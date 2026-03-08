@@ -13,8 +13,54 @@ pub enum AppEvent {
     Key(KeyEvent),
     /// Mouse input.
     Mouse(MouseEvent),
+    /// IME pre-edit (composition) text update.
+    Ime(ImeEvent),
     /// Redraw requested (vsync tick or explicit).
     RedrawRequested,
+}
+
+/// Actions the event handler can request from the framework.
+#[derive(Debug, Clone, Default)]
+pub struct EventResponse {
+    /// Whether the event was consumed (prevents default handling).
+    pub consumed: bool,
+    /// Request the event loop to exit.
+    pub exit: bool,
+    /// Request a window title change.
+    pub set_title: Option<String>,
+}
+
+impl EventResponse {
+    /// Create a response that consumes the event.
+    #[must_use]
+    pub fn consumed() -> Self {
+        Self { consumed: true, ..Default::default() }
+    }
+
+    /// Create a response that does not consume the event.
+    #[must_use]
+    pub fn ignored() -> Self {
+        Self::default()
+    }
+}
+
+impl From<bool> for EventResponse {
+    fn from(consumed: bool) -> Self {
+        Self { consumed, ..Default::default() }
+    }
+}
+
+/// IME (Input Method Editor) event for CJK/compose input.
+#[derive(Debug, Clone)]
+pub enum ImeEvent {
+    /// IME is enabled.
+    Enabled,
+    /// Pre-edit text while composing (with optional cursor position).
+    Preedit(String, Option<(usize, usize)>),
+    /// Final committed text.
+    Commit(String),
+    /// IME is disabled.
+    Disabled,
 }
 
 /// Keyboard event (press or release).

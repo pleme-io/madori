@@ -1,5 +1,7 @@
 use crate::error::{MadoriError, Result};
-use crate::event::{AppEvent, KeyCode, KeyEvent, Modifiers, MouseButton, MouseEvent};
+use crate::event::{
+    AppEvent, EventResponse, ImeEvent, KeyCode, KeyEvent, Modifiers, MouseButton, MouseEvent,
+};
 use crate::render::{RenderCallback, RenderContext};
 use garasu::GpuContext;
 use serde::{Deserialize, Serialize};
@@ -32,9 +34,10 @@ impl Default for AppConfig {
 
 /// Builder for constructing an App with fluent API.
 pub struct AppBuilder<R: RenderCallback> {
-    config: AppConfig,
+    pub config: AppConfig,
     renderer: R,
-    event_handler: Option<Box<dyn FnMut(&AppEvent, &mut R) -> bool + Send + 'static>>,
+    event_handler:
+        Option<Box<dyn FnMut(&AppEvent, &mut R) -> EventResponse + Send + 'static>>,
 }
 
 impl<R: RenderCallback> AppBuilder<R> {
@@ -65,14 +68,18 @@ impl<R: RenderCallback> AppBuilder<R> {
         self
     }
 
-    /// Set event handler. Return `true` from the callback to consume the event
-    /// (prevent default handling like close on Escape).
+    /// Set event handler. Return `EventResponse` to control behavior.
+    /// For backwards compatibility, closures returning `bool` are also accepted
+    /// via the `From<bool>` impl on `EventResponse`.
     #[must_use]
-    pub fn on_event(
-        mut self,
-        handler: impl FnMut(&AppEvent, &mut R) -> bool + Send + 'static,
-    ) -> Self {
-        self.event_handler = Some(Box::new(handler));
+    pub fn on_event<F, Resp>(mut self, mut handler: F) -> Self
+    where
+        F: FnMut(&AppEvent, &mut R) -> Resp + Send + 'static,
+        Resp: Into<EventResponse>,
+    {
+        self.event_handler = Some(Box::new(move |event, renderer| {
+            handler(event, renderer).into()
+        }));
         self
     }
 
@@ -94,7 +101,9 @@ impl App {
     fn run_inner<R: RenderCallback>(
         config: AppConfig,
         renderer: R,
-        event_handler: Option<Box<dyn FnMut(&AppEvent, &mut R) -> bool + Send + 'static>>,
+        event_handler: Option<
+            Box<dyn FnMut(&AppEvent, &mut R) -> EventResponse + Send + 'static>,
+        >,
     ) -> Result<()> {
         use winit::application::ApplicationHandler;
         use winit::event::{ElementState, WindowEvent};
@@ -104,7 +113,9 @@ impl App {
         struct Handler<R: RenderCallback> {
             config: AppConfig,
             renderer: R,
-            event_handler: Option<Box<dyn FnMut(&AppEvent, &mut R) -> bool + Send + 'static>>,
+            event_handler: Option<
+                Box<dyn FnMut(&AppEvent, &mut R) -> EventResponse + Send + 'static>,
+            >,
             window: Option<std::sync::Arc<Window>>,
             gpu: Option<GpuContext>,
             text: Option<garasu::TextRenderer>,
@@ -115,6 +126,38 @@ impl App {
             modifiers: winit::keyboard::ModifiersState,
             width: u32,
             height: u32,
+            // Track cursor position for mouse button events
+            cursor_x: f64,
+            cursor_y: f64,
+        }
+
+        impl<R: RenderCallback> Handler<R> {
+            fn dispatch(
+                &mut self,
+                event: &AppEvent,
+                event_loop: &winit::event_loop::ActiveEventLoop,
+            ) -> EventResponse {
+                let resp = self
+                    .event_handler
+                    .as_mut()
+                    .map_or(EventResponse::default(), |h| {
+                        (h)(event, &mut self.renderer)
+                    });
+
+                // Handle set_title
+                if let Some(title) = &resp.set_title {
+                    if let Some(w) = &self.window {
+                        w.set_title(title);
+                    }
+                }
+
+                // Handle exit request
+                if resp.exit {
+                    event_loop.exit();
+                }
+
+                resp
+            }
         }
 
         impl<R: RenderCallback> ApplicationHandler for Handler<R> {
@@ -140,6 +183,9 @@ impl App {
                         return;
                     }
                 };
+
+                // Enable IME
+                window.set_ime_allowed(true);
 
                 let size = window.inner_size();
                 self.width = size.width;
@@ -179,11 +225,8 @@ impl App {
                         };
                         surface.configure(&gpu.device, &surface_config);
 
-                        let text = garasu::TextRenderer::new(
-                            &gpu.device,
-                            &gpu.queue,
-                            format,
-                        );
+                        let text =
+                            garasu::TextRenderer::new(&gpu.device, &gpu.queue, format);
 
                         self.renderer.init(&gpu);
                         self.text = Some(text);
@@ -210,11 +253,8 @@ impl App {
                 match &event {
                     WindowEvent::CloseRequested => {
                         let app_event = AppEvent::CloseRequested;
-                        let consumed = self
-                            .event_handler
-                            .as_mut()
-                            .is_some_and(|h| (h)(&app_event, &mut self.renderer));
-                        if !consumed {
+                        let resp = self.dispatch(&app_event, event_loop);
+                        if !resp.consumed {
                             event_loop.exit();
                         }
                     }
@@ -233,15 +273,11 @@ impl App {
                             width: self.width,
                             height: self.height,
                         };
-                        if let Some(h) = &mut self.event_handler {
-                            (h)(&app_event, &mut self.renderer);
-                        }
+                        self.dispatch(&app_event, event_loop);
                     }
                     WindowEvent::Focused(focused) => {
                         let app_event = AppEvent::Focused(*focused);
-                        if let Some(h) = &mut self.event_handler {
-                            (h)(&app_event, &mut self.renderer);
-                        }
+                        self.dispatch(&app_event, event_loop);
                     }
                     WindowEvent::ModifiersChanged(mods) => {
                         self.modifiers = mods.state();
@@ -251,24 +287,33 @@ impl App {
                             key: KeyCode::from_winit(&event.logical_key),
                             pressed: event.state == ElementState::Pressed,
                             modifiers: Modifiers::from_winit(&self.modifiers),
-                            text: match &event.text {
-                                Some(t) => Some(t.to_string()),
-                                None => None,
-                            },
+                            text: event.text.as_ref().map(|t| t.to_string()),
                         };
                         let app_event = AppEvent::Key(key_event);
-                        if let Some(h) = &mut self.event_handler {
-                            (h)(&app_event, &mut self.renderer);
-                        }
+                        self.dispatch(&app_event, event_loop);
+                    }
+                    WindowEvent::Ime(ime) => {
+                        let ime_event = match ime {
+                            winit::event::Ime::Enabled => ImeEvent::Enabled,
+                            winit::event::Ime::Preedit(text, cursor) => {
+                                ImeEvent::Preedit(text.clone(), *cursor)
+                            }
+                            winit::event::Ime::Commit(text) => {
+                                ImeEvent::Commit(text.clone())
+                            }
+                            winit::event::Ime::Disabled => ImeEvent::Disabled,
+                        };
+                        let app_event = AppEvent::Ime(ime_event);
+                        self.dispatch(&app_event, event_loop);
                     }
                     WindowEvent::CursorMoved { position, .. } => {
+                        self.cursor_x = position.x;
+                        self.cursor_y = position.y;
                         let app_event = AppEvent::Mouse(MouseEvent::Moved {
                             x: position.x,
                             y: position.y,
                         });
-                        if let Some(h) = &mut self.event_handler {
-                            (h)(&app_event, &mut self.renderer);
-                        }
+                        self.dispatch(&app_event, event_loop);
                     }
                     WindowEvent::MouseInput { state, button, .. } => {
                         let btn = match button {
@@ -280,12 +325,10 @@ impl App {
                         let app_event = AppEvent::Mouse(MouseEvent::Button {
                             button: btn,
                             pressed: *state == ElementState::Pressed,
-                            x: 0.0,
-                            y: 0.0,
+                            x: self.cursor_x,
+                            y: self.cursor_y,
                         });
-                        if let Some(h) = &mut self.event_handler {
-                            (h)(&app_event, &mut self.renderer);
-                        }
+                        self.dispatch(&app_event, event_loop);
                     }
                     WindowEvent::MouseWheel { delta, .. } => {
                         let (dx, dy) = match delta {
@@ -295,17 +338,21 @@ impl App {
                             winit::event::MouseScrollDelta::PixelDelta(p) => (p.x, p.y),
                         };
                         let app_event = AppEvent::Mouse(MouseEvent::Scroll { dx, dy });
-                        if let Some(h) = &mut self.event_handler {
-                            (h)(&app_event, &mut self.renderer);
-                        }
+                        self.dispatch(&app_event, event_loop);
                     }
                     WindowEvent::RedrawRequested => {
+                        // Dispatch redraw event to handler (for title updates, exit checks, etc.)
+                        let redraw_event = AppEvent::RedrawRequested;
+                        self.dispatch(&redraw_event, event_loop);
+
                         if let (Some(surface), Some(gpu), Some(text)) =
                             (&self.surface, &self.gpu, &mut self.text)
                         {
                             let frame = match surface.get_current_texture() {
                                 Ok(f) => f,
-                                Err(wgpu::SurfaceError::Lost | wgpu::SurfaceError::Outdated) => {
+                                Err(
+                                    wgpu::SurfaceError::Lost | wgpu::SurfaceError::Outdated,
+                                ) => {
                                     if let Some(cfg) = &self.surface_config {
                                         surface.configure(&gpu.device, cfg);
                                     }
@@ -316,12 +363,13 @@ impl App {
                                     return;
                                 }
                             };
-                            let view = frame.texture.create_view(
-                                &wgpu::TextureViewDescriptor::default(),
-                            );
+                            let view = frame
+                                .texture
+                                .create_view(&wgpu::TextureViewDescriptor::default());
 
                             let now = Instant::now();
-                            let elapsed = now.duration_since(self.start_time).as_secs_f32();
+                            let elapsed =
+                                now.duration_since(self.start_time).as_secs_f32();
                             let dt = now.duration_since(self.last_frame).as_secs_f32();
                             self.last_frame = now;
 
@@ -347,7 +395,8 @@ impl App {
             }
         }
 
-        let event_loop = EventLoop::new().map_err(|e| MadoriError::EventLoop(e.to_string()))?;
+        let event_loop =
+            EventLoop::new().map_err(|e| MadoriError::EventLoop(e.to_string()))?;
         event_loop.set_control_flow(winit::event_loop::ControlFlow::Poll);
 
         let mut handler = Handler {
@@ -364,6 +413,8 @@ impl App {
             modifiers: winit::keyboard::ModifiersState::default(),
             width: 0,
             height: 0,
+            cursor_x: 0.0,
+            cursor_y: 0.0,
         };
 
         event_loop
@@ -397,5 +448,16 @@ mod tests {
         assert_eq!(builder.config.title, "Test");
         assert_eq!(builder.config.width, 800);
         assert_eq!(builder.config.height, 600);
+    }
+
+    #[test]
+    fn event_response_from_bool() {
+        let resp: EventResponse = true.into();
+        assert!(resp.consumed);
+        assert!(!resp.exit);
+        assert!(resp.set_title.is_none());
+
+        let resp: EventResponse = false.into();
+        assert!(!resp.consumed);
     }
 }
