@@ -1,0 +1,36 @@
+[package]
+name = "madori"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.89.0"
+description = "Madori (間取り) — GPU application framework for pleme-io apps"
+homepage = "https://github.com/pleme-io/madori"
+repository = "https://github.com/pleme-io/madori"
+documentation = "https://docs.rs/madori"
+readme = "README.md"
+license = "MIT"
+categories = ["gui"]
+keywords = ["gpu", "wgpu", "framework", "application", "window"]
+
+[lints.clippy]
+pedantic = "warn"
+
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = "z"
+strip = true
+
+[dependencies]
+garasu = { git = "https://github.com/pleme-io/garasu" }
+egaku = { git = "https://github.com/pleme-io/egaku" }
+shikumi = { git = "https://github.com/pleme-io/shikumi" }
+wgpu = "25"
+winit = "0.30"
+pollster = "0.4"
+serde = { version = "1.0", features = ["derive"] }
+tracing = "0.1"
+thiserror = "2.0"
+
+[dev-dependencies]
+tempfile = "3"
