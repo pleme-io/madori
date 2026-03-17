@@ -81,7 +81,7 @@ pub struct KeyEvent {
 #[derive(Debug, Clone)]
 pub enum MouseEvent {
     Moved { x: f64, y: f64 },
-    Button { button: MouseButton, pressed: bool, x: f64, y: f64 },
+    Button { button: MouseButton, pressed: bool, x: f64, y: f64, modifiers: Modifiers },
     Scroll { dx: f64, dy: f64 },
 }
 

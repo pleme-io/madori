@@ -346,6 +346,7 @@ impl App {
                             pressed: *state == ElementState::Pressed,
                             x: self.cursor_x,
                             y: self.cursor_y,
+                            modifiers: Modifiers::from_winit(&self.modifiers),
                         });
                         self.dispatch(&app_event, event_loop);
                     }
