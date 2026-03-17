@@ -151,6 +151,25 @@ impl App {
                     }
                 }
 
+                // Handle cursor visibility
+                if let Some(visible) = resp.set_cursor_visible {
+                    if let Some(w) = &self.window {
+                        w.set_cursor_visible(visible);
+                    }
+                }
+
+                // Handle fullscreen toggle
+                if resp.toggle_fullscreen {
+                    if let Some(w) = &self.window {
+                        use winit::window::Fullscreen;
+                        if w.fullscreen().is_some() {
+                            w.set_fullscreen(None);
+                        } else {
+                            w.set_fullscreen(Some(Fullscreen::Borderless(None)));
+                        }
+                    }
+                }
+
                 // Handle exit request
                 if resp.exit {
                     event_loop.exit();

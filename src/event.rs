@@ -28,6 +28,10 @@ pub struct EventResponse {
     pub exit: bool,
     /// Request a window title change.
     pub set_title: Option<String>,
+    /// Request fullscreen toggle.
+    pub toggle_fullscreen: bool,
+    /// Request cursor visibility change (None = no change).
+    pub set_cursor_visible: Option<bool>,
 }
 
 impl EventResponse {
