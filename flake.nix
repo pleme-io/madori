@@ -2,7 +2,7 @@
   description = "Madori (間取り) — GPU application framework for pleme-io apps";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-25.11";
     crate2nix.url = "github:nix-community/crate2nix";
     substrate = {
       url = "github:pleme-io/substrate";
