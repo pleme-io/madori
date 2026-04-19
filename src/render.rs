@@ -50,9 +50,12 @@ impl Default for ClearRenderer {
 
 impl RenderCallback for ClearRenderer {
     fn render(&mut self, ctx: &mut RenderContext<'_>) {
-        let mut encoder = ctx.gpu.device.create_command_encoder(
-            &wgpu::CommandEncoderDescriptor { label: Some("clear") },
-        );
+        let mut encoder = ctx
+            .gpu
+            .device
+            .create_command_encoder(&wgpu::CommandEncoderDescriptor {
+                label: Some("clear"),
+            });
         {
             let _pass = encoder.begin_render_pass(&wgpu::RenderPassDescriptor {
                 label: Some("clear_pass"),

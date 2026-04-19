@@ -36,8 +36,7 @@ impl Default for AppConfig {
 pub struct AppBuilder<R: RenderCallback> {
     pub config: AppConfig,
     renderer: R,
-    event_handler:
-        Option<Box<dyn FnMut(&AppEvent, &mut R) -> EventResponse + Send + 'static>>,
+    event_handler: Option<Box<dyn FnMut(&AppEvent, &mut R) -> EventResponse + Send + 'static>>,
 }
 
 impl<R: RenderCallback> AppBuilder<R> {
@@ -101,9 +100,7 @@ impl App {
     fn run_inner<R: RenderCallback>(
         config: AppConfig,
         renderer: R,
-        event_handler: Option<
-            Box<dyn FnMut(&AppEvent, &mut R) -> EventResponse + Send + 'static>,
-        >,
+        event_handler: Option<Box<dyn FnMut(&AppEvent, &mut R) -> EventResponse + Send + 'static>>,
     ) -> Result<()> {
         use winit::application::ApplicationHandler;
         use winit::event::{ElementState, WindowEvent};
@@ -113,9 +110,8 @@ impl App {
         struct Handler<R: RenderCallback> {
             config: AppConfig,
             renderer: R,
-            event_handler: Option<
-                Box<dyn FnMut(&AppEvent, &mut R) -> EventResponse + Send + 'static>,
-            >,
+            event_handler:
+                Option<Box<dyn FnMut(&AppEvent, &mut R) -> EventResponse + Send + 'static>>,
             window: Option<std::sync::Arc<Window>>,
             gpu: Option<GpuContext>,
             text: Option<garasu::TextRenderer>,
@@ -140,9 +136,7 @@ impl App {
                 let resp = self
                     .event_handler
                     .as_mut()
-                    .map_or(EventResponse::default(), |h| {
-                        (h)(event, &mut self.renderer)
-                    });
+                    .map_or(EventResponse::default(), |h| (h)(event, &mut self.renderer));
 
                 // Handle set_title
                 if let Some(title) = &resp.set_title {
@@ -244,8 +238,7 @@ impl App {
                         };
                         surface.configure(&gpu.device, &surface_config);
 
-                        let text =
-                            garasu::TextRenderer::new(&gpu.device, &gpu.queue, format);
+                        let text = garasu::TextRenderer::new(&gpu.device, &gpu.queue, format);
 
                         self.renderer.init(&gpu);
                         self.text = Some(text);
@@ -317,9 +310,7 @@ impl App {
                             winit::event::Ime::Preedit(text, cursor) => {
                                 ImeEvent::Preedit(text.clone(), *cursor)
                             }
-                            winit::event::Ime::Commit(text) => {
-                                ImeEvent::Commit(text.clone())
-                            }
+                            winit::event::Ime::Commit(text) => ImeEvent::Commit(text.clone()),
                             winit::event::Ime::Disabled => ImeEvent::Disabled,
                         };
                         let app_event = AppEvent::Ime(ime_event);
@@ -370,9 +361,7 @@ impl App {
                         {
                             let frame = match surface.get_current_texture() {
                                 Ok(f) => f,
-                                Err(
-                                    wgpu::SurfaceError::Lost | wgpu::SurfaceError::Outdated,
-                                ) => {
+                                Err(wgpu::SurfaceError::Lost | wgpu::SurfaceError::Outdated) => {
                                     if let Some(cfg) = &self.surface_config {
                                         surface.configure(&gpu.device, cfg);
                                     }
@@ -388,8 +377,7 @@ impl App {
                                 .create_view(&wgpu::TextureViewDescriptor::default());
 
                             let now = Instant::now();
-                            let elapsed =
-                                now.duration_since(self.start_time).as_secs_f32();
+                            let elapsed = now.duration_since(self.start_time).as_secs_f32();
                             let dt = now.duration_since(self.last_frame).as_secs_f32();
                             self.last_frame = now;
 
@@ -415,8 +403,7 @@ impl App {
             }
         }
 
-        let event_loop =
-            EventLoop::new().map_err(|e| MadoriError::EventLoop(e.to_string()))?;
+        let event_loop = EventLoop::new().map_err(|e| MadoriError::EventLoop(e.to_string()))?;
         event_loop.set_control_flow(winit::event_loop::ControlFlow::Poll);
 
         let mut handler = Handler {

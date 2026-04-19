@@ -38,7 +38,10 @@ impl EventResponse {
     /// Create a response that consumes the event.
     #[must_use]
     pub fn consumed() -> Self {
-        Self { consumed: true, ..Default::default() }
+        Self {
+            consumed: true,
+            ..Default::default()
+        }
     }
 
     /// Create a response that does not consume the event.
@@ -50,7 +53,10 @@ impl EventResponse {
 
 impl From<bool> for EventResponse {
     fn from(consumed: bool) -> Self {
-        Self { consumed, ..Default::default() }
+        Self {
+            consumed,
+            ..Default::default()
+        }
     }
 }
 
@@ -80,9 +86,21 @@ pub struct KeyEvent {
 /// Mouse event.
 #[derive(Debug, Clone)]
 pub enum MouseEvent {
-    Moved { x: f64, y: f64 },
-    Button { button: MouseButton, pressed: bool, x: f64, y: f64, modifiers: Modifiers },
-    Scroll { dx: f64, dy: f64 },
+    Moved {
+        x: f64,
+        y: f64,
+    },
+    Button {
+        button: MouseButton,
+        pressed: bool,
+        x: f64,
+        y: f64,
+        modifiers: Modifiers,
+    },
+    Scroll {
+        dx: f64,
+        dy: f64,
+    },
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
@@ -204,7 +222,10 @@ mod tests {
         let none = Modifiers::default();
         assert!(!none.any());
 
-        let shift = Modifiers { shift: true, ..Default::default() };
+        let shift = Modifiers {
+            shift: true,
+            ..Default::default()
+        };
         assert!(shift.any());
     }
 
