@@ -22,8 +22,8 @@ opt-level = "z"
 strip = true
 
 [dependencies]
-garasu = { git = "https://github.com/pleme-io/garasu" }
-egaku = { git = "https://github.com/pleme-io/egaku" }
+garasu = "0.1"
+egaku = "0.1"
 shikumi = "0.1"
 wgpu = "25"
 winit = "0.30"
