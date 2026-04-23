@@ -24,7 +24,7 @@ strip = true
 [dependencies]
 garasu = { git = "https://github.com/pleme-io/garasu" }
 egaku = { git = "https://github.com/pleme-io/egaku" }
-shikumi = { git = "https://github.com/pleme-io/shikumi" }
+shikumi = "0.1"
 wgpu = "25"
 winit = "0.30"
 pollster = "0.4"
