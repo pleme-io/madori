@@ -181,7 +181,12 @@ impl App {
 
                 let attrs = WindowAttributes::default()
                     .with_title(&self.config.title)
-                    .with_inner_size(winit::dpi::PhysicalSize::new(
+                    // Logical pixels are scale-aware: 1200x800 logical renders at
+                    // 2400x1600 physical on a 2x HiDPI display (the user-perceived
+                    // "normal big window"), not the cramped 600x400-logical area
+                    // PhysicalSize would have produced. winit handles the
+                    // scale-factor multiplication internally.
+                    .with_inner_size(winit::dpi::LogicalSize::new(
                         self.config.width,
                         self.config.height,
                     ))
