@@ -11,6 +11,12 @@ pub struct RenderContext<'a> {
     /// Current window dimensions in physical pixels.
     pub width: u32,
     pub height: u32,
+    /// HiDPI scale factor — logical pixels × `scale_factor` = physical
+    /// pixels. Renderers that author dimensions / positions in logical
+    /// units (`font_size`, `padding`, etc.) must multiply by this
+    /// before drawing into the surface, which is sized in physical
+    /// pixels. Updated on `ScaleFactorChanged` events.
+    pub scale_factor: f64,
     /// Time since app start in seconds.
     pub elapsed: f32,
     /// Delta time since last frame in seconds.

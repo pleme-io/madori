@@ -122,6 +122,11 @@ impl App {
             modifiers: winit::keyboard::ModifiersState,
             width: u32,
             height: u32,
+            // HiDPI scale factor of the active window — captured at
+            // resume + refreshed on ScaleFactorChanged. Renderers that
+            // author dimensions in logical pixels must multiply by
+            // this before drawing into the physical-pixel surface.
+            scale_factor: f64,
             // Track cursor position for mouse button events
             cursor_x: f64,
             cursor_y: f64,
@@ -208,6 +213,7 @@ impl App {
                 let size = window.inner_size();
                 self.width = size.width;
                 self.height = size.height;
+                self.scale_factor = window.scale_factor();
 
                 // Initialize GPU
                 match pollster::block_on(GpuContext::new()) {
@@ -291,6 +297,14 @@ impl App {
                             height: self.height,
                         };
                         self.dispatch(&app_event, event_loop);
+                    }
+                    WindowEvent::ScaleFactorChanged { scale_factor, .. } => {
+                        // Updates the cached scale-factor so the next
+                        // RenderContext carries the fresh value. winit
+                        // pairs every ScaleFactorChanged with a
+                        // Resized in the same frame, which reconfigures
+                        // the surface — we don't need to do that here.
+                        self.scale_factor = *scale_factor;
                     }
                     WindowEvent::Focused(focused) => {
                         let app_event = AppEvent::Focused(*focused);
@@ -392,6 +406,7 @@ impl App {
                                 surface_view: &view,
                                 width: self.width,
                                 height: self.height,
+                                scale_factor: self.scale_factor,
                                 elapsed,
                                 dt,
                             };
@@ -425,6 +440,10 @@ impl App {
             modifiers: winit::keyboard::ModifiersState::default(),
             width: 0,
             height: 0,
+            // 1.0 is the safe pre-resume default — gets overwritten by
+            // `window.scale_factor()` in `resumed` before the first
+            // render fires.
+            scale_factor: 1.0,
             cursor_x: 0.0,
             cursor_y: 0.0,
         };
