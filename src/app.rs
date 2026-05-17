@@ -130,6 +130,11 @@ impl App {
             // Track cursor position for mouse button events
             cursor_x: f64,
             cursor_y: f64,
+            // Window starts hidden so the user doesn't see the
+            // uninitialised swapchain (random GPU memory shows up as a
+            // multicolor purple flash on macOS Metal). Flipped to true
+            // after the first frame is presented.
+            first_frame_presented: bool,
         }
 
         impl<R: RenderCallback> Handler<R> {
@@ -196,7 +201,13 @@ impl App {
                         self.config.height,
                     ))
                     .with_resizable(self.config.resizable)
-                    .with_transparent(self.config.transparent);
+                    .with_transparent(self.config.transparent)
+                    // Start hidden — the swapchain backbuffer holds
+                    // uninitialised GPU memory until the first present.
+                    // Showing the window before that lets the user see
+                    // random bytes as a multicolor purple flash on
+                    // macOS Metal. set_visible(true) after first frame.
+                    .with_visible(false);
 
                 let window = match event_loop.create_window(attrs) {
                     Ok(w) => std::sync::Arc::new(w),
@@ -413,6 +424,19 @@ impl App {
                             self.renderer.render(&mut render_ctx);
 
                             frame.present();
+
+                            // First-frame reveal — show the window only
+                            // after the swapchain has real pixels in it.
+                            // Prevents the multicolor purple flash that
+                            // results from showing a window whose
+                            // backbuffer still holds uninitialised GPU
+                            // memory.
+                            if !self.first_frame_presented {
+                                self.first_frame_presented = true;
+                                if let Some(w) = &self.window {
+                                    w.set_visible(true);
+                                }
+                            }
                         }
                         if let Some(w) = &self.window {
                             w.request_redraw();
@@ -446,6 +470,7 @@ impl App {
             scale_factor: 1.0,
             cursor_x: 0.0,
             cursor_y: 0.0,
+            first_frame_presented: false,
         };
 
         event_loop
