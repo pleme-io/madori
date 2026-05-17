@@ -254,7 +254,16 @@ impl App {
                             width: self.width.max(1),
                             height: self.height.max(1),
                             present_mode,
-                            desired_maximum_frame_latency: 2,
+                            // Frame latency 1 (not the wgpu default 2) for
+                            // input-responsive interactive use. With 2 the
+                            // swapchain can hold two frames in flight; the
+                            // display shows N-2 then N-1 then N over
+                            // consecutive vsyncs, which on a slow-response
+                            // LCD reads as the cursor / cells trailing
+                            // behind the user with a stream of past states.
+                            // Ghostty / Alacritty / Kitty all default to 1
+                            // for the same reason.
+                            desired_maximum_frame_latency: 1,
                             alpha_mode: caps.alpha_modes[0],
                             view_formats: vec![],
                         };
