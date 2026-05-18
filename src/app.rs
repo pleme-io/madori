@@ -248,6 +248,24 @@ impl App {
                             wgpu::PresentMode::AutoNoVsync
                         };
 
+                        // Prefer Opaque alpha_mode when the surface
+                        // advertises it. On macOS the default
+                        // (caps.alpha_modes[0]) is sometimes
+                        // PostMultiplied or Inherit, which causes
+                        // the FIRST presented frame to flash a
+                        // garbage-colour (often purple/magenta) for
+                        // a few ms while the OS compositor decides
+                        // how to blend an uninitialized surface
+                        // against whatever's behind the window.
+                        // Opaque tells the compositor "draw my
+                        // pixels verbatim, no alpha" — same shape
+                        // ghostty / kitty / alacritty use on macOS.
+                        let alpha_mode = if caps.alpha_modes.contains(&wgpu::CompositeAlphaMode::Opaque) {
+                            wgpu::CompositeAlphaMode::Opaque
+                        } else {
+                            caps.alpha_modes[0]
+                        };
+
                         let surface_config = wgpu::SurfaceConfiguration {
                             usage: wgpu::TextureUsages::RENDER_ATTACHMENT,
                             format,
@@ -264,10 +282,49 @@ impl App {
                             // Ghostty / Alacritty / Kitty all default to 1
                             // for the same reason.
                             desired_maximum_frame_latency: 1,
-                            alpha_mode: caps.alpha_modes[0],
+                            alpha_mode,
                             view_formats: vec![],
                         };
                         surface.configure(&gpu.device, &surface_config);
+
+                        // Force an immediate opaque clear of the
+                        // freshly-configured surface so the first
+                        // present is the operator's background colour,
+                        // not whatever uninitialized pixels Metal
+                        // happened to allocate. Without this the
+                        // window briefly flashes a near-magenta
+                        // value before mado's render loop ticks.
+                        if let Ok(frame) = surface.get_current_texture() {
+                            let view = frame.texture.create_view(&wgpu::TextureViewDescriptor::default());
+                            let mut encoder = gpu.device.create_command_encoder(&wgpu::CommandEncoderDescriptor {
+                                label: Some("madori_first_clear"),
+                            });
+                            {
+                                let _pass = encoder.begin_render_pass(&wgpu::RenderPassDescriptor {
+                                    label: Some("madori_first_clear_pass"),
+                                    color_attachments: &[Some(wgpu::RenderPassColorAttachment {
+                                        view: &view,
+                                        resolve_target: None,
+                                        ops: wgpu::Operations {
+                                            // Match mado's Nord default bg (#2e3440 linear).
+                                            // Slightly different from the renderer's
+                                            // bg_color (sRGB-corrected) but visually
+                                            // indistinguishable; the goal is "not
+                                            // magenta", not "exact theme color".
+                                            load: wgpu::LoadOp::Clear(wgpu::Color {
+                                                r: 0.027, g: 0.035, b: 0.047, a: 1.0,
+                                            }),
+                                            store: wgpu::StoreOp::Store,
+                                        },
+                                    })],
+                                    depth_stencil_attachment: None,
+                                    timestamp_writes: None,
+                                    occlusion_query_set: None,
+                                });
+                            }
+                            gpu.queue.submit(std::iter::once(encoder.finish()));
+                            frame.present();
+                        }
 
                         let text = garasu::TextRenderer::new(&gpu.device, &gpu.queue, format);
 
