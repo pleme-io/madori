@@ -207,6 +207,13 @@ impl App {
                 if self.window.is_some() {
                     return;
                 }
+                // Per-phase launch tracing. Filter via
+                // `RUST_LOG=madori::perf=info` (always on with the
+                // default `info` filter). Operators reading the
+                // mado launch trace get a contiguous timeline
+                // across both crates.
+                let t_resumed_start = std::time::Instant::now();
+                tracing::info!(target: "madori::perf", phase = "resumed_enter", "phase");
 
                 let attrs = WindowAttributes::default()
                     .with_title(&self.config.title)
@@ -245,10 +252,22 @@ impl App {
                 self.width = size.width;
                 self.height = size.height;
                 self.scale_factor = window.scale_factor();
+                tracing::info!(
+                    target: "madori::perf",
+                    phase = "window_created",
+                    ms = t_resumed_start.elapsed().as_millis() as u64,
+                    "phase"
+                );
 
                 // Initialize GPU
                 match pollster::block_on(GpuContext::new()) {
                     Ok(gpu) => {
+                        tracing::info!(
+                            target: "madori::perf",
+                            phase = "gpu_context_ready",
+                            ms = t_resumed_start.elapsed().as_millis() as u64,
+                            "phase"
+                        );
                         let surface = gpu
                             .instance
                             .create_surface(window.clone())
@@ -346,12 +365,30 @@ impl App {
                             frame.present();
                         }
 
+                        tracing::info!(
+                            target: "madori::perf",
+                            phase = "surface_configured",
+                            ms = t_resumed_start.elapsed().as_millis() as u64,
+                            "phase"
+                        );
                         let text = garasu::TextRenderer::new(&gpu.device, &gpu.queue, format);
+                        tracing::info!(
+                            target: "madori::perf",
+                            phase = "text_renderer_ready",
+                            ms = t_resumed_start.elapsed().as_millis() as u64,
+                            "phase"
+                        );
 
                         self.renderer.init(&gpu);
                         self.text = Some(text);
                         self.surface_config = Some(surface_config);
                         self.surface = Some(surface);
+                        tracing::info!(
+                            target: "madori::perf",
+                            phase = "resumed_done",
+                            ms = t_resumed_start.elapsed().as_millis() as u64,
+                            "phase"
+                        );
                         self.gpu = Some(gpu);
                     }
                     Err(e) => {
