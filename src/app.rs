@@ -17,6 +17,24 @@ pub struct AppConfig {
     pub resizable: bool,
     pub vsync: bool,
     pub transparent: bool,
+    /// Show server/window-manager decorations (titlebar, border,
+    /// close/minimize buttons). When `false`, winit creates a
+    /// borderless window — the entire surface is the
+    /// application's canvas.
+    ///
+    /// On macOS, leaving this `true` is usually preferable: it
+    /// keeps the traffic-light buttons usable while platform-
+    /// specific code (e.g. mado's `platform::apply_native_styling`)
+    /// can flip `FullSizeContentView` + transparent titlebar to
+    /// integrate the chrome into the content area. Setting
+    /// `false` on macOS also removes the traffic lights — a
+    /// genuinely chromeless look that many operators prefer for
+    /// kiosk / minimal modes.
+    ///
+    /// Default: `true` (preserves legacy behavior). Mado's
+    /// platform-aware default picks `true` on macOS and `false`
+    /// elsewhere via its own `default_decorations()` helper.
+    pub decorations: bool,
 }
 
 impl Default for AppConfig {
@@ -28,6 +46,7 @@ impl Default for AppConfig {
             resizable: true,
             vsync: true,
             transparent: false,
+            decorations: true,
         }
     }
 }
@@ -202,6 +221,7 @@ impl App {
                     ))
                     .with_resizable(self.config.resizable)
                     .with_transparent(self.config.transparent)
+                    .with_decorations(self.config.decorations)
                     // Start hidden — the swapchain backbuffer holds
                     // uninitialised GPU memory until the first present.
                     // Showing the window before that lets the user see
