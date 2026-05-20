@@ -385,6 +385,17 @@ impl App {
                 }
 
                 self.window = Some(window);
+                // Kick the first redraw. The eager-clear pass that used
+                // to bootstrap the loop is gone; without an explicit
+                // request_redraw() here, the hidden window
+                // (with_visible(false)) never receives a RedrawRequested
+                // on macOS — the self-sustaining loop at end of
+                // RedrawRequested has nothing to sustain — and the
+                // window stays empty forever even though terminal cells
+                // arrive over the PTY.
+                if let Some(w) = &self.window {
+                    w.request_redraw();
+                }
             }
 
             fn window_event(
