@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "cargo_lock_sha256": "13c96bf7fe015952886de4b1b5f3bd05e50b22ab0dc559787aabc17cf8e78a10",
+  "cargo_lock_sha256": "5fb350d87b527444c71f8fd2837ad2c3ea4622b5609d12c886fa61a2d832c51f",
   "target_resolves": {
     "base": {
-      "arc-swap-1.8.2": {
+      "arc-swap-1.9.1": {
         "runtime_dependencies": [
           {
             "name": "rustversion",
@@ -46,7 +46,7 @@
           "std"
         ]
       },
-      "autocfg-1.5.0": {
+      "autocfg-1.5.1": {
         "runtime_dependencies": [],
         "build_dependencies": [],
         "features": []
@@ -72,7 +72,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "bitflags-2.11.0": {
+      "bitflags-2.12.1": {
         "runtime_dependencies": [
           {
             "name": "serde_core",
@@ -206,7 +206,7 @@
         "runtime_dependencies": [
           {
             "name": "bitflags",
-            "package_key": "bitflags-2.11.0",
+            "package_key": "bitflags-2.12.1",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -226,7 +226,7 @@
           },
           {
             "name": "log",
-            "package_key": "log-0.4.29",
+            "package_key": "log-0.4.31",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -288,7 +288,7 @@
           },
           {
             "name": "swash",
-            "package_key": "swash-0.2.6",
+            "package_key": "swash-0.2.7",
             "kind": "normal",
             "features": [
               "render",
@@ -351,7 +351,7 @@
           },
           {
             "name": "unicode_segmentation",
-            "package_key": "unicode-segmentation-1.12.0",
+            "package_key": "unicode-segmentation-1.13.3",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -440,7 +440,7 @@
           },
           {
             "name": "unicode_segmentation",
-            "package_key": "unicode-segmentation-1.12.0",
+            "package_key": "unicode-segmentation-1.13.3",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -471,7 +471,7 @@
         "runtime_dependencies": [
           {
             "name": "libc",
-            "package_key": "libc-0.2.183",
+            "package_key": "libc-0.2.186",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -481,7 +481,7 @@
           },
           {
             "name": "libc",
-            "package_key": "libc-0.2.183",
+            "package_key": "libc-0.2.186",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -491,7 +491,7 @@
           },
           {
             "name": "libc",
-            "package_key": "libc-0.2.183",
+            "package_key": "libc-0.2.186",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -509,7 +509,7 @@
         "runtime_dependencies": [
           {
             "name": "euclid",
-            "package_key": "euclid-0.22.13",
+            "package_key": "euclid-0.22.14",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -531,7 +531,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "euclid-0.22.13": {
+      "euclid-0.22.14": {
         "runtime_dependencies": [
           {
             "name": "num_traits",
@@ -550,7 +550,7 @@
           "std"
         ]
       },
-      "fastrand-2.3.0": {
+      "fastrand-2.4.1": {
         "runtime_dependencies": [],
         "build_dependencies": [],
         "features": [
@@ -638,7 +638,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "font-types-0.10.1": {
+      "font-types-0.11.3": {
         "runtime_dependencies": [
           {
             "name": "bytemuck",
@@ -762,7 +762,7 @@
           },
           {
             "name": "libc",
-            "package_key": "libc-0.2.183",
+            "package_key": "libc-0.2.186",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -772,7 +772,7 @@
           },
           {
             "name": "libc",
-            "package_key": "libc-0.2.183",
+            "package_key": "libc-0.2.186",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -782,7 +782,7 @@
           },
           {
             "name": "libc",
-            "package_key": "libc-0.2.183",
+            "package_key": "libc-0.2.186",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -792,7 +792,7 @@
           },
           {
             "name": "libc",
-            "package_key": "libc-0.2.183",
+            "package_key": "libc-0.2.186",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -802,7 +802,7 @@
           },
           {
             "name": "libc",
-            "package_key": "libc-0.2.183",
+            "package_key": "libc-0.2.186",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -812,7 +812,7 @@
           },
           {
             "name": "libc",
-            "package_key": "libc-0.2.183",
+            "package_key": "libc-0.2.186",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -822,7 +822,7 @@
           },
           {
             "name": "libc",
-            "package_key": "libc-0.2.183",
+            "package_key": "libc-0.2.186",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -832,7 +832,7 @@
           },
           {
             "name": "libc",
-            "package_key": "libc-0.2.183",
+            "package_key": "libc-0.2.186",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -883,7 +883,7 @@
           },
           {
             "name": "rustc_hash",
-            "package_key": "rustc-hash-2.1.1",
+            "package_key": "rustc-hash-2.1.2",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -911,7 +911,7 @@
         "runtime_dependencies": [
           {
             "name": "bitflags",
-            "package_key": "bitflags-2.11.0",
+            "package_key": "bitflags-2.12.1",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -940,7 +940,7 @@
         "runtime_dependencies": [
           {
             "name": "bitflags",
-            "package_key": "bitflags-2.11.0",
+            "package_key": "bitflags-2.12.1",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -956,7 +956,7 @@
         "runtime_dependencies": [
           {
             "name": "bitflags",
-            "package_key": "bitflags-2.11.0",
+            "package_key": "bitflags-2.12.1",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -997,7 +997,7 @@
         "runtime_dependencies": [
           {
             "name": "bitflags",
-            "package_key": "bitflags-2.11.0",
+            "package_key": "bitflags-2.12.1",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -1033,7 +1033,7 @@
           },
           {
             "name": "zerocopy",
-            "package_key": "zerocopy-0.8.42",
+            "package_key": "zerocopy-0.8.50",
             "kind": "normal",
             "features": [
               "derive",
@@ -1069,7 +1069,7 @@
           "inline-more"
         ]
       },
-      "hashbrown-0.16.1": {
+      "hashbrown-0.17.1": {
         "runtime_dependencies": [],
         "build_dependencies": [],
         "features": []
@@ -1084,7 +1084,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "indexmap-2.13.0": {
+      "indexmap-2.14.0": {
         "runtime_dependencies": [
           {
             "name": "equivalent",
@@ -1098,7 +1098,7 @@
           },
           {
             "name": "hashbrown",
-            "package_key": "hashbrown-0.16.1",
+            "package_key": "hashbrown-0.17.1",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -1129,7 +1129,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "itoa-1.0.17": {
+      "itoa-1.0.18": {
         "runtime_dependencies": [],
         "build_dependencies": [],
         "features": []
@@ -1138,7 +1138,7 @@
         "runtime_dependencies": [
           {
             "name": "libc",
-            "package_key": "libc-0.2.183",
+            "package_key": "libc-0.2.186",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -1160,7 +1160,7 @@
         "build_dependencies": [
           {
             "name": "pkg_config",
-            "package_key": "pkg-config-0.3.32",
+            "package_key": "pkg-config-0.3.33",
             "kind": "build",
             "features": [],
             "uses_default_features": true,
@@ -1184,7 +1184,7 @@
           "static"
         ]
       },
-      "libc-0.2.183": {
+      "libc-0.2.186": {
         "runtime_dependencies": [],
         "build_dependencies": [],
         "features": [
@@ -1241,7 +1241,7 @@
           "default"
         ]
       },
-      "log-0.4.29": {
+      "log-0.4.31": {
         "runtime_dependencies": [],
         "build_dependencies": [],
         "features": []
@@ -1251,7 +1251,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "madori-0.1.1": {
+      "madori-0.1.2": {
         "runtime_dependencies": [
           {
             "name": "egaku",
@@ -1349,7 +1349,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "memchr-2.8.0": {
+      "memchr-2.8.1": {
         "runtime_dependencies": [],
         "build_dependencies": [],
         "features": [
@@ -1362,7 +1362,7 @@
         "runtime_dependencies": [
           {
             "name": "libc",
-            "package_key": "libc-0.2.183",
+            "package_key": "libc-0.2.186",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -1398,7 +1398,7 @@
           },
           {
             "name": "bitflags",
-            "package_key": "bitflags-2.11.0",
+            "package_key": "bitflags-2.12.1",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -1453,7 +1453,7 @@
           },
           {
             "name": "indexmap",
-            "package_key": "indexmap-2.13.0",
+            "package_key": "indexmap-2.14.0",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -1463,7 +1463,7 @@
           },
           {
             "name": "log",
-            "package_key": "log-0.4.29",
+            "package_key": "log-0.4.31",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -1574,7 +1574,7 @@
         "runtime_dependencies": [
           {
             "name": "bitflags",
-            "package_key": "bitflags-2.11.0",
+            "package_key": "bitflags-2.12.1",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -1602,7 +1602,7 @@
         "build_dependencies": [
           {
             "name": "autocfg",
-            "package_key": "autocfg-1.5.0",
+            "package_key": "autocfg-1.5.1",
             "kind": "build",
             "features": [],
             "uses_default_features": true,
@@ -1684,7 +1684,7 @@
           },
           {
             "name": "libc",
-            "package_key": "libc-0.2.183",
+            "package_key": "libc-0.2.186",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -1801,7 +1801,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "pkg-config-0.3.32": {
+      "pkg-config-0.3.33": {
         "runtime_dependencies": [],
         "build_dependencies": [],
         "features": []
@@ -1891,7 +1891,7 @@
           "yansi"
         ]
       },
-      "profiling-1.0.17": {
+      "profiling-1.0.18": {
         "runtime_dependencies": [],
         "build_dependencies": [],
         "features": []
@@ -1928,7 +1928,7 @@
           "std"
         ]
       },
-      "read-fonts-0.35.0": {
+      "read-fonts-0.37.0": {
         "runtime_dependencies": [
           {
             "name": "bytemuck",
@@ -1942,7 +1942,7 @@
           },
           {
             "name": "font_types",
-            "package_key": "font-types-0.10.1",
+            "package_key": "font-types-0.11.3",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -1966,7 +1966,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "rustc-hash-2.1.1": {
+      "rustc-hash-2.1.2": {
         "runtime_dependencies": [],
         "build_dependencies": [],
         "features": [
@@ -1983,7 +1983,7 @@
         "runtime_dependencies": [
           {
             "name": "bitflags",
-            "package_key": "bitflags-2.11.0",
+            "package_key": "bitflags-2.12.1",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -2189,11 +2189,11 @@
           "default"
         ]
       },
-      "serde_json-1.0.149": {
+      "serde_json-1.0.150": {
         "runtime_dependencies": [
           {
             "name": "itoa",
-            "package_key": "itoa-1.0.17",
+            "package_key": "itoa-1.0.18",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -2203,7 +2203,7 @@
           },
           {
             "name": "memchr",
-            "package_key": "memchr-2.8.0",
+            "package_key": "memchr-2.8.1",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -2260,7 +2260,7 @@
         "runtime_dependencies": [
           {
             "name": "indexmap",
-            "package_key": "indexmap-2.13.0",
+            "package_key": "indexmap-2.14.0",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -2270,7 +2270,7 @@
           },
           {
             "name": "itoa",
-            "package_key": "itoa-1.0.17",
+            "package_key": "itoa-1.0.18",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -2316,7 +2316,7 @@
         "runtime_dependencies": [
           {
             "name": "arc_swap",
-            "package_key": "arc-swap-1.8.2",
+            "package_key": "arc-swap-1.9.1",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -2384,7 +2384,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "skrifa-0.37.0": {
+      "skrifa-0.40.0": {
         "runtime_dependencies": [
           {
             "name": "bytemuck",
@@ -2398,7 +2398,7 @@
           },
           {
             "name": "read_fonts",
-            "package_key": "read-fonts-0.35.0",
+            "package_key": "read-fonts-0.37.0",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -2463,7 +2463,7 @@
         "runtime_dependencies": [
           {
             "name": "bitflags",
-            "package_key": "bitflags-2.11.0",
+            "package_key": "bitflags-2.12.1",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -2563,11 +2563,11 @@
         "build_dependencies": [],
         "features": []
       },
-      "swash-0.2.6": {
+      "swash-0.2.7": {
         "runtime_dependencies": [
           {
             "name": "skrifa",
-            "package_key": "skrifa-0.37.0",
+            "package_key": "skrifa-0.40.0",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -2659,7 +2659,7 @@
         "runtime_dependencies": [
           {
             "name": "fastrand",
-            "package_key": "fastrand-2.3.0",
+            "package_key": "fastrand-2.4.1",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -2871,7 +2871,7 @@
         "runtime_dependencies": [
           {
             "name": "indexmap",
-            "package_key": "indexmap-2.13.0",
+            "package_key": "indexmap-2.14.0",
             "kind": "normal",
             "features": [
               "std"
@@ -3135,7 +3135,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "unicode-segmentation-1.12.0": {
+      "unicode-segmentation-1.13.3": {
         "runtime_dependencies": [],
         "build_dependencies": [],
         "features": []
@@ -3188,7 +3188,7 @@
           },
           {
             "name": "bitflags",
-            "package_key": "bitflags-2.11.0",
+            "package_key": "bitflags-2.12.1",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -3221,7 +3221,7 @@
           },
           {
             "name": "log",
-            "package_key": "log-0.4.29",
+            "package_key": "log-0.4.31",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -3251,7 +3251,7 @@
           },
           {
             "name": "profiling",
-            "package_key": "profiling-1.0.17",
+            "package_key": "profiling-1.0.18",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -3396,7 +3396,7 @@
         "runtime_dependencies": [
           {
             "name": "bitflags",
-            "package_key": "bitflags-2.11.0",
+            "package_key": "bitflags-2.12.1",
             "kind": "normal",
             "features": [
               "serde"
@@ -3422,7 +3422,7 @@
           },
           {
             "name": "log",
-            "package_key": "log-0.4.29",
+            "package_key": "log-0.4.31",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -3452,7 +3452,7 @@
         "runtime_dependencies": [
           {
             "name": "memchr",
-            "package_key": "memchr-2.8.0",
+            "package_key": "memchr-2.8.1",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -3492,11 +3492,11 @@
           "std"
         ]
       },
-      "zerocopy-0.8.42": {
+      "zerocopy-0.8.50": {
         "runtime_dependencies": [
           {
             "name": "zerocopy_derive",
-            "package_key": "zerocopy-derive-0.8.42",
+            "package_key": "zerocopy-derive-0.8.50",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -3506,7 +3506,7 @@
           },
           {
             "name": "zerocopy_derive",
-            "package_key": "zerocopy-derive-0.8.42",
+            "package_key": "zerocopy-derive-0.8.50",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -3522,7 +3522,7 @@
           "zerocopy-derive"
         ]
       },
-      "zerocopy-derive-0.8.42": {
+      "zerocopy-derive-0.8.50": {
         "runtime_dependencies": [
           {
             "name": "proc_macro2",
@@ -3615,7 +3615,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -3681,7 +3681,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -3720,7 +3720,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -3744,7 +3744,7 @@
             "runtime_dependencies": [
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -3883,7 +3883,7 @@
             "runtime_dependencies": [
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -3899,7 +3899,7 @@
             "runtime_dependencies": [
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -3915,7 +3915,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -3955,7 +3955,7 @@
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -3994,7 +3994,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -4014,7 +4014,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -4024,7 +4024,7 @@
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -4119,7 +4119,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -4139,7 +4139,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -4236,7 +4236,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -4346,7 +4346,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -4376,7 +4376,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -4448,7 +4448,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -4502,7 +4502,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -4570,7 +4570,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -4610,7 +4610,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -4620,7 +4620,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -4678,7 +4678,7 @@
               },
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -4711,7 +4711,7 @@
               },
               {
                 "name": "indexmap",
-                "package_key": "indexmap-2.13.0",
+                "package_key": "indexmap-2.14.0",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -4721,7 +4721,7 @@
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -4763,7 +4763,7 @@
               },
               {
                 "name": "profiling",
-                "package_key": "profiling-1.0.17",
+                "package_key": "profiling-1.0.18",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -4912,7 +4912,7 @@
               },
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -5029,7 +5029,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -5059,7 +5059,7 @@
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -5119,7 +5119,7 @@
               },
               {
                 "name": "profiling",
-                "package_key": "profiling-1.0.17",
+                "package_key": "profiling-1.0.18",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -5206,7 +5206,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -5422,7 +5422,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -5488,7 +5488,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -5527,7 +5527,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -5551,7 +5551,7 @@
             "runtime_dependencies": [
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -5690,7 +5690,7 @@
             "runtime_dependencies": [
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -5706,7 +5706,7 @@
             "runtime_dependencies": [
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -5722,7 +5722,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -5762,7 +5762,7 @@
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -5801,7 +5801,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -5821,7 +5821,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -5831,7 +5831,7 @@
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -5926,7 +5926,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -5946,7 +5946,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -6043,7 +6043,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -6153,7 +6153,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -6183,7 +6183,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -6255,7 +6255,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -6309,7 +6309,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -6377,7 +6377,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -6417,7 +6417,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -6427,7 +6427,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -6485,7 +6485,7 @@
               },
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -6518,7 +6518,7 @@
               },
               {
                 "name": "indexmap",
-                "package_key": "indexmap-2.13.0",
+                "package_key": "indexmap-2.14.0",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -6528,7 +6528,7 @@
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -6570,7 +6570,7 @@
               },
               {
                 "name": "profiling",
-                "package_key": "profiling-1.0.17",
+                "package_key": "profiling-1.0.18",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -6719,7 +6719,7 @@
               },
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -6836,7 +6836,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -6866,7 +6866,7 @@
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -6926,7 +6926,7 @@
               },
               {
                 "name": "profiling",
-                "package_key": "profiling-1.0.17",
+                "package_key": "profiling-1.0.18",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -7013,7 +7013,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -7258,7 +7258,7 @@
               },
               {
                 "name": "zerocopy",
-                "package_key": "zerocopy-0.8.42",
+                "package_key": "zerocopy-0.8.50",
                 "kind": "normal",
                 "features": [
                   "simd"
@@ -7306,7 +7306,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -7316,7 +7316,7 @@
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -7399,7 +7399,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.14",
+                "package_key": "wayland-backend-0.3.15",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -7409,7 +7409,7 @@
               },
               {
                 "name": "wayland_client",
-                "package_key": "wayland-client-0.31.13",
+                "package_key": "wayland-client-0.31.14",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -7421,7 +7421,7 @@
             "build_dependencies": [],
             "features": []
           },
-          "cc-1.2.57": {
+          "cc-1.2.63": {
             "runtime_dependencies": [
               {
                 "name": "find_msvc_tools",
@@ -7445,7 +7445,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -7455,7 +7455,7 @@
               },
               {
                 "name": "shlex",
-                "package_key": "shlex-1.3.0",
+                "package_key": "shlex-2.0.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -7528,7 +7528,7 @@
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -7621,7 +7621,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -7631,7 +7631,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -7641,7 +7641,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -7651,7 +7651,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -7661,7 +7661,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -7671,7 +7671,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -7681,7 +7681,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -7691,7 +7691,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -7705,11 +7705,11 @@
               "std"
             ]
           },
-          "inotify-0.11.1": {
+          "inotify-0.11.2": {
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -7729,7 +7729,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -7745,7 +7745,7 @@
             "runtime_dependencies": [
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -7761,7 +7761,7 @@
             "runtime_dependencies": [
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -7804,41 +7804,21 @@
               "xdp"
             ]
           },
-          "mio-1.1.1": {
+          "mio-1.2.1": {
             "runtime_dependencies": [
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
                 "optional": false,
-                "target": "cfg(unix)",
-                "tree": "target"
-              },
-              {
-                "name": "libc",
-                "package_key": "libc-0.2.183",
-                "kind": "normal",
-                "features": [],
-                "uses_default_features": true,
-                "optional": false,
-                "target": "cfg(target_os = \"hermit\")",
-                "tree": "target"
-              },
-              {
-                "name": "libc",
-                "package_key": "libc-0.2.183",
-                "kind": "normal",
-                "features": [],
-                "uses_default_features": true,
-                "optional": false,
-                "target": "cfg(target_os = \"wasi\")",
+                "target": "cfg(any(unix, target_os = \"hermit\", target_os = \"wasi\"))",
                 "tree": "target"
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -7859,7 +7839,7 @@
             "runtime_dependencies": [
               {
                 "name": "inotify",
-                "package_key": "inotify-0.11.1",
+                "package_key": "inotify-0.11.2",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -7869,7 +7849,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -7879,7 +7859,7 @@
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -7889,7 +7869,7 @@
               },
               {
                 "name": "mio",
-                "package_key": "mio-1.1.1",
+                "package_key": "mio-1.2.1",
                 "kind": "normal",
                 "features": [
                   "os-ext"
@@ -7901,7 +7881,7 @@
               },
               {
                 "name": "mio",
-                "package_key": "mio-1.1.1",
+                "package_key": "mio-1.2.1",
                 "kind": "normal",
                 "features": [
                   "os-ext"
@@ -8005,11 +7985,11 @@
             "build_dependencies": [],
             "features": []
           },
-          "quick-xml-0.39.2": {
+          "quick-xml-0.39.4": {
             "runtime_dependencies": [
               {
                 "name": "memchr",
-                "package_key": "memchr-2.8.0",
+                "package_key": "memchr-2.8.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -8036,7 +8016,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -8076,7 +8056,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -8086,7 +8066,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -8135,7 +8115,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -8175,7 +8155,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -8185,7 +8165,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -8248,7 +8228,7 @@
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -8293,7 +8273,7 @@
               "memmap2"
             ]
           },
-          "shlex-1.3.0": {
+          "shlex-2.0.1": {
             "runtime_dependencies": [],
             "build_dependencies": [],
             "features": [
@@ -8313,7 +8293,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -8353,7 +8333,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -8363,7 +8343,7 @@
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -8407,7 +8387,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.14",
+                "package_key": "wayland-backend-0.3.15",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -8417,7 +8397,7 @@
               },
               {
                 "name": "wayland_client",
-                "package_key": "wayland-client-0.31.13",
+                "package_key": "wayland-client-0.31.14",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -8437,7 +8417,7 @@
               },
               {
                 "name": "wayland_cursor",
-                "package_key": "wayland-cursor-0.31.13",
+                "package_key": "wayland-cursor-0.31.14",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -8447,7 +8427,7 @@
               },
               {
                 "name": "wayland_protocols",
-                "package_key": "wayland-protocols-0.32.11",
+                "package_key": "wayland-protocols-0.32.12",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -8457,7 +8437,7 @@
               },
               {
                 "name": "wayland_protocols_wlr",
-                "package_key": "wayland-protocols-wlr-0.3.11",
+                "package_key": "wayland-protocols-wlr-0.3.12",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -8467,7 +8447,7 @@
               },
               {
                 "name": "wayland_scanner",
-                "package_key": "wayland-scanner-0.31.9",
+                "package_key": "wayland-scanner-0.31.10",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -8595,7 +8575,7 @@
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -8670,7 +8650,7 @@
               "variable-fonts"
             ]
           },
-          "wayland-backend-0.3.14": {
+          "wayland-backend-0.3.15": {
             "runtime_dependencies": [
               {
                 "name": "downcast_rs",
@@ -8723,7 +8703,7 @@
               },
               {
                 "name": "wayland_sys",
-                "package_key": "wayland-sys-0.31.10",
+                "package_key": "wayland-sys-0.31.11",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -8735,7 +8715,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.2.57",
+                "package_key": "cc-1.2.63",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -8749,11 +8729,11 @@
               "dlopen"
             ]
           },
-          "wayland-client-0.31.13": {
+          "wayland-client-0.31.14": {
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -8775,7 +8755,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.14",
+                "package_key": "wayland-backend-0.3.15",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -8785,7 +8765,7 @@
               },
               {
                 "name": "wayland_scanner",
-                "package_key": "wayland-scanner-0.31.9",
+                "package_key": "wayland-scanner-0.31.10",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -8801,7 +8781,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -8821,7 +8801,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.14",
+                "package_key": "wayland-backend-0.3.15",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -8833,7 +8813,7 @@
             "build_dependencies": [],
             "features": []
           },
-          "wayland-cursor-0.31.13": {
+          "wayland-cursor-0.31.14": {
             "runtime_dependencies": [
               {
                 "name": "rustix",
@@ -8849,7 +8829,7 @@
               },
               {
                 "name": "wayland_client",
-                "package_key": "wayland-client-0.31.13",
+                "package_key": "wayland-client-0.31.14",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -8871,11 +8851,11 @@
             "build_dependencies": [],
             "features": []
           },
-          "wayland-protocols-0.32.11": {
+          "wayland-protocols-0.32.12": {
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -8885,7 +8865,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.14",
+                "package_key": "wayland-backend-0.3.15",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -8895,7 +8875,7 @@
               },
               {
                 "name": "wayland_client",
-                "package_key": "wayland-client-0.31.13",
+                "package_key": "wayland-client-0.31.14",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -8905,7 +8885,7 @@
               },
               {
                 "name": "wayland_scanner",
-                "package_key": "wayland-scanner-0.31.9",
+                "package_key": "wayland-scanner-0.31.10",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -8922,11 +8902,11 @@
               "wayland-client"
             ]
           },
-          "wayland-protocols-plasma-0.3.11": {
+          "wayland-protocols-plasma-0.3.12": {
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -8936,7 +8916,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.14",
+                "package_key": "wayland-backend-0.3.15",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -8946,7 +8926,7 @@
               },
               {
                 "name": "wayland_client",
-                "package_key": "wayland-client-0.31.13",
+                "package_key": "wayland-client-0.31.14",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -8956,7 +8936,7 @@
               },
               {
                 "name": "wayland_protocols",
-                "package_key": "wayland-protocols-0.32.11",
+                "package_key": "wayland-protocols-0.32.12",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -8966,7 +8946,7 @@
               },
               {
                 "name": "wayland_scanner",
-                "package_key": "wayland-scanner-0.31.9",
+                "package_key": "wayland-scanner-0.31.10",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -8981,11 +8961,11 @@
               "wayland-client"
             ]
           },
-          "wayland-protocols-wlr-0.3.11": {
+          "wayland-protocols-wlr-0.3.12": {
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -8995,7 +8975,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.14",
+                "package_key": "wayland-backend-0.3.15",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -9005,7 +8985,7 @@
               },
               {
                 "name": "wayland_client",
-                "package_key": "wayland-client-0.31.13",
+                "package_key": "wayland-client-0.31.14",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -9015,7 +8995,7 @@
               },
               {
                 "name": "wayland_protocols",
-                "package_key": "wayland-protocols-0.32.11",
+                "package_key": "wayland-protocols-0.32.12",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -9025,7 +9005,7 @@
               },
               {
                 "name": "wayland_scanner",
-                "package_key": "wayland-scanner-0.31.9",
+                "package_key": "wayland-scanner-0.31.10",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -9040,7 +9020,7 @@
               "wayland-client"
             ]
           },
-          "wayland-scanner-0.31.9": {
+          "wayland-scanner-0.31.10": {
             "runtime_dependencies": [
               {
                 "name": "proc_macro2",
@@ -9054,7 +9034,7 @@
               },
               {
                 "name": "quick_xml",
-                "package_key": "quick-xml-0.39.2",
+                "package_key": "quick-xml-0.39.4",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -9076,7 +9056,7 @@
             "build_dependencies": [],
             "features": []
           },
-          "wayland-sys-0.31.10": {
+          "wayland-sys-0.31.11": {
             "runtime_dependencies": [
               {
                 "name": "dlib",
@@ -9090,7 +9070,7 @@
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -9112,7 +9092,7 @@
             "build_dependencies": [
               {
                 "name": "pkg_config",
-                "package_key": "pkg-config-0.3.32",
+                "package_key": "pkg-config-0.3.33",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -9161,7 +9141,7 @@
               },
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -9194,7 +9174,7 @@
               },
               {
                 "name": "indexmap",
-                "package_key": "indexmap-2.13.0",
+                "package_key": "indexmap-2.14.0",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -9204,7 +9184,7 @@
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -9246,7 +9226,7 @@
               },
               {
                 "name": "profiling",
-                "package_key": "profiling-1.0.17",
+                "package_key": "profiling-1.0.18",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -9398,7 +9378,7 @@
               },
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -9495,7 +9475,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -9525,7 +9505,7 @@
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -9565,7 +9545,7 @@
               },
               {
                 "name": "profiling",
-                "package_key": "profiling-1.0.17",
+                "package_key": "profiling-1.0.18",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -9664,7 +9644,7 @@
               },
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -9714,7 +9694,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -9813,7 +9793,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.14",
+                "package_key": "wayland-backend-0.3.15",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -9823,7 +9803,7 @@
               },
               {
                 "name": "wayland_client",
-                "package_key": "wayland-client-0.31.13",
+                "package_key": "wayland-client-0.31.14",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -9833,7 +9813,7 @@
               },
               {
                 "name": "wayland_protocols",
-                "package_key": "wayland-protocols-0.32.11",
+                "package_key": "wayland-protocols-0.32.12",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -9843,7 +9823,7 @@
               },
               {
                 "name": "wayland_protocols_plasma",
-                "package_key": "wayland-protocols-plasma-0.3.11",
+                "package_key": "wayland-protocols-plasma-0.3.12",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -9926,7 +9906,7 @@
             "runtime_dependencies": [
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -9948,7 +9928,7 @@
             "build_dependencies": [
               {
                 "name": "pkg_config",
-                "package_key": "pkg-config-0.3.32",
+                "package_key": "pkg-config-0.3.33",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -9983,7 +9963,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -10078,7 +10058,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -10098,7 +10078,7 @@
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -10216,7 +10196,7 @@
               },
               {
                 "name": "zerocopy",
-                "package_key": "zerocopy-0.8.42",
+                "package_key": "zerocopy-0.8.50",
                 "kind": "normal",
                 "features": [
                   "simd"
@@ -10264,7 +10244,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -10274,7 +10254,7 @@
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -10357,7 +10337,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.14",
+                "package_key": "wayland-backend-0.3.15",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -10367,7 +10347,7 @@
               },
               {
                 "name": "wayland_client",
-                "package_key": "wayland-client-0.31.13",
+                "package_key": "wayland-client-0.31.14",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -10379,7 +10359,7 @@
             "build_dependencies": [],
             "features": []
           },
-          "cc-1.2.57": {
+          "cc-1.2.63": {
             "runtime_dependencies": [
               {
                 "name": "find_msvc_tools",
@@ -10403,7 +10383,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -10413,7 +10393,7 @@
               },
               {
                 "name": "shlex",
-                "package_key": "shlex-1.3.0",
+                "package_key": "shlex-2.0.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -10486,7 +10466,7 @@
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -10579,7 +10559,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -10589,7 +10569,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -10599,7 +10579,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -10609,7 +10589,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -10619,7 +10599,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -10629,7 +10609,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -10639,7 +10619,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -10649,7 +10629,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -10663,11 +10643,11 @@
               "std"
             ]
           },
-          "inotify-0.11.1": {
+          "inotify-0.11.2": {
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -10687,7 +10667,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -10703,7 +10683,7 @@
             "runtime_dependencies": [
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -10719,7 +10699,7 @@
             "runtime_dependencies": [
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -10762,41 +10742,21 @@
               "xdp"
             ]
           },
-          "mio-1.1.1": {
+          "mio-1.2.1": {
             "runtime_dependencies": [
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
                 "optional": false,
-                "target": "cfg(unix)",
-                "tree": "target"
-              },
-              {
-                "name": "libc",
-                "package_key": "libc-0.2.183",
-                "kind": "normal",
-                "features": [],
-                "uses_default_features": true,
-                "optional": false,
-                "target": "cfg(target_os = \"hermit\")",
-                "tree": "target"
-              },
-              {
-                "name": "libc",
-                "package_key": "libc-0.2.183",
-                "kind": "normal",
-                "features": [],
-                "uses_default_features": true,
-                "optional": false,
-                "target": "cfg(target_os = \"wasi\")",
+                "target": "cfg(any(unix, target_os = \"hermit\", target_os = \"wasi\"))",
                 "tree": "target"
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -10817,7 +10777,7 @@
             "runtime_dependencies": [
               {
                 "name": "inotify",
-                "package_key": "inotify-0.11.1",
+                "package_key": "inotify-0.11.2",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -10827,7 +10787,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -10837,7 +10797,7 @@
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -10847,7 +10807,7 @@
               },
               {
                 "name": "mio",
-                "package_key": "mio-1.1.1",
+                "package_key": "mio-1.2.1",
                 "kind": "normal",
                 "features": [
                   "os-ext"
@@ -10859,7 +10819,7 @@
               },
               {
                 "name": "mio",
-                "package_key": "mio-1.1.1",
+                "package_key": "mio-1.2.1",
                 "kind": "normal",
                 "features": [
                   "os-ext"
@@ -10963,11 +10923,11 @@
             "build_dependencies": [],
             "features": []
           },
-          "quick-xml-0.39.2": {
+          "quick-xml-0.39.4": {
             "runtime_dependencies": [
               {
                 "name": "memchr",
-                "package_key": "memchr-2.8.0",
+                "package_key": "memchr-2.8.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -10994,7 +10954,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -11034,7 +10994,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -11044,7 +11004,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -11093,7 +11053,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -11133,7 +11093,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -11143,7 +11103,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -11206,7 +11166,7 @@
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -11251,7 +11211,7 @@
               "memmap2"
             ]
           },
-          "shlex-1.3.0": {
+          "shlex-2.0.1": {
             "runtime_dependencies": [],
             "build_dependencies": [],
             "features": [
@@ -11271,7 +11231,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -11311,7 +11271,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -11321,7 +11281,7 @@
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -11365,7 +11325,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.14",
+                "package_key": "wayland-backend-0.3.15",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -11375,7 +11335,7 @@
               },
               {
                 "name": "wayland_client",
-                "package_key": "wayland-client-0.31.13",
+                "package_key": "wayland-client-0.31.14",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -11395,7 +11355,7 @@
               },
               {
                 "name": "wayland_cursor",
-                "package_key": "wayland-cursor-0.31.13",
+                "package_key": "wayland-cursor-0.31.14",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -11405,7 +11365,7 @@
               },
               {
                 "name": "wayland_protocols",
-                "package_key": "wayland-protocols-0.32.11",
+                "package_key": "wayland-protocols-0.32.12",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -11415,7 +11375,7 @@
               },
               {
                 "name": "wayland_protocols_wlr",
-                "package_key": "wayland-protocols-wlr-0.3.11",
+                "package_key": "wayland-protocols-wlr-0.3.12",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -11425,7 +11385,7 @@
               },
               {
                 "name": "wayland_scanner",
-                "package_key": "wayland-scanner-0.31.9",
+                "package_key": "wayland-scanner-0.31.10",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -11553,7 +11513,7 @@
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -11628,7 +11588,7 @@
               "variable-fonts"
             ]
           },
-          "wayland-backend-0.3.14": {
+          "wayland-backend-0.3.15": {
             "runtime_dependencies": [
               {
                 "name": "downcast_rs",
@@ -11681,7 +11641,7 @@
               },
               {
                 "name": "wayland_sys",
-                "package_key": "wayland-sys-0.31.10",
+                "package_key": "wayland-sys-0.31.11",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -11693,7 +11653,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.2.57",
+                "package_key": "cc-1.2.63",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -11707,11 +11667,11 @@
               "dlopen"
             ]
           },
-          "wayland-client-0.31.13": {
+          "wayland-client-0.31.14": {
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -11733,7 +11693,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.14",
+                "package_key": "wayland-backend-0.3.15",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -11743,7 +11703,7 @@
               },
               {
                 "name": "wayland_scanner",
-                "package_key": "wayland-scanner-0.31.9",
+                "package_key": "wayland-scanner-0.31.10",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -11759,7 +11719,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -11779,7 +11739,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.14",
+                "package_key": "wayland-backend-0.3.15",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -11791,7 +11751,7 @@
             "build_dependencies": [],
             "features": []
           },
-          "wayland-cursor-0.31.13": {
+          "wayland-cursor-0.31.14": {
             "runtime_dependencies": [
               {
                 "name": "rustix",
@@ -11807,7 +11767,7 @@
               },
               {
                 "name": "wayland_client",
-                "package_key": "wayland-client-0.31.13",
+                "package_key": "wayland-client-0.31.14",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -11829,11 +11789,11 @@
             "build_dependencies": [],
             "features": []
           },
-          "wayland-protocols-0.32.11": {
+          "wayland-protocols-0.32.12": {
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -11843,7 +11803,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.14",
+                "package_key": "wayland-backend-0.3.15",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -11853,7 +11813,7 @@
               },
               {
                 "name": "wayland_client",
-                "package_key": "wayland-client-0.31.13",
+                "package_key": "wayland-client-0.31.14",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -11863,7 +11823,7 @@
               },
               {
                 "name": "wayland_scanner",
-                "package_key": "wayland-scanner-0.31.9",
+                "package_key": "wayland-scanner-0.31.10",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -11880,11 +11840,11 @@
               "wayland-client"
             ]
           },
-          "wayland-protocols-plasma-0.3.11": {
+          "wayland-protocols-plasma-0.3.12": {
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -11894,7 +11854,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.14",
+                "package_key": "wayland-backend-0.3.15",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -11904,7 +11864,7 @@
               },
               {
                 "name": "wayland_client",
-                "package_key": "wayland-client-0.31.13",
+                "package_key": "wayland-client-0.31.14",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -11914,7 +11874,7 @@
               },
               {
                 "name": "wayland_protocols",
-                "package_key": "wayland-protocols-0.32.11",
+                "package_key": "wayland-protocols-0.32.12",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -11924,7 +11884,7 @@
               },
               {
                 "name": "wayland_scanner",
-                "package_key": "wayland-scanner-0.31.9",
+                "package_key": "wayland-scanner-0.31.10",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -11939,11 +11899,11 @@
               "wayland-client"
             ]
           },
-          "wayland-protocols-wlr-0.3.11": {
+          "wayland-protocols-wlr-0.3.12": {
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -11953,7 +11913,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.14",
+                "package_key": "wayland-backend-0.3.15",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -11963,7 +11923,7 @@
               },
               {
                 "name": "wayland_client",
-                "package_key": "wayland-client-0.31.13",
+                "package_key": "wayland-client-0.31.14",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -11973,7 +11933,7 @@
               },
               {
                 "name": "wayland_protocols",
-                "package_key": "wayland-protocols-0.32.11",
+                "package_key": "wayland-protocols-0.32.12",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -11983,7 +11943,7 @@
               },
               {
                 "name": "wayland_scanner",
-                "package_key": "wayland-scanner-0.31.9",
+                "package_key": "wayland-scanner-0.31.10",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -11998,7 +11958,7 @@
               "wayland-client"
             ]
           },
-          "wayland-scanner-0.31.9": {
+          "wayland-scanner-0.31.10": {
             "runtime_dependencies": [
               {
                 "name": "proc_macro2",
@@ -12012,7 +11972,7 @@
               },
               {
                 "name": "quick_xml",
-                "package_key": "quick-xml-0.39.2",
+                "package_key": "quick-xml-0.39.4",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -12034,7 +11994,7 @@
             "build_dependencies": [],
             "features": []
           },
-          "wayland-sys-0.31.10": {
+          "wayland-sys-0.31.11": {
             "runtime_dependencies": [
               {
                 "name": "dlib",
@@ -12048,7 +12008,7 @@
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -12070,7 +12030,7 @@
             "build_dependencies": [
               {
                 "name": "pkg_config",
-                "package_key": "pkg-config-0.3.32",
+                "package_key": "pkg-config-0.3.33",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -12119,7 +12079,7 @@
               },
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -12152,7 +12112,7 @@
               },
               {
                 "name": "indexmap",
-                "package_key": "indexmap-2.13.0",
+                "package_key": "indexmap-2.14.0",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -12162,7 +12122,7 @@
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -12204,7 +12164,7 @@
               },
               {
                 "name": "profiling",
-                "package_key": "profiling-1.0.17",
+                "package_key": "profiling-1.0.18",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -12356,7 +12316,7 @@
               },
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -12453,7 +12413,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -12483,7 +12443,7 @@
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -12523,7 +12483,7 @@
               },
               {
                 "name": "profiling",
-                "package_key": "profiling-1.0.17",
+                "package_key": "profiling-1.0.18",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -12622,7 +12582,7 @@
               },
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -12672,7 +12632,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -12771,7 +12731,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.14",
+                "package_key": "wayland-backend-0.3.15",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -12781,7 +12741,7 @@
               },
               {
                 "name": "wayland_client",
-                "package_key": "wayland-client-0.31.13",
+                "package_key": "wayland-client-0.31.14",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -12791,7 +12751,7 @@
               },
               {
                 "name": "wayland_protocols",
-                "package_key": "wayland-protocols-0.32.11",
+                "package_key": "wayland-protocols-0.32.12",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -12801,7 +12761,7 @@
               },
               {
                 "name": "wayland_protocols_plasma",
-                "package_key": "wayland-protocols-plasma-0.3.11",
+                "package_key": "wayland-protocols-plasma-0.3.12",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -12884,7 +12844,7 @@
             "runtime_dependencies": [
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -12906,7 +12866,7 @@
             "build_dependencies": [
               {
                 "name": "pkg_config",
-                "package_key": "pkg-config-0.3.32",
+                "package_key": "pkg-config-0.3.33",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -12941,7 +12901,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -13036,7 +12996,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -13056,7 +13016,7 @@
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -13174,7 +13134,7 @@
               },
               {
                 "name": "zerocopy",
-                "package_key": "zerocopy-0.8.42",
+                "package_key": "zerocopy-0.8.50",
                 "kind": "normal",
                 "features": [
                   "simd"
@@ -13222,7 +13182,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -13232,7 +13192,7 @@
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -13315,7 +13275,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.14",
+                "package_key": "wayland-backend-0.3.15",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -13325,7 +13285,7 @@
               },
               {
                 "name": "wayland_client",
-                "package_key": "wayland-client-0.31.13",
+                "package_key": "wayland-client-0.31.14",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -13337,7 +13297,7 @@
             "build_dependencies": [],
             "features": []
           },
-          "cc-1.2.57": {
+          "cc-1.2.63": {
             "runtime_dependencies": [
               {
                 "name": "find_msvc_tools",
@@ -13361,7 +13321,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -13371,7 +13331,7 @@
               },
               {
                 "name": "shlex",
-                "package_key": "shlex-1.3.0",
+                "package_key": "shlex-2.0.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -13444,7 +13404,7 @@
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -13537,7 +13497,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -13547,7 +13507,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -13557,7 +13517,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -13567,7 +13527,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -13577,7 +13537,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -13587,7 +13547,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -13597,7 +13557,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -13607,7 +13567,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -13621,11 +13581,11 @@
               "std"
             ]
           },
-          "inotify-0.11.1": {
+          "inotify-0.11.2": {
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -13645,7 +13605,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -13661,7 +13621,7 @@
             "runtime_dependencies": [
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -13677,7 +13637,7 @@
             "runtime_dependencies": [
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -13720,41 +13680,21 @@
               "xdp"
             ]
           },
-          "mio-1.1.1": {
+          "mio-1.2.1": {
             "runtime_dependencies": [
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
                 "optional": false,
-                "target": "cfg(unix)",
-                "tree": "target"
-              },
-              {
-                "name": "libc",
-                "package_key": "libc-0.2.183",
-                "kind": "normal",
-                "features": [],
-                "uses_default_features": true,
-                "optional": false,
-                "target": "cfg(target_os = \"hermit\")",
-                "tree": "target"
-              },
-              {
-                "name": "libc",
-                "package_key": "libc-0.2.183",
-                "kind": "normal",
-                "features": [],
-                "uses_default_features": true,
-                "optional": false,
-                "target": "cfg(target_os = \"wasi\")",
+                "target": "cfg(any(unix, target_os = \"hermit\", target_os = \"wasi\"))",
                 "tree": "target"
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -13775,7 +13715,7 @@
             "runtime_dependencies": [
               {
                 "name": "inotify",
-                "package_key": "inotify-0.11.1",
+                "package_key": "inotify-0.11.2",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -13785,7 +13725,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -13795,7 +13735,7 @@
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -13805,7 +13745,7 @@
               },
               {
                 "name": "mio",
-                "package_key": "mio-1.1.1",
+                "package_key": "mio-1.2.1",
                 "kind": "normal",
                 "features": [
                   "os-ext"
@@ -13817,7 +13757,7 @@
               },
               {
                 "name": "mio",
-                "package_key": "mio-1.1.1",
+                "package_key": "mio-1.2.1",
                 "kind": "normal",
                 "features": [
                   "os-ext"
@@ -13921,11 +13861,11 @@
             "build_dependencies": [],
             "features": []
           },
-          "quick-xml-0.39.2": {
+          "quick-xml-0.39.4": {
             "runtime_dependencies": [
               {
                 "name": "memchr",
-                "package_key": "memchr-2.8.0",
+                "package_key": "memchr-2.8.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -13952,7 +13892,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -13992,7 +13932,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -14002,7 +13942,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -14051,7 +13991,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -14091,7 +14031,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -14101,7 +14041,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -14164,7 +14104,7 @@
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -14209,7 +14149,7 @@
               "memmap2"
             ]
           },
-          "shlex-1.3.0": {
+          "shlex-2.0.1": {
             "runtime_dependencies": [],
             "build_dependencies": [],
             "features": [
@@ -14229,7 +14169,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -14269,7 +14209,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -14279,7 +14219,7 @@
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -14323,7 +14263,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.14",
+                "package_key": "wayland-backend-0.3.15",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -14333,7 +14273,7 @@
               },
               {
                 "name": "wayland_client",
-                "package_key": "wayland-client-0.31.13",
+                "package_key": "wayland-client-0.31.14",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -14353,7 +14293,7 @@
               },
               {
                 "name": "wayland_cursor",
-                "package_key": "wayland-cursor-0.31.13",
+                "package_key": "wayland-cursor-0.31.14",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -14363,7 +14303,7 @@
               },
               {
                 "name": "wayland_protocols",
-                "package_key": "wayland-protocols-0.32.11",
+                "package_key": "wayland-protocols-0.32.12",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -14373,7 +14313,7 @@
               },
               {
                 "name": "wayland_protocols_wlr",
-                "package_key": "wayland-protocols-wlr-0.3.11",
+                "package_key": "wayland-protocols-wlr-0.3.12",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -14383,7 +14323,7 @@
               },
               {
                 "name": "wayland_scanner",
-                "package_key": "wayland-scanner-0.31.9",
+                "package_key": "wayland-scanner-0.31.10",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -14511,7 +14451,7 @@
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -14586,7 +14526,7 @@
               "variable-fonts"
             ]
           },
-          "wayland-backend-0.3.14": {
+          "wayland-backend-0.3.15": {
             "runtime_dependencies": [
               {
                 "name": "downcast_rs",
@@ -14639,7 +14579,7 @@
               },
               {
                 "name": "wayland_sys",
-                "package_key": "wayland-sys-0.31.10",
+                "package_key": "wayland-sys-0.31.11",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -14651,7 +14591,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.2.57",
+                "package_key": "cc-1.2.63",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -14665,11 +14605,11 @@
               "dlopen"
             ]
           },
-          "wayland-client-0.31.13": {
+          "wayland-client-0.31.14": {
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -14691,7 +14631,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.14",
+                "package_key": "wayland-backend-0.3.15",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -14701,7 +14641,7 @@
               },
               {
                 "name": "wayland_scanner",
-                "package_key": "wayland-scanner-0.31.9",
+                "package_key": "wayland-scanner-0.31.10",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -14717,7 +14657,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -14737,7 +14677,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.14",
+                "package_key": "wayland-backend-0.3.15",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -14749,7 +14689,7 @@
             "build_dependencies": [],
             "features": []
           },
-          "wayland-cursor-0.31.13": {
+          "wayland-cursor-0.31.14": {
             "runtime_dependencies": [
               {
                 "name": "rustix",
@@ -14765,7 +14705,7 @@
               },
               {
                 "name": "wayland_client",
-                "package_key": "wayland-client-0.31.13",
+                "package_key": "wayland-client-0.31.14",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -14787,11 +14727,11 @@
             "build_dependencies": [],
             "features": []
           },
-          "wayland-protocols-0.32.11": {
+          "wayland-protocols-0.32.12": {
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -14801,7 +14741,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.14",
+                "package_key": "wayland-backend-0.3.15",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -14811,7 +14751,7 @@
               },
               {
                 "name": "wayland_client",
-                "package_key": "wayland-client-0.31.13",
+                "package_key": "wayland-client-0.31.14",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -14821,7 +14761,7 @@
               },
               {
                 "name": "wayland_scanner",
-                "package_key": "wayland-scanner-0.31.9",
+                "package_key": "wayland-scanner-0.31.10",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -14838,11 +14778,11 @@
               "wayland-client"
             ]
           },
-          "wayland-protocols-plasma-0.3.11": {
+          "wayland-protocols-plasma-0.3.12": {
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -14852,7 +14792,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.14",
+                "package_key": "wayland-backend-0.3.15",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -14862,7 +14802,7 @@
               },
               {
                 "name": "wayland_client",
-                "package_key": "wayland-client-0.31.13",
+                "package_key": "wayland-client-0.31.14",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -14872,7 +14812,7 @@
               },
               {
                 "name": "wayland_protocols",
-                "package_key": "wayland-protocols-0.32.11",
+                "package_key": "wayland-protocols-0.32.12",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -14882,7 +14822,7 @@
               },
               {
                 "name": "wayland_scanner",
-                "package_key": "wayland-scanner-0.31.9",
+                "package_key": "wayland-scanner-0.31.10",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -14897,11 +14837,11 @@
               "wayland-client"
             ]
           },
-          "wayland-protocols-wlr-0.3.11": {
+          "wayland-protocols-wlr-0.3.12": {
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -14911,7 +14851,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.14",
+                "package_key": "wayland-backend-0.3.15",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -14921,7 +14861,7 @@
               },
               {
                 "name": "wayland_client",
-                "package_key": "wayland-client-0.31.13",
+                "package_key": "wayland-client-0.31.14",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -14931,7 +14871,7 @@
               },
               {
                 "name": "wayland_protocols",
-                "package_key": "wayland-protocols-0.32.11",
+                "package_key": "wayland-protocols-0.32.12",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -14941,7 +14881,7 @@
               },
               {
                 "name": "wayland_scanner",
-                "package_key": "wayland-scanner-0.31.9",
+                "package_key": "wayland-scanner-0.31.10",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -14956,7 +14896,7 @@
               "wayland-client"
             ]
           },
-          "wayland-scanner-0.31.9": {
+          "wayland-scanner-0.31.10": {
             "runtime_dependencies": [
               {
                 "name": "proc_macro2",
@@ -14970,7 +14910,7 @@
               },
               {
                 "name": "quick_xml",
-                "package_key": "quick-xml-0.39.2",
+                "package_key": "quick-xml-0.39.4",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -14992,7 +14932,7 @@
             "build_dependencies": [],
             "features": []
           },
-          "wayland-sys-0.31.10": {
+          "wayland-sys-0.31.11": {
             "runtime_dependencies": [
               {
                 "name": "dlib",
@@ -15006,7 +14946,7 @@
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -15028,7 +14968,7 @@
             "build_dependencies": [
               {
                 "name": "pkg_config",
-                "package_key": "pkg-config-0.3.32",
+                "package_key": "pkg-config-0.3.33",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -15077,7 +15017,7 @@
               },
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -15110,7 +15050,7 @@
               },
               {
                 "name": "indexmap",
-                "package_key": "indexmap-2.13.0",
+                "package_key": "indexmap-2.14.0",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -15120,7 +15060,7 @@
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -15162,7 +15102,7 @@
               },
               {
                 "name": "profiling",
-                "package_key": "profiling-1.0.17",
+                "package_key": "profiling-1.0.18",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -15314,7 +15254,7 @@
               },
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -15411,7 +15351,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -15441,7 +15381,7 @@
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -15481,7 +15421,7 @@
               },
               {
                 "name": "profiling",
-                "package_key": "profiling-1.0.17",
+                "package_key": "profiling-1.0.18",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -15580,7 +15520,7 @@
               },
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -15630,7 +15570,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -15729,7 +15669,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.14",
+                "package_key": "wayland-backend-0.3.15",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -15739,7 +15679,7 @@
               },
               {
                 "name": "wayland_client",
-                "package_key": "wayland-client-0.31.13",
+                "package_key": "wayland-client-0.31.14",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -15749,7 +15689,7 @@
               },
               {
                 "name": "wayland_protocols",
-                "package_key": "wayland-protocols-0.32.11",
+                "package_key": "wayland-protocols-0.32.12",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -15759,7 +15699,7 @@
               },
               {
                 "name": "wayland_protocols_plasma",
-                "package_key": "wayland-protocols-plasma-0.3.11",
+                "package_key": "wayland-protocols-plasma-0.3.12",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -15842,7 +15782,7 @@
             "runtime_dependencies": [
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -15864,7 +15804,7 @@
             "build_dependencies": [
               {
                 "name": "pkg_config",
-                "package_key": "pkg-config-0.3.32",
+                "package_key": "pkg-config-0.3.33",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -15899,7 +15839,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -15994,7 +15934,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -16014,7 +15954,7 @@
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -16132,7 +16072,7 @@
               },
               {
                 "name": "zerocopy",
-                "package_key": "zerocopy-0.8.42",
+                "package_key": "zerocopy-0.8.50",
                 "kind": "normal",
                 "features": [
                   "simd"
@@ -16180,7 +16120,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -16190,7 +16130,7 @@
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -16273,7 +16213,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.14",
+                "package_key": "wayland-backend-0.3.15",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -16283,7 +16223,7 @@
               },
               {
                 "name": "wayland_client",
-                "package_key": "wayland-client-0.31.13",
+                "package_key": "wayland-client-0.31.14",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -16295,7 +16235,7 @@
             "build_dependencies": [],
             "features": []
           },
-          "cc-1.2.57": {
+          "cc-1.2.63": {
             "runtime_dependencies": [
               {
                 "name": "find_msvc_tools",
@@ -16319,7 +16259,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -16329,7 +16269,7 @@
               },
               {
                 "name": "shlex",
-                "package_key": "shlex-1.3.0",
+                "package_key": "shlex-2.0.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -16402,7 +16342,7 @@
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -16495,7 +16435,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -16505,7 +16445,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -16515,7 +16455,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -16525,7 +16465,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -16535,7 +16475,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -16545,7 +16485,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -16555,7 +16495,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -16565,7 +16505,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -16579,11 +16519,11 @@
               "std"
             ]
           },
-          "inotify-0.11.1": {
+          "inotify-0.11.2": {
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -16603,7 +16543,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -16619,7 +16559,7 @@
             "runtime_dependencies": [
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -16635,7 +16575,7 @@
             "runtime_dependencies": [
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -16678,41 +16618,21 @@
               "xdp"
             ]
           },
-          "mio-1.1.1": {
+          "mio-1.2.1": {
             "runtime_dependencies": [
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
                 "optional": false,
-                "target": "cfg(unix)",
-                "tree": "target"
-              },
-              {
-                "name": "libc",
-                "package_key": "libc-0.2.183",
-                "kind": "normal",
-                "features": [],
-                "uses_default_features": true,
-                "optional": false,
-                "target": "cfg(target_os = \"hermit\")",
-                "tree": "target"
-              },
-              {
-                "name": "libc",
-                "package_key": "libc-0.2.183",
-                "kind": "normal",
-                "features": [],
-                "uses_default_features": true,
-                "optional": false,
-                "target": "cfg(target_os = \"wasi\")",
+                "target": "cfg(any(unix, target_os = \"hermit\", target_os = \"wasi\"))",
                 "tree": "target"
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -16733,7 +16653,7 @@
             "runtime_dependencies": [
               {
                 "name": "inotify",
-                "package_key": "inotify-0.11.1",
+                "package_key": "inotify-0.11.2",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -16743,7 +16663,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -16753,7 +16673,7 @@
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -16763,7 +16683,7 @@
               },
               {
                 "name": "mio",
-                "package_key": "mio-1.1.1",
+                "package_key": "mio-1.2.1",
                 "kind": "normal",
                 "features": [
                   "os-ext"
@@ -16775,7 +16695,7 @@
               },
               {
                 "name": "mio",
-                "package_key": "mio-1.1.1",
+                "package_key": "mio-1.2.1",
                 "kind": "normal",
                 "features": [
                   "os-ext"
@@ -16879,11 +16799,11 @@
             "build_dependencies": [],
             "features": []
           },
-          "quick-xml-0.39.2": {
+          "quick-xml-0.39.4": {
             "runtime_dependencies": [
               {
                 "name": "memchr",
-                "package_key": "memchr-2.8.0",
+                "package_key": "memchr-2.8.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -16910,7 +16830,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -16950,7 +16870,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -16960,7 +16880,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -17009,7 +16929,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -17049,7 +16969,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -17059,7 +16979,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -17122,7 +17042,7 @@
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -17167,7 +17087,7 @@
               "memmap2"
             ]
           },
-          "shlex-1.3.0": {
+          "shlex-2.0.1": {
             "runtime_dependencies": [],
             "build_dependencies": [],
             "features": [
@@ -17187,7 +17107,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -17227,7 +17147,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -17237,7 +17157,7 @@
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -17281,7 +17201,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.14",
+                "package_key": "wayland-backend-0.3.15",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -17291,7 +17211,7 @@
               },
               {
                 "name": "wayland_client",
-                "package_key": "wayland-client-0.31.13",
+                "package_key": "wayland-client-0.31.14",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -17311,7 +17231,7 @@
               },
               {
                 "name": "wayland_cursor",
-                "package_key": "wayland-cursor-0.31.13",
+                "package_key": "wayland-cursor-0.31.14",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -17321,7 +17241,7 @@
               },
               {
                 "name": "wayland_protocols",
-                "package_key": "wayland-protocols-0.32.11",
+                "package_key": "wayland-protocols-0.32.12",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -17331,7 +17251,7 @@
               },
               {
                 "name": "wayland_protocols_wlr",
-                "package_key": "wayland-protocols-wlr-0.3.11",
+                "package_key": "wayland-protocols-wlr-0.3.12",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -17341,7 +17261,7 @@
               },
               {
                 "name": "wayland_scanner",
-                "package_key": "wayland-scanner-0.31.9",
+                "package_key": "wayland-scanner-0.31.10",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -17469,7 +17389,7 @@
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -17544,7 +17464,7 @@
               "variable-fonts"
             ]
           },
-          "wayland-backend-0.3.14": {
+          "wayland-backend-0.3.15": {
             "runtime_dependencies": [
               {
                 "name": "downcast_rs",
@@ -17597,7 +17517,7 @@
               },
               {
                 "name": "wayland_sys",
-                "package_key": "wayland-sys-0.31.10",
+                "package_key": "wayland-sys-0.31.11",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -17609,7 +17529,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.2.57",
+                "package_key": "cc-1.2.63",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -17623,11 +17543,11 @@
               "dlopen"
             ]
           },
-          "wayland-client-0.31.13": {
+          "wayland-client-0.31.14": {
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -17649,7 +17569,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.14",
+                "package_key": "wayland-backend-0.3.15",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -17659,7 +17579,7 @@
               },
               {
                 "name": "wayland_scanner",
-                "package_key": "wayland-scanner-0.31.9",
+                "package_key": "wayland-scanner-0.31.10",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -17675,7 +17595,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -17695,7 +17615,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.14",
+                "package_key": "wayland-backend-0.3.15",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -17707,7 +17627,7 @@
             "build_dependencies": [],
             "features": []
           },
-          "wayland-cursor-0.31.13": {
+          "wayland-cursor-0.31.14": {
             "runtime_dependencies": [
               {
                 "name": "rustix",
@@ -17723,7 +17643,7 @@
               },
               {
                 "name": "wayland_client",
-                "package_key": "wayland-client-0.31.13",
+                "package_key": "wayland-client-0.31.14",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -17745,11 +17665,11 @@
             "build_dependencies": [],
             "features": []
           },
-          "wayland-protocols-0.32.11": {
+          "wayland-protocols-0.32.12": {
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -17759,7 +17679,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.14",
+                "package_key": "wayland-backend-0.3.15",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -17769,7 +17689,7 @@
               },
               {
                 "name": "wayland_client",
-                "package_key": "wayland-client-0.31.13",
+                "package_key": "wayland-client-0.31.14",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -17779,7 +17699,7 @@
               },
               {
                 "name": "wayland_scanner",
-                "package_key": "wayland-scanner-0.31.9",
+                "package_key": "wayland-scanner-0.31.10",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -17796,11 +17716,11 @@
               "wayland-client"
             ]
           },
-          "wayland-protocols-plasma-0.3.11": {
+          "wayland-protocols-plasma-0.3.12": {
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -17810,7 +17730,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.14",
+                "package_key": "wayland-backend-0.3.15",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -17820,7 +17740,7 @@
               },
               {
                 "name": "wayland_client",
-                "package_key": "wayland-client-0.31.13",
+                "package_key": "wayland-client-0.31.14",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -17830,7 +17750,7 @@
               },
               {
                 "name": "wayland_protocols",
-                "package_key": "wayland-protocols-0.32.11",
+                "package_key": "wayland-protocols-0.32.12",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -17840,7 +17760,7 @@
               },
               {
                 "name": "wayland_scanner",
-                "package_key": "wayland-scanner-0.31.9",
+                "package_key": "wayland-scanner-0.31.10",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -17855,11 +17775,11 @@
               "wayland-client"
             ]
           },
-          "wayland-protocols-wlr-0.3.11": {
+          "wayland-protocols-wlr-0.3.12": {
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -17869,7 +17789,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.14",
+                "package_key": "wayland-backend-0.3.15",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -17879,7 +17799,7 @@
               },
               {
                 "name": "wayland_client",
-                "package_key": "wayland-client-0.31.13",
+                "package_key": "wayland-client-0.31.14",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -17889,7 +17809,7 @@
               },
               {
                 "name": "wayland_protocols",
-                "package_key": "wayland-protocols-0.32.11",
+                "package_key": "wayland-protocols-0.32.12",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -17899,7 +17819,7 @@
               },
               {
                 "name": "wayland_scanner",
-                "package_key": "wayland-scanner-0.31.9",
+                "package_key": "wayland-scanner-0.31.10",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -17914,7 +17834,7 @@
               "wayland-client"
             ]
           },
-          "wayland-scanner-0.31.9": {
+          "wayland-scanner-0.31.10": {
             "runtime_dependencies": [
               {
                 "name": "proc_macro2",
@@ -17928,7 +17848,7 @@
               },
               {
                 "name": "quick_xml",
-                "package_key": "quick-xml-0.39.2",
+                "package_key": "quick-xml-0.39.4",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -17950,7 +17870,7 @@
             "build_dependencies": [],
             "features": []
           },
-          "wayland-sys-0.31.10": {
+          "wayland-sys-0.31.11": {
             "runtime_dependencies": [
               {
                 "name": "dlib",
@@ -17964,7 +17884,7 @@
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -17986,7 +17906,7 @@
             "build_dependencies": [
               {
                 "name": "pkg_config",
-                "package_key": "pkg-config-0.3.32",
+                "package_key": "pkg-config-0.3.33",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -18035,7 +17955,7 @@
               },
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -18068,7 +17988,7 @@
               },
               {
                 "name": "indexmap",
-                "package_key": "indexmap-2.13.0",
+                "package_key": "indexmap-2.14.0",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -18078,7 +17998,7 @@
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -18120,7 +18040,7 @@
               },
               {
                 "name": "profiling",
-                "package_key": "profiling-1.0.17",
+                "package_key": "profiling-1.0.18",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -18272,7 +18192,7 @@
               },
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -18369,7 +18289,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -18399,7 +18319,7 @@
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -18439,7 +18359,7 @@
               },
               {
                 "name": "profiling",
-                "package_key": "profiling-1.0.17",
+                "package_key": "profiling-1.0.18",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -18538,7 +18458,7 @@
               },
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -18588,7 +18508,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -18687,7 +18607,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.14",
+                "package_key": "wayland-backend-0.3.15",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -18697,7 +18617,7 @@
               },
               {
                 "name": "wayland_client",
-                "package_key": "wayland-client-0.31.13",
+                "package_key": "wayland-client-0.31.14",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -18707,7 +18627,7 @@
               },
               {
                 "name": "wayland_protocols",
-                "package_key": "wayland-protocols-0.32.11",
+                "package_key": "wayland-protocols-0.32.12",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -18717,7 +18637,7 @@
               },
               {
                 "name": "wayland_protocols_plasma",
-                "package_key": "wayland-protocols-plasma-0.3.11",
+                "package_key": "wayland-protocols-plasma-0.3.12",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -18800,7 +18720,7 @@
             "runtime_dependencies": [
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -18822,7 +18742,7 @@
             "build_dependencies": [
               {
                 "name": "pkg_config",
-                "package_key": "pkg-config-0.3.32",
+                "package_key": "pkg-config-0.3.33",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -18857,7 +18777,7 @@
               },
               {
                 "name": "libc",
-                "package_key": "libc-0.2.183",
+                "package_key": "libc-0.2.186",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -18952,7 +18872,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.11.0",
+                "package_key": "bitflags-2.12.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -18972,7 +18892,7 @@
               },
               {
                 "name": "log",
-                "package_key": "log-0.4.29",
+                "package_key": "log-0.4.31",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -19016,7 +18936,7 @@
     }
   },
   "per_crate": {
-    "arc-swap-1.8.2": {
+    "arc-swap-1.9.1": {
       "edition": "2018"
     },
     "arrayvec-0.7.6": {
@@ -19026,7 +18946,7 @@
       "edition": "2021",
       "build_script": "build.rs"
     },
-    "autocfg-1.5.0": {
+    "autocfg-1.5.1": {
       "edition": "2015"
     },
     "bit-set-0.8.0": {
@@ -19038,7 +18958,7 @@
     "bitflags-1.3.2": {
       "edition": "2018"
     },
-    "bitflags-2.11.0": {
+    "bitflags-2.12.1": {
       "edition": "2021"
     },
     "block-0.1.6": {
@@ -19107,10 +19027,10 @@
     "etagere-0.2.15": {
       "edition": "2018"
     },
-    "euclid-0.22.13": {
+    "euclid-0.22.14": {
       "edition": "2021"
     },
-    "fastrand-2.3.0": {
+    "fastrand-2.4.1": {
       "edition": "2018"
     },
     "figment-0.10.19": {
@@ -19120,7 +19040,7 @@
     "foldhash-0.1.5": {
       "edition": "2021"
     },
-    "font-types-0.10.1": {
+    "font-types-0.11.3": {
       "edition": "2021"
     },
     "fontdb-0.16.2": {
@@ -19170,8 +19090,8 @@
     "hashbrown-0.15.5": {
       "edition": "2021"
     },
-    "hashbrown-0.16.1": {
-      "edition": "2021"
+    "hashbrown-0.17.1": {
+      "edition": "2024"
     },
     "heck-0.5.0": {
       "edition": "2021"
@@ -19179,20 +19099,20 @@
     "hexf-parse-0.2.1": {
       "edition": "2018"
     },
-    "indexmap-2.13.0": {
-      "edition": "2021"
+    "indexmap-2.14.0": {
+      "edition": "2024"
     },
     "inlinable_string-0.1.15": {
       "edition": "2018"
     },
-    "itoa-1.0.17": {
+    "itoa-1.0.18": {
       "edition": "2021"
     },
     "khronos-egl-6.0.0": {
       "edition": "2021",
       "build_script": "build.rs"
     },
-    "libc-0.2.183": {
+    "libc-0.2.186": {
       "edition": "2021",
       "build_script": "build.rs"
     },
@@ -19209,13 +19129,13 @@
     "lock_api-0.4.14": {
       "edition": "2021"
     },
-    "log-0.4.29": {
+    "log-0.4.31": {
       "edition": "2021"
     },
     "lru-0.12.5": {
       "edition": "2015"
     },
-    "madori-0.1.1": {
+    "madori-0.1.2": {
       "edition": "2024",
       "lib_target": {
         "name": "madori",
@@ -19225,7 +19145,7 @@
     "malloc_buf-0.0.6": {
       "edition": "2015"
     },
-    "memchr-2.8.0": {
+    "memchr-2.8.1": {
       "edition": "2021"
     },
     "memmap2-0.9.10": {
@@ -19308,7 +19228,7 @@
     "pin-project-lite-0.2.17": {
       "edition": "2018"
     },
-    "pkg-config-0.3.32": {
+    "pkg-config-0.3.33": {
       "edition": "2018"
     },
     "pollster-0.4.0": {
@@ -19322,7 +19242,7 @@
       "edition": "2018",
       "build_script": "build.rs"
     },
-    "profiling-1.0.17": {
+    "profiling-1.0.18": {
       "edition": "2018"
     },
     "quote-1.0.45": {
@@ -19335,7 +19255,7 @@
     "raw-window-handle-0.6.2": {
       "edition": "2021"
     },
-    "read-fonts-0.35.0": {
+    "read-fonts-0.37.0": {
       "edition": "2021"
     },
     "renderdoc-sys-1.1.0": {
@@ -19344,7 +19264,7 @@
     "rustc-hash-1.1.0": {
       "edition": "2015"
     },
-    "rustc-hash-2.1.1": {
+    "rustc-hash-2.1.2": {
       "edition": "2021"
     },
     "rustix-1.1.4": {
@@ -19383,7 +19303,7 @@
       "edition": "2021",
       "proc_macro": true
     },
-    "serde_json-1.0.149": {
+    "serde_json-1.0.150": {
       "edition": "2021",
       "build_script": "build.rs"
     },
@@ -19396,7 +19316,7 @@
     "shikumi-0.1.0": {
       "edition": "2024"
     },
-    "skrifa-0.37.0": {
+    "skrifa-0.40.0": {
       "edition": "2021"
     },
     "slotmap-1.1.1": {
@@ -19429,7 +19349,7 @@
     "svg_fmt-0.4.5": {
       "edition": "2018"
     },
-    "swash-0.2.6": {
+    "swash-0.2.7": {
       "edition": "2021"
     },
     "syn-2.0.117": {
@@ -19511,7 +19431,7 @@
     "unicode-script-0.5.8": {
       "edition": "2018"
     },
-    "unicode-segmentation-1.12.0": {
+    "unicode-segmentation-1.13.3": {
       "edition": "2018"
     },
     "unicode-width-0.2.2": {
@@ -19594,11 +19514,11 @@
     "zeno-0.3.3": {
       "edition": "2021"
     },
-    "zerocopy-0.8.42": {
+    "zerocopy-0.8.50": {
       "edition": "2021",
       "build_script": "build.rs"
     },
-    "zerocopy-derive-0.8.42": {
+    "zerocopy-derive-0.8.50": {
       "edition": "2021",
       "proc_macro": true
     },
@@ -19628,7 +19548,7 @@
     "calloop-wayland-source-0.3.0": {
       "edition": "2021"
     },
-    "cc-1.2.57": {
+    "cc-1.2.63": {
       "edition": "2018"
     },
     "dlib-0.5.3": {
@@ -19650,7 +19570,7 @@
       "edition": "2021",
       "build_script": "build.rs"
     },
-    "inotify-0.11.1": {
+    "inotify-0.11.2": {
       "edition": "2018"
     },
     "inotify-sys-0.1.5": {
@@ -19665,7 +19585,7 @@
     "linux-raw-sys-0.12.1": {
       "edition": "2021"
     },
-    "mio-1.1.1": {
+    "mio-1.2.1": {
       "edition": "2021"
     },
     "owned_ttf_parser-0.25.1": {
@@ -19677,7 +19597,7 @@
     "polling-3.11.0": {
       "edition": "2021"
     },
-    "quick-xml-0.39.2": {
+    "quick-xml-0.39.4": {
       "edition": "2021"
     },
     "roxmltree-0.20.0": {
@@ -19693,8 +19613,8 @@
     "sctk-adwaita-0.10.1": {
       "edition": "2021"
     },
-    "shlex-1.3.0": {
-      "edition": "2015"
+    "shlex-2.0.1": {
+      "edition": "2018"
     },
     "slab-0.4.12": {
       "edition": "2018"
@@ -19723,34 +19643,34 @@
     "ttf-parser-0.25.1": {
       "edition": "2018"
     },
-    "wayland-backend-0.3.14": {
+    "wayland-backend-0.3.15": {
       "edition": "2021",
       "build_script": "build.rs"
     },
-    "wayland-client-0.31.13": {
+    "wayland-client-0.31.14": {
       "edition": "2021",
       "build_script": "build.rs"
     },
     "wayland-csd-frame-0.3.0": {
       "edition": "2021"
     },
-    "wayland-cursor-0.31.13": {
+    "wayland-cursor-0.31.14": {
       "edition": "2021"
     },
-    "wayland-protocols-0.32.11": {
+    "wayland-protocols-0.32.12": {
       "edition": "2021"
     },
-    "wayland-protocols-plasma-0.3.11": {
+    "wayland-protocols-plasma-0.3.12": {
       "edition": "2021"
     },
-    "wayland-protocols-wlr-0.3.11": {
+    "wayland-protocols-wlr-0.3.12": {
       "edition": "2021"
     },
-    "wayland-scanner-0.31.9": {
+    "wayland-scanner-0.31.10": {
       "edition": "2021",
       "proc_macro": true
     },
-    "wayland-sys-0.31.10": {
+    "wayland-sys-0.31.11": {
       "edition": "2021",
       "build_script": "build.rs"
     },
