@@ -100,6 +100,11 @@ pub enum MouseEvent {
     Scroll {
         dx: f64,
         dy: f64,
+        /// Keyboard modifiers held during the wheel event — consumers
+        /// need them for the shift+wheel mouse-tracking bypass (the
+        /// universal terminal convention) which Button events already
+        /// support via their own `modifiers` field.
+        modifiers: Modifiers,
     },
 }
 

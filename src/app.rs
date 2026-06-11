@@ -498,7 +498,11 @@ impl App {
                             }
                             winit::event::MouseScrollDelta::PixelDelta(p) => (p.x, p.y),
                         };
-                        let app_event = AppEvent::Mouse(MouseEvent::Scroll { dx, dy });
+                        let app_event = AppEvent::Mouse(MouseEvent::Scroll {
+                            dx,
+                            dy,
+                            modifiers: Modifiers::from_winit(&self.modifiers),
+                        });
                         self.dispatch(&app_event, event_loop);
                     }
                     WindowEvent::RedrawRequested => {
