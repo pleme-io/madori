@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "cargo_lock_sha256": "9fd8cc150792e7ce2efa0be89990093735088e8498eb75e7c2aa2b69bf0c01d9",
+  "cargo_lock_sha256": "1d1bacf6f16218a6f3522b9b283bed6980e2b375d3261375eb91d199fb26472f",
   "target_resolves": {
     "base": {
       "arc-swap-1.9.1": {
@@ -65,7 +65,7 @@
           },
           {
             "name": "quote",
-            "package_key": "quote-1.0.45",
+            "package_key": "quote-1.0.46",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -176,7 +176,7 @@
           },
           {
             "name": "quote",
-            "package_key": "quote-1.0.45",
+            "package_key": "quote-1.0.46",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -911,7 +911,7 @@
           },
           {
             "name": "quote",
-            "package_key": "quote-1.0.45",
+            "package_key": "quote-1.0.46",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -1612,7 +1612,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "madori-0.1.4": {
+      "madori-0.1.5": {
         "runtime_dependencies": [
           {
             "name": "egaku",
@@ -2165,7 +2165,7 @@
           },
           {
             "name": "quote",
-            "package_key": "quote-1.0.45",
+            "package_key": "quote-1.0.46",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -2239,7 +2239,7 @@
           },
           {
             "name": "quote",
-            "package_key": "quote-1.0.45",
+            "package_key": "quote-1.0.46",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -2291,7 +2291,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "quote-1.0.45": {
+      "quote-1.0.46": {
         "runtime_dependencies": [
           {
             "name": "proc_macro2",
@@ -2563,7 +2563,7 @@
           },
           {
             "name": "quote",
-            "package_key": "quote-1.0.45",
+            "package_key": "quote-1.0.46",
             "kind": "normal",
             "features": [
               "proc-macro"
@@ -2990,7 +2990,7 @@
           },
           {
             "name": "quote",
-            "package_key": "quote-1.0.45",
+            "package_key": "quote-1.0.46",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -3084,7 +3084,7 @@
           },
           {
             "name": "quote",
-            "package_key": "quote-1.0.45",
+            "package_key": "quote-1.0.46",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -3213,7 +3213,7 @@
           },
           {
             "name": "quote",
-            "package_key": "quote-1.0.45",
+            "package_key": "quote-1.0.46",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -3472,7 +3472,7 @@
           },
           {
             "name": "quote",
-            "package_key": "quote-1.0.45",
+            "package_key": "quote-1.0.46",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -3983,7 +3983,7 @@
           },
           {
             "name": "quote",
-            "package_key": "quote-1.0.45",
+            "package_key": "quote-1.0.46",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -4361,7 +4361,7 @@
               },
               {
                 "name": "quote",
-                "package_key": "quote-1.0.45",
+                "package_key": "quote-1.0.46",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -7256,7 +7256,7 @@
               },
               {
                 "name": "quote",
-                "package_key": "quote-1.0.45",
+                "package_key": "quote-1.0.46",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -7793,7 +7793,7 @@
               },
               {
                 "name": "quote",
-                "package_key": "quote-1.0.45",
+                "package_key": "quote-1.0.46",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -10208,7 +10208,7 @@
               },
               {
                 "name": "quote",
-                "package_key": "quote-1.0.45",
+                "package_key": "quote-1.0.46",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -10745,7 +10745,7 @@
               },
               {
                 "name": "quote",
-                "package_key": "quote-1.0.45",
+                "package_key": "quote-1.0.46",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -12195,7 +12195,7 @@
               },
               {
                 "name": "quote",
-                "package_key": "quote-1.0.45",
+                "package_key": "quote-1.0.46",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -15105,7 +15105,7 @@
               },
               {
                 "name": "quote",
-                "package_key": "quote-1.0.45",
+                "package_key": "quote-1.0.46",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -15642,7 +15642,7 @@
               },
               {
                 "name": "quote",
-                "package_key": "quote-1.0.45",
+                "package_key": "quote-1.0.46",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -18072,7 +18072,7 @@
               },
               {
                 "name": "quote",
-                "package_key": "quote-1.0.45",
+                "package_key": "quote-1.0.46",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -18609,7 +18609,7 @@
               },
               {
                 "name": "quote",
-                "package_key": "quote-1.0.45",
+                "package_key": "quote-1.0.46",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -19994,7 +19994,7 @@
     "lru-0.12.5": {
       "edition": "2015"
     },
-    "madori-0.1.4": {
+    "madori-0.1.5": {
       "edition": "2024",
       "lib_target": {
         "name": "madori",
@@ -20119,7 +20119,7 @@
     "quick-xml-0.39.4": {
       "edition": "2021"
     },
-    "quote-1.0.45": {
+    "quote-1.0.46": {
       "edition": "2021",
       "build_script": "build.rs"
     },
