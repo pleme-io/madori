@@ -83,6 +83,59 @@ pub struct KeyEvent {
     pub text: Option<String>,
 }
 
+/// A scroll delta, typed by its SOURCE so a consumer can never read a
+/// pixel magnitude as a line count. winit's `MouseScrollDelta` maps 1:1:
+/// `LineDelta` (discrete mouse wheel) → [`ScrollDelta::Lines`];
+/// `PixelDelta` (trackpad / Magic Mouse — already physical-pixel scaled,
+/// and the stream the OS keeps sending during the post-finger-lift
+/// momentum/inertia phase) → [`ScrollDelta::Pixels`].
+///
+/// This replaces the former flattened `dx`/`dy: f64` pair on
+/// [`MouseEvent::Scroll`], which discarded the line-vs-pixel distinction
+/// and made trackpad pixel deltas indistinguishable from wheel detents
+/// downstream — a terminal that re-quantizes pixels to lines scrolls in
+/// coarse steps and, if it then layers its own inertia, double-applies
+/// the physics the OS already provides. A two-variant sum type makes the
+/// "pixels read as lines" state unrepresentable rather than merely
+/// guarded.
+#[derive(Debug, Clone, Copy, PartialEq)]
+pub enum ScrollDelta {
+    /// Discrete wheel detents. `y` is wheel ticks (≈ ±1 per notch),
+    /// `x` the horizontal equivalent. No inertia — a wheel has none.
+    Lines { x: f64, y: f64 },
+    /// Precise pixel deltas in PHYSICAL pixels (trackpad / Magic Mouse).
+    /// Includes the OS momentum-phase coast as a continued event stream.
+    Pixels { x: f64, y: f64 },
+}
+
+impl ScrollDelta {
+    /// Vertical component — wheel ticks for [`Self::Lines`], physical
+    /// pixels for [`Self::Pixels`]. Positive is up (into history).
+    #[must_use]
+    pub fn y(self) -> f64 {
+        match self {
+            Self::Lines { y, .. } | Self::Pixels { y, .. } => y,
+        }
+    }
+
+    /// Horizontal component — wheel ticks for [`Self::Lines`], physical
+    /// pixels for [`Self::Pixels`].
+    #[must_use]
+    pub fn x(self) -> f64 {
+        match self {
+            Self::Lines { x, .. } | Self::Pixels { x, .. } => x,
+        }
+    }
+
+    /// `true` for a precise / pixel (trackpad) delta. The one bit a
+    /// scroll consumer needs to choose pixel-accumulation (trackpad,
+    /// OS-inertial) over line-stepping (discrete wheel).
+    #[must_use]
+    pub fn is_precise(self) -> bool {
+        matches!(self, Self::Pixels { .. })
+    }
+}
+
 /// Mouse event.
 #[derive(Debug, Clone)]
 pub enum MouseEvent {
@@ -98,8 +151,9 @@ pub enum MouseEvent {
         modifiers: Modifiers,
     },
     Scroll {
-        dx: f64,
-        dy: f64,
+        /// Typed scroll delta — line (wheel) vs pixel (trackpad). See
+        /// [`ScrollDelta`].
+        delta: ScrollDelta,
         /// Keyboard modifiers held during the wheel event — consumers
         /// need them for the shift+wheel mouse-tracking bypass (the
         /// universal terminal convention) which Button events already

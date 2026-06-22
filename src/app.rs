@@ -1,6 +1,7 @@
 use crate::error::{MadoriError, Result};
 use crate::event::{
     AppEvent, EventResponse, ImeEvent, KeyCode, KeyEvent, Modifiers, MouseButton, MouseEvent,
+    ScrollDelta,
 };
 use crate::render::{RenderCallback, RenderContext};
 use garasu::GpuContext;
@@ -492,15 +493,27 @@ impl App {
                         self.dispatch(&app_event, event_loop);
                     }
                     WindowEvent::MouseWheel { delta, .. } => {
-                        let (dx, dy) = match delta {
+                        // Preserve winit's line-vs-pixel distinction as a typed
+                        // delta. `LineDelta` is a discrete mouse wheel (ticks);
+                        // `PixelDelta` is a trackpad / Magic Mouse (physical
+                        // pixels, already scaled by the backing factor, and the
+                        // stream the OS keeps sending during momentum/inertia).
+                        // Flattening these into one f64 would let a consumer read
+                        // pixels as lines — the bug `ScrollDelta` makes
+                        // unrepresentable.
+                        let scroll_delta = match delta {
                             winit::event::MouseScrollDelta::LineDelta(x, y) => {
-                                (f64::from(*x), f64::from(*y))
+                                ScrollDelta::Lines {
+                                    x: f64::from(*x),
+                                    y: f64::from(*y),
+                                }
                             }
-                            winit::event::MouseScrollDelta::PixelDelta(p) => (p.x, p.y),
+                            winit::event::MouseScrollDelta::PixelDelta(p) => {
+                                ScrollDelta::Pixels { x: p.x, y: p.y }
+                            }
                         };
                         let app_event = AppEvent::Mouse(MouseEvent::Scroll {
-                            dx,
-                            dy,
+                            delta: scroll_delta,
                             modifiers: Modifiers::from_winit(&self.modifiers),
                         });
                         self.dispatch(&app_event, event_loop);

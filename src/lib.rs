@@ -5,5 +5,7 @@ pub mod render;
 
 pub use app::{App, AppBuilder, AppConfig};
 pub use error::MadoriError;
-pub use event::{AppEvent, EventResponse, ImeEvent, InputEvent, KeyEvent, MouseEvent};
+pub use event::{
+    AppEvent, EventResponse, ImeEvent, InputEvent, KeyEvent, MouseEvent, ScrollDelta,
+};
 pub use render::{RenderCallback, RenderContext};
