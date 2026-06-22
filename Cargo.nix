@@ -198,7 +198,7 @@ rec {
           }
           {
             name = "bitflags";
-            packageId = "bitflags 2.12.1";
+            packageId = "bitflags 2.13.0";
           }
           {
             name = "jni";
@@ -482,11 +482,11 @@ rec {
         };
         resolvedDefaultFeatures = [ "default" ];
       };
-      "bitflags 2.12.1" = rec {
+      "bitflags 2.13.0" = rec {
         crateName = "bitflags";
-        version = "2.12.1";
+        version = "2.13.0";
         edition = "2021";
-        sha256 = "02phhjm7w380zdh8928zf13cfi1bw2qz2ay36ml2jmwmmv8cxmw4";
+        sha256 = "1y239gpvl061rfvav7jds8mjs42kmwi39is7yx5d1qw3hvp8nf5l";
         authors = [
           "The Rust Project Developers"
         ];
@@ -639,7 +639,7 @@ rec {
         dependencies = [
           {
             name = "bitflags";
-            packageId = "bitflags 2.12.1";
+            packageId = "bitflags 2.13.0";
           }
           {
             name = "log";
@@ -1010,7 +1010,7 @@ rec {
         dependencies = [
           {
             name = "bitflags";
-            packageId = "bitflags 2.12.1";
+            packageId = "bitflags 2.13.0";
           }
           {
             name = "fontdb";
@@ -2054,7 +2054,7 @@ rec {
         dependencies = [
           {
             name = "bitflags";
-            packageId = "bitflags 2.12.1";
+            packageId = "bitflags 2.13.0";
             usesDefaultFeatures = false;
           }
           {
@@ -2081,7 +2081,7 @@ rec {
         dependencies = [
           {
             name = "bitflags";
-            packageId = "bitflags 2.12.1";
+            packageId = "bitflags 2.13.0";
             usesDefaultFeatures = false;
           }
         ];
@@ -2147,7 +2147,7 @@ rec {
         dependencies = [
           {
             name = "bitflags";
-            packageId = "bitflags 2.12.1";
+            packageId = "bitflags 2.13.0";
             usesDefaultFeatures = false;
           }
           {
@@ -2180,7 +2180,7 @@ rec {
         dependencies = [
           {
             name = "bitflags";
-            packageId = "bitflags 2.12.1";
+            packageId = "bitflags 2.13.0";
             usesDefaultFeatures = false;
           }
         ];
@@ -2403,7 +2403,7 @@ rec {
         dependencies = [
           {
             name = "bitflags";
-            packageId = "bitflags 2.12.1";
+            packageId = "bitflags 2.13.0";
           }
           {
             name = "inotify-sys";
@@ -2624,9 +2624,9 @@ rec {
       };
       "js-sys" = rec {
         crateName = "js-sys";
-        version = "0.3.99";
+        version = "0.3.100";
         edition = "2021";
-        sha256 = "04azrzsz91gr5s3z0ij36lz0kj9ry4lw3jz0mmbiwb251rsc8aql";
+        sha256 = "0qi1wjakyw2rx9wwprcfx77g3lvn1b8n6yvfhj2pgym4swh5y0pj";
         libName = "js_sys";
         authors = [
           "The wasm-bindgen Developers"
@@ -2642,11 +2642,6 @@ rec {
             optional = true;
             usesDefaultFeatures = false;
             features = [ "std" ];
-          }
-          {
-            name = "once_cell";
-            packageId = "once_cell";
-            usesDefaultFeatures = false;
           }
           {
             name = "wasm-bindgen";
@@ -2749,7 +2744,7 @@ rec {
         dependencies = [
           {
             name = "bitflags";
-            packageId = "bitflags 2.12.1";
+            packageId = "bitflags 2.13.0";
             usesDefaultFeatures = false;
           }
           {
@@ -2837,7 +2832,7 @@ rec {
         dependencies = [
           {
             name = "bitflags";
-            packageId = "bitflags 2.12.1";
+            packageId = "bitflags 2.13.0";
             optional = true;
           }
           {
@@ -2942,9 +2937,9 @@ rec {
       };
       "log" = rec {
         crateName = "log";
-        version = "0.4.31";
+        version = "0.4.32";
         edition = "2021";
-        sha256 = "0kq2fh6q2bjkrm8m6hj8kb7gxfd7cr7qbcpxd1lc1xq5rns30fqi";
+        sha256 = "0fmdg0cxig7i4fwf1sw7fmg4d1gdbfzniawcfpwydy1q7320fgwm";
         authors = [
           "The Rust Project Developers"
         ];
@@ -2979,7 +2974,7 @@ rec {
       };
       "madori" = rec {
         crateName = "madori";
-        version = "0.1.3";
+        version = "0.1.4";
         edition = "2024";
         src = lib.cleanSourceWith { filter = sourceFilter;  src = ./.; };
         dependencies = [
@@ -3100,7 +3095,7 @@ rec {
         dependencies = [
           {
             name = "bitflags";
-            packageId = "bitflags 2.12.1";
+            packageId = "bitflags 2.13.0";
           }
           {
             name = "block";
@@ -3196,7 +3191,7 @@ rec {
           }
           {
             name = "bitflags";
-            packageId = "bitflags 2.12.1";
+            packageId = "bitflags 2.13.0";
           }
           {
             name = "codespan-reporting";
@@ -3310,7 +3305,7 @@ rec {
         dependencies = [
           {
             name = "bitflags";
-            packageId = "bitflags 2.12.1";
+            packageId = "bitflags 2.13.0";
           }
           {
             name = "jni-sys";
@@ -3426,7 +3421,7 @@ rec {
         dependencies = [
           {
             name = "bitflags";
-            packageId = "bitflags 2.12.1";
+            packageId = "bitflags 2.13.0";
             target = { target, features }: ("macos" == target."os" or null);
           }
           {
@@ -3520,7 +3515,7 @@ rec {
         dependencies = [
           {
             name = "bitflags";
-            packageId = "bitflags 2.12.1";
+            packageId = "bitflags 2.13.0";
           }
         ];
         features = {
@@ -3724,7 +3719,7 @@ rec {
         dependencies = [
           {
             name = "bitflags";
-            packageId = "bitflags 2.12.1";
+            packageId = "bitflags 2.13.0";
             optional = true;
             usesDefaultFeatures = false;
           }
@@ -4064,7 +4059,7 @@ rec {
         dependencies = [
           {
             name = "bitflags";
-            packageId = "bitflags 2.12.1";
+            packageId = "bitflags 2.13.0";
             optional = true;
             usesDefaultFeatures = false;
           }
@@ -4221,7 +4216,7 @@ rec {
         dependencies = [
           {
             name = "bitflags";
-            packageId = "bitflags 2.12.1";
+            packageId = "bitflags 2.13.0";
             optional = true;
             usesDefaultFeatures = false;
           }
@@ -4457,7 +4452,7 @@ rec {
         dependencies = [
           {
             name = "bitflags";
-            packageId = "bitflags 2.12.1";
+            packageId = "bitflags 2.13.0";
             optional = true;
             usesDefaultFeatures = false;
           }
@@ -4592,7 +4587,7 @@ rec {
         dependencies = [
           {
             name = "bitflags";
-            packageId = "bitflags 2.12.1";
+            packageId = "bitflags 2.13.0";
             optional = true;
             usesDefaultFeatures = false;
           }
@@ -4679,7 +4674,7 @@ rec {
         dependencies = [
           {
             name = "bitflags";
-            packageId = "bitflags 2.12.1";
+            packageId = "bitflags 2.13.0";
             optional = true;
             usesDefaultFeatures = false;
           }
@@ -4775,7 +4770,7 @@ rec {
         dependencies = [
           {
             name = "bitflags";
-            packageId = "bitflags 2.12.1";
+            packageId = "bitflags 2.13.0";
             optional = true;
             usesDefaultFeatures = false;
           }
@@ -5261,7 +5256,7 @@ rec {
         dependencies = [
           {
             name = "bitflags";
-            packageId = "bitflags 2.12.1";
+            packageId = "bitflags 2.13.0";
             optional = true;
             usesDefaultFeatures = false;
           }
@@ -5989,9 +5984,9 @@ rec {
       };
       "read-fonts" = rec {
         crateName = "read-fonts";
-        version = "0.37.0";
+        version = "0.39.2";
         edition = "2021";
-        sha256 = "1r82vwrmsai9i7bgmnblb7sn08k2kca75lpz0x9v3yijy2mlyqvv";
+        sha256 = "10da5nn4f7dqad5j4yjwmww0y0gvcnnlahajijbgyxrckjw3ivf4";
         libName = "read_fonts";
         dependencies = [
           {
@@ -6045,7 +6040,7 @@ rec {
         dependencies = [
           {
             name = "bitflags";
-            packageId = "bitflags 2.12.1";
+            packageId = "bitflags 2.13.0";
           }
         ];
         features = {
@@ -6067,7 +6062,7 @@ rec {
         dependencies = [
           {
             name = "bitflags";
-            packageId = "bitflags 2.12.1";
+            packageId = "bitflags 2.13.0";
           }
         ];
         features = {
@@ -6154,7 +6149,7 @@ rec {
         dependencies = [
           {
             name = "bitflags";
-            packageId = "bitflags 2.12.1";
+            packageId = "bitflags 2.13.0";
             usesDefaultFeatures = false;
           }
           {
@@ -6265,7 +6260,7 @@ rec {
         dependencies = [
           {
             name = "bitflags";
-            packageId = "bitflags 2.12.1";
+            packageId = "bitflags 2.13.0";
             usesDefaultFeatures = false;
           }
           {
@@ -6383,7 +6378,7 @@ rec {
         dependencies = [
           {
             name = "bitflags";
-            packageId = "bitflags 2.12.1";
+            packageId = "bitflags 2.13.0";
           }
           {
             name = "bytemuck";
@@ -6849,9 +6844,9 @@ rec {
       };
       "skrifa" = rec {
         crateName = "skrifa";
-        version = "0.40.0";
+        version = "0.42.1";
         edition = "2021";
-        sha256 = "1b1lfid1326df2aq4cjqz7jv63m3i21czrgks7fxgyvm4hyzxgbz";
+        sha256 = "0r25dss2bnz3i55y46dfk9jq943xa7mjpfv1f7xqx5mff1rn2d0c";
         dependencies = [
           {
             name = "bytemuck";
@@ -6916,9 +6911,9 @@ rec {
       };
       "smallvec" = rec {
         crateName = "smallvec";
-        version = "1.15.1";
+        version = "1.15.2";
         edition = "2018";
-        sha256 = "00xxdxxpgyq5vjnpljvkmy99xij5rxgh913ii1v16kzynnivgcb7";
+        sha256 = "143wzbqf6vgapdp2z4qpl0yvlqcn17s8cnk8m28rqly808zsdmlf";
         authors = [
           "The Servo Project Developers"
         ];
@@ -6948,7 +6943,7 @@ rec {
         dependencies = [
           {
             name = "bitflags";
-            packageId = "bitflags 2.12.1";
+            packageId = "bitflags 2.13.0";
           }
           {
             name = "calloop";
@@ -7073,7 +7068,7 @@ rec {
         dependencies = [
           {
             name = "bitflags";
-            packageId = "bitflags 2.12.1";
+            packageId = "bitflags 2.13.0";
           }
         ];
         features = {
@@ -7183,9 +7178,9 @@ rec {
       };
       "swash" = rec {
         crateName = "swash";
-        version = "0.2.7";
+        version = "0.2.8";
         edition = "2021";
-        sha256 = "0r5fb8rnqayydb9rw5fply28wjp5lpm87y84cab3ifn2d79kqbw4";
+        sha256 = "0hyyg7pnjsw7gqlnv6jv6v5lc3z172hv0zi73lmwldbanqr4d06i";
         authors = [
           "Chad Brokaw <cbrokaw@gmail.com>"
         ];
@@ -8155,9 +8150,9 @@ rec {
       };
       "wasm-bindgen" = rec {
         crateName = "wasm-bindgen";
-        version = "0.2.122";
+        version = "0.2.123";
         edition = "2021";
-        sha256 = "02flix96brsb2r1i3grnikii302iqpdm337kl3xv5lklz5v4bl1y";
+        sha256 = "0qqmx07r597gm8lbz8qngvv0phwvpzzyfh3nl84nz9qr1jqs8m52";
         libName = "wasm_bindgen";
         authors = [
           "The wasm-bindgen Developers"
@@ -8206,9 +8201,9 @@ rec {
       };
       "wasm-bindgen-futures" = rec {
         crateName = "wasm-bindgen-futures";
-        version = "0.4.72";
+        version = "0.4.73";
         edition = "2021";
-        sha256 = "03qb24gfr072rk8hb69glfdc8yhqqqq2rhy3j5i0ps8sk79dnwwl";
+        sha256 = "1bva12h8gdpqkp753czlxabs0s21lvgzm41brr4lhpdzz818fmjl";
         libName = "wasm_bindgen_futures";
         authors = [
           "The wasm-bindgen Developers"
@@ -8234,9 +8229,9 @@ rec {
       };
       "wasm-bindgen-macro" = rec {
         crateName = "wasm-bindgen-macro";
-        version = "0.2.122";
+        version = "0.2.123";
         edition = "2021";
-        sha256 = "1inyl55bvdifx7l60q9wl0ivmw7236jg7jqmcqpxhsx3knq52qci";
+        sha256 = "1p50xdwmv543b52bc49vm5lcsgd9adpx647bdisg7ihfbg3hz914";
         procMacro = true;
         libName = "wasm_bindgen_macro";
         authors = [
@@ -8258,9 +8253,9 @@ rec {
       };
       "wasm-bindgen-macro-support" = rec {
         crateName = "wasm-bindgen-macro-support";
-        version = "0.2.122";
+        version = "0.2.123";
         edition = "2021";
-        sha256 = "0pjw5kc2mbfz59agk5l21kh4hxzp94rygdvsnr4f3z6b5hv4g419";
+        sha256 = "0nwqyc63byl7rp9nnv45av8h85fncfmxywkvy35d9qwwkfyk93wh";
         libName = "wasm_bindgen_macro_support";
         authors = [
           "The wasm-bindgen Developers"
@@ -8294,10 +8289,10 @@ rec {
       };
       "wasm-bindgen-shared" = rec {
         crateName = "wasm-bindgen-shared";
-        version = "0.2.122";
+        version = "0.2.123";
         edition = "2021";
         links = "wasm_bindgen";
-        sha256 = "0ds4mmfqvxwc5fp33hn0jblf0f6b4lghrd9mpkls66zic4n9p4ls";
+        sha256 = "14lvjm3pzywm5c4962i6s5zmngic1knpggshnnxr9c97dihzgjvs";
         libName = "wasm_bindgen_shared";
         authors = [
           "The wasm-bindgen Developers"
@@ -8389,7 +8384,7 @@ rec {
         dependencies = [
           {
             name = "bitflags";
-            packageId = "bitflags 2.12.1";
+            packageId = "bitflags 2.13.0";
           }
           {
             name = "hashbrown";
@@ -8491,7 +8486,7 @@ rec {
         dependencies = [
           {
             name = "bitflags";
-            packageId = "bitflags 2.12.1";
+            packageId = "bitflags 2.13.0";
           }
           {
             name = "rustix";
@@ -8526,7 +8521,7 @@ rec {
         dependencies = [
           {
             name = "bitflags";
-            packageId = "bitflags 2.12.1";
+            packageId = "bitflags 2.13.0";
           }
           {
             name = "cursor-icon";
@@ -8578,7 +8573,7 @@ rec {
         dependencies = [
           {
             name = "bitflags";
-            packageId = "bitflags 2.12.1";
+            packageId = "bitflags 2.13.0";
           }
           {
             name = "wayland-backend";
@@ -8614,7 +8609,7 @@ rec {
         dependencies = [
           {
             name = "bitflags";
-            packageId = "bitflags 2.12.1";
+            packageId = "bitflags 2.13.0";
           }
           {
             name = "wayland-backend";
@@ -8654,7 +8649,7 @@ rec {
         dependencies = [
           {
             name = "bitflags";
-            packageId = "bitflags 2.12.1";
+            packageId = "bitflags 2.13.0";
           }
           {
             name = "wayland-backend";
@@ -8755,9 +8750,9 @@ rec {
       };
       "web-sys" = rec {
         crateName = "web-sys";
-        version = "0.3.99";
+        version = "0.3.100";
         edition = "2021";
-        sha256 = "0dilfvl9jnyhi4skl6cry9wc300r693j0w82jjbq8yy3rx0i8qkd";
+        sha256 = "0sffbkrpgyi1402mv4wzp9av6ky6rnb1d2m2dpf87wi7yfn7223f";
         libName = "web_sys";
         authors = [
           "The wasm-bindgen Developers"
@@ -9289,7 +9284,7 @@ rec {
           }
           {
             name = "bitflags";
-            packageId = "bitflags 2.12.1";
+            packageId = "bitflags 2.13.0";
           }
           {
             name = "document-features";
@@ -9477,7 +9472,7 @@ rec {
           }
           {
             name = "bitflags";
-            packageId = "bitflags 2.12.1";
+            packageId = "bitflags 2.13.0";
           }
           {
             name = "document-features";
@@ -9711,7 +9706,7 @@ rec {
           }
           {
             name = "bitflags";
-            packageId = "bitflags 2.12.1";
+            packageId = "bitflags 2.13.0";
           }
           {
             name = "block";
@@ -9969,7 +9964,7 @@ rec {
         dependencies = [
           {
             name = "bitflags";
-            packageId = "bitflags 2.12.1";
+            packageId = "bitflags 2.13.0";
             features = [ "serde" ];
           }
           {
@@ -12191,7 +12186,7 @@ rec {
           }
           {
             name = "bitflags";
-            packageId = "bitflags 2.12.1";
+            packageId = "bitflags 2.13.0";
           }
           {
             name = "block2";
@@ -12705,7 +12700,7 @@ rec {
           }
           {
             name = "bitflags";
-            packageId = "bitflags 2.12.1";
+            packageId = "bitflags 2.13.0";
           }
           {
             name = "indexmap";
@@ -13022,7 +13017,7 @@ rec {
         dependencies = [
           {
             name = "bitflags";
-            packageId = "bitflags 2.12.1";
+            packageId = "bitflags 2.13.0";
           }
           {
             name = "dlib";
@@ -13117,9 +13112,9 @@ rec {
       };
       "zerocopy" = rec {
         crateName = "zerocopy";
-        version = "0.8.50";
+        version = "0.8.52";
         edition = "2021";
-        sha256 = "1laahnfxs4qyfb1fdf5nbb2qfshi72b1hbi0ffp2zy2m1r7ms1iv";
+        sha256 = "0gv563swc1yn3k8w3wjj07a8q293rkx99nfp3a25vzzmbycj446f";
         authors = [
           "Joshua Liebow-Feeser <joshlf@google.com>"
           "Jack Wrenn <jswrenn@amazon.com>"
@@ -13153,9 +13148,9 @@ rec {
       };
       "zerocopy-derive" = rec {
         crateName = "zerocopy-derive";
-        version = "0.8.50";
+        version = "0.8.52";
         edition = "2021";
-        sha256 = "0fdnr9qslx1hbn2i9rsvy9s95mychfy2vj90ajsjm2basccinqqb";
+        sha256 = "0c3rhsh4sd9kdym4z55zprybjkydy9y2gvw75d72aapcfa5z7rqs";
         procMacro = true;
         libName = "zerocopy_derive";
         authors = [
