@@ -15,6 +15,16 @@ pub enum AppEvent {
     Mouse(MouseEvent),
     /// IME pre-edit (composition) text update.
     Ime(ImeEvent),
+    /// A file was drag-and-dropped onto the window (one event per file).
+    /// Consumers typically insert the file's path into the focused
+    /// surface (the ghostty/terminal contract — a dropped screenshot
+    /// becomes a path a TUI / `$EDITOR` can open).
+    DroppedFile(std::path::PathBuf),
+    /// A file is being dragged over the window (not yet released) — for a
+    /// drop-target affordance. One event per file as it enters.
+    HoveredFile(std::path::PathBuf),
+    /// A hovered drag left the window without dropping.
+    HoveredFileCancelled,
     /// Redraw requested (vsync tick or explicit).
     RedrawRequested,
 }

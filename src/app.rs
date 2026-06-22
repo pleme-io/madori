@@ -442,6 +442,22 @@ impl App {
                         let app_event = AppEvent::Focused(*focused);
                         self.dispatch(&app_event, event_loop);
                     }
+                    // Drag-and-drop: winit emits one event per file. A
+                    // dropped file becomes an `AppEvent::DroppedFile` the
+                    // consumer turns into a path insertion (ghostty contract
+                    // — a dragged screenshot becomes a path a TUI can open).
+                    WindowEvent::DroppedFile(path) => {
+                        let app_event = AppEvent::DroppedFile(path.clone());
+                        self.dispatch(&app_event, event_loop);
+                    }
+                    WindowEvent::HoveredFile(path) => {
+                        let app_event = AppEvent::HoveredFile(path.clone());
+                        self.dispatch(&app_event, event_loop);
+                    }
+                    WindowEvent::HoveredFileCancelled => {
+                        let app_event = AppEvent::HoveredFileCancelled;
+                        self.dispatch(&app_event, event_loop);
+                    }
                     WindowEvent::ModifiersChanged(mods) => {
                         self.modifiers = mods.state();
                     }
