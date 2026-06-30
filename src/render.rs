@@ -1,11 +1,15 @@
-use garasu::{GpuContext, TextRenderer};
+use garasu::{GpuContext, TextLayerStack};
 
 /// Context passed to the application's render callback each frame.
 pub struct RenderContext<'a> {
     /// The GPU context (device, queue, etc).
     pub gpu: &'a GpuContext,
-    /// The text renderer for drawing text.
-    pub text: &'a mut TextRenderer,
+    /// The text layer stack for drawing text. Each independent text surface
+    /// (terminal grid, overlays) prepares/renders its OWN layer so a second
+    /// pass cannot clobber the first's vertex buffer (see
+    /// `garasu::TextLayerStack`). Single-pass consumers may use the back-compat
+    /// `text.prepare(..)` / `text.render(..)` methods unchanged.
+    pub text: &'a mut TextLayerStack,
     /// Current surface texture view to render into.
     pub surface_view: &'a wgpu::TextureView,
     /// Current window dimensions in physical pixels.

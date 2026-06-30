@@ -134,7 +134,7 @@ impl App {
                 Option<Box<dyn FnMut(&AppEvent, &mut R) -> EventResponse + Send + 'static>>,
             window: Option<std::sync::Arc<Window>>,
             gpu: Option<GpuContext>,
-            text: Option<garasu::TextRenderer>,
+            text: Option<garasu::TextLayerStack>,
             surface: Option<wgpu::Surface<'static>>,
             surface_config: Option<wgpu::SurfaceConfiguration>,
             start_time: Instant,
@@ -358,7 +358,7 @@ impl App {
                             ms = t_resumed_start.elapsed().as_millis() as u64,
                             "phase"
                         );
-                        let text = garasu::TextRenderer::new(&gpu.device, &gpu.queue, format);
+                        let text = garasu::TextLayerStack::new(&gpu.device, &gpu.queue, format);
                         tracing::info!(
                             target: "madori::perf",
                             phase = "text_renderer_ready",

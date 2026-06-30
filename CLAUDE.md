@@ -21,7 +21,7 @@ and input dispatch system. Eliminates ~200 lines of identical boilerplate per GP
 |--------|---------|
 | `app.rs` | `App`, `AppBuilder`, `AppConfig` — fluent builder, window creation, event loop |
 | `event.rs` | `AppEvent`, `KeyEvent`, `MouseEvent`, `KeyCode`, `Modifiers` — platform-independent input |
-| `render.rs` | `RenderCallback` trait, `RenderContext` (gpu, text, surface_view, elapsed, dt) |
+| `render.rs` | `RenderCallback` trait, `RenderContext` (gpu, text, surface_view, elapsed, dt). `text` is `&mut garasu::TextLayerStack` (was `TextRenderer`): the framework owns the stack, the app mints its own per-surface layers — so multi-pass text apps can't clobber one layer's buffer with another's. Single-pass apps use the back-compat `text.prepare`/`text.render` unchanged. |
 | `error.rs` | `MadoriError` — event loop and GPU init failures |
 
 ### Layer Position
