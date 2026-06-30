@@ -916,6 +916,28 @@ dependencies = [
 ]
 
 [[package]]
+name = "irodori"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7c1e6ec2a36084626fdbd4dcfb8beb53d0b5f6125b4cd54a4d45abddf6ffbbb9"
+dependencies = [
+ "serde",
+ "thiserror 2.0.18",
+]
+
+[[package]]
+name = "ishou-tokens"
+version = "0.1.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "cae2efc1f9948384bcf78d3a06d2b89893bfefabfa8e7251d143baad108e8ea6"
+dependencies = [
+ "irodori",
+ "serde",
+ "serde_json",
+ "wgpu-types",
+]
+
+[[package]]
 name = "itoa"
 version = "1.0.18"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1116,6 +1138,7 @@ version = "0.1.5"
 dependencies = [
  "egaku",
  "garasu",
+ "ishou-tokens",
  "pollster",
  "serde",
  "serde_json",

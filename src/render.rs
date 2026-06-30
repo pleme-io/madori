@@ -1,4 +1,5 @@
 use garasu::{GpuContext, TextLayerStack};
+use ishou_tokens::{ColorPalette, FleetTheme, Srgb};
 
 /// Context passed to the application's render callback each frame.
 pub struct RenderContext<'a> {
@@ -46,15 +47,30 @@ pub struct ClearRenderer {
 
 impl Default for ClearRenderer {
     fn default() -> Self {
-        // Nord polar night background
-        Self {
-            color: wgpu::Color {
-                r: 0.180,
-                g: 0.204,
-                b: 0.251,
-                a: 1.0,
-            },
-        }
+        // Nord polar-night background, sourced from the ishou fleet design
+        // system instead of a hand-authored literal. `FleetTheme::PlemeDark`
+        // is the Nord Polar Night theme; its resolved `background` is the
+        // canonical `#2E3440` (nord0) the original literal approximated.
+        //
+        // The colour is routed through the typed `Srgb → Linear →
+        // wgpu::Color` path. madori configures an sRGB-storage surface
+        // (`app.rs` selects the format via `is_srgb()`), so a clear colour
+        // must be supplied in LINEAR space — passing the sRGB unit-floats
+        // verbatim (as the old literal did) makes the GPU gamma-encode them
+        // on store and renders washed-out grey. `Srgb::to_linear()` is the
+        // one type-correct construction path (ishou-tokens `space.rs`).
+        //
+        // The unwrap is unreachable — `ResolvedTheme::pleme_dark().background`
+        // is always valid hex — but the fallback stays fully token-sourced
+        // (`ColorPalette::pleme().polar_night_0`, the same nord0 value) so no
+        // hand-authored hex survives at the paint site.
+        let background = FleetTheme::PlemeDark.resolve().background;
+        let color = Srgb::from_hex(&background)
+            .unwrap_or_else(|| ColorPalette::pleme().polar_night_0.into())
+            .to_linear()
+            .with_alpha(1.0)
+            .into();
+        Self { color }
     }
 }
 

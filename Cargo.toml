@@ -25,6 +25,12 @@ strip = true
 garasu = "0.1"
 egaku = "0.1"
 shikumi = "0.1"
+# ishou-tokens — the fleet design system. The `wgpu` feature exposes the
+# typed `Srgb → Linear → wgpu::Color` path so the framework's themed
+# default (the built-in `ClearRenderer`) sources its colour from a fleet
+# theme token instead of a hand-authored literal. Matches the GPU-app
+# convention (mado, escriba, hibiki, … all depend on it `features = ["wgpu"]`).
+ishou-tokens = { version = "0.1", features = ["wgpu"] }
 wgpu = "25"
 winit = "0.30"
 pollster = "0.4"
