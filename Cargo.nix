@@ -2778,6 +2778,55 @@ rec {
         ];
 
       };
+      "irodori" = rec {
+        crateName = "irodori";
+        version = "0.1.1";
+        edition = "2024";
+        sha256 = "1fdvzzvdvas59m5dak2v2bvbbl2kxf5zpp6lvdpn5130lg16w7kw";
+        dependencies = [
+          {
+            name = "serde";
+            packageId = "serde";
+            features = [ "derive" ];
+          }
+          {
+            name = "thiserror";
+            packageId = "thiserror 2.0.18";
+          }
+        ];
+
+      };
+      "ishou-tokens" = rec {
+        crateName = "ishou-tokens";
+        version = "0.1.3";
+        edition = "2024";
+        sha256 = "19lfiq8avfj3s58p53psmgpvz4wqp390cfldyyy890wlz70yzqna";
+        libName = "ishou_tokens";
+        dependencies = [
+          {
+            name = "irodori";
+            packageId = "irodori";
+          }
+          {
+            name = "serde";
+            packageId = "serde";
+            features = [ "derive" ];
+          }
+          {
+            name = "serde_json";
+            packageId = "serde_json";
+          }
+          {
+            name = "wgpu-types";
+            packageId = "wgpu-types";
+            optional = true;
+          }
+        ];
+        features = {
+          "wgpu" = [ "dep:wgpu-types" ];
+        };
+        resolvedDefaultFeatures = [ "default" "wgpu" ];
+      };
       "itoa" = rec {
         crateName = "itoa";
         version = "1.0.18";
@@ -3302,7 +3351,7 @@ rec {
       };
       "madori" = rec {
         crateName = "madori";
-        version = "0.1.5";
+        version = "0.1.6";
         edition = "2024";
         src = lib.cleanSourceWith { filter = sourceFilter;  src = ./.; };
         dependencies = [
@@ -3313,6 +3362,11 @@ rec {
           {
             name = "garasu";
             packageId = "garasu";
+          }
+          {
+            name = "ishou-tokens";
+            packageId = "ishou-tokens";
+            features = [ "wgpu" ];
           }
           {
             name = "pollster";
@@ -6182,9 +6236,9 @@ rec {
       };
       "quote" = rec {
         crateName = "quote";
-        version = "1.0.45";
+        version = "1.0.46";
         edition = "2021";
-        sha256 = "095rb5rg7pbnwdp6v8w5jw93wndwyijgci1b5lw8j1h5cscn3wj1";
+        sha256 = "0s034glrlav8nzqy2yskqzv52ncy82k126sm2jk5j1vs1iylbg6z";
         authors = [
           "David Tolnay <dtolnay@gmail.com>"
         ];

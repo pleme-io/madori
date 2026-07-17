@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "cargo_lock_sha256": "fade74ca8c69d730e458df20f81e186603bff126580d31746ba08d00ec74cd52",
+  "cargo_lock_sha256": "32333a70441f75a8e692de2813c8bf48e990ca7af1b608bee0e6030b4c5f784f",
   "target_resolves": {
     "base": {
-      "arc-swap-1.9.1": {
+      "arc-swap-1.9.2": {
         "runtime_dependencies": [
           {
             "name": "rustversion",
-            "package_key": "rustversion-1.0.22",
+            "package_key": "rustversion-1.0.23",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -24,7 +24,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "arrayvec-0.7.7": {
+      "arrayvec-0.7.8": {
         "runtime_dependencies": [],
         "build_dependencies": [],
         "features": []
@@ -75,7 +75,7 @@
           },
           {
             "name": "syn",
-            "package_key": "syn-2.0.118",
+            "package_key": "syn-2.0.119",
             "kind": "normal",
             "features": [
               "clone-impls",
@@ -96,6 +96,22 @@
       },
       "autocfg-1.5.1": {
         "runtime_dependencies": [],
+        "build_dependencies": [],
+        "features": []
+      },
+      "bincode-1.3.3": {
+        "runtime_dependencies": [
+          {
+            "name": "serde",
+            "package_key": "serde-1.0.228",
+            "kind": "normal",
+            "features": [],
+            "uses_default_features": true,
+            "optional": false,
+            "target": null,
+            "tree": "target"
+          }
+        ],
         "build_dependencies": [],
         "features": []
       },
@@ -120,7 +136,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "bitflags-2.13.0": {
+      "bitflags-2.13.1": {
         "runtime_dependencies": [
           {
             "name": "serde_core",
@@ -140,11 +156,11 @@
           "std"
         ]
       },
-      "bytemuck-1.25.0": {
+      "bytemuck-1.25.1": {
         "runtime_dependencies": [
           {
             "name": "bytemuck_derive",
-            "package_key": "bytemuck_derive-1.10.2",
+            "package_key": "bytemuck_derive-1.11.0",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -162,7 +178,7 @@
           "min_const_generics"
         ]
       },
-      "bytemuck_derive-1.10.2": {
+      "bytemuck_derive-1.11.0": {
         "runtime_dependencies": [
           {
             "name": "proc_macro2",
@@ -186,7 +202,7 @@
           },
           {
             "name": "syn",
-            "package_key": "syn-2.0.118",
+            "package_key": "syn-2.0.119",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -198,7 +214,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "cc-1.2.65": {
+      "cc-1.2.67": {
         "runtime_dependencies": [
           {
             "name": "find_msvc_tools",
@@ -212,7 +228,7 @@
           },
           {
             "name": "jobserver",
-            "package_key": "jobserver-0.1.34",
+            "package_key": "jobserver-0.1.35",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -251,7 +267,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "cfg_aliases-0.2.1": {
+      "cfg_aliases-0.2.2": {
         "runtime_dependencies": [],
         "build_dependencies": [],
         "features": []
@@ -348,7 +364,7 @@
         "runtime_dependencies": [
           {
             "name": "bitflags",
-            "package_key": "bitflags-2.13.0",
+            "package_key": "bitflags-2.13.1",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -410,7 +426,7 @@
           },
           {
             "name": "self_cell",
-            "package_key": "self_cell-1.2.2",
+            "package_key": "self_cell-1.3.0",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -430,7 +446,7 @@
           },
           {
             "name": "swash",
-            "package_key": "swash-0.2.9",
+            "package_key": "swash-0.2.10",
             "kind": "normal",
             "features": [
               "render",
@@ -521,6 +537,48 @@
           "default",
           "std"
         ]
+      },
+      "dirs-6.0.0": {
+        "runtime_dependencies": [
+          {
+            "name": "dirs_sys",
+            "package_key": "dirs-sys-0.5.0",
+            "kind": "normal",
+            "features": [],
+            "uses_default_features": true,
+            "optional": false,
+            "target": null,
+            "tree": "target"
+          }
+        ],
+        "build_dependencies": [],
+        "features": []
+      },
+      "dirs-sys-0.5.0": {
+        "runtime_dependencies": [
+          {
+            "name": "libc",
+            "package_key": "libc-0.2.186",
+            "kind": "normal",
+            "features": [],
+            "uses_default_features": true,
+            "optional": false,
+            "target": "cfg(unix)",
+            "tree": "target"
+          },
+          {
+            "name": "option_ext",
+            "package_key": "option-ext-0.2.0",
+            "kind": "normal",
+            "features": [],
+            "uses_default_features": true,
+            "optional": false,
+            "target": null,
+            "tree": "target"
+          }
+        ],
+        "build_dependencies": [],
+        "features": []
       },
       "document-features-0.2.12": {
         "runtime_dependencies": [
@@ -787,11 +845,11 @@
         "build_dependencies": [],
         "features": []
       },
-      "font-types-0.11.3": {
+      "font-types-0.12.1": {
         "runtime_dependencies": [
           {
             "name": "bytemuck",
-            "package_key": "bytemuck-1.25.0",
+            "package_key": "bytemuck-1.25.1",
             "kind": "normal",
             "features": [
               "derive",
@@ -809,8 +867,60 @@
           "std"
         ]
       },
-      "garasu-0.1.0": {
+      "garasu-0.1.4": {
         "runtime_dependencies": [
+          {
+            "name": "bincode",
+            "package_key": "bincode-1.3.3",
+            "kind": "normal",
+            "features": [],
+            "uses_default_features": true,
+            "optional": false,
+            "target": null,
+            "tree": "target"
+          },
+          {
+            "name": "blake3",
+            "package_key": "blake3-1.8.5",
+            "kind": "normal",
+            "features": [],
+            "uses_default_features": true,
+            "optional": false,
+            "target": null,
+            "tree": "target"
+          },
+          {
+            "name": "bytemuck",
+            "package_key": "bytemuck-1.25.1",
+            "kind": "normal",
+            "features": [
+              "derive"
+            ],
+            "uses_default_features": true,
+            "optional": false,
+            "target": null,
+            "tree": "target"
+          },
+          {
+            "name": "dirs",
+            "package_key": "dirs-6.0.0",
+            "kind": "normal",
+            "features": [],
+            "uses_default_features": true,
+            "optional": false,
+            "target": null,
+            "tree": "target"
+          },
+          {
+            "name": "fontdb",
+            "package_key": "fontdb-0.16.2",
+            "kind": "normal",
+            "features": [],
+            "uses_default_features": true,
+            "optional": false,
+            "target": null,
+            "tree": "target"
+          },
           {
             "name": "glyphon",
             "package_key": "glyphon-0.9.0",
@@ -895,9 +1005,11 @@
           }
         ],
         "build_dependencies": [],
-        "features": []
+        "features": [
+          "default"
+        ]
       },
-      "gen-macros-0.1.17": {
+      "gen-macros-0.1.19": {
         "runtime_dependencies": [
           {
             "name": "proc_macro2",
@@ -921,7 +1033,7 @@
           },
           {
             "name": "syn",
-            "package_key": "syn-2.0.118",
+            "package_key": "syn-2.0.119",
             "kind": "normal",
             "features": [
               "extra-traits",
@@ -936,11 +1048,11 @@
         "build_dependencies": [],
         "features": []
       },
-      "gen-platform-0.1.17": {
+      "gen-platform-0.1.19": {
         "runtime_dependencies": [
           {
             "name": "gen_macros",
-            "package_key": "gen-macros-0.1.17",
+            "package_key": "gen-macros-0.1.19",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -950,7 +1062,7 @@
           },
           {
             "name": "gen_types",
-            "package_key": "gen-types-0.1.17",
+            "package_key": "gen-types-0.1.19",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -1004,7 +1116,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "gen-types-0.1.17": {
+      "gen-types-0.1.19": {
         "runtime_dependencies": [
           {
             "name": "blake3",
@@ -1180,7 +1292,9 @@
           }
         ],
         "build_dependencies": [],
-        "features": []
+        "features": [
+          "std"
+        ]
       },
       "glow-0.16.0": {
         "runtime_dependencies": [],
@@ -1221,7 +1335,7 @@
           },
           {
             "name": "rustc_hash",
-            "package_key": "rustc-hash-2.1.2",
+            "package_key": "rustc-hash-2.1.3",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -1245,11 +1359,11 @@
         "build_dependencies": [],
         "features": []
       },
-      "gpu-alloc-0.6.0": {
+      "gpu-alloc-0.6.2": {
         "runtime_dependencies": [
           {
             "name": "bitflags",
-            "package_key": "bitflags-2.13.0",
+            "package_key": "bitflags-2.13.1",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -1259,7 +1373,7 @@
           },
           {
             "name": "gpu_alloc_types",
-            "package_key": "gpu-alloc-types-0.3.0",
+            "package_key": "gpu-alloc-types-0.3.1",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -1274,11 +1388,11 @@
           "std"
         ]
       },
-      "gpu-alloc-types-0.3.0": {
+      "gpu-alloc-types-0.3.1": {
         "runtime_dependencies": [
           {
             "name": "bitflags",
-            "package_key": "bitflags-2.13.0",
+            "package_key": "bitflags-2.13.1",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -1294,7 +1408,7 @@
         "runtime_dependencies": [
           {
             "name": "bitflags",
-            "package_key": "bitflags-2.13.0",
+            "package_key": "bitflags-2.13.1",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -1335,7 +1449,7 @@
         "runtime_dependencies": [
           {
             "name": "bitflags",
-            "package_key": "bitflags-2.13.0",
+            "package_key": "bitflags-2.13.1",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -1373,7 +1487,7 @@
           },
           {
             "name": "zerocopy",
-            "package_key": "zerocopy-0.8.52",
+            "package_key": "zerocopy-0.8.54",
             "kind": "normal",
             "features": [
               "derive",
@@ -1558,7 +1672,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "jobserver-0.1.34": {
+      "jobserver-0.1.35": {
         "runtime_dependencies": [
           {
             "name": "libc",
@@ -1691,7 +1805,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "madori-0.1.5": {
+      "madori-0.1.6": {
         "runtime_dependencies": [
           {
             "name": "egaku",
@@ -1705,7 +1819,7 @@
           },
           {
             "name": "garasu",
-            "package_key": "garasu-0.1.0",
+            "package_key": "garasu-0.1.4",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -1749,7 +1863,7 @@
           },
           {
             "name": "shikumi",
-            "package_key": "shikumi-0.1.80",
+            "package_key": "shikumi-0.1.317",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -1801,7 +1915,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "memchr-2.8.2": {
+      "memchr-2.8.3": {
         "runtime_dependencies": [],
         "build_dependencies": [],
         "features": [
@@ -1810,7 +1924,7 @@
           "std"
         ]
       },
-      "memmap2-0.9.10": {
+      "memmap2-0.9.11": {
         "runtime_dependencies": [
           {
             "name": "libc",
@@ -1826,7 +1940,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "mio-1.2.1": {
+      "mio-1.2.2": {
         "runtime_dependencies": [
           {
             "name": "libc",
@@ -1861,7 +1975,7 @@
         "runtime_dependencies": [
           {
             "name": "arrayvec",
-            "package_key": "arrayvec-0.7.7",
+            "package_key": "arrayvec-0.7.8",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -1881,7 +1995,7 @@
           },
           {
             "name": "bitflags",
-            "package_key": "bitflags-2.13.0",
+            "package_key": "bitflags-2.13.1",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -2036,7 +2150,7 @@
         "build_dependencies": [
           {
             "name": "cfg_aliases",
-            "package_key": "cfg_aliases-0.2.1",
+            "package_key": "cfg_aliases-0.2.2",
             "kind": "build",
             "features": [],
             "uses_default_features": true,
@@ -2060,7 +2174,7 @@
         "runtime_dependencies": [
           {
             "name": "bitflags",
-            "package_key": "bitflags-2.13.0",
+            "package_key": "bitflags-2.13.1",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -2111,6 +2225,11 @@
           "race",
           "std"
         ]
+      },
+      "option-ext-0.2.0": {
+        "runtime_dependencies": [],
+        "build_dependencies": [],
+        "features": []
       },
       "ordered-float-4.6.0": {
         "runtime_dependencies": [
@@ -2266,7 +2385,7 @@
           },
           {
             "name": "syn",
-            "package_key": "syn-2.0.118",
+            "package_key": "syn-2.0.119",
             "kind": "normal",
             "features": [
               "extra-traits",
@@ -2340,7 +2459,7 @@
           },
           {
             "name": "syn",
-            "package_key": "syn-2.0.118",
+            "package_key": "syn-2.0.119",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -2414,11 +2533,11 @@
           "std"
         ]
       },
-      "read-fonts-0.39.2": {
+      "read-fonts-0.41.0": {
         "runtime_dependencies": [
           {
             "name": "bytemuck",
-            "package_key": "bytemuck-1.25.0",
+            "package_key": "bytemuck-1.25.1",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -2428,12 +2547,25 @@
           },
           {
             "name": "font_types",
-            "package_key": "font-types-0.11.3",
+            "package_key": "font-types-0.12.1",
             "kind": "normal",
             "features": [
               "bytemuck"
             ],
             "uses_default_features": true,
+            "optional": false,
+            "target": null,
+            "tree": "target"
+          },
+          {
+            "name": "once_cell",
+            "package_key": "once_cell-1.21.4",
+            "kind": "normal",
+            "features": [
+              "alloc",
+              "race"
+            ],
+            "uses_default_features": false,
             "optional": false,
             "target": null,
             "tree": "target"
@@ -2454,7 +2586,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "rustc-hash-2.1.2": {
+      "rustc-hash-2.1.3": {
         "runtime_dependencies": [],
         "build_dependencies": [],
         "features": [
@@ -2462,7 +2594,7 @@
           "std"
         ]
       },
-      "rustversion-1.0.22": {
+      "rustversion-1.0.23": {
         "runtime_dependencies": [],
         "build_dependencies": [],
         "features": []
@@ -2471,7 +2603,7 @@
         "runtime_dependencies": [
           {
             "name": "bitflags",
-            "package_key": "bitflags-2.13.0",
+            "package_key": "bitflags-2.13.1",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -2481,7 +2613,7 @@
           },
           {
             "name": "bytemuck",
-            "package_key": "bytemuck-1.25.0",
+            "package_key": "bytemuck-1.25.1",
             "kind": "normal",
             "features": [
               "extern_crate_alloc"
@@ -2590,7 +2722,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "self_cell-1.2.2": {
+      "self_cell-1.3.0": {
         "runtime_dependencies": [],
         "build_dependencies": [],
         "features": []
@@ -2666,7 +2798,7 @@
           },
           {
             "name": "syn",
-            "package_key": "syn-2.0.118",
+            "package_key": "syn-2.0.119",
             "kind": "normal",
             "features": [
               "clone-impls",
@@ -2700,7 +2832,7 @@
           },
           {
             "name": "memchr",
-            "package_key": "memchr-2.8.2",
+            "package_key": "memchr-2.8.3",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -2720,7 +2852,7 @@
           },
           {
             "name": "zmij",
-            "package_key": "zmij-1.0.21",
+            "package_key": "zmij-1.0.23",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -2809,11 +2941,11 @@
         "build_dependencies": [],
         "features": []
       },
-      "shikumi-0.1.80": {
+      "shikumi-0.1.317": {
         "runtime_dependencies": [
           {
             "name": "arc_swap",
-            "package_key": "arc-swap-1.9.1",
+            "package_key": "arc-swap-1.9.2",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -2847,7 +2979,7 @@
           },
           {
             "name": "gen_platform",
-            "package_key": "gen-platform-0.1.17",
+            "package_key": "gen-platform-0.1.19",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -2857,7 +2989,7 @@
           },
           {
             "name": "gen_types",
-            "package_key": "gen-types-0.1.17",
+            "package_key": "gen-types-0.1.19",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -2953,11 +3085,11 @@
           "std"
         ]
       },
-      "skrifa-0.42.1": {
+      "skrifa-0.44.0": {
         "runtime_dependencies": [
           {
             "name": "bytemuck",
-            "package_key": "bytemuck-1.25.0",
+            "package_key": "bytemuck-1.25.1",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -2967,7 +3099,7 @@
           },
           {
             "name": "read_fonts",
-            "package_key": "read-fonts-0.39.2",
+            "package_key": "read-fonts-0.41.0",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -3021,7 +3153,7 @@
         "runtime_dependencies": [
           {
             "name": "bitflags",
-            "package_key": "bitflags-2.13.0",
+            "package_key": "bitflags-2.13.1",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -3091,7 +3223,7 @@
           },
           {
             "name": "rustversion",
-            "package_key": "rustversion-1.0.22",
+            "package_key": "rustversion-1.0.23",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -3101,7 +3233,7 @@
           },
           {
             "name": "syn",
-            "package_key": "syn-2.0.118",
+            "package_key": "syn-2.0.119",
             "kind": "normal",
             "features": [
               "extra-traits",
@@ -3121,11 +3253,11 @@
         "build_dependencies": [],
         "features": []
       },
-      "swash-0.2.9": {
+      "swash-0.2.10": {
         "runtime_dependencies": [
           {
             "name": "skrifa",
-            "package_key": "skrifa-0.42.1",
+            "package_key": "skrifa-0.44.0",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -3161,7 +3293,7 @@
           "std"
         ]
       },
-      "syn-2.0.118": {
+      "syn-2.0.119": {
         "runtime_dependencies": [
           {
             "name": "proc_macro2",
@@ -3314,7 +3446,7 @@
           },
           {
             "name": "syn",
-            "package_key": "syn-2.0.118",
+            "package_key": "syn-2.0.119",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -3326,7 +3458,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "tinyvec-1.11.0": {
+      "tinyvec-1.12.0": {
         "runtime_dependencies": [
           {
             "name": "tinyvec_macros",
@@ -3573,7 +3705,7 @@
           },
           {
             "name": "syn",
-            "package_key": "syn-2.0.118",
+            "package_key": "syn-2.0.119",
             "kind": "normal",
             "features": [
               "clone-impls",
@@ -3736,7 +3868,7 @@
         "runtime_dependencies": [
           {
             "name": "arrayvec",
-            "package_key": "arrayvec-0.7.7",
+            "package_key": "arrayvec-0.7.8",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -3746,7 +3878,7 @@
           },
           {
             "name": "bitflags",
-            "package_key": "bitflags-2.13.0",
+            "package_key": "bitflags-2.13.1",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -3922,7 +4054,7 @@
         "build_dependencies": [
           {
             "name": "cfg_aliases",
-            "package_key": "cfg_aliases-0.2.1",
+            "package_key": "cfg_aliases-0.2.2",
             "kind": "build",
             "features": [],
             "uses_default_features": true,
@@ -3945,7 +4077,7 @@
         "runtime_dependencies": [
           {
             "name": "bitflags",
-            "package_key": "bitflags-2.13.0",
+            "package_key": "bitflags-2.13.1",
             "kind": "normal",
             "features": [
               "serde"
@@ -3957,7 +4089,7 @@
           },
           {
             "name": "bytemuck",
-            "package_key": "bytemuck-1.25.0",
+            "package_key": "bytemuck-1.25.1",
             "kind": "normal",
             "features": [
               "derive",
@@ -4030,11 +4162,11 @@
           "std"
         ]
       },
-      "zerocopy-0.8.52": {
+      "zerocopy-0.8.54": {
         "runtime_dependencies": [
           {
             "name": "zerocopy_derive",
-            "package_key": "zerocopy-derive-0.8.52",
+            "package_key": "zerocopy-derive-0.8.54",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -4044,7 +4176,7 @@
           },
           {
             "name": "zerocopy_derive",
-            "package_key": "zerocopy-derive-0.8.52",
+            "package_key": "zerocopy-derive-0.8.54",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -4060,7 +4192,7 @@
           "zerocopy-derive"
         ]
       },
-      "zerocopy-derive-0.8.52": {
+      "zerocopy-derive-0.8.54": {
         "runtime_dependencies": [
           {
             "name": "proc_macro2",
@@ -4084,7 +4216,7 @@
           },
           {
             "name": "syn",
-            "package_key": "syn-2.0.118",
+            "package_key": "syn-2.0.119",
             "kind": "normal",
             "features": [
               "full"
@@ -4098,7 +4230,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "zmij-1.0.21": {
+      "zmij-1.0.23": {
         "runtime_dependencies": [],
         "build_dependencies": [],
         "features": []
@@ -4128,7 +4260,7 @@
               },
               {
                 "name": "arrayvec",
-                "package_key": "arrayvec-0.7.7",
+                "package_key": "arrayvec-0.7.8",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -4160,7 +4292,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.2.65",
+                "package_key": "cc-1.2.67",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -4353,7 +4485,7 @@
               },
               {
                 "name": "memmap2",
-                "package_key": "memmap2-0.9.10",
+                "package_key": "memmap2-0.9.11",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -4373,7 +4505,7 @@
               },
               {
                 "name": "tinyvec",
-                "package_key": "tinyvec-1.11.0",
+                "package_key": "tinyvec-1.12.0",
                 "kind": "normal",
                 "features": [
                   "alloc"
@@ -4401,6 +4533,7 @@
             ],
             "build_dependencies": [],
             "features": [
+              "default",
               "fontconfig",
               "fontconfig-parser",
               "fs",
@@ -4462,7 +4595,7 @@
               },
               {
                 "name": "syn",
-                "package_key": "syn-2.0.118",
+                "package_key": "syn-2.0.119",
                 "kind": "normal",
                 "features": [
                   "full"
@@ -4531,7 +4664,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -4573,7 +4706,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -4652,7 +4785,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -4702,7 +4835,7 @@
               },
               {
                 "name": "mio",
-                "package_key": "mio-1.2.1",
+                "package_key": "mio-1.2.2",
                 "kind": "normal",
                 "features": [
                   "os-ext"
@@ -4714,7 +4847,7 @@
               },
               {
                 "name": "mio",
-                "package_key": "mio-1.2.1",
+                "package_key": "mio-1.2.2",
                 "kind": "normal",
                 "features": [
                   "os-ext"
@@ -4726,7 +4859,7 @@
               },
               {
                 "name": "mio",
-                "package_key": "mio-1.2.1",
+                "package_key": "mio-1.2.2",
                 "kind": "normal",
                 "features": [
                   "os-ext"
@@ -4823,7 +4956,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -4890,7 +5023,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -4970,7 +5103,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -5062,7 +5195,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -5106,7 +5239,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -5154,7 +5287,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -5232,7 +5365,7 @@
             "runtime_dependencies": [
               {
                 "name": "arrayvec",
-                "package_key": "arrayvec-0.7.7",
+                "package_key": "arrayvec-0.7.8",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -5262,7 +5395,7 @@
               },
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -5429,7 +5562,7 @@
             "build_dependencies": [
               {
                 "name": "cfg_aliases",
-                "package_key": "cfg_aliases-0.2.1",
+                "package_key": "cfg_aliases-0.2.2",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -5476,7 +5609,7 @@
             "runtime_dependencies": [
               {
                 "name": "arrayvec",
-                "package_key": "arrayvec-0.7.7",
+                "package_key": "arrayvec-0.7.8",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -5496,7 +5629,7 @@
               },
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -5516,7 +5649,7 @@
               },
               {
                 "name": "bytemuck",
-                "package_key": "bytemuck-1.25.0",
+                "package_key": "bytemuck-1.25.1",
                 "kind": "normal",
                 "features": [
                   "derive",
@@ -5560,7 +5693,7 @@
               },
               {
                 "name": "gpu_alloc",
-                "package_key": "gpu-alloc-0.6.0",
+                "package_key": "gpu-alloc-0.6.2",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -5772,7 +5905,7 @@
             "build_dependencies": [
               {
                 "name": "cfg_aliases",
-                "package_key": "cfg_aliases-0.2.1",
+                "package_key": "cfg_aliases-0.2.2",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -5795,7 +5928,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -5988,7 +6121,7 @@
             "build_dependencies": [
               {
                 "name": "cfg_aliases",
-                "package_key": "cfg_aliases-0.2.1",
+                "package_key": "cfg_aliases-0.2.2",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -6097,7 +6230,7 @@
               },
               {
                 "name": "zerocopy",
-                "package_key": "zerocopy-0.8.52",
+                "package_key": "zerocopy-0.8.54",
                 "kind": "normal",
                 "features": [
                   "simd"
@@ -6150,7 +6283,7 @@
               },
               {
                 "name": "arrayvec",
-                "package_key": "arrayvec-0.7.7",
+                "package_key": "arrayvec-0.7.8",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -6182,7 +6315,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.2.65",
+                "package_key": "cc-1.2.67",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -6200,7 +6333,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -6379,7 +6512,7 @@
               },
               {
                 "name": "memmap2",
-                "package_key": "memmap2-0.9.10",
+                "package_key": "memmap2-0.9.11",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -6399,7 +6532,7 @@
               },
               {
                 "name": "tinyvec",
-                "package_key": "tinyvec-1.11.0",
+                "package_key": "tinyvec-1.12.0",
                 "kind": "normal",
                 "features": [
                   "alloc"
@@ -6427,6 +6560,7 @@
             ],
             "build_dependencies": [],
             "features": [
+              "default",
               "fontconfig",
               "fontconfig-parser",
               "fs",
@@ -6547,9 +6681,7 @@
               }
             ],
             "build_dependencies": [],
-            "features": [
-              "std"
-            ]
+            "features": []
           },
           "iana-time-zone-0.1.65": {
             "runtime_dependencies": [],
@@ -6558,11 +6690,11 @@
               "fallback"
             ]
           },
-          "inotify-0.11.2": {
+          "inotify-0.11.4": {
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -6572,7 +6704,7 @@
               },
               {
                 "name": "inotify_sys",
-                "package_key": "inotify-sys-0.1.5",
+                "package_key": "inotify-sys-0.1.8",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -6594,7 +6726,7 @@
             "build_dependencies": [],
             "features": []
           },
-          "inotify-sys-0.1.5": {
+          "inotify-sys-0.1.8": {
             "runtime_dependencies": [
               {
                 "name": "libc",
@@ -6645,7 +6777,7 @@
             "runtime_dependencies": [
               {
                 "name": "inotify",
-                "package_key": "inotify-0.11.2",
+                "package_key": "inotify-0.11.4",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -6675,7 +6807,7 @@
               },
               {
                 "name": "mio",
-                "package_key": "mio-1.2.1",
+                "package_key": "mio-1.2.2",
                 "kind": "normal",
                 "features": [
                   "os-ext"
@@ -6687,7 +6819,7 @@
               },
               {
                 "name": "mio",
-                "package_key": "mio-1.2.1",
+                "package_key": "mio-1.2.2",
                 "kind": "normal",
                 "features": [
                   "os-ext"
@@ -6699,7 +6831,7 @@
               },
               {
                 "name": "mio",
-                "package_key": "mio-1.2.1",
+                "package_key": "mio-1.2.2",
                 "kind": "normal",
                 "features": [
                   "os-ext"
@@ -6807,7 +6939,7 @@
             "runtime_dependencies": [
               {
                 "name": "memchr",
-                "package_key": "memchr-2.8.2",
+                "package_key": "memchr-2.8.3",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -6834,7 +6966,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -6943,7 +7075,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -7077,7 +7209,7 @@
               },
               {
                 "name": "memmap2",
-                "package_key": "memmap2-0.9.10",
+                "package_key": "memmap2-0.9.11",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -7127,7 +7259,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -7187,7 +7319,7 @@
               },
               {
                 "name": "memmap2",
-                "package_key": "memmap2-0.9.10",
+                "package_key": "memmap2-0.9.11",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -7357,7 +7489,7 @@
               },
               {
                 "name": "syn",
-                "package_key": "syn-2.0.118",
+                "package_key": "syn-2.0.119",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -7383,7 +7515,7 @@
               },
               {
                 "name": "arrayvec",
-                "package_key": "arrayvec-0.7.7",
+                "package_key": "arrayvec-0.7.8",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -7393,7 +7525,7 @@
               },
               {
                 "name": "bytemuck",
-                "package_key": "bytemuck-1.25.0",
+                "package_key": "bytemuck-1.25.1",
                 "kind": "normal",
                 "features": [
                   "aarch64_simd"
@@ -7454,7 +7586,7 @@
               },
               {
                 "name": "bytemuck",
-                "package_key": "bytemuck-1.25.0",
+                "package_key": "bytemuck-1.25.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -7555,7 +7687,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.2.65",
+                "package_key": "cc-1.2.67",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -7573,7 +7705,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -7621,7 +7753,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -7695,7 +7827,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -7746,7 +7878,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -7805,7 +7937,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -7951,7 +8083,7 @@
             "runtime_dependencies": [
               {
                 "name": "arrayvec",
-                "package_key": "arrayvec-0.7.7",
+                "package_key": "arrayvec-0.7.8",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -7981,7 +8113,7 @@
               },
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -8148,7 +8280,7 @@
             "build_dependencies": [
               {
                 "name": "cfg_aliases",
-                "package_key": "cfg_aliases-0.2.1",
+                "package_key": "cfg_aliases-0.2.2",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -8198,7 +8330,7 @@
             "runtime_dependencies": [
               {
                 "name": "arrayvec",
-                "package_key": "arrayvec-0.7.7",
+                "package_key": "arrayvec-0.7.8",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -8218,7 +8350,7 @@
               },
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -8228,7 +8360,7 @@
               },
               {
                 "name": "bytemuck",
-                "package_key": "bytemuck-1.25.0",
+                "package_key": "bytemuck-1.25.1",
                 "kind": "normal",
                 "features": [
                   "derive",
@@ -8262,7 +8394,7 @@
               },
               {
                 "name": "gpu_alloc",
-                "package_key": "gpu-alloc-0.6.0",
+                "package_key": "gpu-alloc-0.6.2",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -8454,7 +8586,7 @@
             "build_dependencies": [
               {
                 "name": "cfg_aliases",
-                "package_key": "cfg_aliases-0.2.1",
+                "package_key": "cfg_aliases-0.2.2",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -8489,7 +8621,7 @@
               },
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -8499,7 +8631,7 @@
               },
               {
                 "name": "bytemuck",
-                "package_key": "bytemuck-1.25.0",
+                "package_key": "bytemuck-1.25.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -8549,7 +8681,7 @@
               },
               {
                 "name": "memmap2",
-                "package_key": "memmap2-0.9.10",
+                "package_key": "memmap2-0.9.11",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -8723,7 +8855,7 @@
             "build_dependencies": [
               {
                 "name": "cfg_aliases",
-                "package_key": "cfg_aliases-0.2.1",
+                "package_key": "cfg_aliases-0.2.2",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -8911,7 +9043,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -9049,7 +9181,7 @@
               },
               {
                 "name": "zerocopy",
-                "package_key": "zerocopy-0.8.52",
+                "package_key": "zerocopy-0.8.54",
                 "kind": "normal",
                 "features": [
                   "simd"
@@ -9102,7 +9234,7 @@
               },
               {
                 "name": "arrayvec",
-                "package_key": "arrayvec-0.7.7",
+                "package_key": "arrayvec-0.7.8",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -9134,7 +9266,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.2.65",
+                "package_key": "cc-1.2.67",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -9152,7 +9284,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -9331,7 +9463,7 @@
               },
               {
                 "name": "memmap2",
-                "package_key": "memmap2-0.9.10",
+                "package_key": "memmap2-0.9.11",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -9351,7 +9483,7 @@
               },
               {
                 "name": "tinyvec",
-                "package_key": "tinyvec-1.11.0",
+                "package_key": "tinyvec-1.12.0",
                 "kind": "normal",
                 "features": [
                   "alloc"
@@ -9379,6 +9511,7 @@
             ],
             "build_dependencies": [],
             "features": [
+              "default",
               "fontconfig",
               "fontconfig-parser",
               "fs",
@@ -9499,9 +9632,7 @@
               }
             ],
             "build_dependencies": [],
-            "features": [
-              "std"
-            ]
+            "features": []
           },
           "iana-time-zone-0.1.65": {
             "runtime_dependencies": [],
@@ -9510,11 +9641,11 @@
               "fallback"
             ]
           },
-          "inotify-0.11.2": {
+          "inotify-0.11.4": {
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -9524,7 +9655,7 @@
               },
               {
                 "name": "inotify_sys",
-                "package_key": "inotify-sys-0.1.5",
+                "package_key": "inotify-sys-0.1.8",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -9546,7 +9677,7 @@
             "build_dependencies": [],
             "features": []
           },
-          "inotify-sys-0.1.5": {
+          "inotify-sys-0.1.8": {
             "runtime_dependencies": [
               {
                 "name": "libc",
@@ -9597,7 +9728,7 @@
             "runtime_dependencies": [
               {
                 "name": "inotify",
-                "package_key": "inotify-0.11.2",
+                "package_key": "inotify-0.11.4",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -9627,7 +9758,7 @@
               },
               {
                 "name": "mio",
-                "package_key": "mio-1.2.1",
+                "package_key": "mio-1.2.2",
                 "kind": "normal",
                 "features": [
                   "os-ext"
@@ -9639,7 +9770,7 @@
               },
               {
                 "name": "mio",
-                "package_key": "mio-1.2.1",
+                "package_key": "mio-1.2.2",
                 "kind": "normal",
                 "features": [
                   "os-ext"
@@ -9651,7 +9782,7 @@
               },
               {
                 "name": "mio",
-                "package_key": "mio-1.2.1",
+                "package_key": "mio-1.2.2",
                 "kind": "normal",
                 "features": [
                   "os-ext"
@@ -9759,7 +9890,7 @@
             "runtime_dependencies": [
               {
                 "name": "memchr",
-                "package_key": "memchr-2.8.2",
+                "package_key": "memchr-2.8.3",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -9786,7 +9917,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -9895,7 +10026,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -10029,7 +10160,7 @@
               },
               {
                 "name": "memmap2",
-                "package_key": "memmap2-0.9.10",
+                "package_key": "memmap2-0.9.11",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -10079,7 +10210,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -10139,7 +10270,7 @@
               },
               {
                 "name": "memmap2",
-                "package_key": "memmap2-0.9.10",
+                "package_key": "memmap2-0.9.11",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -10309,7 +10440,7 @@
               },
               {
                 "name": "syn",
-                "package_key": "syn-2.0.118",
+                "package_key": "syn-2.0.119",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -10335,7 +10466,7 @@
               },
               {
                 "name": "arrayvec",
-                "package_key": "arrayvec-0.7.7",
+                "package_key": "arrayvec-0.7.8",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -10345,7 +10476,7 @@
               },
               {
                 "name": "bytemuck",
-                "package_key": "bytemuck-1.25.0",
+                "package_key": "bytemuck-1.25.1",
                 "kind": "normal",
                 "features": [
                   "aarch64_simd"
@@ -10406,7 +10537,7 @@
               },
               {
                 "name": "bytemuck",
-                "package_key": "bytemuck-1.25.0",
+                "package_key": "bytemuck-1.25.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -10507,7 +10638,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.2.65",
+                "package_key": "cc-1.2.67",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -10525,7 +10656,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -10573,7 +10704,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -10647,7 +10778,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -10698,7 +10829,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -10757,7 +10888,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -10903,7 +11034,7 @@
             "runtime_dependencies": [
               {
                 "name": "arrayvec",
-                "package_key": "arrayvec-0.7.7",
+                "package_key": "arrayvec-0.7.8",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -10933,7 +11064,7 @@
               },
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -11100,7 +11231,7 @@
             "build_dependencies": [
               {
                 "name": "cfg_aliases",
-                "package_key": "cfg_aliases-0.2.1",
+                "package_key": "cfg_aliases-0.2.2",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -11150,7 +11281,7 @@
             "runtime_dependencies": [
               {
                 "name": "arrayvec",
-                "package_key": "arrayvec-0.7.7",
+                "package_key": "arrayvec-0.7.8",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -11170,7 +11301,7 @@
               },
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -11180,7 +11311,7 @@
               },
               {
                 "name": "bytemuck",
-                "package_key": "bytemuck-1.25.0",
+                "package_key": "bytemuck-1.25.1",
                 "kind": "normal",
                 "features": [
                   "derive",
@@ -11214,7 +11345,7 @@
               },
               {
                 "name": "gpu_alloc",
-                "package_key": "gpu-alloc-0.6.0",
+                "package_key": "gpu-alloc-0.6.2",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -11406,7 +11537,7 @@
             "build_dependencies": [
               {
                 "name": "cfg_aliases",
-                "package_key": "cfg_aliases-0.2.1",
+                "package_key": "cfg_aliases-0.2.2",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -11441,7 +11572,7 @@
               },
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -11451,7 +11582,7 @@
               },
               {
                 "name": "bytemuck",
-                "package_key": "bytemuck-1.25.0",
+                "package_key": "bytemuck-1.25.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -11501,7 +11632,7 @@
               },
               {
                 "name": "memmap2",
-                "package_key": "memmap2-0.9.10",
+                "package_key": "memmap2-0.9.11",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -11675,7 +11806,7 @@
             "build_dependencies": [
               {
                 "name": "cfg_aliases",
-                "package_key": "cfg_aliases-0.2.1",
+                "package_key": "cfg_aliases-0.2.2",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -11863,7 +11994,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -11947,7 +12078,7 @@
               },
               {
                 "name": "arrayvec",
-                "package_key": "arrayvec-0.7.7",
+                "package_key": "arrayvec-0.7.8",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -11989,7 +12120,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.2.65",
+                "package_key": "cc-1.2.67",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -12187,7 +12318,7 @@
               },
               {
                 "name": "memmap2",
-                "package_key": "memmap2-0.9.10",
+                "package_key": "memmap2-0.9.11",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -12207,7 +12338,7 @@
               },
               {
                 "name": "tinyvec",
-                "package_key": "tinyvec-1.11.0",
+                "package_key": "tinyvec-1.12.0",
                 "kind": "normal",
                 "features": [
                   "alloc"
@@ -12235,6 +12366,7 @@
             ],
             "build_dependencies": [],
             "features": [
+              "default",
               "fontconfig",
               "fontconfig-parser",
               "fs",
@@ -12296,7 +12428,7 @@
               },
               {
                 "name": "syn",
-                "package_key": "syn-2.0.118",
+                "package_key": "syn-2.0.119",
                 "kind": "normal",
                 "features": [
                   "full"
@@ -12365,7 +12497,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -12407,7 +12539,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -12486,7 +12618,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -12536,7 +12668,7 @@
               },
               {
                 "name": "mio",
-                "package_key": "mio-1.2.1",
+                "package_key": "mio-1.2.2",
                 "kind": "normal",
                 "features": [
                   "os-ext"
@@ -12548,7 +12680,7 @@
               },
               {
                 "name": "mio",
-                "package_key": "mio-1.2.1",
+                "package_key": "mio-1.2.2",
                 "kind": "normal",
                 "features": [
                   "os-ext"
@@ -12560,7 +12692,7 @@
               },
               {
                 "name": "mio",
-                "package_key": "mio-1.2.1",
+                "package_key": "mio-1.2.2",
                 "kind": "normal",
                 "features": [
                   "os-ext"
@@ -12657,7 +12789,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -12724,7 +12856,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -12804,7 +12936,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -12896,7 +13028,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -12940,7 +13072,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -12988,7 +13120,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -13066,7 +13198,7 @@
             "runtime_dependencies": [
               {
                 "name": "arrayvec",
-                "package_key": "arrayvec-0.7.7",
+                "package_key": "arrayvec-0.7.8",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -13096,7 +13228,7 @@
               },
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -13263,7 +13395,7 @@
             "build_dependencies": [
               {
                 "name": "cfg_aliases",
-                "package_key": "cfg_aliases-0.2.1",
+                "package_key": "cfg_aliases-0.2.2",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -13310,7 +13442,7 @@
             "runtime_dependencies": [
               {
                 "name": "arrayvec",
-                "package_key": "arrayvec-0.7.7",
+                "package_key": "arrayvec-0.7.8",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -13330,7 +13462,7 @@
               },
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -13350,7 +13482,7 @@
               },
               {
                 "name": "bytemuck",
-                "package_key": "bytemuck-1.25.0",
+                "package_key": "bytemuck-1.25.1",
                 "kind": "normal",
                 "features": [
                   "derive",
@@ -13394,7 +13526,7 @@
               },
               {
                 "name": "gpu_alloc",
-                "package_key": "gpu-alloc-0.6.0",
+                "package_key": "gpu-alloc-0.6.2",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -13606,7 +13738,7 @@
             "build_dependencies": [
               {
                 "name": "cfg_aliases",
-                "package_key": "cfg_aliases-0.2.1",
+                "package_key": "cfg_aliases-0.2.2",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -13629,7 +13761,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -13822,7 +13954,7 @@
             "build_dependencies": [
               {
                 "name": "cfg_aliases",
-                "package_key": "cfg_aliases-0.2.1",
+                "package_key": "cfg_aliases-0.2.2",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -13931,7 +14063,7 @@
               },
               {
                 "name": "zerocopy",
-                "package_key": "zerocopy-0.8.52",
+                "package_key": "zerocopy-0.8.54",
                 "kind": "normal",
                 "features": [
                   "simd"
@@ -13984,7 +14116,7 @@
               },
               {
                 "name": "arrayvec",
-                "package_key": "arrayvec-0.7.7",
+                "package_key": "arrayvec-0.7.8",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -14026,7 +14158,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.2.65",
+                "package_key": "cc-1.2.67",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -14044,7 +14176,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -14228,7 +14360,7 @@
               },
               {
                 "name": "memmap2",
-                "package_key": "memmap2-0.9.10",
+                "package_key": "memmap2-0.9.11",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -14248,7 +14380,7 @@
               },
               {
                 "name": "tinyvec",
-                "package_key": "tinyvec-1.11.0",
+                "package_key": "tinyvec-1.12.0",
                 "kind": "normal",
                 "features": [
                   "alloc"
@@ -14276,6 +14408,7 @@
             ],
             "build_dependencies": [],
             "features": [
+              "default",
               "fontconfig",
               "fontconfig-parser",
               "fs",
@@ -14396,9 +14529,7 @@
               }
             ],
             "build_dependencies": [],
-            "features": [
-              "std"
-            ]
+            "features": []
           },
           "iana-time-zone-0.1.65": {
             "runtime_dependencies": [],
@@ -14407,11 +14538,11 @@
               "fallback"
             ]
           },
-          "inotify-0.11.2": {
+          "inotify-0.11.4": {
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -14421,7 +14552,7 @@
               },
               {
                 "name": "inotify_sys",
-                "package_key": "inotify-sys-0.1.5",
+                "package_key": "inotify-sys-0.1.8",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -14443,7 +14574,7 @@
             "build_dependencies": [],
             "features": []
           },
-          "inotify-sys-0.1.5": {
+          "inotify-sys-0.1.8": {
             "runtime_dependencies": [
               {
                 "name": "libc",
@@ -14494,7 +14625,7 @@
             "runtime_dependencies": [
               {
                 "name": "inotify",
-                "package_key": "inotify-0.11.2",
+                "package_key": "inotify-0.11.4",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -14524,7 +14655,7 @@
               },
               {
                 "name": "mio",
-                "package_key": "mio-1.2.1",
+                "package_key": "mio-1.2.2",
                 "kind": "normal",
                 "features": [
                   "os-ext"
@@ -14536,7 +14667,7 @@
               },
               {
                 "name": "mio",
-                "package_key": "mio-1.2.1",
+                "package_key": "mio-1.2.2",
                 "kind": "normal",
                 "features": [
                   "os-ext"
@@ -14548,7 +14679,7 @@
               },
               {
                 "name": "mio",
-                "package_key": "mio-1.2.1",
+                "package_key": "mio-1.2.2",
                 "kind": "normal",
                 "features": [
                   "os-ext"
@@ -14656,7 +14787,7 @@
             "runtime_dependencies": [
               {
                 "name": "memchr",
-                "package_key": "memchr-2.8.2",
+                "package_key": "memchr-2.8.3",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -14683,7 +14814,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -14792,7 +14923,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -14926,7 +15057,7 @@
               },
               {
                 "name": "memmap2",
-                "package_key": "memmap2-0.9.10",
+                "package_key": "memmap2-0.9.11",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -14976,7 +15107,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -15036,7 +15167,7 @@
               },
               {
                 "name": "memmap2",
-                "package_key": "memmap2-0.9.10",
+                "package_key": "memmap2-0.9.11",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -15206,7 +15337,7 @@
               },
               {
                 "name": "syn",
-                "package_key": "syn-2.0.118",
+                "package_key": "syn-2.0.119",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -15232,7 +15363,7 @@
               },
               {
                 "name": "arrayvec",
-                "package_key": "arrayvec-0.7.7",
+                "package_key": "arrayvec-0.7.8",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -15242,7 +15373,7 @@
               },
               {
                 "name": "bytemuck",
-                "package_key": "bytemuck-1.25.0",
+                "package_key": "bytemuck-1.25.1",
                 "kind": "normal",
                 "features": [
                   "aarch64_simd"
@@ -15303,7 +15434,7 @@
               },
               {
                 "name": "bytemuck",
-                "package_key": "bytemuck-1.25.0",
+                "package_key": "bytemuck-1.25.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -15404,7 +15535,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.2.65",
+                "package_key": "cc-1.2.67",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -15422,7 +15553,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -15470,7 +15601,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -15544,7 +15675,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -15595,7 +15726,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -15654,7 +15785,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -15800,7 +15931,7 @@
             "runtime_dependencies": [
               {
                 "name": "arrayvec",
-                "package_key": "arrayvec-0.7.7",
+                "package_key": "arrayvec-0.7.8",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -15830,7 +15961,7 @@
               },
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -15997,7 +16128,7 @@
             "build_dependencies": [
               {
                 "name": "cfg_aliases",
-                "package_key": "cfg_aliases-0.2.1",
+                "package_key": "cfg_aliases-0.2.2",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -16047,7 +16178,7 @@
             "runtime_dependencies": [
               {
                 "name": "arrayvec",
-                "package_key": "arrayvec-0.7.7",
+                "package_key": "arrayvec-0.7.8",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -16067,7 +16198,7 @@
               },
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -16077,7 +16208,7 @@
               },
               {
                 "name": "bytemuck",
-                "package_key": "bytemuck-1.25.0",
+                "package_key": "bytemuck-1.25.1",
                 "kind": "normal",
                 "features": [
                   "derive",
@@ -16111,7 +16242,7 @@
               },
               {
                 "name": "gpu_alloc",
-                "package_key": "gpu-alloc-0.6.0",
+                "package_key": "gpu-alloc-0.6.2",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -16303,7 +16434,7 @@
             "build_dependencies": [
               {
                 "name": "cfg_aliases",
-                "package_key": "cfg_aliases-0.2.1",
+                "package_key": "cfg_aliases-0.2.2",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -16338,7 +16469,7 @@
               },
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -16348,7 +16479,7 @@
               },
               {
                 "name": "bytemuck",
-                "package_key": "bytemuck-1.25.0",
+                "package_key": "bytemuck-1.25.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -16398,7 +16529,7 @@
               },
               {
                 "name": "memmap2",
-                "package_key": "memmap2-0.9.10",
+                "package_key": "memmap2-0.9.11",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -16572,7 +16703,7 @@
             "build_dependencies": [
               {
                 "name": "cfg_aliases",
-                "package_key": "cfg_aliases-0.2.1",
+                "package_key": "cfg_aliases-0.2.2",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -16760,7 +16891,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -16898,7 +17029,7 @@
               },
               {
                 "name": "zerocopy",
-                "package_key": "zerocopy-0.8.52",
+                "package_key": "zerocopy-0.8.54",
                 "kind": "normal",
                 "features": [
                   "simd"
@@ -16951,7 +17082,7 @@
               },
               {
                 "name": "arrayvec",
-                "package_key": "arrayvec-0.7.7",
+                "package_key": "arrayvec-0.7.8",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -16993,7 +17124,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.2.65",
+                "package_key": "cc-1.2.67",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -17011,7 +17142,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -17195,7 +17326,7 @@
               },
               {
                 "name": "memmap2",
-                "package_key": "memmap2-0.9.10",
+                "package_key": "memmap2-0.9.11",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -17215,7 +17346,7 @@
               },
               {
                 "name": "tinyvec",
-                "package_key": "tinyvec-1.11.0",
+                "package_key": "tinyvec-1.12.0",
                 "kind": "normal",
                 "features": [
                   "alloc"
@@ -17243,6 +17374,7 @@
             ],
             "build_dependencies": [],
             "features": [
+              "default",
               "fontconfig",
               "fontconfig-parser",
               "fs",
@@ -17363,9 +17495,7 @@
               }
             ],
             "build_dependencies": [],
-            "features": [
-              "std"
-            ]
+            "features": []
           },
           "iana-time-zone-0.1.65": {
             "runtime_dependencies": [],
@@ -17374,11 +17504,11 @@
               "fallback"
             ]
           },
-          "inotify-0.11.2": {
+          "inotify-0.11.4": {
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -17388,7 +17518,7 @@
               },
               {
                 "name": "inotify_sys",
-                "package_key": "inotify-sys-0.1.5",
+                "package_key": "inotify-sys-0.1.8",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -17410,7 +17540,7 @@
             "build_dependencies": [],
             "features": []
           },
-          "inotify-sys-0.1.5": {
+          "inotify-sys-0.1.8": {
             "runtime_dependencies": [
               {
                 "name": "libc",
@@ -17461,7 +17591,7 @@
             "runtime_dependencies": [
               {
                 "name": "inotify",
-                "package_key": "inotify-0.11.2",
+                "package_key": "inotify-0.11.4",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -17491,7 +17621,7 @@
               },
               {
                 "name": "mio",
-                "package_key": "mio-1.2.1",
+                "package_key": "mio-1.2.2",
                 "kind": "normal",
                 "features": [
                   "os-ext"
@@ -17503,7 +17633,7 @@
               },
               {
                 "name": "mio",
-                "package_key": "mio-1.2.1",
+                "package_key": "mio-1.2.2",
                 "kind": "normal",
                 "features": [
                   "os-ext"
@@ -17515,7 +17645,7 @@
               },
               {
                 "name": "mio",
-                "package_key": "mio-1.2.1",
+                "package_key": "mio-1.2.2",
                 "kind": "normal",
                 "features": [
                   "os-ext"
@@ -17623,7 +17753,7 @@
             "runtime_dependencies": [
               {
                 "name": "memchr",
-                "package_key": "memchr-2.8.2",
+                "package_key": "memchr-2.8.3",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -17650,7 +17780,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -17759,7 +17889,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -17893,7 +18023,7 @@
               },
               {
                 "name": "memmap2",
-                "package_key": "memmap2-0.9.10",
+                "package_key": "memmap2-0.9.11",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -17943,7 +18073,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -18003,7 +18133,7 @@
               },
               {
                 "name": "memmap2",
-                "package_key": "memmap2-0.9.10",
+                "package_key": "memmap2-0.9.11",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -18173,7 +18303,7 @@
               },
               {
                 "name": "syn",
-                "package_key": "syn-2.0.118",
+                "package_key": "syn-2.0.119",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -18199,7 +18329,7 @@
               },
               {
                 "name": "arrayvec",
-                "package_key": "arrayvec-0.7.7",
+                "package_key": "arrayvec-0.7.8",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -18209,7 +18339,7 @@
               },
               {
                 "name": "bytemuck",
-                "package_key": "bytemuck-1.25.0",
+                "package_key": "bytemuck-1.25.1",
                 "kind": "normal",
                 "features": [
                   "aarch64_simd"
@@ -18270,7 +18400,7 @@
               },
               {
                 "name": "bytemuck",
-                "package_key": "bytemuck-1.25.0",
+                "package_key": "bytemuck-1.25.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -18371,7 +18501,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.2.65",
+                "package_key": "cc-1.2.67",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -18389,7 +18519,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -18437,7 +18567,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -18511,7 +18641,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -18562,7 +18692,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -18621,7 +18751,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -18767,7 +18897,7 @@
             "runtime_dependencies": [
               {
                 "name": "arrayvec",
-                "package_key": "arrayvec-0.7.7",
+                "package_key": "arrayvec-0.7.8",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -18797,7 +18927,7 @@
               },
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -18964,7 +19094,7 @@
             "build_dependencies": [
               {
                 "name": "cfg_aliases",
-                "package_key": "cfg_aliases-0.2.1",
+                "package_key": "cfg_aliases-0.2.2",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -19014,7 +19144,7 @@
             "runtime_dependencies": [
               {
                 "name": "arrayvec",
-                "package_key": "arrayvec-0.7.7",
+                "package_key": "arrayvec-0.7.8",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -19034,7 +19164,7 @@
               },
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -19044,7 +19174,7 @@
               },
               {
                 "name": "bytemuck",
-                "package_key": "bytemuck-1.25.0",
+                "package_key": "bytemuck-1.25.1",
                 "kind": "normal",
                 "features": [
                   "derive",
@@ -19078,7 +19208,7 @@
               },
               {
                 "name": "gpu_alloc",
-                "package_key": "gpu-alloc-0.6.0",
+                "package_key": "gpu-alloc-0.6.2",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -19270,7 +19400,7 @@
             "build_dependencies": [
               {
                 "name": "cfg_aliases",
-                "package_key": "cfg_aliases-0.2.1",
+                "package_key": "cfg_aliases-0.2.2",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -19305,7 +19435,7 @@
               },
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -19315,7 +19445,7 @@
               },
               {
                 "name": "bytemuck",
-                "package_key": "bytemuck-1.25.0",
+                "package_key": "bytemuck-1.25.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -19365,7 +19495,7 @@
               },
               {
                 "name": "memmap2",
-                "package_key": "memmap2-0.9.10",
+                "package_key": "memmap2-0.9.11",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -19539,7 +19669,7 @@
             "build_dependencies": [
               {
                 "name": "cfg_aliases",
-                "package_key": "cfg_aliases-0.2.1",
+                "package_key": "cfg_aliases-0.2.2",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -19727,7 +19857,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -19801,13 +19931,13 @@
       "edition": "2018",
       "build_script": "build.rs"
     },
-    "arc-swap-1.9.1": {
+    "arc-swap-1.9.2": {
       "edition": "2018"
     },
     "arrayref-0.3.9": {
       "edition": "2015"
     },
-    "arrayvec-0.7.7": {
+    "arrayvec-0.7.8": {
       "edition": "2018"
     },
     "as-raw-xcb-connection-1.0.1": {
@@ -19824,6 +19954,9 @@
     "autocfg-1.5.1": {
       "edition": "2015"
     },
+    "bincode-1.3.3": {
+      "edition": "2015"
+    },
     "bit-set-0.8.0": {
       "edition": "2015"
     },
@@ -19833,7 +19966,7 @@
     "bitflags-1.3.2": {
       "edition": "2018"
     },
-    "bitflags-2.13.0": {
+    "bitflags-2.13.1": {
       "edition": "2021"
     },
     "blake3-1.8.5": {
@@ -19846,10 +19979,10 @@
     "block2-0.5.1": {
       "edition": "2021"
     },
-    "bytemuck-1.25.0": {
+    "bytemuck-1.25.1": {
       "edition": "2018"
     },
-    "bytemuck_derive-1.10.2": {
+    "bytemuck_derive-1.11.0": {
       "edition": "2018",
       "proc_macro": true
     },
@@ -19859,13 +19992,13 @@
     "calloop-wayland-source-0.3.0": {
       "edition": "2021"
     },
-    "cc-1.2.65": {
+    "cc-1.2.67": {
       "edition": "2018"
     },
     "cfg-if-1.0.4": {
       "edition": "2018"
     },
-    "cfg_aliases-0.2.1": {
+    "cfg_aliases-0.2.2": {
       "edition": "2018"
     },
     "chrono-0.4.45": {
@@ -19897,6 +20030,12 @@
     },
     "cursor-icon-1.2.0": {
       "edition": "2021"
+    },
+    "dirs-6.0.0": {
+      "edition": "2015"
+    },
+    "dirs-sys-0.5.0": {
+      "edition": "2015"
     },
     "dispatch-0.2.0": {
       "edition": "2018"
@@ -19946,7 +20085,7 @@
     "foldhash-0.1.5": {
       "edition": "2021"
     },
-    "font-types-0.11.3": {
+    "font-types-0.12.1": {
       "edition": "2021"
     },
     "fontconfig-parser-0.5.8": {
@@ -19965,17 +20104,18 @@
     "foreign-types-shared-0.3.1": {
       "edition": "2018"
     },
-    "garasu-0.1.0": {
-      "edition": "2024"
+    "garasu-0.1.4": {
+      "edition": "2024",
+      "build_script": "build.rs"
     },
-    "gen-macros-0.1.17": {
+    "gen-macros-0.1.19": {
       "edition": "2024",
       "proc_macro": true
     },
-    "gen-platform-0.1.17": {
+    "gen-platform-0.1.19": {
       "edition": "2024"
     },
-    "gen-types-0.1.17": {
+    "gen-types-0.1.19": {
       "edition": "2024"
     },
     "gethostname-1.1.0": {
@@ -19995,10 +20135,10 @@
     "glyphon-0.9.0": {
       "edition": "2021"
     },
-    "gpu-alloc-0.6.0": {
+    "gpu-alloc-0.6.2": {
       "edition": "2018"
     },
-    "gpu-alloc-types-0.3.0": {
+    "gpu-alloc-types-0.3.1": {
       "edition": "2018"
     },
     "gpu-descriptor-0.3.2": {
@@ -20031,11 +20171,12 @@
     "inlinable_string-0.1.15": {
       "edition": "2018"
     },
-    "inotify-0.11.2": {
+    "inotify-0.11.4": {
       "edition": "2018"
     },
-    "inotify-sys-0.1.5": {
-      "edition": "2015"
+    "inotify-sys-0.1.8": {
+      "edition": "2015",
+      "build_script": "build.rs"
     },
     "inventory-0.3.24": {
       "edition": "2021"
@@ -20049,7 +20190,7 @@
     "itoa-1.0.18": {
       "edition": "2021"
     },
-    "jobserver-0.1.34": {
+    "jobserver-0.1.35": {
       "edition": "2021"
     },
     "khronos-egl-6.0.0": {
@@ -20091,7 +20232,7 @@
     "lru-0.12.5": {
       "edition": "2015"
     },
-    "madori-0.1.5": {
+    "madori-0.1.6": {
       "edition": "2024",
       "lib_target": {
         "name": "madori",
@@ -20101,16 +20242,16 @@
     "malloc_buf-0.0.6": {
       "edition": "2015"
     },
-    "memchr-2.8.2": {
+    "memchr-2.8.3": {
       "edition": "2021"
     },
-    "memmap2-0.9.10": {
+    "memmap2-0.9.11": {
       "edition": "2021"
     },
     "metal-0.31.0": {
       "edition": "2021"
     },
-    "mio-1.2.1": {
+    "mio-1.2.2": {
       "edition": "2021"
     },
     "naga-25.0.1": {
@@ -20161,6 +20302,9 @@
     },
     "once_cell-1.21.4": {
       "edition": "2021"
+    },
+    "option-ext-0.2.0": {
+      "edition": "2015"
     },
     "ordered-float-4.6.0": {
       "edition": "2021"
@@ -20226,7 +20370,7 @@
     "raw-window-handle-0.6.2": {
       "edition": "2021"
     },
-    "read-fonts-0.39.2": {
+    "read-fonts-0.41.0": {
       "edition": "2021"
     },
     "renderdoc-sys-1.1.0": {
@@ -20238,7 +20382,7 @@
     "rustc-hash-1.1.0": {
       "edition": "2015"
     },
-    "rustc-hash-2.1.2": {
+    "rustc-hash-2.1.3": {
       "edition": "2021"
     },
     "rustix-0.38.44": {
@@ -20249,7 +20393,7 @@
       "edition": "2021",
       "build_script": "build.rs"
     },
-    "rustversion-1.0.22": {
+    "rustversion-1.0.23": {
       "edition": "2018",
       "proc_macro": true,
       "build_script": "build/build.rs"
@@ -20272,7 +20416,7 @@
     "sctk-adwaita-0.10.1": {
       "edition": "2021"
     },
-    "self_cell-1.2.2": {
+    "self_cell-1.3.0": {
       "edition": "2018"
     },
     "serde-1.0.228": {
@@ -20297,13 +20441,13 @@
     "serde_yaml-0.9.34+deprecated": {
       "edition": "2021"
     },
-    "shikumi-0.1.80": {
+    "shikumi-0.1.317": {
       "edition": "2024"
     },
     "shlex-2.0.1": {
       "edition": "2018"
     },
-    "skrifa-0.42.1": {
+    "skrifa-0.44.0": {
       "edition": "2021"
     },
     "slab-0.4.12": {
@@ -20346,10 +20490,10 @@
     "svg_fmt-0.4.5": {
       "edition": "2018"
     },
-    "swash-0.2.9": {
+    "swash-0.2.10": {
       "edition": "2021"
     },
-    "syn-2.0.118": {
+    "syn-2.0.119": {
       "edition": "2021"
     },
     "sys-locale-0.3.2": {
@@ -20383,7 +20527,7 @@
     "tiny-skia-path-0.11.4": {
       "edition": "2018"
     },
-    "tinyvec-1.11.0": {
+    "tinyvec-1.12.0": {
       "edition": "2018"
     },
     "tinyvec_macros-0.1.1": {
@@ -20508,6 +20652,10 @@
         {
           "kind": "force-cfg",
           "cfg": "supports_64bit_atomics"
+        },
+        {
+          "kind": "force-cfg",
+          "cfg": "supports_ptr_atomics"
         }
       ]
     },
@@ -20518,6 +20666,10 @@
         {
           "kind": "force-cfg",
           "cfg": "supports_64bit_atomics"
+        },
+        {
+          "kind": "force-cfg",
+          "cfg": "supports_ptr_atomics"
         }
       ]
     },
@@ -20534,6 +20686,10 @@
         {
           "kind": "force-cfg",
           "cfg": "supports_64bit_atomics"
+        },
+        {
+          "kind": "force-cfg",
+          "cfg": "supports_ptr_atomics"
         }
       ]
     },
@@ -20543,6 +20699,10 @@
         {
           "kind": "force-cfg",
           "cfg": "supports_64bit_atomics"
+        },
+        {
+          "kind": "force-cfg",
+          "cfg": "supports_ptr_atomics"
         }
       ]
     },
@@ -20581,15 +20741,15 @@
     "zeno-0.3.3": {
       "edition": "2021"
     },
-    "zerocopy-0.8.52": {
+    "zerocopy-0.8.54": {
       "edition": "2021",
       "build_script": "build.rs"
     },
-    "zerocopy-derive-0.8.52": {
+    "zerocopy-derive-0.8.54": {
       "edition": "2021",
       "proc_macro": true
     },
-    "zmij-1.0.21": {
+    "zmij-1.0.23": {
       "edition": "2021",
       "build_script": "build.rs"
     }
