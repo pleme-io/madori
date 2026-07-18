@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "cargo_lock_sha256": "32333a70441f75a8e692de2813c8bf48e990ca7af1b608bee0e6030b4c5f784f",
+  "cargo_lock_sha256": "ffddf50904acb2673198ec7b7868ae762dde64bfbb0357262fda4fb42a6126ca",
   "target_resolves": {
     "base": {
       "arc-swap-1.9.2": {
@@ -867,7 +867,7 @@
           "std"
         ]
       },
-      "garasu-0.1.4": {
+      "garasu-0.1.5": {
         "runtime_dependencies": [
           {
             "name": "bincode",
@@ -1819,7 +1819,7 @@
           },
           {
             "name": "garasu",
-            "package_key": "garasu-0.1.4",
+            "package_key": "garasu-0.1.5",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -20104,7 +20104,7 @@
     "foreign-types-shared-0.3.1": {
       "edition": "2018"
     },
-    "garasu-0.1.4": {
+    "garasu-0.1.5": {
       "edition": "2024",
       "build_script": "build.rs"
     },
