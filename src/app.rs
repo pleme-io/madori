@@ -7,6 +7,42 @@ use crate::render::{RenderCallback, RenderContext};
 use garasu::GpuContext;
 use serde::{Deserialize, Serialize};
 use std::time::Instant;
+/// Who owns the macOS application menubar.
+///
+/// winit builds a default menubar on macOS — About / Services / Hide /
+/// Hide Others / Show All / Quit — in its own
+/// `platform_impl/macos/menu.rs`, and it is **all-or-nothing**: winit
+/// exposes no way to drop a single item, so an app that wants a different
+/// menu must decline the default outright and build its own.
+///
+/// Making that an authored field rather than an inherited default is the
+/// point. The default menu is not neutral — it advertises a Services
+/// submenu via `app.setServicesMenu(...)`, and a Service acts on the
+/// app's *selection*, which it obtains through `NSServicesMenuRequestor`
+/// (`validRequestorForSendType:returnType:`,
+/// `writeSelectionToPasteboard:types:`). An app that does not implement
+/// that protocol — which is every madori app today — offers a submenu no
+/// service can ever read from.
+///
+/// No-op off macOS: winit builds this menu on no other platform.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default, serde::Serialize, serde::Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum MenuPolicy {
+    /// Keep winit's default menubar.
+    #[default]
+    PlatformDefault,
+    /// Decline the default menubar; the application owns its menu and every
+    /// key equivalent it wants.
+    ///
+    /// **The cost, named because macOS does not hand it back by accident:**
+    /// ⌘Q, ⌘H and ⌥⌘H are *menu key equivalents* (`terminate:`, `hide:`,
+    /// `hideOtherApplications:`) — they live on menu items, not on the
+    /// application object. Choosing this variant removes all three, so an
+    /// app that picks it MUST install its own menu (or bind those chords
+    /// itself) or it ships a window the operator cannot quit with ⌘Q.
+    AppOwned,
+}
+
 
 /// Configuration for creating an App.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -36,6 +72,9 @@ pub struct AppConfig {
     /// platform-aware default picks `true` on macOS and `false`
     /// elsewhere via its own `default_decorations()` helper.
     pub decorations: bool,
+    /// Who owns the macOS menubar. See [`MenuPolicy`] — the `AppOwned`
+    /// variant removes ⌘Q, so an app selecting it installs its own menu.
+    pub menu_policy: MenuPolicy,
 }
 
 impl Default for AppConfig {
@@ -48,6 +87,7 @@ impl Default for AppConfig {
             vsync: true,
             transparent: false,
             decorations: true,
+            menu_policy: MenuPolicy::PlatformDefault,
         }
     }
 }
@@ -600,6 +640,21 @@ impl App {
             }
         }
 
+        // `with_default_menu` is only reachable on the BUILDER, before the
+        // loop exists — winit installs its menubar during `build()`, so
+        // there is no post-hoc way to decline it.
+        #[cfg(target_os = "macos")]
+        let event_loop = {
+            use winit::platform::macos::EventLoopBuilderExtMacOS;
+            let mut builder = EventLoop::builder();
+            if matches!(config.menu_policy, MenuPolicy::AppOwned) {
+                builder.with_default_menu(false);
+            }
+            builder
+                .build()
+                .map_err(|e| MadoriError::EventLoop(e.to_string()))?
+        };
+        #[cfg(not(target_os = "macos"))]
         let event_loop = EventLoop::new().map_err(|e| MadoriError::EventLoop(e.to_string()))?;
         event_loop.set_control_flow(winit::event_loop::ControlFlow::Poll);
 
