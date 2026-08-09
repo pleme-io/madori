@@ -6,7 +6,8 @@ use crate::event::{
 use crate::render::{RenderCallback, RenderContext};
 use garasu::GpuContext;
 use serde::{Deserialize, Serialize};
-use std::time::Instant;
+use std::num::NonZeroU32;
+use std::time::{Duration, Instant};
 /// Who owns the macOS application menubar.
 ///
 /// winit builds a default menubar on macOS — About / Services / Hide /
@@ -43,6 +44,64 @@ pub enum MenuPolicy {
     AppOwned,
 }
 
+/// How the event loop decides when the next frame is due.
+///
+/// **This is opt-in and defaults to [`Continuous`](FramePacing::Continuous) —
+/// the behaviour every madori consumer had before this type existed.** A caller
+/// that never touches [`AppBuilder::frame_pacing`] / [`AppBuilder::target_fps`]
+/// keeps winit's `ControlFlow::Poll` and the self-sustaining
+/// `request_redraw()`, byte for byte. Nothing here changes another app's frame
+/// pacing behind its back.
+///
+/// **Why it exists.** Under `Poll` the loop never sleeps: it redraws as fast as
+/// the swapchain will hand back a texture, which on an idle window is pure
+/// waste — a measured ~297 Hz for an idle mado prompt, roughly a tenth of a
+/// core spent presenting frames identical to the last one. `Capped` replaces
+/// the spin with `ControlFlow::WaitUntil(next_frame_deadline)`, so between
+/// deadlines the thread is genuinely parked in the platform's event wait and
+/// costs nothing.
+///
+/// **Capping is a ceiling, not a floor.** A `WaitUntil` deadline only decides
+/// how long the loop may *sleep* when it has nothing else to do; real input,
+/// resize and IME events still wake it immediately, and the frame that follows
+/// them is not delayed by the cap.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
+pub enum FramePacing {
+    /// winit `ControlFlow::Poll` — redraw as fast as the loop can turn over.
+    /// The historical madori behaviour and the default.
+    #[default]
+    Continuous,
+    /// Wake on a deadline and draw at most `n` frames per second.
+    ///
+    /// The rate is a [`NonZeroU32`] on purpose: a zero-fps cap has no meaning
+    /// (its frame interval is infinite), so "0" cannot be spelled here at all.
+    /// Callers whose config uses `0` as a sentinel for *uncapped* — mado's
+    /// `performance.target_fps` does — convert through
+    /// [`FramePacing::from_target_fps`], which maps it to `Continuous`.
+    Capped(NonZeroU32),
+}
+
+impl FramePacing {
+    /// Build from a resolved frame-rate target where **0 means "uncapped"**.
+    ///
+    /// That is the spelling mado's adaptive chain uses
+    /// (`PerformanceConfig::resolve_target_fps` returns `0` when the operator
+    /// explicitly asked for no cap), so the sentinel is translated once, here,
+    /// rather than re-derived at every call site.
+    #[must_use]
+    pub fn from_target_fps(fps: u32) -> Self {
+        NonZeroU32::new(fps).map_or(Self::Continuous, Self::Capped)
+    }
+
+    /// Minimum wall-clock gap between two frames, or `None` when uncapped.
+    #[must_use]
+    pub fn frame_interval(self) -> Option<Duration> {
+        match self {
+            Self::Continuous => None,
+            Self::Capped(fps) => Some(Duration::from_secs_f64(1.0 / f64::from(fps.get()))),
+        }
+    }
+}
 
 /// Configuration for creating an App.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -97,6 +156,12 @@ pub struct AppBuilder<R: RenderCallback> {
     pub config: AppConfig,
     renderer: R,
     event_handler: Option<Box<dyn FnMut(&AppEvent, &mut R) -> EventResponse + Send + 'static>>,
+    /// Event-loop pacing. Deliberately NOT a field on [`AppConfig`]: adding
+    /// one there would break every consumer that builds `AppConfig` with a
+    /// struct literal (kagi, kekkai, myaku, appkit, mado all do). Living on
+    /// the builder keeps the knob purely additive — an app that never calls
+    /// [`AppBuilder::frame_pacing`] compiles and behaves exactly as before.
+    pacing: FramePacing,
 }
 
 impl<R: RenderCallback> AppBuilder<R> {
@@ -105,6 +170,7 @@ impl<R: RenderCallback> AppBuilder<R> {
             config: AppConfig::default(),
             renderer,
             event_handler: None,
+            pacing: FramePacing::default(),
         }
     }
 
@@ -142,9 +208,30 @@ impl<R: RenderCallback> AppBuilder<R> {
         self
     }
 
+    /// Pace the event loop instead of spinning it.
+    ///
+    /// Omit this call and the loop runs on `ControlFlow::Poll` exactly as it
+    /// always has — see [`FramePacing`] for why the default is unchanged.
+    #[must_use]
+    pub fn frame_pacing(mut self, pacing: FramePacing) -> Self {
+        self.pacing = pacing;
+        self
+    }
+
+    /// Cap the loop at `fps` frames per second, where **`0` means uncapped**.
+    ///
+    /// Sugar over [`AppBuilder::frame_pacing`] +
+    /// [`FramePacing::from_target_fps`] for apps that already carry a resolved
+    /// `u32` frame-rate target in their config (mado's
+    /// `performance.target_fps` chain).
+    #[must_use]
+    pub fn target_fps(self, fps: u32) -> Self {
+        self.frame_pacing(FramePacing::from_target_fps(fps))
+    }
+
     /// Build and run the application. This blocks until the window is closed.
     pub fn run(self) -> Result<()> {
-        App::run_inner(self.config, self.renderer, self.event_handler)
+        App::run_inner(self.config, self.renderer, self.event_handler, self.pacing)
     }
 }
 
@@ -161,6 +248,7 @@ impl App {
         config: AppConfig,
         renderer: R,
         event_handler: Option<Box<dyn FnMut(&AppEvent, &mut R) -> EventResponse + Send + 'static>>,
+        pacing: FramePacing,
     ) -> Result<()> {
         use winit::application::ApplicationHandler;
         use winit::event::{ElementState, WindowEvent};
@@ -195,6 +283,16 @@ impl App {
             // multicolor purple flash on macOS Metal). Flipped to true
             // after the first frame is presented.
             first_frame_presented: bool,
+            // Minimum gap between frames, or None for the legacy
+            // spin-as-fast-as-possible loop. `None` is the default and
+            // keeps `ControlFlow::Poll` + the self-sustaining
+            // request_redraw() at the end of RedrawRequested; `Some(d)`
+            // swaps both for a WaitUntil deadline driven from
+            // about_to_wait. See `FramePacing`.
+            frame_interval: Option<Duration>,
+            // When the next frame is due. Meaningless (and never read)
+            // while `frame_interval` is None.
+            next_frame_due: Instant,
         }
 
         impl<R: RenderCallback> Handler<R> {
@@ -631,12 +729,54 @@ impl App {
                                 }
                             }
                         }
-                        if let Some(w) = &self.window {
-                            w.request_redraw();
+                        // Self-sustaining loop — ONLY under Continuous
+                        // pacing. Re-arming here while a WaitUntil
+                        // deadline is set would defeat the deadline
+                        // entirely: a pending redraw request is work,
+                        // and a loop with work to do never waits. Under
+                        // Capped pacing `about_to_wait` owns the next
+                        // request instead.
+                        if self.frame_interval.is_none() {
+                            if let Some(w) = &self.window {
+                                w.request_redraw();
+                            }
                         }
                     }
                     _ => {}
                 }
+            }
+
+            /// Deadline-driven redraw scheduling. A no-op under
+            /// [`FramePacing::Continuous`] (the default), where
+            /// `ControlFlow::Poll` and the `RedrawRequested` re-arm above
+            /// keep the historical behaviour untouched.
+            fn about_to_wait(&mut self, event_loop: &winit::event_loop::ActiveEventLoop) {
+                let Some(interval) = self.frame_interval else {
+                    return;
+                };
+                let now = Instant::now();
+                if now >= self.next_frame_due {
+                    // Advance from the previous DEADLINE, not from `now`, so
+                    // the cadence doesn't shed the render's own duration every
+                    // frame (that drift is how a 60 Hz cap silently becomes
+                    // 56 Hz). Resync to `now` only when a stall put us a whole
+                    // interval behind — a recovered stall must not queue a
+                    // burst of catch-up frames.
+                    let mut next = self.next_frame_due + interval;
+                    if next <= now {
+                        next = now + interval;
+                    }
+                    self.next_frame_due = next;
+                    if let Some(w) = &self.window {
+                        w.request_redraw();
+                    }
+                }
+                // Park until the next frame is due. Real input, resize and
+                // IME events still wake the loop early — a deadline caps how
+                // long we may SLEEP, it never delays an event.
+                event_loop.set_control_flow(winit::event_loop::ControlFlow::WaitUntil(
+                    self.next_frame_due,
+                ));
             }
         }
 
@@ -656,7 +796,15 @@ impl App {
         };
         #[cfg(not(target_os = "macos"))]
         let event_loop = EventLoop::new().map_err(|e| MadoriError::EventLoop(e.to_string()))?;
-        event_loop.set_control_flow(winit::event_loop::ControlFlow::Poll);
+        // The one line this whole knob exists for. `Continuous` (the default,
+        // and what every consumer that never calls `frame_pacing` gets) keeps
+        // `Poll` — the loop spins as it always did. A `Capped` pacing starts
+        // the deadline machinery; `about_to_wait` re-arms it every turn.
+        let frame_interval = pacing.frame_interval();
+        event_loop.set_control_flow(match frame_interval {
+            None => winit::event_loop::ControlFlow::Poll,
+            Some(_) => winit::event_loop::ControlFlow::WaitUntil(Instant::now()),
+        });
 
         let mut handler = Handler {
             config,
@@ -679,6 +827,8 @@ impl App {
             cursor_x: 0.0,
             cursor_y: 0.0,
             first_frame_presented: false,
+            frame_interval,
+            next_frame_due: Instant::now(),
         };
 
         event_loop
@@ -712,6 +862,60 @@ mod tests {
         assert_eq!(builder.config.title, "Test");
         assert_eq!(builder.config.width, 800);
         assert_eq!(builder.config.height, 600);
+    }
+
+    #[test]
+    fn default_pacing_is_the_legacy_spin() {
+        // The regression this guards: a consumer that never asks for pacing
+        // must keep `ControlFlow::Poll`. `frame_interval() == None` is the
+        // exact predicate `run_inner` branches on.
+        assert_eq!(FramePacing::default(), FramePacing::Continuous);
+        assert_eq!(FramePacing::Continuous.frame_interval(), None);
+    }
+
+    #[test]
+    fn builder_defaults_to_continuous_pacing() {
+        use crate::render::ClearRenderer;
+        let builder = App::builder(ClearRenderer::default());
+        assert_eq!(builder.pacing, FramePacing::Continuous);
+    }
+
+    #[test]
+    fn zero_target_fps_means_uncapped_not_an_infinite_interval() {
+        assert_eq!(FramePacing::from_target_fps(0), FramePacing::Continuous);
+        assert_eq!(FramePacing::from_target_fps(0).frame_interval(), None);
+    }
+
+    #[test]
+    fn target_fps_resolves_to_its_frame_interval() {
+        let sixty = FramePacing::from_target_fps(60);
+        assert_eq!(
+            sixty,
+            FramePacing::Capped(std::num::NonZeroU32::new(60).unwrap())
+        );
+        let interval = sixty.frame_interval().expect("60 fps is capped");
+        // 1/60 s within a microsecond.
+        assert!(
+            interval.as_nanos().abs_diff(16_666_666) < 1_000,
+            "unexpected 60fps interval: {interval:?}"
+        );
+        let interval_120 = FramePacing::from_target_fps(120)
+            .frame_interval()
+            .expect("120 fps is capped");
+        assert!(interval_120 < interval, "a higher cap is a shorter interval");
+    }
+
+    #[test]
+    fn builder_target_fps_is_opt_in() {
+        use crate::render::ClearRenderer;
+        let builder = App::builder(ClearRenderer::default()).target_fps(120);
+        assert_eq!(
+            builder.pacing,
+            FramePacing::Capped(std::num::NonZeroU32::new(120).unwrap())
+        );
+        // …and the uncapped sentinel round-trips back to the default.
+        let uncapped = App::builder(ClearRenderer::default()).target_fps(0);
+        assert_eq!(uncapped.pacing, FramePacing::Continuous);
     }
 
     #[test]
