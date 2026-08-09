@@ -1,8 +1,8 @@
 {
   "schema_version": 2,
-  "cargo_lock_sha256": "10b965db706632853522150bbdb08bc05b4b124ba4c239d28cf996d12c34f005",
+  "cargo_lock_sha256": "4816bcdbf155afd95b610b395b12be52c6e9410ca1d483057425d83fc14fab47",
   "manifest_sha256": {
-    "Cargo.toml": "6931833a6112fbaff1e93d74a4de63d7cdc7265074ea005554caf96ded61b5b6"
+    "Cargo.toml": "3b64bdd7b29aff42f1266c9f7852df24fb21d754964492882839cac996c3ad68"
   },
   "target_resolves": {
     "base": {
@@ -102,7 +102,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "awase-0.1.7": {
+      "awase-0.1.9": {
         "runtime_dependencies": [
           {
             "name": "serde",
@@ -647,11 +647,11 @@
           "std"
         ]
       },
-      "egaku-0.1.10": {
+      "egaku-0.1.11": {
         "runtime_dependencies": [
           {
             "name": "awase",
-            "package_key": "awase-0.1.7",
+            "package_key": "awase-0.1.9",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -1667,7 +1667,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "ishou-tokens-0.1.6": {
+      "ishou-tokens-0.1.8": {
         "runtime_dependencies": [
           {
             "name": "irodori",
@@ -1856,11 +1856,11 @@
         "build_dependencies": [],
         "features": []
       },
-      "madori-0.1.8": {
+      "madori-0.1.9": {
         "runtime_dependencies": [
           {
             "name": "egaku",
-            "package_key": "egaku-0.1.10",
+            "package_key": "egaku-0.1.11",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -1880,7 +1880,7 @@
           },
           {
             "name": "ishou_tokens",
-            "package_key": "ishou-tokens-0.1.6",
+            "package_key": "ishou-tokens-0.1.8",
             "kind": "normal",
             "features": [
               "wgpu"
@@ -1914,7 +1914,7 @@
           },
           {
             "name": "shikumi",
-            "package_key": "shikumi-0.1.496",
+            "package_key": "shikumi-0.1.497",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -2961,7 +2961,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "shikumi-0.1.496": {
+      "shikumi-0.1.497": {
         "runtime_dependencies": [
           {
             "name": "arc_swap",
@@ -19925,7 +19925,7 @@
     "autocfg-1.5.1": {
       "edition": "2015"
     },
-    "awase-0.1.7": {
+    "awase-0.1.9": {
       "edition": "2024"
     },
     "bincode-1.3.3": {
@@ -20031,7 +20031,7 @@
     "dpi-0.1.2": {
       "edition": "2021"
     },
-    "egaku-0.1.10": {
+    "egaku-0.1.11": {
       "edition": "2024"
     },
     "equivalent-1.0.2": {
@@ -20161,7 +20161,7 @@
     "irodori-0.1.1": {
       "edition": "2024"
     },
-    "ishou-tokens-0.1.6": {
+    "ishou-tokens-0.1.8": {
       "edition": "2024"
     },
     "itoa-1.0.18": {
@@ -20203,7 +20203,7 @@
     "lru-0.12.5": {
       "edition": "2015"
     },
-    "madori-0.1.8": {
+    "madori-0.1.9": {
       "edition": "2024",
       "lib_target": {
         "name": "madori",
@@ -20412,7 +20412,7 @@
     "serde_yaml-0.9.34+deprecated": {
       "edition": "2021"
     },
-    "shikumi-0.1.496": {
+    "shikumi-0.1.497": {
       "edition": "2024"
     },
     "shlex-2.0.1": {
