@@ -1384,7 +1384,7 @@ rec {
           }
           {
             name = "windows-sys";
-            packageId = "windows-sys 0.60.2";
+            packageId = "windows-sys 0.61.2";
             target = { target, features }: (target."windows" or false);
             features = [ "Win32_UI_Shell" "Win32_Foundation" "Win32_Globalization" "Win32_System_Com" ];
           }
@@ -1467,9 +1467,9 @@ rec {
       };
       "egaku" = rec {
         crateName = "egaku";
-        version = "0.1.3";
+        version = "0.1.4";
         edition = "2024";
-        sha256 = "1sfgad2cwm40mb527wmn3n5v16wxnl1kgp59dks2lfzz6xpijngn";
+        sha256 = "0vqn06k4xiin9vr5a3z5cziihdxqkn483zc52b2viisv3alkf4jf";
         dependencies = [
           {
             name = "serde";
@@ -1532,7 +1532,7 @@ rec {
           }
           {
             name = "windows-sys";
-            packageId = "windows-sys 0.60.2";
+            packageId = "windows-sys 0.61.2";
             target = { target, features }: (target."windows" or false);
             features = [ "Win32_Foundation" "Win32_System_Diagnostics_Debug" ];
           }
@@ -1997,9 +1997,9 @@ rec {
       };
       "gen-macros" = rec {
         crateName = "gen-macros";
-        version = "0.1.19";
+        version = "0.1.22";
         edition = "2024";
-        sha256 = "1k146qss6incgy22j77qp022m1x6m294g37skrrk4rk3ivqsd7mi";
+        sha256 = "15rddwwyyknr9r6hn3ysmlpd7l5mamdphw8cy4dza5jmvyhni5sr";
         procMacro = true;
         libName = "gen_macros";
         authors = [
@@ -2024,9 +2024,9 @@ rec {
       };
       "gen-platform" = rec {
         crateName = "gen-platform";
-        version = "0.1.19";
+        version = "0.1.22";
         edition = "2024";
-        sha256 = "1dz48z35aiv3nalj3nj66mj7csbrz36sp6d96pmg4rr7j91ghz02";
+        sha256 = "028gmvajdwpm28zbghyza9lk6xz5qz0z7iqrz93xmhf0zhisqa6b";
         libName = "gen_platform";
         authors = [
           "pleme-io"
@@ -2062,9 +2062,9 @@ rec {
       };
       "gen-types" = rec {
         crateName = "gen-types";
-        version = "0.1.19";
+        version = "0.1.22";
         edition = "2024";
-        sha256 = "1v3pv5x9wsbmbjlf7jdk19i0ynscjwdmq6pf9hazw3xvlwys2gdx";
+        sha256 = "0w4n0rzlsqvfrn9s89s9ymjgcs35f1lblxggrgb4kp90pry7fp6d";
         libName = "gen_types";
         authors = [
           "pleme-io"
@@ -2930,9 +2930,9 @@ rec {
       };
       "ishou-tokens" = rec {
         crateName = "ishou-tokens";
-        version = "0.1.3";
+        version = "0.1.4";
         edition = "2024";
-        sha256 = "19lfiq8avfj3s58p53psmgpvz4wqp390cfldyyy890wlz70yzqna";
+        sha256 = "0p3lhg9frdylcs52gmn91nrcydsy53hf62n3aw0ghr9qfhl61g9a";
         libName = "ishou_tokens";
         dependencies = [
           {
@@ -3483,7 +3483,7 @@ rec {
       };
       "madori" = rec {
         crateName = "madori";
-        version = "0.1.7";
+        version = "0.1.8";
         edition = "2024";
         src = lib.cleanSourceWith { filter = sourceFilter;  src = ./.; };
         dependencies = [
@@ -6833,7 +6833,7 @@ rec {
           }
           {
             name = "windows-sys";
-            packageId = "windows-sys 0.60.2";
+            packageId = "windows-sys 0.61.2";
             target = { target, features }: (target."windows" or false);
             features = [ "Win32_Foundation" "Win32_Networking_WinSock" ];
           }
@@ -7270,9 +7270,9 @@ rec {
       };
       "shikumi" = rec {
         crateName = "shikumi";
-        version = "0.1.317";
+        version = "0.1.321";
         edition = "2024";
-        sha256 = "1x2fbfha5mwj8zqwya28ircc8zcl5cvd4lyixgzfcxhxlyr0z6lk";
+        sha256 = "156q0pjz6s38226pn2jby8v6b0v7ww0dshdfb8yixnm5n5mfymxg";
         dependencies = [
           {
             name = "arc-swap";
@@ -7871,7 +7871,7 @@ rec {
           }
           {
             name = "windows-sys";
-            packageId = "windows-sys 0.60.2";
+            packageId = "windows-sys 0.61.2";
             target = { target, features }: (target."windows" or false);
             features = [ "Win32_Storage_FileSystem" "Win32_Foundation" ];
           }
@@ -10435,7 +10435,7 @@ rec {
         dependencies = [
           {
             name = "windows-sys";
-            packageId = "windows-sys 0.60.2";
+            packageId = "windows-sys 0.61.2";
             target = { target, features }: (target."windows" or false);
             features = [ "Win32_Foundation" "Win32_Storage_FileSystem" "Win32_System_Console" "Win32_System_SystemInformation" ];
           }
@@ -12195,7 +12195,7 @@ rec {
           "Win32_Web" = [ "Win32" ];
           "Win32_Web_InternetExplorer" = [ "Win32_Web" ];
         };
-        resolvedDefaultFeatures = [ "Win32" "Win32_Foundation" "Win32_Globalization" "Win32_Networking" "Win32_Networking_WinSock" "Win32_Security" "Win32_Storage" "Win32_Storage_FileSystem" "Win32_System" "Win32_System_Com" "Win32_System_Console" "Win32_System_Diagnostics" "Win32_System_Diagnostics_Debug" "Win32_System_IO" "Win32_System_SystemInformation" "Win32_System_Threading" "Win32_System_WindowsProgramming" "Win32_UI" "Win32_UI_Shell" "default" ];
+        resolvedDefaultFeatures = [ "Win32" "Win32_Foundation" "Win32_Security" "Win32_Storage" "Win32_Storage_FileSystem" "Win32_System" "Win32_System_IO" "Win32_System_Threading" "Win32_System_WindowsProgramming" "default" ];
       };
       "windows-sys 0.61.2" = rec {
         crateName = "windows-sys";
@@ -12457,7 +12457,7 @@ rec {
           "Win32_Web" = [ "Win32" ];
           "Win32_Web_InternetExplorer" = [ "Win32_Web" ];
         };
-        resolvedDefaultFeatures = [ "Wdk" "Wdk_Foundation" "Wdk_Storage" "Wdk_Storage_FileSystem" "Wdk_System" "Wdk_System_IO" "Win32" "Win32_Foundation" "Win32_Networking" "Win32_Networking_WinSock" "Win32_Security" "Win32_Storage" "Win32_Storage_FileSystem" "Win32_System" "Win32_System_IO" "Win32_System_LibraryLoader" "Win32_System_Pipes" "Win32_System_Threading" "Win32_System_WindowsProgramming" "default" ];
+        resolvedDefaultFeatures = [ "Wdk" "Wdk_Foundation" "Wdk_Storage" "Wdk_Storage_FileSystem" "Wdk_System" "Wdk_System_IO" "Win32" "Win32_Foundation" "Win32_Globalization" "Win32_Networking" "Win32_Networking_WinSock" "Win32_Security" "Win32_Storage" "Win32_Storage_FileSystem" "Win32_System" "Win32_System_Com" "Win32_System_Console" "Win32_System_Diagnostics" "Win32_System_Diagnostics_Debug" "Win32_System_IO" "Win32_System_LibraryLoader" "Win32_System_Pipes" "Win32_System_SystemInformation" "Win32_System_Threading" "Win32_System_WindowsProgramming" "Win32_UI" "Win32_UI_Shell" "default" ];
       };
       "windows-targets 0.52.6" = rec {
         crateName = "windows-targets";
