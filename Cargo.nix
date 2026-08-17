@@ -442,9 +442,9 @@ rec {
       };
       "awase" = rec {
         crateName = "awase";
-        version = "0.1.7";
+        version = "0.1.9";
         edition = "2024";
-        sha256 = "1ky7f2nvsjyfj8gmgjx2az3fwgc05abrhsk5pg6ggma7kgrg4z61";
+        sha256 = "1p60pz0rrq94fs710fa361h8khhqqkr2pyhbnx52ly9bpjbh2qry";
         dependencies = [
           {
             name = "serde";
@@ -1486,9 +1486,9 @@ rec {
       };
       "egaku" = rec {
         crateName = "egaku";
-        version = "0.1.10";
+        version = "0.1.11";
         edition = "2024";
-        sha256 = "0h4wqal65gqzv53f4b2aiv85j8lfm51z0k1gvx8ifa82byl76lif";
+        sha256 = "1n5a1ks6iwg8iwafwfgr488pnanriqv2fwxgh8fckpdbsk70ccrh";
         dependencies = [
           {
             name = "awase";
@@ -2973,9 +2973,9 @@ rec {
       };
       "ishou-tokens" = rec {
         crateName = "ishou-tokens";
-        version = "0.1.6";
+        version = "0.1.8";
         edition = "2024";
-        sha256 = "0fnpqyr571l0mrcz76p7895lr2q0bjga0qibq40r211s7nfvmhda";
+        sha256 = "14p4sjxbrs5ikrd4m1bdvijf4175lil6wm8gajkdfm1js8js50b6";
         libName = "ishou_tokens";
         dependencies = [
           {
@@ -3523,7 +3523,7 @@ rec {
       };
       "madori" = rec {
         crateName = "madori";
-        version = "0.1.9";
+        version = "0.1.10";
         edition = "2024";
         src = lib.cleanSourceWith { filter = sourceFilter;  src = ./.; };
         dependencies = [
@@ -7316,9 +7316,9 @@ rec {
       };
       "shikumi" = rec {
         crateName = "shikumi";
-        version = "0.1.496";
+        version = "0.1.497";
         edition = "2024";
-        sha256 = "0hdgnvbv7g9hn134i8rrq5hyl394d1hcv8r00930dcycm4s5j56y";
+        sha256 = "1d5q22w2v8ly8hj0bcjyz9q3wk650jqahysb27h6izxhwj54kwk9";
         dependencies = [
           {
             name = "arc-swap";

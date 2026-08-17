@@ -1,11 +1,18 @@
 {
   "schema_version": 2,
-  "cargo_lock_sha256": "4816bcdbf155afd95b610b395b12be52c6e9410ca1d483057425d83fc14fab47",
+  "cargo_lock_sha256": "973fa7e9aa2e0cb332c274665b37e4fe3a593730f369863432fded81ad0bc3b2",
   "manifest_sha256": {
-    "Cargo.toml": "3b64bdd7b29aff42f1266c9f7852df24fb21d754964492882839cac996c3ad68"
+    "Cargo.toml": "72c53b05270c1b100b932a1daf5c0b5e5ed06be0d4bbe5cabe3d6f5c19fd1757"
   },
   "target_resolves": {
     "base": {
+      "allocator-api2-0.2.21": {
+        "runtime_dependencies": [],
+        "build_dependencies": [],
+        "features": [
+          "alloc"
+        ]
+      },
       "arc-swap-1.9.2": {
         "runtime_dependencies": [
           {
@@ -255,11 +262,11 @@
         "build_dependencies": [],
         "features": []
       },
-      "cc-1.4.2": {
+      "cc-1.4.3": {
         "runtime_dependencies": [
           {
             "name": "find_msvc_tools",
-            "package_key": "find-msvc-tools-0.1.10",
+            "package_key": "find-msvc-tools-0.1.11",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -435,7 +442,7 @@
           },
           {
             "name": "rangemap",
-            "package_key": "rangemap-1.7.1",
+            "package_key": "rangemap-1.8.0",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -647,7 +654,7 @@
           "std"
         ]
       },
-      "egaku-0.1.11": {
+      "egaku-0.1.13": {
         "runtime_dependencies": [
           {
             "name": "awase",
@@ -666,6 +673,16 @@
             "features": [
               "derive"
             ],
+            "uses_default_features": true,
+            "optional": false,
+            "target": null,
+            "tree": "target"
+          },
+          {
+            "name": "shibori",
+            "package_key": "shibori-0.1.1",
+            "kind": "normal",
+            "features": [],
             "uses_default_features": true,
             "optional": false,
             "target": null,
@@ -886,7 +903,7 @@
           "yaml"
         ]
       },
-      "find-msvc-tools-0.1.10": {
+      "find-msvc-tools-0.1.11": {
         "runtime_dependencies": [],
         "build_dependencies": [],
         "features": []
@@ -896,7 +913,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "font-types-0.12.2": {
+      "font-types-0.12.3": {
         "runtime_dependencies": [
           {
             "name": "bytemuck",
@@ -918,7 +935,7 @@
           "std"
         ]
       },
-      "garasu-0.1.7": {
+      "garasu-0.1.9": {
         "runtime_dependencies": [
           {
             "name": "bincode",
@@ -975,6 +992,16 @@
           {
             "name": "glyphon",
             "package_key": "glyphon-0.9.0",
+            "kind": "normal",
+            "features": [],
+            "uses_default_features": true,
+            "optional": false,
+            "target": null,
+            "tree": "target"
+          },
+          {
+            "name": "lru",
+            "package_key": "lru-0.12.5",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -1558,6 +1585,28 @@
       "hashbrown-0.15.5": {
         "runtime_dependencies": [
           {
+            "name": "allocator_api2",
+            "package_key": "allocator-api2-0.2.21",
+            "kind": "normal",
+            "features": [
+              "alloc"
+            ],
+            "uses_default_features": false,
+            "optional": true,
+            "target": null,
+            "tree": "target"
+          },
+          {
+            "name": "equivalent",
+            "package_key": "equivalent-1.0.2",
+            "kind": "normal",
+            "features": [],
+            "uses_default_features": false,
+            "optional": true,
+            "target": null,
+            "tree": "target"
+          },
+          {
             "name": "foldhash",
             "package_key": "foldhash-0.1.5",
             "kind": "normal",
@@ -1570,8 +1619,12 @@
         ],
         "build_dependencies": [],
         "features": [
+          "allocator-api2",
+          "default",
           "default-hasher",
-          "inline-more"
+          "equivalent",
+          "inline-more",
+          "raw-entry"
         ]
       },
       "hashbrown-0.17.1": {
@@ -1667,7 +1720,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "ishou-tokens-0.1.8": {
+      "ishou-tokens-0.1.9": {
         "runtime_dependencies": [
           {
             "name": "irodori",
@@ -1765,7 +1818,7 @@
         "build_dependencies": [
           {
             "name": "pkg_config",
-            "package_key": "pkg-config-0.3.33",
+            "package_key": "pkg-config-0.3.34",
             "kind": "build",
             "features": [],
             "uses_default_features": true,
@@ -1852,15 +1905,29 @@
         "features": []
       },
       "lru-0.12.5": {
-        "runtime_dependencies": [],
+        "runtime_dependencies": [
+          {
+            "name": "hashbrown",
+            "package_key": "hashbrown-0.15.5",
+            "kind": "normal",
+            "features": [],
+            "uses_default_features": true,
+            "optional": true,
+            "target": null,
+            "tree": "target"
+          }
+        ],
         "build_dependencies": [],
-        "features": []
+        "features": [
+          "default",
+          "hashbrown"
+        ]
       },
-      "madori-0.1.9": {
+      "madori-0.1.10": {
         "runtime_dependencies": [
           {
             "name": "egaku",
-            "package_key": "egaku-0.1.11",
+            "package_key": "egaku-0.1.13",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -1870,7 +1937,7 @@
           },
           {
             "name": "garasu",
-            "package_key": "garasu-0.1.7",
+            "package_key": "garasu-0.1.9",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -1880,7 +1947,7 @@
           },
           {
             "name": "ishou_tokens",
-            "package_key": "ishou-tokens-0.1.8",
+            "package_key": "ishou-tokens-0.1.9",
             "kind": "normal",
             "features": [
               "wgpu"
@@ -1914,7 +1981,7 @@
           },
           {
             "name": "shikumi",
-            "package_key": "shikumi-0.1.497",
+            "package_key": "shikumi-0.1.594",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -2426,7 +2493,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "pkg-config-0.3.33": {
+      "pkg-config-0.3.34": {
         "runtime_dependencies": [],
         "build_dependencies": [],
         "features": []
@@ -2540,7 +2607,7 @@
           "proc-macro"
         ]
       },
-      "rangemap-1.7.1": {
+      "rangemap-1.8.0": {
         "runtime_dependencies": [],
         "build_dependencies": [],
         "features": []
@@ -2567,7 +2634,7 @@
           },
           {
             "name": "font_types",
-            "package_key": "font-types-0.12.2",
+            "package_key": "font-types-0.12.3",
             "kind": "normal",
             "features": [
               "bytemuck"
@@ -2961,7 +3028,12 @@
         "build_dependencies": [],
         "features": []
       },
-      "shikumi-0.1.497": {
+      "shibori-0.1.1": {
+        "runtime_dependencies": [],
+        "build_dependencies": [],
+        "features": []
+      },
+      "shikumi-0.1.594": {
         "runtime_dependencies": [
           {
             "name": "arc_swap",
@@ -4357,7 +4429,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.4.2",
+                "package_key": "cc-1.4.3",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -6297,7 +6369,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.4.2",
+                "package_key": "cc-1.4.3",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -6408,7 +6480,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.16",
+                "package_key": "wayland-backend-0.3.17",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -6672,7 +6744,7 @@
               "fallback"
             ]
           },
-          "inotify-0.11.4": {
+          "inotify-0.11.5": {
             "runtime_dependencies": [
               {
                 "name": "bitflags",
@@ -6790,7 +6862,7 @@
             "runtime_dependencies": [
               {
                 "name": "inotify",
-                "package_key": "inotify-0.11.4",
+                "package_key": "inotify-0.11.5",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -7353,7 +7425,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.16",
+                "package_key": "wayland-backend-0.3.17",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -7622,7 +7694,7 @@
               "variable-fonts"
             ]
           },
-          "wayland-backend-0.3.16": {
+          "wayland-backend-0.3.17": {
             "runtime_dependencies": [
               {
                 "name": "downcast_rs",
@@ -7687,7 +7759,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.4.2",
+                "package_key": "cc-1.4.3",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -7727,7 +7799,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.16",
+                "package_key": "wayland-backend-0.3.17",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -7773,7 +7845,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.16",
+                "package_key": "wayland-backend-0.3.17",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -7837,7 +7909,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.16",
+                "package_key": "wayland-backend-0.3.17",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -7888,7 +7960,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.16",
+                "package_key": "wayland-backend-0.3.17",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -7947,7 +8019,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.16",
+                "package_key": "wayland-backend-0.3.17",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -8064,7 +8136,7 @@
             "build_dependencies": [
               {
                 "name": "pkg_config",
-                "package_key": "pkg-config-0.3.33",
+                "package_key": "pkg-config-0.3.34",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -8770,7 +8842,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.16",
+                "package_key": "wayland-backend-0.3.17",
                 "kind": "normal",
                 "features": [
                   "client_system"
@@ -8911,7 +8983,7 @@
             "build_dependencies": [
               {
                 "name": "pkg_config",
-                "package_key": "pkg-config-0.3.33",
+                "package_key": "pkg-config-0.3.34",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -9266,7 +9338,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.4.2",
+                "package_key": "cc-1.4.3",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -9377,7 +9449,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.16",
+                "package_key": "wayland-backend-0.3.17",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -9641,7 +9713,7 @@
               "fallback"
             ]
           },
-          "inotify-0.11.4": {
+          "inotify-0.11.5": {
             "runtime_dependencies": [
               {
                 "name": "bitflags",
@@ -9759,7 +9831,7 @@
             "runtime_dependencies": [
               {
                 "name": "inotify",
-                "package_key": "inotify-0.11.4",
+                "package_key": "inotify-0.11.5",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -10322,7 +10394,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.16",
+                "package_key": "wayland-backend-0.3.17",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -10591,7 +10663,7 @@
               "variable-fonts"
             ]
           },
-          "wayland-backend-0.3.16": {
+          "wayland-backend-0.3.17": {
             "runtime_dependencies": [
               {
                 "name": "downcast_rs",
@@ -10656,7 +10728,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.4.2",
+                "package_key": "cc-1.4.3",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -10696,7 +10768,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.16",
+                "package_key": "wayland-backend-0.3.17",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -10742,7 +10814,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.16",
+                "package_key": "wayland-backend-0.3.17",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -10806,7 +10878,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.16",
+                "package_key": "wayland-backend-0.3.17",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -10857,7 +10929,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.16",
+                "package_key": "wayland-backend-0.3.17",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -10916,7 +10988,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.16",
+                "package_key": "wayland-backend-0.3.17",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -11033,7 +11105,7 @@
             "build_dependencies": [
               {
                 "name": "pkg_config",
-                "package_key": "pkg-config-0.3.33",
+                "package_key": "pkg-config-0.3.34",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -11739,7 +11811,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.16",
+                "package_key": "wayland-backend-0.3.17",
                 "kind": "normal",
                 "features": [
                   "client_system"
@@ -11880,7 +11952,7 @@
             "build_dependencies": [
               {
                 "name": "pkg_config",
-                "package_key": "pkg-config-0.3.33",
+                "package_key": "pkg-config-0.3.34",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -12138,7 +12210,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.4.2",
+                "package_key": "cc-1.4.3",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -14093,7 +14165,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.4.2",
+                "package_key": "cc-1.4.3",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -14204,7 +14276,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.16",
+                "package_key": "wayland-backend-0.3.17",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -14473,7 +14545,7 @@
               "fallback"
             ]
           },
-          "inotify-0.11.4": {
+          "inotify-0.11.5": {
             "runtime_dependencies": [
               {
                 "name": "bitflags",
@@ -14591,7 +14663,7 @@
             "runtime_dependencies": [
               {
                 "name": "inotify",
-                "package_key": "inotify-0.11.4",
+                "package_key": "inotify-0.11.5",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -15154,7 +15226,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.16",
+                "package_key": "wayland-backend-0.3.17",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -15423,7 +15495,7 @@
               "variable-fonts"
             ]
           },
-          "wayland-backend-0.3.16": {
+          "wayland-backend-0.3.17": {
             "runtime_dependencies": [
               {
                 "name": "downcast_rs",
@@ -15488,7 +15560,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.4.2",
+                "package_key": "cc-1.4.3",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -15528,7 +15600,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.16",
+                "package_key": "wayland-backend-0.3.17",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -15574,7 +15646,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.16",
+                "package_key": "wayland-backend-0.3.17",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -15638,7 +15710,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.16",
+                "package_key": "wayland-backend-0.3.17",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -15689,7 +15761,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.16",
+                "package_key": "wayland-backend-0.3.17",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -15748,7 +15820,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.16",
+                "package_key": "wayland-backend-0.3.17",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -15865,7 +15937,7 @@
             "build_dependencies": [
               {
                 "name": "pkg_config",
-                "package_key": "pkg-config-0.3.33",
+                "package_key": "pkg-config-0.3.34",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -16571,7 +16643,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.16",
+                "package_key": "wayland-backend-0.3.17",
                 "kind": "normal",
                 "features": [
                   "client_system"
@@ -16712,7 +16784,7 @@
             "build_dependencies": [
               {
                 "name": "pkg_config",
-                "package_key": "pkg-config-0.3.33",
+                "package_key": "pkg-config-0.3.34",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -17077,7 +17149,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.4.2",
+                "package_key": "cc-1.4.3",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -17188,7 +17260,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.16",
+                "package_key": "wayland-backend-0.3.17",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -17457,7 +17529,7 @@
               "fallback"
             ]
           },
-          "inotify-0.11.4": {
+          "inotify-0.11.5": {
             "runtime_dependencies": [
               {
                 "name": "bitflags",
@@ -17575,7 +17647,7 @@
             "runtime_dependencies": [
               {
                 "name": "inotify",
-                "package_key": "inotify-0.11.4",
+                "package_key": "inotify-0.11.5",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -18138,7 +18210,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.16",
+                "package_key": "wayland-backend-0.3.17",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -18407,7 +18479,7 @@
               "variable-fonts"
             ]
           },
-          "wayland-backend-0.3.16": {
+          "wayland-backend-0.3.17": {
             "runtime_dependencies": [
               {
                 "name": "downcast_rs",
@@ -18472,7 +18544,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.4.2",
+                "package_key": "cc-1.4.3",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -18512,7 +18584,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.16",
+                "package_key": "wayland-backend-0.3.17",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -18558,7 +18630,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.16",
+                "package_key": "wayland-backend-0.3.17",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -18622,7 +18694,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.16",
+                "package_key": "wayland-backend-0.3.17",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -18673,7 +18745,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.16",
+                "package_key": "wayland-backend-0.3.17",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -18732,7 +18804,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.16",
+                "package_key": "wayland-backend-0.3.17",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -18849,7 +18921,7 @@
             "build_dependencies": [
               {
                 "name": "pkg_config",
-                "package_key": "pkg-config-0.3.33",
+                "package_key": "pkg-config-0.3.34",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -19555,7 +19627,7 @@
               },
               {
                 "name": "wayland_backend",
-                "package_key": "wayland-backend-0.3.16",
+                "package_key": "wayland-backend-0.3.17",
                 "kind": "normal",
                 "features": [
                   "client_system"
@@ -19696,7 +19768,7 @@
             "build_dependencies": [
               {
                 "name": "pkg_config",
-                "package_key": "pkg-config-0.3.33",
+                "package_key": "pkg-config-0.3.34",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -19902,6 +19974,9 @@
       "edition": "2018",
       "build_script": "build.rs"
     },
+    "allocator-api2-0.2.21": {
+      "edition": "2018"
+    },
     "arc-swap-1.9.2": {
       "edition": "2018"
     },
@@ -19966,7 +20041,7 @@
     "calloop-wayland-source-0.3.0": {
       "edition": "2021"
     },
-    "cc-1.4.2": {
+    "cc-1.4.3": {
       "edition": "2021"
     },
     "cfg-if-1.0.4": {
@@ -20031,7 +20106,7 @@
     "dpi-0.1.2": {
       "edition": "2021"
     },
-    "egaku-0.1.11": {
+    "egaku-0.1.13": {
       "edition": "2024"
     },
     "equivalent-1.0.2": {
@@ -20053,13 +20128,13 @@
       "edition": "2018",
       "build_script": "build.rs"
     },
-    "find-msvc-tools-0.1.10": {
+    "find-msvc-tools-0.1.11": {
       "edition": "2021"
     },
     "foldhash-0.1.5": {
       "edition": "2021"
     },
-    "font-types-0.12.2": {
+    "font-types-0.12.3": {
       "edition": "2021"
     },
     "fontconfig-parser-0.5.8": {
@@ -20081,7 +20156,7 @@
     "fsevent-sys-4.1.0": {
       "edition": "2018"
     },
-    "garasu-0.1.7": {
+    "garasu-0.1.9": {
       "edition": "2024",
       "build_script": "build.rs"
     },
@@ -20148,7 +20223,7 @@
     "inlinable_string-0.1.15": {
       "edition": "2018"
     },
-    "inotify-0.11.4": {
+    "inotify-0.11.5": {
       "edition": "2018"
     },
     "inotify-sys-0.1.8": {
@@ -20161,7 +20236,7 @@
     "irodori-0.1.1": {
       "edition": "2024"
     },
-    "ishou-tokens-0.1.8": {
+    "ishou-tokens-0.1.9": {
       "edition": "2024"
     },
     "itoa-1.0.18": {
@@ -20203,7 +20278,7 @@
     "lru-0.12.5": {
       "edition": "2015"
     },
-    "madori-0.1.9": {
+    "madori-0.1.10": {
       "edition": "2024",
       "lib_target": {
         "name": "madori",
@@ -20308,8 +20383,8 @@
     "pin-project-lite-0.2.17": {
       "edition": "2018"
     },
-    "pkg-config-0.3.33": {
-      "edition": "2018"
+    "pkg-config-0.3.34": {
+      "edition": "2021"
     },
     "polling-3.11.0": {
       "edition": "2021"
@@ -20335,7 +20410,7 @@
       "edition": "2021",
       "build_script": "build.rs"
     },
-    "rangemap-1.7.1": {
+    "rangemap-1.8.0": {
       "edition": "2018"
     },
     "raw-window-handle-0.6.2": {
@@ -20412,7 +20487,10 @@
     "serde_yaml-0.9.34+deprecated": {
       "edition": "2021"
     },
-    "shikumi-0.1.497": {
+    "shibori-0.1.1": {
+      "edition": "2024"
+    },
+    "shikumi-0.1.594": {
       "edition": "2024"
     },
     "shlex-2.0.1": {
@@ -20588,7 +20666,7 @@
     "walkdir-2.5.0": {
       "edition": "2018"
     },
-    "wayland-backend-0.3.16": {
+    "wayland-backend-0.3.17": {
       "edition": "2021",
       "build_script": "build.rs"
     },
