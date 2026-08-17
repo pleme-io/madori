@@ -189,7 +189,18 @@ pub struct Modifiers {
 }
 
 /// Platform-independent key codes for common keys.
+///
+/// `#[non_exhaustive]`, added alongside the lock keys and for exactly that
+/// reason: this enum models a keyboard, keyboards keep having keys we have
+/// not modelled yet, and every future addition would otherwise be a breaking
+/// change for all 11 consumers. Measured before adding it — every consumer
+/// file that matches on `KeyCode::` already carries a catch-all arm (1 to 11
+/// of them), so the attribute costs nothing today and prevents the next
+/// variant from costing anything either. The alternative, discovered the hard
+/// way in this crate's own history, is a mapping that stays missing because
+/// adding it looks expensive.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[non_exhaustive]
 pub enum KeyCode {
     Char(char),
     Enter,
@@ -207,6 +218,36 @@ pub enum KeyCode {
     PageDown,
     F(u8),
     Space,
+    /// The Caps Lock KEY was pressed or released.
+    ///
+    /// ★ THIS IS THE KEY EVENT, NOT THE LOCK STATE — and the distinction is
+    /// the whole reason this variant needs a doc comment.
+    ///
+    /// A login screen wants to warn "Caps Lock is ON", which is a question
+    /// about *current lock state*, not about a keypress. winit 0.30 cannot
+    /// answer it: `ModifiersState` is exactly `SHIFT | CONTROL | ALT | SUPER`
+    /// (`winit-0.30.13/src/keyboard.rs:1695-1701`) with no lock bits at all,
+    /// so [`Modifiers`] has nothing to carry and madori has nothing to
+    /// forward. Mapping this key does NOT give a consumer the indicator.
+    ///
+    /// What a consumer can do with it: observe toggles while it has focus.
+    /// What that cannot do: know the state at startup, or survive the lock
+    /// being toggled while another window had focus. Treating a toggle count
+    /// as the state is wrong in exactly the case a greeter cares about — the
+    /// user turned Caps Lock on, *then* focused the password field.
+    ///
+    /// The real answer is below winit: on Wayland `wl_keyboard.modifiers`
+    /// carries `mods_locked`, and xkbcommon exposes
+    /// `xkb_state_led_name_is_active(XKB_LED_NAME_CAPS)`; on macOS
+    /// `NSEvent.modifierFlags` carries `NSEventModifierFlagCapsLock`. A
+    /// surface that needs the indicator must reach one of those, and that is
+    /// a madori change, not a consumer workaround.
+    CapsLock,
+    /// The Num Lock KEY was pressed or released. Same state-vs-event caveat
+    /// as [`KeyCode::CapsLock`]; mapped alongside it because it is the other
+    /// lock key that changes which character a keypress produces, which is
+    /// what makes it a password-entry hazard rather than a curiosity.
+    NumLock,
     /// Key not mapped to any known code.
     Unknown,
 }
@@ -244,6 +285,8 @@ impl KeyCode {
                 NamedKey::F10 => Self::F(10),
                 NamedKey::F11 => Self::F(11),
                 NamedKey::F12 => Self::F(12),
+                NamedKey::CapsLock => Self::CapsLock,
+                NamedKey::NumLock => Self::NumLock,
                 _ => Self::Unknown,
             },
             WKey::Character(c) => {
@@ -422,11 +465,44 @@ mod tests {
 
     #[test]
     fn key_code_from_winit_unmapped_named_is_unknown() {
-        // Unmapped NamedKey variants fall into the catch-all `_ =>
-        // Unknown` arm. CapsLock is intentionally unmapped — if someone
-        // adds it without updating this test, we'll see the new mapping.
-        let got = KeyCode::from_winit(&WKey::Named(NamedKey::CapsLock));
+        // The catch-all `_ => Unknown` arm still exists and still works.
+        //
+        // This test used to pin `NamedKey::CapsLock => Unknown` and said so:
+        // "CapsLock is intentionally unmapped — if someone adds it without
+        // updating this test, we'll see the new mapping." That is exactly
+        // what happened, so the tripwire moved to a key that is genuinely
+        // still unmapped rather than being deleted. A catch-all with no test
+        // is how the next unmapped key becomes invisible.
+        let got = KeyCode::from_winit(&WKey::Named(NamedKey::PrintScreen));
         assert_eq!(got, KeyCode::Unknown);
+    }
+
+    /// The lock keys map, because a login surface must at least be able to
+    /// SEE them. Read [`KeyCode::CapsLock`]'s doc before building an
+    /// indicator on this: winit carries no lock STATE, so this is the key
+    /// event only.
+    #[test]
+    fn lock_keys_map_rather_than_falling_into_the_catch_all() {
+        assert_eq!(
+            KeyCode::from_winit(&WKey::Named(NamedKey::CapsLock)),
+            KeyCode::CapsLock
+        );
+        assert_eq!(
+            KeyCode::from_winit(&WKey::Named(NamedKey::NumLock)),
+            KeyCode::NumLock
+        );
+    }
+
+    /// The gap this closed, stated as a test so it cannot silently reopen:
+    /// a lock key must be DISTINGUISHABLE from an unmapped key. Before this,
+    /// both were `Unknown`, so a consumer could not tell "the user pressed
+    /// Caps Lock" from "the user pressed something I do not model".
+    #[test]
+    fn a_lock_key_is_distinguishable_from_an_unmapped_key() {
+        let caps = KeyCode::from_winit(&WKey::Named(NamedKey::CapsLock));
+        let unmapped = KeyCode::from_winit(&WKey::Named(NamedKey::PrintScreen));
+        assert_ne!(caps, unmapped);
+        assert_ne!(KeyCode::from_winit(&WKey::Named(NamedKey::NumLock)), unmapped);
     }
 
     #[test]
