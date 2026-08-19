@@ -162,6 +162,13 @@ pub struct AppBuilder<R: RenderCallback> {
     /// the builder keeps the knob purely additive — an app that never calls
     /// [`AppBuilder::frame_pacing`] compiles and behaves exactly as before.
     pacing: FramePacing,
+    /// Wayland `app_id` / X11 `WM_CLASS`. Same reasoning as `pacing` — a
+    /// field on [`AppConfig`] would break every consumer that builds it
+    /// with a struct literal. `None` preserves legacy behavior (no
+    /// `set_app_id` call, no `WM_CLASS`); `Some(id)` is what lets GNOME
+    /// and every other Wayland compositor / X11 WM associate the running
+    /// window with its `.desktop` launcher.
+    app_id: Option<String>,
 }
 
 impl<R: RenderCallback> AppBuilder<R> {
@@ -171,6 +178,7 @@ impl<R: RenderCallback> AppBuilder<R> {
             renderer,
             event_handler: None,
             pacing: FramePacing::default(),
+            app_id: None,
         }
     }
 
@@ -229,9 +237,34 @@ impl<R: RenderCallback> AppBuilder<R> {
         self.frame_pacing(FramePacing::from_target_fps(fps))
     }
 
+    /// Set the Wayland `app_id` / X11 `WM_CLASS` for the window.
+    ///
+    /// When set, madori calls `xdg_toplevel.set_app_id(id)` on Wayland and
+    /// sets `WM_CLASS = (id, id)` on X11 through winit's platform-specific
+    /// `WindowAttributesExt{Wayland,X11}::with_name`. Compositors and window
+    /// managers use that string to associate the running window with its
+    /// `.desktop` launcher — without it, GNOME (and every other Wayland
+    /// compositor) shows a generic icon separately from the favourited
+    /// launcher because there is no name to match against `StartupWMClass`.
+    ///
+    /// Omit this call and neither `set_app_id` nor `WM_CLASS` is sent —
+    /// behavior is exactly as before this method existed, so every existing
+    /// consumer keeps compiling and behaving identically.
+    #[must_use]
+    pub fn app_id(mut self, id: impl Into<String>) -> Self {
+        self.app_id = Some(id.into());
+        self
+    }
+
     /// Build and run the application. This blocks until the window is closed.
     pub fn run(self) -> Result<()> {
-        App::run_inner(self.config, self.renderer, self.event_handler, self.pacing)
+        App::run_inner(
+            self.config,
+            self.renderer,
+            self.event_handler,
+            self.pacing,
+            self.app_id,
+        )
     }
 }
 
@@ -249,6 +282,7 @@ impl App {
         renderer: R,
         event_handler: Option<Box<dyn FnMut(&AppEvent, &mut R) -> EventResponse + Send + 'static>>,
         pacing: FramePacing,
+        app_id: Option<String>,
     ) -> Result<()> {
         use winit::application::ApplicationHandler;
         use winit::event::{ElementState, WindowEvent};
@@ -257,6 +291,7 @@ impl App {
 
         struct Handler<R: RenderCallback> {
             config: AppConfig,
+            app_id: Option<String>,
             renderer: R,
             event_handler:
                 Option<Box<dyn FnMut(&AppEvent, &mut R) -> EventResponse + Send + 'static>>,
@@ -354,7 +389,25 @@ impl App {
                 let t_resumed_start = std::time::Instant::now();
                 tracing::info!(target: "madori::perf", phase = "resumed_enter", "phase");
 
-                let attrs = WindowAttributes::default()
+                // Wayland `app_id` / X11 `WM_CLASS` are set from
+                // `AppBuilder::app_id` — see the method's rustdoc for why.
+                // When `None`, no `set_app_id` / `WM_CLASS` is sent and
+                // behavior matches every earlier madori release.
+                let attrs = WindowAttributes::default();
+                #[cfg(target_os = "linux")]
+                let attrs = if let Some(id) = self.app_id.as_deref() {
+                    let a = {
+                        use winit::platform::wayland::WindowAttributesExtWayland as _;
+                        attrs.with_name(id, id)
+                    };
+                    {
+                        use winit::platform::x11::WindowAttributesExtX11 as _;
+                        a.with_name(id, id)
+                    }
+                } else {
+                    attrs
+                };
+                let attrs = attrs
                     .with_title(&self.config.title)
                     // Logical pixels are scale-aware: 1200x800 logical renders at
                     // 2400x1600 physical on a 2x HiDPI display (the user-perceived
@@ -859,6 +912,7 @@ impl App {
 
         let mut handler = Handler {
             config,
+            app_id,
             renderer,
             event_handler,
             window: None,
