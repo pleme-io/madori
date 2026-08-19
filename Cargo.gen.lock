@@ -1,8 +1,8 @@
 {
   "schema_version": 2,
-  "cargo_lock_sha256": "973fa7e9aa2e0cb332c274665b37e4fe3a593730f369863432fded81ad0bc3b2",
+  "cargo_lock_sha256": "eca0705ba05e16d49da7fa9ed52ea3734b66b98fd90111d85672ef62e3e4116d",
   "manifest_sha256": {
-    "Cargo.toml": "72c53b05270c1b100b932a1daf5c0b5e5ed06be0d4bbe5cabe3d6f5c19fd1757"
+    "Cargo.toml": "9b958bfb82fdcb445378318d221ada0f83775c6fd1117266a42b5f362d3d7350"
   },
   "target_resolves": {
     "base": {
@@ -935,7 +935,7 @@
           "std"
         ]
       },
-      "garasu-0.1.9": {
+      "garasu-0.1.11": {
         "runtime_dependencies": [
           {
             "name": "bincode",
@@ -1937,7 +1937,7 @@
           },
           {
             "name": "garasu",
-            "package_key": "garasu-0.1.9",
+            "package_key": "garasu-0.1.11",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -20156,7 +20156,7 @@
     "fsevent-sys-4.1.0": {
       "edition": "2018"
     },
-    "garasu-0.1.9": {
+    "garasu-0.1.11": {
       "edition": "2024",
       "build_script": "build.rs"
     },

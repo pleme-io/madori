@@ -674,9 +674,9 @@ dependencies = [
 
 [[package]]
 name = "garasu"
-version = "0.1.9"
+version = "0.1.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1e079d0252d9f1d4eff4c7229e15dc73af576f5e4f5adf26b97455daad501daa"
+checksum = "6c2ec08e2d0e89d13a65095c9a37504698a3156170c28665d57537db0ea53408"
 dependencies = [
  "bincode",
  "blake3",

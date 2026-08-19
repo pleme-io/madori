@@ -22,7 +22,12 @@ opt-level = "z"
 strip = true
 
 [dependencies]
-garasu = "0.1"
+# 0.1.11 is a REQUIREMENT, not a preference: `GpuContext::instance()` and
+# `new_for_surface()` land there, and they are what let madori pick an adapter
+# that can actually present to its surface. Under a bare "0.1" an existing
+# Cargo.lock happily stays on 0.1.9 and the build fails on a missing method,
+# which is a worse error than the panic this replaced.
+garasu = "0.1.11"
 egaku = "0.1"
 shikumi = "0.1"
 # ishou-tokens — the fleet design system. The `wgpu` feature exposes the

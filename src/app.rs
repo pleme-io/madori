@@ -412,8 +412,30 @@ impl App {
                     "phase"
                 );
 
-                // Initialize GPU
-                match pollster::block_on(GpuContext::new()) {
+                // Initialize GPU.
+                //
+                // ★ THE ORDER IS LOAD-BEARING: instance → surface → adapter.
+                // The surface is created BEFORE the adapter is chosen so the
+                // adapter can be chosen *for* it. Asking for an adapter first
+                // and hoping it presents to whatever surface turns up later is
+                // safe on macOS (one Metal adapter) and wrong on Linux, where
+                // several are enumerated and the mismatch is SILENT — see
+                // `garasu::GpuContext::new_for_surface`.
+                let instance = GpuContext::instance();
+                let surface = match instance.create_surface(window.clone()) {
+                    Ok(surface) => surface,
+                    Err(e) => {
+                        tracing::error!("failed to create surface: {e}");
+                        event_loop.exit();
+                        return;
+                    }
+                };
+
+                match pollster::block_on(GpuContext::new_for_surface(
+                    instance,
+                    &surface,
+                    wgpu::PowerPreference::LowPower,
+                )) {
                     Ok(gpu) => {
                         tracing::info!(
                             target: "madori::perf",
@@ -421,18 +443,39 @@ impl App {
                             ms = t_resumed_start.elapsed().as_millis() as u64,
                             "phase"
                         );
-                        let surface = gpu
-                            .instance
-                            .create_surface(window.clone())
-                            .expect("failed to create surface");
 
                         let caps = surface.get_capabilities(&gpu.adapter);
+
+                        // ── AN EMPTY CAPABILITY SET IS A DIAGNOSIS, NOT A ────
+                        // ── DEFAULT ──────────────────────────────────────────
+                        // `caps.formats` empty means this adapter cannot present
+                        // to this surface at all. wgpu reports that as an empty
+                        // vector rather than an error, so the previous
+                        // `unwrap_or(caps.formats[0])` turned it into `index out
+                        // of bounds: the len is 0 but the index is 0` — a panic
+                        // that blames the indexing instead of the adapter choice.
+                        // Measured 2026-08-19: exactly this, with mado running
+                        // against a Wayland compositor on Linux.
+                        let Some(&fallback_format) = caps.formats.first() else {
+                            let info = gpu.adapter.get_info();
+                            tracing::error!(
+                                adapter = %info.name,
+                                backend = ?info.backend,
+                                device_type = ?info.device_type,
+                                "the GPU adapter supports NO texture format for this \
+                                 surface, so it cannot present to it. This is an \
+                                 adapter/surface mismatch, not a missing GPU."
+                            );
+                            event_loop.exit();
+                            return;
+                        };
+
                         let format = caps
                             .formats
                             .iter()
                             .find(|f| f.is_srgb())
                             .copied()
-                            .unwrap_or(caps.formats[0]);
+                            .unwrap_or(fallback_format);
 
                         let present_mode = if self.config.vsync {
                             wgpu::PresentMode::AutoVsync
@@ -455,7 +498,15 @@ impl App {
                         let alpha_mode = if caps.alpha_modes.contains(&wgpu::CompositeAlphaMode::Opaque) {
                             wgpu::CompositeAlphaMode::Opaque
                         } else {
-                            caps.alpha_modes[0]
+                            // Same empty-vector hazard as `formats`, reached by
+                            // the same mismatch. The guard above has already
+                            // returned in that case, so `Auto` here is only for
+                            // an adapter that advertises formats but no alpha
+                            // modes — let wgpu decide rather than panic.
+                            caps.alpha_modes
+                                .first()
+                                .copied()
+                                .unwrap_or(wgpu::CompositeAlphaMode::Auto)
                         };
 
                         let surface_config = wgpu::SurfaceConfiguration {
