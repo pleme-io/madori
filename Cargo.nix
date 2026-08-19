@@ -458,9 +458,9 @@ rec {
       };
       "awase" = rec {
         crateName = "awase";
-        version = "0.1.9";
+        version = "0.1.10";
         edition = "2024";
-        sha256 = "1p60pz0rrq94fs710fa361h8khhqqkr2pyhbnx52ly9bpjbh2qry";
+        sha256 = "1qlgxsrghb65rh4ynvyz1y30v4wsvskl75v2lpfl53a6wzjk0nq9";
         dependencies = [
           {
             name = "serde";
@@ -1502,9 +1502,9 @@ rec {
       };
       "egaku" = rec {
         crateName = "egaku";
-        version = "0.1.13";
+        version = "0.1.14";
         edition = "2024";
-        sha256 = "1jdal2i9jgs9nkhjm8mm45kwljxp7v1x88srd8z459dab5n42b89";
+        sha256 = "0picbqzr6d4mbnj0slks8yxdd4b3x3g8dsjx74c9fjjsysmj1ykf";
         dependencies = [
           {
             name = "awase";
@@ -1534,6 +1534,10 @@ rec {
           {
             name = "unicode-width";
             packageId = "unicode-width";
+          }
+          {
+            name = "zeroize";
+            packageId = "zeroize";
           }
         ];
 
@@ -3010,9 +3014,9 @@ rec {
       };
       "ishou-tokens" = rec {
         crateName = "ishou-tokens";
-        version = "0.1.9";
+        version = "0.1.10";
         edition = "2024";
-        sha256 = "0yf14gkvfkgmf90car69rn4qy6w35l6n9ikyfk1axfc6f8lk67cm";
+        sha256 = "1ym53bambg919p6rp7qy9ppyccrxah8ri314pfxarli042hax3li";
         libName = "ishou_tokens";
         dependencies = [
           {
@@ -3568,7 +3572,7 @@ rec {
       };
       "madori" = rec {
         crateName = "madori";
-        version = "0.1.11";
+        version = "0.1.12";
         edition = "2024";
         src = lib.cleanSourceWith { filter = sourceFilter;  src = ./.; };
         dependencies = [
@@ -7369,9 +7373,9 @@ rec {
       };
       "shikumi" = rec {
         crateName = "shikumi";
-        version = "0.1.594";
+        version = "0.1.610";
         edition = "2024";
-        sha256 = "00vgy2h27z19h668lqbh2j0i5mwnph2vzvjjr82k4cjqpr8c8vdh";
+        sha256 = "0h8fmfsifywbqgc86qqyp7lfpg6yjngk5rs401kw8gdnk0nxf0qf";
         dependencies = [
           {
             name = "arc-swap";
@@ -13548,6 +13552,23 @@ rec {
           }
         ];
 
+      };
+      "zeroize" = rec {
+        crateName = "zeroize";
+        version = "1.9.0";
+        edition = "2024";
+        sha256 = "0kpnij2v1ig6g2mhc0bnci0lrdfdhiq40afbc0fahajqc9jiag71";
+        authors = [
+          "The RustCrypto Project Developers"
+        ];
+        features = {
+          "default" = [ "alloc" ];
+          "derive" = [ "zeroize_derive" ];
+          "serde" = [ "dep:serde" ];
+          "std" = [ "alloc" ];
+          "zeroize_derive" = [ "dep:zeroize_derive" ];
+        };
+        resolvedDefaultFeatures = [ "alloc" "default" ];
       };
       "zmij" = rec {
         crateName = "zmij";
