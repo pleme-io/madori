@@ -141,9 +141,9 @@ checksum = "f2032f911046de80f0a198e0901378627c33f59ea0ac00e363d481118bd70a53"
 
 [[package]]
 name = "awase"
-version = "0.1.9"
+version = "0.1.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3e630197bc2b792a4ab70bfa2bf2c418c28960304339108e7624e19cc1bfc0dc"
+checksum = "095b30e5e7468d42dda5629743a7de9a930d860fdf6feb09ccc52cf8b2ee8fe2"
 dependencies = [
  "serde",
  "thiserror 2.0.20",
@@ -499,9 +499,9 @@ checksum = "d8b14ccef22fc6f5a8f4d7d768562a182c04ce9a3b3157b91390b52ddfdf1a76"
 
 [[package]]
 name = "egaku"
-version = "0.1.13"
+version = "0.1.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "092d416c59aaa5423e6a5923d4c33eb74bca6721b5a22ae1b4493f99a2a0aac9"
+checksum = "6efa20abf65a4a9718395dea86dee86391d6ba477a520da45d9534933f5e2c5e"
 dependencies = [
  "awase",
  "serde",
@@ -510,6 +510,7 @@ dependencies = [
  "tracing",
  "unicode-segmentation",
  "unicode-width",
+ "zeroize",
 ]
 
 [[package]]
@@ -1004,9 +1005,9 @@ dependencies = [
 
 [[package]]
 name = "ishou-tokens"
-version = "0.1.9"
+version = "0.1.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "951d33297286b9aec2747ec6640d2d831b8f89cdc964c54072f54db7e723c179"
+checksum = "918eaea02020d2acbabb248c9811543d33e6ef4d1e9f9bcd4d21bd55d51aa5fa"
 dependencies = [
  "irodori",
  "serde",
@@ -1214,7 +1215,7 @@ dependencies = [
 
 [[package]]
 name = "madori"
-version = "0.1.10"
+version = "0.1.11"
 dependencies = [
  "egaku",
  "garasu",
@@ -2125,9 +2126,9 @@ checksum = "a5fb3ed7c462ed1f055d1db17434f2ceaffdd4a7dd6d633328cc1493e9423f40"
 
 [[package]]
 name = "shikumi"
-version = "0.1.594"
+version = "0.1.610"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b06dc450be58323205ca52eebf05bc96d712811470618a8c8129fc23a0f06f03"
+checksum = "0e03d72d98b63dc4670044e7329f95debcebe8b91e6383d8c38b7b17b5ab0e41"
 dependencies = [
  "arc-swap",
  "async-trait",
@@ -3446,6 +3447,12 @@ dependencies = [
  "quote",
  "syn 2.0.119",
 ]
+
+[[package]]
+name = "zeroize"
+version = "1.9.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e13c156562582aa81c60cb29407084cdb54c4164760106ab78e6c5b0858cf64e"
 
 [[package]]
 name = "zmij"

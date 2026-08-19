@@ -185,6 +185,22 @@ rec {
         };
         resolvedDefaultFeatures = [ "default" "getrandom" "no-rng" "runtime-rng" "std" ];
       };
+      "allocator-api2" = rec {
+        crateName = "allocator-api2";
+        version = "0.2.21";
+        edition = "2018";
+        sha256 = "08zrzs022xwndihvzdn78yqarv2b9696y67i6h78nla3ww87jgb8";
+        libName = "allocator_api2";
+        authors = [
+          "Zakarum <zaq.dev@icloud.com>"
+        ];
+        features = {
+          "default" = [ "std" ];
+          "serde" = [ "dep:serde" ];
+          "std" = [ "alloc" ];
+        };
+        resolvedDefaultFeatures = [ "alloc" ];
+      };
       "android-activity" = rec {
         crateName = "android-activity";
         version = "0.6.1";
@@ -826,9 +842,9 @@ rec {
       };
       "cc" = rec {
         crateName = "cc";
-        version = "1.4.2";
+        version = "1.4.3";
         edition = "2021";
-        sha256 = "0zi7dyd4jaflww22jd3701869jrv4p47f9xlslw7h60pk4a2w9jx";
+        sha256 = "0v9b5arr047vbihfbh3fmbd3aj9vf1i7dbdgfpvlwzynpjvr35ah";
         dependencies = [
           {
             name = "find-msvc-tools";
@@ -1486,9 +1502,9 @@ rec {
       };
       "egaku" = rec {
         crateName = "egaku";
-        version = "0.1.11";
+        version = "0.1.13";
         edition = "2024";
-        sha256 = "1n5a1ks6iwg8iwafwfgr488pnanriqv2fwxgh8fckpdbsk70ccrh";
+        sha256 = "1jdal2i9jgs9nkhjm8mm45kwljxp7v1x88srd8z459dab5n42b89";
         dependencies = [
           {
             name = "awase";
@@ -1498,6 +1514,10 @@ rec {
             name = "serde";
             packageId = "serde";
             features = [ "derive" ];
+          }
+          {
+            name = "shibori";
+            packageId = "shibori";
           }
           {
             name = "thiserror";
@@ -1700,9 +1720,9 @@ rec {
       };
       "find-msvc-tools" = rec {
         crateName = "find-msvc-tools";
-        version = "0.1.10";
+        version = "0.1.11";
         edition = "2021";
-        sha256 = "1pp1612g5k6im9732g16j6a87czhb35xcyzlrpq2mkgdwrrkbdr6";
+        sha256 = "145qpfb9r4ml2klr8v4byvrkikp61qyiks9n69b8z0vbscbb0pfl";
         libName = "find_msvc_tools";
 
       };
@@ -1720,9 +1740,9 @@ rec {
       };
       "font-types" = rec {
         crateName = "font-types";
-        version = "0.12.2";
+        version = "0.12.3";
         edition = "2021";
-        sha256 = "007imxz417xximmgvnsrnmqq8dn9462irbp23cwnsjl5h2krjwha";
+        sha256 = "0fgc0ydgh12ysvc9cp8fmm6jsvdk7py94pwk22nhmw9f773jnf3m";
         libName = "font_types";
         dependencies = [
           {
@@ -1893,9 +1913,9 @@ rec {
       };
       "futures-core" = rec {
         crateName = "futures-core";
-        version = "0.3.33";
+        version = "0.3.34";
         edition = "2018";
-        sha256 = "1iqdbvcdlplfr2g43h7xrfkv2sg5p1a26x8acz1xgxl07i3hrm9c";
+        sha256 = "0pjgv4fx0np6hrs5sz5a2phabwv0z70yr51v03injbi44bjrkmlj";
         libName = "futures_core";
         features = {
           "default" = [ "std" ];
@@ -1906,9 +1926,9 @@ rec {
       };
       "futures-task" = rec {
         crateName = "futures-task";
-        version = "0.3.33";
+        version = "0.3.34";
         edition = "2018";
-        sha256 = "02f1y1yvjg1cv998zkgl1706pi9y4fyc9045l1hlmyqyhclfscdj";
+        sha256 = "1zfilqs8nwlfqz4prk7ihvpp5avvzins87ibzlxzq5fhs7ipshfd";
         libName = "futures_task";
         features = {
           "default" = [ "std" ];
@@ -1918,9 +1938,9 @@ rec {
       };
       "futures-util" = rec {
         crateName = "futures-util";
-        version = "0.3.33";
+        version = "0.3.34";
         edition = "2018";
-        sha256 = "1anyg40j5www5l22r2jbn1birsafz4q1w9qmcjk4vqzwasi90ym7";
+        sha256 = "1g3r9ghzq7c2fh34lis43i72xavk9p84npgfwgb5vfpqcwjajl0d";
         libName = "futures_util";
         dependencies = [
           {
@@ -1975,9 +1995,9 @@ rec {
       };
       "garasu" = rec {
         crateName = "garasu";
-        version = "0.1.7";
+        version = "0.1.11";
         edition = "2024";
-        sha256 = "19k8a6aq10w3pklh8nchs574rvfahl49l14j0qmxad17qq8zgran";
+        sha256 = "021lll7dndvmsmjqdhkhc4as7626a0vrlp09clxd328f5n7c0bkc";
         dependencies = [
           {
             name = "bincode";
@@ -2003,6 +2023,10 @@ rec {
           {
             name = "glyphon";
             packageId = "glyphon";
+          }
+          {
+            name = "lru";
+            packageId = "lru";
           }
           {
             name = "pollster";
@@ -2684,6 +2708,19 @@ rec {
         ];
         dependencies = [
           {
+            name = "allocator-api2";
+            packageId = "allocator-api2";
+            optional = true;
+            usesDefaultFeatures = false;
+            features = [ "alloc" ];
+          }
+          {
+            name = "equivalent";
+            packageId = "equivalent";
+            optional = true;
+            usesDefaultFeatures = false;
+          }
+          {
             name = "foldhash";
             packageId = "foldhash";
             optional = true;
@@ -2702,7 +2739,7 @@ rec {
           "rustc-dep-of-std" = [ "nightly" "core" "alloc" "rustc-internal-api" ];
           "serde" = [ "dep:serde" ];
         };
-        resolvedDefaultFeatures = [ "default-hasher" "inline-more" ];
+        resolvedDefaultFeatures = [ "allocator-api2" "default" "default-hasher" "equivalent" "inline-more" "raw-entry" ];
       };
       "hashbrown 0.17.1" = rec {
         crateName = "hashbrown";
@@ -2888,9 +2925,9 @@ rec {
       };
       "inotify" = rec {
         crateName = "inotify";
-        version = "0.11.4";
+        version = "0.11.5";
         edition = "2018";
-        sha256 = "1j7jkacw6cxra4jf1sbndkpkbm5qm0bvxpcms36cjghq3aaf2fqm";
+        sha256 = "14p5gkhk95yk536zncfrjywy2yxrxf06yrfsnx89bd6a0ylhxh2c";
         dependencies = [
           {
             name = "bitflags";
@@ -2973,9 +3010,9 @@ rec {
       };
       "ishou-tokens" = rec {
         crateName = "ishou-tokens";
-        version = "0.1.8";
+        version = "0.1.9";
         edition = "2024";
-        sha256 = "14p4sjxbrs5ikrd4m1bdvijf4175lil6wm8gajkdfm1js8js50b6";
+        sha256 = "0yf14gkvfkgmf90car69rn4qy6w35l6n9ikyfk1axfc6f8lk67cm";
         libName = "ishou_tokens";
         dependencies = [
           {
@@ -3372,9 +3409,9 @@ rec {
       };
       "libredox" = rec {
         crateName = "libredox";
-        version = "0.1.19";
+        version = "0.1.20";
         edition = "2021";
-        sha256 = "1yl5s2g4s072829l4sis97shg98dlk5qhr6mylmhp8b4cw2sa9i0";
+        sha256 = "02h77867iakw9798c6zl238rwzrs3rr9ny5ng7b31yd94l4s1l18";
         authors = [
           "4lDO2 <4lDO2@protonmail.com>"
         ];
@@ -3396,7 +3433,7 @@ rec {
           }
           {
             name = "redox_syscall";
-            packageId = "redox_syscall 0.9.1";
+            packageId = "redox_syscall 0.9.2";
             optional = true;
           }
         ];
@@ -3515,15 +3552,23 @@ rec {
         authors = [
           "Jerome Froelich <jeromefroelic@hotmail.com>"
         ];
+        dependencies = [
+          {
+            name = "hashbrown";
+            packageId = "hashbrown 0.15.5";
+            optional = true;
+          }
+        ];
         features = {
           "default" = [ "hashbrown" ];
           "hashbrown" = [ "dep:hashbrown" ];
           "nightly" = [ "hashbrown" "hashbrown/nightly" ];
         };
+        resolvedDefaultFeatures = [ "default" "hashbrown" ];
       };
       "madori" = rec {
         crateName = "madori";
-        version = "0.1.10";
+        version = "0.1.11";
         edition = "2024";
         src = lib.cleanSourceWith { filter = sourceFilter;  src = ./.; };
         dependencies = [
@@ -6187,9 +6232,9 @@ rec {
       };
       "pkg-config" = rec {
         crateName = "pkg-config";
-        version = "0.3.33";
-        edition = "2018";
-        sha256 = "17jnqmcbxsnwhg9gjf0nh6dj5k0x3hgwi3mb9krjnmfa9v435w8r";
+        version = "0.3.34";
+        edition = "2021";
+        sha256 = "0j05h08nzg0q8rf6lzw7nry0b7kn7x97vc9n4hwrl52fqzxn9d7n";
         libName = "pkg_config";
         authors = [
           "Alex Crichton <alex@alexcrichton.com>"
@@ -6268,9 +6313,9 @@ rec {
       };
       "portable-atomic" = rec {
         crateName = "portable-atomic";
-        version = "1.14.0";
+        version = "1.15.0";
         edition = "2018";
-        sha256 = "1hyfma9n2cs2ibazpfwrbv61zwg7cv86g0pr5yjkg07qgr4xa81x";
+        sha256 = "11csag858ndk5w4yz17h91vy53ynh67r2903gwwdn2cnilzbdj05";
         libName = "portable_atomic";
         features = {
           "critical-section" = [ "dep:critical-section" ];
@@ -6480,16 +6525,17 @@ rec {
       };
       "rangemap" = rec {
         crateName = "rangemap";
-        version = "1.7.1";
+        version = "1.8.0";
         edition = "2018";
-        sha256 = "0s7am2w72siggn668h03gn3g06gsinv6m1jaaxmnbj59177l6d4p";
+        sha256 = "0gdaws5kkg3md7z4w7ln4sf3jkz6n3f3xl5pfr6fngvla1dx24d6";
         authors = [
           "Jeff Parsons <jeff@parsons.io>"
         ];
         features = {
+          "ordered-float5" = [ "dep:ordered-float" ];
           "quickcheck" = [ "dep:quickcheck" ];
           "serde" = [ "dep:serde" ];
-          "serde1" = [ "serde" ];
+          "serde1" = [ "serde" "ordered-float?/serde" ];
         };
       };
       "raw-window-handle" = rec {
@@ -6582,11 +6628,11 @@ rec {
         };
         resolvedDefaultFeatures = [ "default" "userspace" ];
       };
-      "redox_syscall 0.9.1" = rec {
+      "redox_syscall 0.9.2" = rec {
         crateName = "redox_syscall";
-        version = "0.9.1";
+        version = "0.9.2";
         edition = "2021";
-        sha256 = "07n2265vyd8xqan9ywr9zffz4zss3yxsxvj1xdpg5yd5nkkpnl07";
+        sha256 = "1zm2mqij8bw9mj1znaw8ljh6k4f8canyxazp1rn4wp9cpfjkvjgi";
         libName = "syscall";
         authors = [
           "Jeremy Soller <jackpot51@gmail.com>"
@@ -7314,11 +7360,18 @@ rec {
         ];
 
       };
+      "shibori" = rec {
+        crateName = "shibori";
+        version = "0.1.1";
+        edition = "2024";
+        sha256 = "0h1z8blr656c50rn6vfxlzagvbyfy8s79c8xbl2izvb2qkbkxyx5";
+
+      };
       "shikumi" = rec {
         crateName = "shikumi";
-        version = "0.1.497";
+        version = "0.1.594";
         edition = "2024";
-        sha256 = "1d5q22w2v8ly8hj0bcjyz9q3wk650jqahysb27h6izxhwj54kwk9";
+        sha256 = "00vgy2h27z19h668lqbh2j0i5mwnph2vzvjjr82k4cjqpr8c8vdh";
         dependencies = [
           {
             name = "arc-swap";
@@ -8918,9 +8971,9 @@ rec {
       };
       "wayland-backend" = rec {
         crateName = "wayland-backend";
-        version = "0.3.16";
+        version = "0.3.17";
         edition = "2021";
-        sha256 = "1f2l7zw10cwid6444w86szvr08wvgkhi6a31k64nz2y5s40wyv01";
+        sha256 = "0y50cw56f09cdcsinbbl94naz91xf7iqaj87s4f7py6zmm71pa9q";
         libName = "wayland_backend";
         authors = [
           "Elinor Berger <elinor@safaradeg.net>"
