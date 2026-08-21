@@ -581,18 +581,14 @@ rec {
       };
       "blake3" = rec {
         crateName = "blake3";
-        version = "1.8.6";
+        version = "1.8.7";
         edition = "2024";
-        sha256 = "0xrap6fg0z1ip0v0xb2f906gjmh7662w7brvqvjfj8214nnppbkn";
+        sha256 = "1bi7m95sggkkcmlyiykflbb37v84cgzkm283r1yrfxhzq57lb7kd";
         authors = [
           "Jack O'Connor <oconnor663@gmail.com>"
           "Samuel Neves"
         ];
         dependencies = [
-          {
-            name = "arrayref";
-            packageId = "arrayref";
-          }
           {
             name = "arrayvec";
             packageId = "arrayvec";
@@ -842,9 +838,9 @@ rec {
       };
       "cc" = rec {
         crateName = "cc";
-        version = "1.4.3";
+        version = "1.4.4";
         edition = "2021";
-        sha256 = "0v9b5arr047vbihfbh3fmbd3aj9vf1i7dbdgfpvlwzynpjvr35ah";
+        sha256 = "0wq26vvhzv5ci9gx3cfiw320skvaysf9i701wp668lks6ps39m8a";
         dependencies = [
           {
             name = "find-msvc-tools";
@@ -1999,9 +1995,9 @@ rec {
       };
       "garasu" = rec {
         crateName = "garasu";
-        version = "0.1.11";
+        version = "0.1.12";
         edition = "2024";
-        sha256 = "021lll7dndvmsmjqdhkhc4as7626a0vrlp09clxd328f5n7c0bkc";
+        sha256 = "1m290r91ycs71q3qk3pac5k2sbrcjxh0fjpgd8rkd31glz77fbn8";
         dependencies = [
           {
             name = "bincode";
@@ -3572,7 +3568,7 @@ rec {
       };
       "madori" = rec {
         crateName = "madori";
-        version = "0.1.13";
+        version = "0.1.14";
         edition = "2024";
         src = lib.cleanSourceWith { filter = sourceFilter;  src = ./.; };
         dependencies = [
@@ -7373,9 +7369,9 @@ rec {
       };
       "shikumi" = rec {
         crateName = "shikumi";
-        version = "0.1.613";
+        version = "0.1.647";
         edition = "2024";
-        sha256 = "14vzn02j42951rwj7g5f86r4500qxd5bq6ixb93ray8cs3xq0fbf";
+        sha256 = "0m3fr301gl6wagm5jbijp0gf961wrkfrinm9cvaxvjgkw2nv7im9";
         dependencies = [
           {
             name = "arc-swap";
