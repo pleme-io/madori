@@ -781,8 +781,28 @@ impl App {
                         let redraw_event = AppEvent::RedrawRequested;
                         self.dispatch(&redraw_event, event_loop);
 
-                        if let (Some(surface), Some(gpu), Some(text)) =
-                            (&self.surface, &self.gpu, &mut self.text)
+                        // ★ ASK BEFORE ACQUIRING. The acquire, the render and
+                        // the present are one decision — see
+                        // `RenderCallback::needs_frame`. Skipping all three
+                        // together means no unpainted swapchain slot is ever
+                        // handed to `present()`; the window simply keeps the
+                        // frame it already has.
+                        //
+                        // Asked above `get_current_texture` deliberately:
+                        // acquiring and then dropping the frame would still
+                        // block on the swapchain and still cost most of what
+                        // we are trying not to spend.
+                        //
+                        // ★ AND IT IS A CONDITION, NOT AN EARLY RETURN.
+                        // Under `FramePacing::Continuous` the re-arming
+                        // `request_redraw()` lives at the BOTTOM of this arm,
+                        // so returning from here would skip it and the window
+                        // would never be asked to draw again — a permanent
+                        // freeze the first time anything reported itself
+                        // clean. Skipping the frame must not skip the loop.
+                        let frame_needed = self.renderer.needs_frame();
+                        if let (true, Some(surface), Some(gpu), Some(text)) =
+                            (frame_needed, &self.surface, &self.gpu, &mut self.text)
                         {
                             let frame = match surface.get_current_texture() {
                                 Ok(f) => f,

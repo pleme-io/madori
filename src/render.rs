@@ -30,7 +30,43 @@ pub struct RenderContext<'a> {
 
 /// Trait that applications implement for custom rendering.
 pub trait RenderCallback: Send + 'static {
+    /// Is a frame needed at all?
+    ///
+    /// Asked **before** the swapchain image is acquired, so returning `false`
+    /// skips acquire, [`render`](Self::render) **and** present together. The
+    /// window keeps showing the last presented frame, which is what it should
+    /// show when nothing has changed.
+    ///
+    /// ★ **The three must move together, and that is the whole point.** A
+    /// renderer cannot implement this itself: `madori` owns the acquire and
+    /// the present, so a renderer that decided to skip could only skip its
+    /// own drawing — and skipping the draw while `madori` still presents
+    /// hands the compositor a swapchain slot nobody painted. That surfaces
+    /// content from 2–3 frames back (the "prompt leaves shadows of itself"
+    /// regression) and, on Metal, an uninitialised slot's magenta.
+    ///
+    /// `mado` hit exactly that, and drew the wrong conclusion from it: it
+    /// went back to painting every frame unconditionally, keeping the skip
+    /// decision as a counter and a log line while rendering anyway
+    /// (`TOTAL_FRAMES_SKIPPED` read 9,934,969 of 10,726,562, none of which
+    /// were skipped). Measured on plo 2026-08-21: **50.7% of a core on a
+    /// static screen**, against a source comment estimating "≈0.2% … free
+    /// correctness with no measurable cost".
+    ///
+    /// The implication of *never present an unwritten slot* is **do not
+    /// present**, not **always write** — and only this trait, on this side of
+    /// the seam, can express that.
+    ///
+    /// Defaults to `true`, so every existing renderer behaves exactly as
+    /// before. Takes `&mut self` so an implementation may drain a dirty flag.
+    fn needs_frame(&mut self) -> bool {
+        true
+    }
+
     /// Called each frame. Draw into `ctx.surface_view`.
+    ///
+    /// Not called at all when [`needs_frame`](Self::needs_frame) returns
+    /// `false`.
     fn render(&mut self, ctx: &mut RenderContext<'_>);
 
     /// Called when the window is resized.
@@ -99,5 +135,70 @@ impl RenderCallback for ClearRenderer {
             });
         }
         ctx.gpu.queue.submit(std::iter::once(encoder.finish()));
+    }
+}
+
+#[cfg(test)]
+mod needs_frame_tests {
+    use super::{RenderCallback, RenderContext};
+
+    /// A renderer that only implements `render` — i.e. every consumer that
+    /// existed before `needs_frame` was added.
+    struct Legacy;
+    impl RenderCallback for Legacy {
+        fn render(&mut self, _ctx: &mut RenderContext<'_>) {}
+    }
+
+    /// A renderer that reports itself clean forever.
+    struct AlwaysClean;
+    impl RenderCallback for AlwaysClean {
+        fn needs_frame(&mut self) -> bool {
+            false
+        }
+        fn render(&mut self, _ctx: &mut RenderContext<'_>) {}
+    }
+
+    /// A renderer whose dirty flag is CONSUMED by the question, which is the
+    /// shape a real one has.
+    struct Draining(bool);
+    impl RenderCallback for Draining {
+        fn needs_frame(&mut self) -> bool {
+            std::mem::replace(&mut self.0, false)
+        }
+        fn render(&mut self, _ctx: &mut RenderContext<'_>) {}
+    }
+
+    #[test]
+    fn the_default_is_draw_because_the_alternative_freezes_every_consumer() {
+        // ★ THIS IS THE LOAD-BEARING ONE. `needs_frame` was added with a
+        // default so no existing renderer had to change. If that default ever
+        // became `false`, every consumer that has not overridden it would
+        // stop drawing entirely — a black window with no error, no panic and
+        // no log line, in a crate whose consumers are other repositories.
+        assert!(
+            Legacy.needs_frame(),
+            "the default must be `true`: a renderer that never opted in must \
+             keep drawing exactly as it did before this trait method existed"
+        );
+    }
+
+    #[test]
+    fn an_override_is_honoured_in_both_directions() {
+        assert!(!AlwaysClean.needs_frame());
+        let mut d = Draining(true);
+        assert!(d.needs_frame(), "the first ask sees the dirty flag");
+        assert!(!d.needs_frame(), "and the ask CONSUMED it");
+    }
+
+    #[test]
+    fn the_question_may_be_asked_through_a_generic_bound() {
+        // `App` holds `R: RenderCallback` and asks through that bound, so a
+        // default method that somehow failed to dispatch generically would
+        // break there and nowhere else.
+        fn ask<R: RenderCallback>(r: &mut R) -> bool {
+            r.needs_frame()
+        }
+        assert!(ask(&mut Legacy));
+        assert!(!ask(&mut AlwaysClean));
     }
 }
