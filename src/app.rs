@@ -800,7 +800,20 @@ impl App {
                         // would never be asked to draw again — a permanent
                         // freeze the first time anything reported itself
                         // clean. Skipping the frame must not skip the loop.
-                        let frame_needed = self.renderer.needs_frame();
+                        //
+                        // The clock is read HERE, above the question, because
+                        // the honest answer is usually time-dependent — a
+                        // blinking cursor, a decaying flash. `last_frame` is
+                        // NOT advanced here though: `dt` must span the gap to
+                        // the last frame actually PRESENTED, so that an
+                        // animation stepping by `dt` moves the same distance
+                        // whether it was sampled every tick or once a second.
+                        let now = Instant::now();
+                        let elapsed = now.duration_since(self.start_time).as_secs_f32();
+                        let dt = now.duration_since(self.last_frame).as_secs_f32();
+                        let frame_needed = self
+                            .renderer
+                            .needs_frame(crate::render::FrameQuery { elapsed, dt });
                         if let (true, Some(surface), Some(gpu), Some(text)) =
                             (frame_needed, &self.surface, &self.gpu, &mut self.text)
                         {
@@ -821,9 +834,15 @@ impl App {
                                 .texture
                                 .create_view(&wgpu::TextureViewDescriptor::default());
 
-                            let now = Instant::now();
-                            let elapsed = now.duration_since(self.start_time).as_secs_f32();
-                            let dt = now.duration_since(self.last_frame).as_secs_f32();
+                            // `elapsed` / `dt` were computed above the
+                            // `needs_frame` question so the renderer could
+                            // answer it with a clock. Advancing `last_frame`
+                            // is deferred to HERE — this is the first point
+                            // at which a frame is definitely being produced,
+                            // and advancing it on a skipped tick would reset
+                            // `dt` to ~0 without any motion having been
+                            // applied, so animations would crawl in exact
+                            // proportion to how often we skipped.
                             self.last_frame = now;
 
                             let mut render_ctx = RenderContext {

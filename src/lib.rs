@@ -8,4 +8,4 @@ pub use error::MadoriError;
 pub use event::{
     AppEvent, EventResponse, ImeEvent, InputEvent, KeyEvent, MouseEvent, ScrollDelta,
 };
-pub use render::{RenderCallback, RenderContext};
+pub use render::{FrameQuery, RenderCallback, RenderContext};

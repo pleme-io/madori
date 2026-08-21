@@ -28,6 +28,25 @@ pub struct RenderContext<'a> {
     pub dt: f32,
 }
 
+/// What a renderer is told when asked whether it needs a frame.
+///
+/// The same clock [`RenderContext`] carries, handed over BEFORE the swapchain
+/// acquire. It is here because the honest answer to "do you need a frame?" is
+/// often time-dependent — a blinking cursor, a decaying flash, any animation
+/// in flight — and a renderer with no clock would have to answer `true` on
+/// every tick just in case, which is the behaviour this exists to end.
+#[derive(Debug, Clone, Copy, PartialEq)]
+pub struct FrameQuery {
+    /// Seconds since app start. Same value [`RenderContext::elapsed`] will
+    /// carry if a frame follows.
+    pub elapsed: f32,
+    /// Seconds since the last frame that was actually PRESENTED — not since
+    /// the last tick. Skipped frames widen it, which is what an animation
+    /// stepping by `dt` needs: the motion is the same whether it was sampled
+    /// often or rarely.
+    pub dt: f32,
+}
+
 /// Trait that applications implement for custom rendering.
 pub trait RenderCallback: Send + 'static {
     /// Is a frame needed at all?
@@ -59,7 +78,7 @@ pub trait RenderCallback: Send + 'static {
     ///
     /// Defaults to `true`, so every existing renderer behaves exactly as
     /// before. Takes `&mut self` so an implementation may drain a dirty flag.
-    fn needs_frame(&mut self) -> bool {
+    fn needs_frame(&mut self, _q: FrameQuery) -> bool {
         true
     }
 
@@ -140,7 +159,9 @@ impl RenderCallback for ClearRenderer {
 
 #[cfg(test)]
 mod needs_frame_tests {
-    use super::{RenderCallback, RenderContext};
+    use super::{FrameQuery, RenderCallback, RenderContext};
+
+    const Q: FrameQuery = FrameQuery { elapsed: 0.0, dt: 0.0 };
 
     /// A renderer that only implements `render` — i.e. every consumer that
     /// existed before `needs_frame` was added.
@@ -152,7 +173,7 @@ mod needs_frame_tests {
     /// A renderer that reports itself clean forever.
     struct AlwaysClean;
     impl RenderCallback for AlwaysClean {
-        fn needs_frame(&mut self) -> bool {
+        fn needs_frame(&mut self, _q: FrameQuery) -> bool {
             false
         }
         fn render(&mut self, _ctx: &mut RenderContext<'_>) {}
@@ -162,7 +183,7 @@ mod needs_frame_tests {
     /// shape a real one has.
     struct Draining(bool);
     impl RenderCallback for Draining {
-        fn needs_frame(&mut self) -> bool {
+        fn needs_frame(&mut self, _q: FrameQuery) -> bool {
             std::mem::replace(&mut self.0, false)
         }
         fn render(&mut self, _ctx: &mut RenderContext<'_>) {}
@@ -176,7 +197,7 @@ mod needs_frame_tests {
         // stop drawing entirely — a black window with no error, no panic and
         // no log line, in a crate whose consumers are other repositories.
         assert!(
-            Legacy.needs_frame(),
+            Legacy.needs_frame(Q),
             "the default must be `true`: a renderer that never opted in must \
              keep drawing exactly as it did before this trait method existed"
         );
@@ -184,10 +205,10 @@ mod needs_frame_tests {
 
     #[test]
     fn an_override_is_honoured_in_both_directions() {
-        assert!(!AlwaysClean.needs_frame());
+        assert!(!AlwaysClean.needs_frame(Q));
         let mut d = Draining(true);
-        assert!(d.needs_frame(), "the first ask sees the dirty flag");
-        assert!(!d.needs_frame(), "and the ask CONSUMED it");
+        assert!(d.needs_frame(Q), "the first ask sees the dirty flag");
+        assert!(!d.needs_frame(Q), "and the ask CONSUMED it");
     }
 
     #[test]
@@ -196,7 +217,7 @@ mod needs_frame_tests {
         // default method that somehow failed to dispatch generically would
         // break there and nowhere else.
         fn ask<R: RenderCallback>(r: &mut R) -> bool {
-            r.needs_frame()
+            r.needs_frame(Q)
         }
         assert!(ask(&mut Legacy));
         assert!(!ask(&mut AlwaysClean));
