@@ -1,8 +1,8 @@
 {
   "schema_version": 2,
-  "cargo_lock_sha256": "c17e34394727e90f54b1940500b72cb3ec80174af2ebe065ea1889f7a8295180",
+  "cargo_lock_sha256": "a19df16d0e694e3496d6c34dec88fe2cba12ba1c77113aca26da0261a13b1b44",
   "manifest_sha256": {
-    "Cargo.toml": "7a1f1d0ec2722ee50889952f4c03fede40aa49e1a405d7fdb91cce5e298a648f"
+    "Cargo.toml": "e41aea9705aed4eeef665cfb818b74bb70133c7178c9eefb622a8b7f6a06ee45"
   },
   "target_resolves": {
     "base": {
@@ -26,11 +26,6 @@
             "tree": "host"
           }
         ],
-        "build_dependencies": [],
-        "features": []
-      },
-      "arrayref-0.3.9": {
-        "runtime_dependencies": [],
         "build_dependencies": [],
         "features": []
       },
@@ -262,7 +257,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "cc-1.4.3": {
+      "cc-1.4.4": {
         "runtime_dependencies": [
           {
             "name": "find_msvc_tools",
@@ -945,7 +940,7 @@
           "std"
         ]
       },
-      "garasu-0.1.11": {
+      "garasu-0.1.12": {
         "runtime_dependencies": [
           {
             "name": "bincode",
@@ -959,7 +954,7 @@
           },
           {
             "name": "blake3",
-            "package_key": "blake3-1.8.6",
+            "package_key": "blake3-1.8.7",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -1208,7 +1203,7 @@
         "runtime_dependencies": [
           {
             "name": "blake3",
-            "package_key": "blake3-1.8.6",
+            "package_key": "blake3-1.8.7",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -1933,7 +1928,7 @@
           "hashbrown"
         ]
       },
-      "madori-0.1.12": {
+      "madori-0.1.13": {
         "runtime_dependencies": [
           {
             "name": "egaku",
@@ -1947,7 +1942,7 @@
           },
           {
             "name": "garasu",
-            "package_key": "garasu-0.1.11",
+            "package_key": "garasu-0.1.12",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -1991,7 +1986,7 @@
           },
           {
             "name": "shikumi",
-            "package_key": "shikumi-0.1.613",
+            "package_key": "shikumi-0.1.647",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -3043,7 +3038,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "shikumi-0.1.613": {
+      "shikumi-0.1.647": {
         "runtime_dependencies": [
           {
             "name": "arc_swap",
@@ -4401,18 +4396,8 @@
               "default"
             ]
           },
-          "blake3-1.8.6": {
+          "blake3-1.8.7": {
             "runtime_dependencies": [
-              {
-                "name": "arrayref",
-                "package_key": "arrayref-0.3.9",
-                "kind": "normal",
-                "features": [],
-                "uses_default_features": true,
-                "optional": false,
-                "target": null,
-                "tree": "target"
-              },
               {
                 "name": "arrayvec",
                 "package_key": "arrayvec-0.7.8",
@@ -4447,7 +4432,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.4.3",
+                "package_key": "cc-1.4.4",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -6333,6 +6318,11 @@
               "std"
             ]
           },
+          "arrayref-0.3.9": {
+            "runtime_dependencies": [],
+            "build_dependencies": [],
+            "features": []
+          },
           "as-raw-xcb-connection-1.0.1": {
             "runtime_dependencies": [],
             "build_dependencies": [],
@@ -6341,18 +6331,8 @@
               "default"
             ]
           },
-          "blake3-1.8.6": {
+          "blake3-1.8.7": {
             "runtime_dependencies": [
-              {
-                "name": "arrayref",
-                "package_key": "arrayref-0.3.9",
-                "kind": "normal",
-                "features": [],
-                "uses_default_features": true,
-                "optional": false,
-                "target": null,
-                "tree": "target"
-              },
               {
                 "name": "arrayvec",
                 "package_key": "arrayvec-0.7.8",
@@ -6387,7 +6367,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.4.3",
+                "package_key": "cc-1.4.4",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -7777,7 +7757,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.4.3",
+                "package_key": "cc-1.4.4",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -9302,6 +9282,11 @@
               "std"
             ]
           },
+          "arrayref-0.3.9": {
+            "runtime_dependencies": [],
+            "build_dependencies": [],
+            "features": []
+          },
           "as-raw-xcb-connection-1.0.1": {
             "runtime_dependencies": [],
             "build_dependencies": [],
@@ -9310,18 +9295,8 @@
               "default"
             ]
           },
-          "blake3-1.8.6": {
+          "blake3-1.8.7": {
             "runtime_dependencies": [
-              {
-                "name": "arrayref",
-                "package_key": "arrayref-0.3.9",
-                "kind": "normal",
-                "features": [],
-                "uses_default_features": true,
-                "optional": false,
-                "target": null,
-                "tree": "target"
-              },
               {
                 "name": "arrayvec",
                 "package_key": "arrayvec-0.7.8",
@@ -9356,7 +9331,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.4.3",
+                "package_key": "cc-1.4.4",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -10746,7 +10721,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.4.3",
+                "package_key": "cc-1.4.4",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -12172,18 +12147,8 @@
               "default"
             ]
           },
-          "blake3-1.8.6": {
+          "blake3-1.8.7": {
             "runtime_dependencies": [
-              {
-                "name": "arrayref",
-                "package_key": "arrayref-0.3.9",
-                "kind": "normal",
-                "features": [],
-                "uses_default_features": true,
-                "optional": false,
-                "target": null,
-                "tree": "target"
-              },
               {
                 "name": "arrayvec",
                 "package_key": "arrayvec-0.7.8",
@@ -12228,7 +12193,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.4.3",
+                "package_key": "cc-1.4.4",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -14119,6 +14084,11 @@
               "std"
             ]
           },
+          "arrayref-0.3.9": {
+            "runtime_dependencies": [],
+            "build_dependencies": [],
+            "features": []
+          },
           "as-raw-xcb-connection-1.0.1": {
             "runtime_dependencies": [],
             "build_dependencies": [],
@@ -14127,18 +14097,8 @@
               "default"
             ]
           },
-          "blake3-1.8.6": {
+          "blake3-1.8.7": {
             "runtime_dependencies": [
-              {
-                "name": "arrayref",
-                "package_key": "arrayref-0.3.9",
-                "kind": "normal",
-                "features": [],
-                "uses_default_features": true,
-                "optional": false,
-                "target": null,
-                "tree": "target"
-              },
               {
                 "name": "arrayvec",
                 "package_key": "arrayvec-0.7.8",
@@ -14183,7 +14143,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.4.3",
+                "package_key": "cc-1.4.4",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -15578,7 +15538,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.4.3",
+                "package_key": "cc-1.4.4",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -17103,6 +17063,11 @@
               "std"
             ]
           },
+          "arrayref-0.3.9": {
+            "runtime_dependencies": [],
+            "build_dependencies": [],
+            "features": []
+          },
           "as-raw-xcb-connection-1.0.1": {
             "runtime_dependencies": [],
             "build_dependencies": [],
@@ -17111,18 +17076,8 @@
               "default"
             ]
           },
-          "blake3-1.8.6": {
+          "blake3-1.8.7": {
             "runtime_dependencies": [
-              {
-                "name": "arrayref",
-                "package_key": "arrayref-0.3.9",
-                "kind": "normal",
-                "features": [],
-                "uses_default_features": true,
-                "optional": false,
-                "target": null,
-                "tree": "target"
-              },
               {
                 "name": "arrayvec",
                 "package_key": "arrayvec-0.7.8",
@@ -17167,7 +17122,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.4.3",
+                "package_key": "cc-1.4.4",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -18562,7 +18517,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.4.3",
+                "package_key": "cc-1.4.4",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -20036,7 +19991,7 @@
     "bitflags-2.13.1": {
       "edition": "2021"
     },
-    "blake3-1.8.6": {
+    "blake3-1.8.7": {
       "edition": "2024",
       "build_script": "build.rs"
     },
@@ -20059,7 +20014,7 @@
     "calloop-wayland-source-0.3.0": {
       "edition": "2021"
     },
-    "cc-1.4.3": {
+    "cc-1.4.4": {
       "edition": "2021"
     },
     "cfg-if-1.0.4": {
@@ -20174,7 +20129,7 @@
     "fsevent-sys-4.1.0": {
       "edition": "2018"
     },
-    "garasu-0.1.11": {
+    "garasu-0.1.12": {
       "edition": "2024",
       "build_script": "build.rs"
     },
@@ -20296,7 +20251,7 @@
     "lru-0.12.5": {
       "edition": "2015"
     },
-    "madori-0.1.12": {
+    "madori-0.1.13": {
       "edition": "2024",
       "lib_target": {
         "name": "madori",
@@ -20508,7 +20463,7 @@
     "shibori-0.1.1": {
       "edition": "2024"
     },
-    "shikumi-0.1.613": {
+    "shikumi-0.1.647": {
       "edition": "2024"
     },
     "shlex-2.0.1": {
