@@ -548,19 +548,20 @@ impl App {
                         // Opaque tells the compositor "draw my
                         // pixels verbatim, no alpha" — same shape
                         // ghostty / kitty / alacritty use on macOS.
-                        let alpha_mode = if caps.alpha_modes.contains(&wgpu::CompositeAlphaMode::Opaque) {
-                            wgpu::CompositeAlphaMode::Opaque
-                        } else {
-                            // Same empty-vector hazard as `formats`, reached by
-                            // the same mismatch. The guard above has already
-                            // returned in that case, so `Auto` here is only for
-                            // an adapter that advertises formats but no alpha
-                            // modes — let wgpu decide rather than panic.
-                            caps.alpha_modes
-                                .first()
-                                .copied()
-                                .unwrap_or(wgpu::CompositeAlphaMode::Auto)
-                        };
+                        let alpha_mode =
+                            if caps.alpha_modes.contains(&wgpu::CompositeAlphaMode::Opaque) {
+                                wgpu::CompositeAlphaMode::Opaque
+                            } else {
+                                // Same empty-vector hazard as `formats`, reached by
+                                // the same mismatch. The guard above has already
+                                // returned in that case, so `Auto` here is only for
+                                // an adapter that advertises formats but no alpha
+                                // modes — let wgpu decide rather than panic.
+                                caps.alpha_modes
+                                    .first()
+                                    .copied()
+                                    .unwrap_or(wgpu::CompositeAlphaMode::Auto)
+                            };
 
                         let surface_config = wgpu::SurfaceConfiguration {
                             usage: wgpu::TextureUsages::RENDER_ATTACHMENT,
@@ -671,6 +672,38 @@ impl App {
                             height: self.height,
                         };
                         self.dispatch(&app_event, event_loop);
+                        // ── ★ A RESIZE MUST SCHEDULE A FRAME ─────────────────
+                        // Reconfiguring the wgpu surface above changes what the
+                        // NEXT frame will be drawn into; it does not change what
+                        // the window currently IS. On Wayland a surface's size
+                        // is whatever its last COMMITTED buffer says, so with no
+                        // redraw there is no commit, and the compositor goes on
+                        // seeing the old dimensions indefinitely.
+                        //
+                        // Measured on plo 2026-09-05, omoya + mado: the tile was
+                        // grown 952x1044 -> 1048x1044 and mado's surface stayed
+                        // 952x1044 for 30+ seconds — polled every 2s, never
+                        // converged. Sending ONE byte to the PTY (a bare `\n`)
+                        // made it snap to 1048x1044 immediately: the configure
+                        // had been applied all along and was waiting for any
+                        // unrelated reason to draw. The visible symptom is a
+                        // band of desktop background where the window should be,
+                        // most obvious right after a neighbour closes and the
+                        // survivor's tile grows.
+                        //
+                        // macOS hides this: AppKit repaints the view on resize,
+                        // so the frame that carries the new size always happens.
+                        // That asymmetry is why this looked like "mado is fine on
+                        // Mac, broken on Linux" rather than a missing redraw.
+                        //
+                        // Unconditional, and NOT gated on `frame_interval`: the
+                        // paced path lets `about_to_wait` own the *steady-state*
+                        // cadence, but a resize is an edge that must produce a
+                        // frame even when the app is otherwise idle — which is
+                        // exactly the state a terminal sits in.
+                        if let Some(w) = &self.window {
+                            w.request_redraw();
+                        }
                     }
                     WindowEvent::ScaleFactorChanged { scale_factor, .. } => {
                         // Updates the cached scale-factor so the next
@@ -760,12 +793,10 @@ impl App {
                         // pixels as lines — the bug `ScrollDelta` makes
                         // unrepresentable.
                         let scroll_delta = match delta {
-                            winit::event::MouseScrollDelta::LineDelta(x, y) => {
-                                ScrollDelta::Lines {
-                                    x: f64::from(*x),
-                                    y: f64::from(*y),
-                                }
-                            }
+                            winit::event::MouseScrollDelta::LineDelta(x, y) => ScrollDelta::Lines {
+                                x: f64::from(*x),
+                                y: f64::from(*y),
+                            },
                             winit::event::MouseScrollDelta::PixelDelta(p) => {
                                 ScrollDelta::Pixels { x: p.x, y: p.y }
                             }
@@ -1046,7 +1077,10 @@ mod tests {
         let interval_120 = FramePacing::from_target_fps(120)
             .frame_interval()
             .expect("120 fps is capped");
-        assert!(interval_120 < interval, "a higher cap is a shorter interval");
+        assert!(
+            interval_120 < interval,
+            "a higher cap is a shorter interval"
+        );
     }
 
     #[test]
