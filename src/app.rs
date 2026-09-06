@@ -276,6 +276,27 @@ pub(crate) fn frame_gate(debts: FrameDebts, content_says: bool) -> bool {
     debts.any() || content_says
 }
 
+/// Whether delivering `event` obliges the loop to re-ask `needs_frame`.
+///
+/// The mirror of [`FrameDebt`]. A debt is the loop KNOWING a frame is required
+/// and forcing one; this is the loop knowing only that the consumer's ANSWER may
+/// have changed, and scheduling the question. Modelling it as a debt would draw
+/// on every mouse-move; not modelling it at all deadlocks
+/// [`FramePacing::Reactive`], because `animating` is assigned only in the
+/// `RedrawRequested` arm and a parked loop that never re-arms never asks again.
+///
+/// ★ **Negative by default, on purpose.** A new [`AppEvent`] variant re-asks
+/// without anyone remembering to add it here — the safe direction, since the
+/// cost of a needless re-ask is one predicate call and the cost of a missed one
+/// is an input the window ignores forever. That is the opposite of
+/// [`FrameDebt::bit`], which must fail to compile on a new variant: there the
+/// safe answer is genuinely unknown, so a human has to choose it.
+pub(crate) fn reask_after(event: &AppEvent) -> bool {
+    // Excluding the redraw's own dispatch is load-bearing: re-arming there
+    // would make `Reactive` spin exactly like `Continuous` and delete the mode.
+    !matches!(event, AppEvent::RedrawRequested)
+}
+
 /// Configuration for creating an App.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(default)]
@@ -618,6 +639,40 @@ impl App {
                     .event_handler
                     .as_mut()
                     .map_or(EventResponse::default(), |h| (h)(event, &mut self.renderer));
+
+                // ── ★ DELIVERING AN EVENT MEANS RE-ASKING ────────────────────
+                // The mirror of `FrameDebt`, and the other half of the same
+                // defect. `FrameDebt` exists because the CONSUMER cannot see
+                // the loop's reasons to draw; this exists because the LOOP
+                // cannot see the consumer's. Handing a consumer an event may
+                // have changed its answer to `needs_frame`, and the loop has no
+                // way to know that it did.
+                //
+                // Under `Reactive` that gap is a deadlock, not an inefficiency:
+                // `animating` is assigned ONLY in the `RedrawRequested` arm, so
+                // once the loop parks with `animating == false`, a keystroke
+                // wakes it, `about_to_wait` sees `!animating` and parks again —
+                // without ever requesting a redraw. `needs_frame` is never
+                // asked again, so no amount of typing can produce a frame. A
+                // launcher would render once and then ignore the keyboard
+                // forever.
+                //
+                // ★ RE-ASK, NOT A DEBT. A `FrameDebt` FORCES a draw because the
+                // loop knows one is required. Here it knows no such thing — it
+                // only knows the answer may have changed. So it schedules the
+                // QUESTION and lets the consumer decide: if `needs_frame` still
+                // says `false` the loop parks again having spent one predicate
+                // call and no frame. Modelling this as a debt would draw on
+                // every mouse-move.
+                //
+                // Excluding `RedrawRequested` is load-bearing: re-arming on the
+                // dispatch that a redraw itself performs would make `Reactive`
+                // spin exactly like `Continuous` and silently delete the mode.
+                if reask_after(event) {
+                    if let Some(w) = &self.window {
+                        w.request_redraw();
+                    }
+                }
 
                 // Handle set_title
                 if let Some(title) = &resp.set_title {
@@ -1466,6 +1521,51 @@ impl App {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn delivering_input_re_asks_but_a_redraw_does_not() {
+        // THE DEADLOCK this guards, in one sentence: under `Reactive` the loop
+        // parks when `!animating`, `animating` is written only by the
+        // `RedrawRequested` arm, and a keystroke that does not re-arm therefore
+        // wakes the loop only to park it again — forever. A launcher would
+        // render once and then ignore the keyboard.
+        use crate::event::{ImeEvent, KeyCode, KeyEvent, Modifiers, MouseButton, MouseEvent};
+        let delivered = [
+            AppEvent::Resized {
+                width: 1912,
+                height: 1044,
+            },
+            AppEvent::Focused(true),
+            AppEvent::Key(KeyEvent {
+                key: KeyCode::Char('a'),
+                pressed: true,
+                modifiers: Modifiers::default(),
+                text: Some("a".into()),
+            }),
+            AppEvent::Mouse(MouseEvent::Button {
+                button: MouseButton::Left,
+                pressed: true,
+                x: 0.0,
+                y: 0.0,
+                modifiers: Modifiers::default(),
+            }),
+            AppEvent::Ime(ImeEvent::Commit("a".into())),
+            AppEvent::HoveredFileCancelled,
+            AppEvent::CloseRequested,
+        ];
+        for event in &delivered {
+            assert!(
+                reask_after(event),
+                "{event:?} may have changed the consumer's answer, so the loop \
+                 must schedule the question — otherwise Reactive never asks again"
+            );
+        }
+        assert!(
+            !reask_after(&AppEvent::RedrawRequested),
+            "re-arming on the redraw's own dispatch turns Reactive into \
+             Continuous and silently deletes the mode"
+        );
+    }
 
     #[test]
     fn debt_variants_all_force_a_frame() {
