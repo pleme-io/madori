@@ -1,8 +1,8 @@
 {
   "schema_version": 2,
-  "cargo_lock_sha256": "7357409d0c5d6e5da687731e9b15055062cc2abf0d384321b5bee94ea522d26b",
+  "cargo_lock_sha256": "9ab3b6aecc0bc28ebfc046b2c3e6220a37e908b8350e3b2050953548096e7b95",
   "manifest_sha256": {
-    "Cargo.toml": "b141c11175e1d8b1e2507d386ac8c1e7a00f1441f71977976e26be954d8c7b0b"
+    "Cargo.toml": "1095ab81f166c8e4ae94dcd5095a8e415718a96c618e28f7dbdb455c539963d9"
   },
   "target_resolves": {
     "base": {
@@ -1948,7 +1948,7 @@
           "hashbrown"
         ]
       },
-      "madori-0.1.15": {
+      "madori-0.1.16": {
         "runtime_dependencies": [
           {
             "name": "egaku",
@@ -2006,7 +2006,7 @@
           },
           {
             "name": "shikumi",
-            "package_key": "shikumi-0.1.823",
+            "package_key": "shikumi-0.1.824",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -3063,7 +3063,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "shikumi-0.1.823": {
+      "shikumi-0.1.824": {
         "runtime_dependencies": [
           {
             "name": "arc_swap",
@@ -20277,7 +20277,7 @@
     "lru-0.12.5": {
       "edition": "2015"
     },
-    "madori-0.1.15": {
+    "madori-0.1.16": {
       "edition": "2024",
       "lib_target": {
         "name": "madori",
@@ -20492,7 +20492,7 @@
     "shibori-0.1.1": {
       "edition": "2024"
     },
-    "shikumi-0.1.823": {
+    "shikumi-0.1.824": {
       "edition": "2024"
     },
     "shlex-2.0.1": {
