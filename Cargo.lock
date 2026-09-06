@@ -1221,6 +1221,7 @@ dependencies = [
  "egaku",
  "garasu",
  "ishou-tokens",
+ "pleme-allvariants-derive",
  "pollster",
  "serde",
  "serde_json",
@@ -1759,6 +1760,17 @@ name = "plain"
 version = "0.2.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b4596b6d070b27117e987119b4dac604f3c58cfb0b191112e24771b2faeac1a6"
+
+[[package]]
+name = "pleme-allvariants-derive"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6cb114bcd833314a8da4ca405f57aa7f4f1bffed58dcf4d41a020c2bc89a662a"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 2.0.119",
+]
 
 [[package]]
 name = "polling"

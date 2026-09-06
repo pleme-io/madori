@@ -135,6 +135,108 @@ impl FramePacing {
     }
 }
 
+/// A frame the LOOP owes, for a reason the consumer cannot see.
+///
+/// ── ★ THE DEFECT THIS TYPE EXISTS TO END ─────────────────────────────────
+/// [`RenderCallback::needs_frame`] was asked "must a frame be produced?" when
+/// the only thing a consumer can honestly answer is "has my CONTENT changed?".
+/// Those are different questions with different owners: content belongs to the
+/// renderer, GEOMETRY and SWAPCHAIN STATE belong to the loop. Delegating the
+/// second to a party that cannot observe it is why a resize, a lost swapchain
+/// and a scale change each produced a separate bug with a separate fix.
+///
+/// Three commits fixed one arm each — `5c20bdb` (a resize schedules a frame),
+/// `127512e` (a lost swapchain re-arms), tobira `3624153` (the same class in a
+/// hand-rolled loop) — and every one of them was then defeated by the same
+/// gate, because each requested a redraw and none of them could override the
+/// consumer's answer once it arrived.
+///
+/// ── ★ WHY AN ENUM AND NOT A `bool` ───────────────────────────────────────
+/// The first cut of this fix was `resize_pending: bool`. That is the same
+/// mistake one size smaller: the next loop-owned edge becomes another field and
+/// another `||`, and the one after that gets forgotten — which is precisely how
+/// this reached three arms. A closed enum makes the set of reasons ENUMERABLE,
+/// so [`FrameDebt::bit`] fails to compile the moment a variant is added without
+/// being classified, and `debt_variants_all_force_a_frame` fails if a variant is
+/// added without being covered.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, pleme_allvariants_derive::AllVariants)]
+pub(crate) enum FrameDebt {
+    /// The surface was reconfigured for a new size and nothing has been
+    /// COMMITTED at that size yet. On Wayland a surface's size is whatever its
+    /// last committed buffer says, so until this is settled the window still IS
+    /// the old size, however correct every other layer looks.
+    Resized,
+    /// `get_current_texture` returned `Lost`/`Outdated` and the surface was
+    /// reconfigured. The frame that re-establishes the swapchain is owed —
+    /// and `Outdated` is itself most often what a resize produces, which is why
+    /// leaving this one to the consumer defeated the resize fix a second time.
+    SurfaceRecovered,
+    /// The HiDPI scale factor changed. winit is documented to pair this with a
+    /// `Resized`, but a debt that depends on another event arriving is not a
+    /// debt the loop controls — so it is recorded on its own.
+    ScaleChanged,
+    /// Nothing has ever been presented. The default `needs_frame` answers
+    /// `true`, so only an override could suppress the very first frame — but
+    /// "only an override" is exactly the population that has this bug.
+    FirstFrame,
+}
+
+impl FrameDebt {
+    /// One bit per reason.
+    ///
+    /// The match is deliberately exhaustive and deliberately NOT `_ =>`: adding
+    /// a variant must be a compile error here, because the whole point of the
+    /// type is that a new loop-owned edge cannot be introduced without somebody
+    /// deciding it owes a frame.
+    const fn bit(self) -> u8 {
+        match self {
+            Self::Resized => 1 << 0,
+            Self::SurfaceRecovered => 1 << 1,
+            Self::ScaleChanged => 1 << 2,
+            Self::FirstFrame => 1 << 3,
+        }
+    }
+}
+
+/// The set of frames the loop currently owes.
+///
+/// Several can be outstanding at once — a resize whose first acquire comes back
+/// `Outdated` owes both — and they settle together, because one presented frame
+/// discharges every reason it was owed for.
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq)]
+pub(crate) struct FrameDebts(u8);
+
+impl FrameDebts {
+    /// The set a loop starts with: [`FrameDebt::FirstFrame`] is owed before
+    /// anything has been presented.
+    ///
+    /// Not `Default`, deliberately — `Default` reads as "nothing outstanding",
+    /// and a window that has drawn nothing has the most outstanding frame there
+    /// is. Spelling it makes the startup debt a decision rather than a value
+    /// nobody looked at.
+    pub(crate) fn at_startup() -> Self {
+        let mut debts = Self::default();
+        debts.owe(FrameDebt::FirstFrame);
+        debts
+    }
+
+    /// Record that the loop owes a frame for `reason`. Idempotent.
+    pub(crate) fn owe(&mut self, reason: FrameDebt) {
+        self.0 |= reason.bit();
+    }
+
+    /// Is any frame outstanding?
+    pub(crate) const fn any(self) -> bool {
+        self.0 != 0
+    }
+
+    /// Discharge every outstanding debt. Called only after `frame.present()` —
+    /// a presented frame is the only thing that actually settles any of these.
+    pub(crate) fn settle(&mut self) {
+        self.0 = 0;
+    }
+}
+
 /// Whether `RedrawRequested` must acquire, render and present this tick.
 ///
 /// [`RenderCallback::needs_frame`] lets a consumer skip all three when nothing
@@ -170,8 +272,8 @@ impl FramePacing {
 /// Resolving to `true` on doubt is the codebase's standing rule for this
 /// question: a redundant frame costs microseconds, a wrongly-skipped one is a
 /// window that stops updating.
-pub(crate) fn frame_gate(resize_pending: bool, callback_says: bool) -> bool {
-    resize_pending || callback_says
+pub(crate) fn frame_gate(debts: FrameDebts, content_says: bool) -> bool {
+    debts.any() || content_says
 }
 
 /// Configuration for creating an App.
@@ -494,18 +596,16 @@ impl App {
             // would show an empty surface until the user happened to move
             // the mouse.
             animating: bool,
-            // A resize has reconfigured the surface and no frame has been
-            // PRESENTED at the new size yet.
+            // Frames the LOOP owes for reasons the consumer cannot observe —
+            // geometry, swapchain recovery, scale, first paint. See `FrameDebt`.
             //
-            // Set on `Resized`, cleared only after `frame.present()` — on
-            // attempt would be wrong, because the acquire immediately after a
-            // resize is the one most likely to come back `Outdated`, and that
-            // path returns early to re-arm. Clearing there would drop the force
-            // on the exact tick it exists to cover.
-            //
-            // See `frame_gate`: this is the input that lets a resize outrank a
-            // consumer's content-only `needs_frame`.
-            resize_pending: bool,
+            // Owed at the edge that creates them, settled ONLY after
+            // `frame.present()`. Settling on attempt would be wrong: the
+            // acquire immediately after a resize is the one most likely to come
+            // back `Outdated`, and that path returns early to re-arm, so
+            // clearing there would drop the debt on the exact tick it exists to
+            // cover.
+            debts: FrameDebts,
         }
 
         impl<R: RenderCallback, U, F: FnMut(U, &mut R) -> EventResponse> Handler<R, U, F> {
@@ -911,7 +1011,7 @@ impl App {
                         // very thing this line exists to prevent. Flagging the
                         // resize is what lets it outrank that answer; see
                         // `frame_gate`.
-                        self.resize_pending = true;
+                        self.debts.owe(FrameDebt::Resized);
                         if let Some(w) = &self.window {
                             w.request_redraw();
                         }
@@ -923,6 +1023,22 @@ impl App {
                         // Resized in the same frame, which reconfigures
                         // the surface — we don't need to do that here.
                         self.scale_factor = *scale_factor;
+                        // ── ★ BUT THE FRAME IS OWED HERE, NOT THERE ─────────
+                        // The pairing above is winit's promise, not ours, and
+                        // a debt that depends on another event arriving is not
+                        // a debt this loop controls. Recording it here costs
+                        // one redundant frame in the paired case and is the
+                        // difference between a correct window and a window
+                        // rendering at the wrong scale in the unpaired one.
+                        //
+                        // `scale_factor` feeds RenderContext, so every consumer
+                        // that authors in logical pixels draws wrong until a
+                        // frame carries the new value — and a consumer whose
+                        // CONTENT did not change has no reason to ask for one.
+                        self.debts.owe(FrameDebt::ScaleChanged);
+                        if let Some(w) = &self.window {
+                            w.request_redraw();
+                        }
                     }
                     WindowEvent::Focused(focused) => {
                         let app_event = AppEvent::Focused(*focused);
@@ -1059,10 +1175,10 @@ impl App {
                         // side-effect free, but short-circuiting past it would
                         // make that documentation load-bearing for correctness
                         // rather than merely true.
-                        let callback_says = self
+                        let content_says = self
                             .renderer
                             .needs_frame(crate::render::FrameQuery { elapsed, dt });
-                        let frame_needed = frame_gate(self.resize_pending, callback_says);
+                        let frame_needed = frame_gate(self.debts, content_says);
                         // Under `Reactive` this is what decides whether the
                         // loop holds a deadline or parks. Recorded on every
                         // pacing so the field never carries a stale answer
@@ -1077,6 +1193,23 @@ impl App {
                                     if let Some(cfg) = &self.surface_config {
                                         surface.configure(&gpu.device, cfg);
                                     }
+                                    // ── ★ THE RE-ARM BELOW IS NOT ENOUGH ─────
+                                    // This arm has requested a redraw since
+                                    // `127512e`, and that redraw was then handed
+                                    // straight back to the consumer's
+                                    // content-only answer — which is `false`,
+                                    // because a lost swapchain changes no
+                                    // content. So the fix re-armed a frame that
+                                    // the gate then skipped, and the window
+                                    // stayed frozen exactly as before.
+                                    //
+                                    // Recording the debt is what makes the
+                                    // re-arm mean something. Note this arm is
+                                    // reached MOST often right after a resize
+                                    // (`Outdated` is what a resize produces),
+                                    // so the two debts routinely coexist — and
+                                    // settle together on one presented frame.
+                                    self.debts.owe(FrameDebt::SurfaceRecovered);
                                     // ── ★ RE-ARM, OR THIS IS A PERMANENT FREEZE ──
                                     // The comment ~20 lines above already states
                                     // this rule for the frame-SKIP path — "it is a
@@ -1175,7 +1308,7 @@ impl App {
                             // above returns early to re-arm, and the acquire
                             // right after a resize is the one most likely to
                             // come back `Outdated`.
-                            self.resize_pending = false;
+                            self.debts.settle();
 
                             // First-frame reveal — show the window only
                             // after the swapchain has real pixels in it.
@@ -1319,7 +1452,7 @@ impl App {
             next_frame_due: Instant::now(),
             reactive: matches!(pacing, FramePacing::Reactive(_)),
             animating: true,
-            resize_pending: false,
+            debts: FrameDebts::at_startup(),
         };
 
         event_loop
@@ -1335,30 +1468,111 @@ mod tests {
     use super::*;
 
     #[test]
-    fn a_resize_outranks_a_consumer_that_reports_itself_clean() {
-        // THE REGRESSION, stated as the predicate that shipped broken three
-        // times: a consumer whose `needs_frame` answers from content alone says
-        // `false` after a resize, because a resize changes no content. If that
-        // answer reaches the acquire/render/present decision unmodified, no
-        // frame is drawn, nothing is committed, and on Wayland the window stays
-        // the size of its last committed buffer — indefinitely.
+    fn debt_variants_all_force_a_frame() {
+        // THE CLASS, stated once and checked for EVERY member — the property
+        // that three one-arm fixes could not give us. A consumer whose
+        // `needs_frame` answers from content alone says `false` after any of
+        // these, because none of them changes content. If that answer reached
+        // the acquire/render/present decision unmodified, no frame would be
+        // drawn, nothing committed, and on Wayland the window keeps the size
+        // and pixels of its last committed buffer — indefinitely.
+        //
+        // Walking `FrameDebt::ALL` is what makes this a matrix rather than
+        // three assertions: a variant added to the enum and forgotten here
+        // fails this test, and a variant that never reaches `ALL` fails to
+        // compile in `FrameDebt::bit`.
+        // ── ★ THE DENOMINATOR, CARRIED INSIDE THE ASSERTION ──────────────
+        // A matrix that iterates an empty list passes while testing nothing —
+        // the vacuity hazard this fleet has been bitten by repeatedly. `ALL` is
+        // emitted by `#[derive(AllVariants)]`, so it cannot silently lose a
+        // variant the way the hand-written const it replaced could; it CAN
+        // still be empty if the derive ever breaks. Assert the loop ran.
         assert!(
-            frame_gate(true, false),
-            "a pending resize must produce a frame even when the renderer \
-             reports itself clean — this is the half-width-window bug"
+            !FrameDebt::ALL.is_empty(),
+            "the debt matrix iterated nothing — a green run here would mean \
+             the derive stopped emitting variants, not that the class is fixed"
+        );
+        for &reason in FrameDebt::ALL {
+            let mut debts = FrameDebts::default();
+            debts.owe(reason);
+            assert!(
+                frame_gate(debts, false),
+                "{reason:?} must produce a frame even when the renderer reports \
+                 itself clean — the consumer cannot see this reason"
+            );
+        }
+    }
+
+    #[test]
+    fn the_gate_passes_a_clean_loop_through_untouched() {
+        // The other half, and the reason this is a gate and not a force: with
+        // nothing outstanding the consumer's answer is passed through
+        // untouched, in BOTH directions. A gate that quietly raised the idle
+        // case to `true` would hand back the 50.7%-of-a-core idle repaint that
+        // `needs_frame` was introduced to remove.
+        assert!(!frame_gate(FrameDebts::default(), false));
+        assert!(frame_gate(FrameDebts::default(), true));
+    }
+
+    #[test]
+    fn debts_coexist_and_settle_together() {
+        // A resize whose first acquire returns `Outdated` owes both at once —
+        // the routine case, not a corner one. One presented frame discharges
+        // every reason it was owed for, so `settle` clears the set rather than
+        // one bit; anything else would leave a permanent debt nothing can pay.
+        let mut debts = FrameDebts::default();
+        debts.owe(FrameDebt::Resized);
+        debts.owe(FrameDebt::SurfaceRecovered);
+        assert!(debts.any());
+        debts.settle();
+        assert!(!debts.any(), "one presented frame settles every debt");
+        assert!(!frame_gate(debts, false));
+    }
+
+    #[test]
+    fn owing_is_idempotent() {
+        // Two resizes before a single frame is one debt, not two — otherwise
+        // `settle` would have to count, and a miscount is a window that either
+        // freezes or repaints forever.
+        let mut once = FrameDebts::default();
+        once.owe(FrameDebt::Resized);
+        let mut twice = FrameDebts::default();
+        twice.owe(FrameDebt::Resized);
+        twice.owe(FrameDebt::Resized);
+        assert_eq!(once, twice);
+    }
+
+    #[test]
+    fn a_loop_starts_owing_its_first_frame() {
+        // The default `needs_frame` answers `true`, so only an OVERRIDE could
+        // suppress the very first frame — and "only an override" is exactly the
+        // population that has this bug. A window that has drawn nothing has the
+        // most outstanding frame there is, so the startup set says so.
+        assert!(FrameDebts::at_startup().any());
+        assert!(frame_gate(FrameDebts::at_startup(), false));
+        assert_ne!(
+            FrameDebts::at_startup(),
+            FrameDebts::default(),
+            "startup must not be spelled `default()` — `default` reads as \
+             'nothing outstanding', which is the opposite of the truth"
         );
     }
 
     #[test]
-    fn the_gate_changes_nothing_when_no_resize_is_pending() {
-        // The other half, and the reason this is a gate and not a force: with
-        // no resize outstanding the consumer's answer is passed through
-        // untouched, in BOTH directions. A gate that quietly raised the idle
-        // case to `true` would hand back the 50.7%-of-a-core idle repaint that
-        // `needs_frame` was introduced to remove.
-        assert!(!frame_gate(false, false));
-        assert!(frame_gate(false, true));
-        assert!(frame_gate(true, true));
+    fn every_debt_has_a_distinct_bit() {
+        // `bit()` is a hand-written exhaustive match, so a new variant compiles
+        // only once someone classifies it — but nothing stops that someone
+        // pasting a neighbour's shift. Two variants sharing a bit would make
+        // one of them settle the other silently.
+        let mut seen = 0u8;
+        for &reason in FrameDebt::ALL {
+            let mut debts = FrameDebts::default();
+            debts.owe(reason);
+            let bit = debts.0;
+            assert_ne!(bit, 0, "{reason:?} must occupy a bit");
+            assert_eq!(seen & bit, 0, "{reason:?} shares a bit with another debt");
+            seen |= bit;
+        }
     }
 
     #[test]
