@@ -1216,7 +1216,7 @@ dependencies = [
 
 [[package]]
 name = "madori"
-version = "0.1.17"
+version = "0.1.18"
 dependencies = [
  "egaku",
  "garasu",
@@ -2133,9 +2133,9 @@ checksum = "a5fb3ed7c462ed1f055d1db17434f2ceaffdd4a7dd6d633328cc1493e9423f40"
 
 [[package]]
 name = "shikumi"
-version = "0.1.825"
+version = "0.1.830"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b41647be010ed91bd73bda4f608b48bb6f8bbda42078a0b7212eef6a4c1e531b"
+checksum = "fda5fa76fbfc942823b21af279b618e6679628b8d9e1f78dcc4d03715a8652aa"
 dependencies = [
  "arc-swap",
  "async-trait",
