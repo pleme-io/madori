@@ -60,7 +60,10 @@ mod tests {
             other => panic!("expected Garasu variant, got {other:?}"),
         }
         assert!(outer.source().is_some());
-        assert_eq!(outer.to_string(), "garasu error: GPU error: adapter missing");
+        assert_eq!(
+            outer.to_string(),
+            "garasu error: GPU error: adapter missing"
+        );
     }
 
     #[test]
@@ -68,8 +71,12 @@ mod tests {
         // Result<T> is `std::result::Result<T, MadoriError>`. If this
         // alias ever shadows to anyhow::Result or similar, `?` chains
         // throughout the crate would change their error semantics.
-        fn ok() -> Result<u8> { Ok(7) }
-        fn err() -> Result<u8> { Err(MadoriError::Render("x".into())) }
+        fn ok() -> Result<u8> {
+            Ok(7)
+        }
+        fn err() -> Result<u8> {
+            Err(MadoriError::Render("x".into()))
+        }
         assert_eq!(ok().unwrap(), 7);
         assert!(err().is_err());
     }

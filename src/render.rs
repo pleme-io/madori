@@ -161,7 +161,10 @@ impl RenderCallback for ClearRenderer {
 mod needs_frame_tests {
     use super::{FrameQuery, RenderCallback, RenderContext};
 
-    const Q: FrameQuery = FrameQuery { elapsed: 0.0, dt: 0.0 };
+    const Q: FrameQuery = FrameQuery {
+        elapsed: 0.0,
+        dt: 0.0,
+    };
 
     /// A renderer that only implements `render` — i.e. every consumer that
     /// existed before `needs_frame` was added.

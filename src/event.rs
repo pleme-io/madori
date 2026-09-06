@@ -348,10 +348,22 @@ mod tests {
         // future refactor (e.g. bitflags) drops a field from the OR, that
         // modifier would silently stop gating hotkeys — hard to notice.
         for modifier in [
-            Modifiers { shift: true, ..Default::default() },
-            Modifiers { ctrl: true, ..Default::default() },
-            Modifiers { alt: true, ..Default::default() },
-            Modifiers { meta: true, ..Default::default() },
+            Modifiers {
+                shift: true,
+                ..Default::default()
+            },
+            Modifiers {
+                ctrl: true,
+                ..Default::default()
+            },
+            Modifiers {
+                alt: true,
+                ..Default::default()
+            },
+            Modifiers {
+                meta: true,
+                ..Default::default()
+            },
         ] {
             assert!(modifier.any(), "any() false for {modifier:?}");
         }
@@ -359,9 +371,18 @@ mod tests {
 
     #[test]
     fn modifiers_any_with_combinations() {
-        let all = Modifiers { shift: true, ctrl: true, alt: true, meta: true };
+        let all = Modifiers {
+            shift: true,
+            ctrl: true,
+            alt: true,
+            meta: true,
+        };
         assert!(all.any());
-        let ctrl_alt = Modifiers { ctrl: true, alt: true, ..Default::default() };
+        let ctrl_alt = Modifiers {
+            ctrl: true,
+            alt: true,
+            ..Default::default()
+        };
         assert!(ctrl_alt.any());
     }
 
@@ -370,7 +391,12 @@ mod tests {
         // Modifiers participates in config serialization (hotkeys stored
         // as YAML). A rename or reorder would silently break user
         // configs — pin the field set via JSON round-trip.
-        let original = Modifiers { shift: true, ctrl: false, alt: true, meta: false };
+        let original = Modifiers {
+            shift: true,
+            ctrl: false,
+            alt: true,
+            meta: false,
+        };
         let json = serde_json::to_string(&original).unwrap();
         assert!(json.contains("\"shift\":true"));
         assert!(json.contains("\"alt\":true"));
@@ -422,10 +448,18 @@ mod tests {
         // exact; a typo like `NamedKey::F3 => Self::F(2)` would route
         // shortcuts to the wrong slot.
         let fkeys = [
-            (NamedKey::F1, 1u8), (NamedKey::F2, 2), (NamedKey::F3, 3),
-            (NamedKey::F4, 4), (NamedKey::F5, 5), (NamedKey::F6, 6),
-            (NamedKey::F7, 7), (NamedKey::F8, 8), (NamedKey::F9, 9),
-            (NamedKey::F10, 10), (NamedKey::F11, 11), (NamedKey::F12, 12),
+            (NamedKey::F1, 1u8),
+            (NamedKey::F2, 2),
+            (NamedKey::F3, 3),
+            (NamedKey::F4, 4),
+            (NamedKey::F5, 5),
+            (NamedKey::F6, 6),
+            (NamedKey::F7, 7),
+            (NamedKey::F8, 8),
+            (NamedKey::F9, 9),
+            (NamedKey::F10, 10),
+            (NamedKey::F11, 11),
+            (NamedKey::F12, 12),
         ];
         for (named, n) in fkeys {
             let got = KeyCode::from_winit(&WKey::Named(named));
@@ -502,7 +536,10 @@ mod tests {
         let caps = KeyCode::from_winit(&WKey::Named(NamedKey::CapsLock));
         let unmapped = KeyCode::from_winit(&WKey::Named(NamedKey::PrintScreen));
         assert_ne!(caps, unmapped);
-        assert_ne!(KeyCode::from_winit(&WKey::Named(NamedKey::NumLock)), unmapped);
+        assert_ne!(
+            KeyCode::from_winit(&WKey::Named(NamedKey::NumLock)),
+            unmapped
+        );
     }
 
     #[test]

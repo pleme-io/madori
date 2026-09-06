@@ -79,6 +79,37 @@ pub enum FramePacing {
     /// `performance.target_fps` does — convert through
     /// [`FramePacing::from_target_fps`], which maps it to `Continuous`.
     Capped(NonZeroU32),
+    /// **Sleep until something happens; wake on a deadline only while an
+    /// animation is actually in flight.**
+    ///
+    /// ── ★ WHY `Capped` WAS NOT ENOUGH ───────────────────────────────────
+    /// `Capped` still wakes `n` times a second forever. For a window that is
+    /// on screen continuously — a terminal, an editor — that is the right
+    /// trade, and 60 cheap wakeups buy a frame whenever one is wanted.
+    ///
+    /// It is the wrong trade for a window that spends almost all of its life
+    /// showing nothing. A launcher summoned by a hotkey is hidden ~99.9% of
+    /// the time; capping it at 60 fps means 60 wakeups a second, all day, to
+    /// discover 60 times a second that there is still nothing to draw. An
+    /// app built on `ControlFlow::Wait` costs *literally zero* while idle,
+    /// and that is a property worth keeping rather than trading away for the
+    /// ability to animate.
+    ///
+    /// `Reactive` keeps both. Idle, the loop parks in `ControlFlow::Wait` and
+    /// costs nothing; input, resize and IME still wake it exactly as they
+    /// would under any pacing. The moment
+    /// [`RenderCallback::needs_frame`] answers `true` — an animation is in
+    /// flight — the loop switches to the same `WaitUntil` cadence `Capped`
+    /// uses, and it switches back the frame after `needs_frame` answers
+    /// `false`.
+    ///
+    /// ★ **`needs_frame` is therefore load-bearing here in a way it is not
+    /// elsewhere.** Under the other two pacings a renderer that always
+    /// answers `true` merely wastes frames; under `Reactive` it converts the
+    /// mode into `Capped` and quietly gives up the idle-free property. A
+    /// consumer choosing `Reactive` must answer honestly, which — since the
+    /// default impl returns `true` — means implementing it at all.
+    Reactive(NonZeroU32),
 }
 
 impl FramePacing {
@@ -98,6 +129,7 @@ impl FramePacing {
     pub fn frame_interval(self) -> Option<Duration> {
         match self {
             Self::Continuous => None,
+            Self::Reactive(fps) => Some(Duration::from_secs_f64(1.0 / f64::from(fps.get()))),
             Self::Capped(fps) => Some(Duration::from_secs_f64(1.0 / f64::from(fps.get()))),
         }
     }
@@ -411,6 +443,18 @@ impl App {
             // When the next frame is due. Meaningless (and never read)
             // while `frame_interval` is None.
             next_frame_due: Instant,
+            // `Reactive` pacing only: park in `ControlFlow::Wait` between
+            // events instead of holding a deadline. Read together with
+            // `animating` below.
+            reactive: bool,
+            // The last answer `RenderCallback::needs_frame` gave.
+            //
+            // ★ Starts `true` so the FIRST frame is never gated on an answer
+            // nobody has asked for yet: a window that has drawn nothing has
+            // nothing to keep showing, and parking before the first paint
+            // would show an empty surface until the user happened to move
+            // the mouse.
+            animating: bool,
         }
 
         impl<R: RenderCallback, U, F: FnMut(U, &mut R) -> EventResponse> Handler<R, U, F> {
@@ -948,6 +992,11 @@ impl App {
                         let frame_needed = self
                             .renderer
                             .needs_frame(crate::render::FrameQuery { elapsed, dt });
+                        // Under `Reactive` this is what decides whether the
+                        // loop holds a deadline or parks. Recorded on every
+                        // pacing so the field never carries a stale answer
+                        // from a mode switch.
+                        self.animating = frame_needed;
                         if let (true, Some(surface), Some(gpu), Some(text)) =
                             (frame_needed, &self.surface, &self.gpu, &mut self.text)
                         {
@@ -1086,6 +1135,18 @@ impl App {
                 let Some(interval) = self.frame_interval else {
                     return;
                 };
+                // ── ★ NOTHING IN FLIGHT: SLEEP, DO NOT SCHEDULE ─────────────
+                // `Reactive`'s whole value is this branch. With no animation
+                // pending there is no next frame to be due, so the loop parks
+                // in `ControlFlow::Wait` and the thread costs nothing at all
+                // until a real event arrives. `next_frame_due` is resynced to
+                // `now` on the way out, so waking from an arbitrarily long
+                // park does not read as a stall and queue catch-up frames.
+                if self.reactive && !self.animating {
+                    self.next_frame_due = Instant::now();
+                    event_loop.set_control_flow(winit::event_loop::ControlFlow::Wait);
+                    return;
+                }
                 let now = Instant::now();
                 if now >= self.next_frame_due {
                     // Advance from the previous DEADLINE, not from `now`, so
@@ -1176,6 +1237,8 @@ impl App {
             first_frame_presented: false,
             frame_interval,
             next_frame_due: Instant::now(),
+            reactive: matches!(pacing, FramePacing::Reactive(_)),
+            animating: true,
         };
 
         event_loop
@@ -1231,6 +1294,33 @@ mod tests {
     fn zero_target_fps_means_uncapped_not_an_infinite_interval() {
         assert_eq!(FramePacing::from_target_fps(0), FramePacing::Continuous);
         assert_eq!(FramePacing::from_target_fps(0).frame_interval(), None);
+    }
+
+    #[test]
+    fn reactive_paces_like_capped_when_something_is_moving() {
+        let fps = NonZeroU32::new(60).unwrap();
+        // Same cadence as `Capped` — the difference is not the interval, it
+        // is whether the loop holds one while nothing is animating.
+        assert_eq!(
+            FramePacing::Reactive(fps).frame_interval(),
+            FramePacing::Capped(fps).frame_interval()
+        );
+        assert!(FramePacing::Reactive(fps).frame_interval().is_some());
+    }
+
+    /// ★ `from_target_fps` must NOT start returning `Reactive`. It exists to
+    /// translate one specific sentinel (mado's `0 == uncapped`) and its
+    /// callers expect the historical mapping; a pacing that parks the loop is
+    /// a deliberate choice a consumer makes with `frame_pacing`, never
+    /// something a number silently becomes.
+    #[test]
+    fn target_fps_never_yields_reactive() {
+        for fps in [0_u32, 1, 30, 60, 240] {
+            assert!(!matches!(
+                FramePacing::from_target_fps(fps),
+                FramePacing::Reactive(_)
+            ));
+        }
     }
 
     #[test]
