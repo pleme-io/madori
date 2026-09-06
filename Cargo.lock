@@ -1006,9 +1006,9 @@ dependencies = [
 
 [[package]]
 name = "ishou-tokens"
-version = "0.1.17"
+version = "0.1.18"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e6c1825fa9cb726fc72478c6d2b1eab2e072d3563a09acd478ec4d4bdeb7a6be"
+checksum = "23db07da0d5de4f3a0a689c87d1b407286fbcdaaa4ed5e2c61c6e64efb1f8125"
 dependencies = [
  "irodori",
  "serde",
@@ -1216,7 +1216,7 @@ dependencies = [
 
 [[package]]
 name = "madori"
-version = "0.1.18"
+version = "0.1.19"
 dependencies = [
  "egaku",
  "garasu",
@@ -2133,9 +2133,9 @@ checksum = "a5fb3ed7c462ed1f055d1db17434f2ceaffdd4a7dd6d633328cc1493e9423f40"
 
 [[package]]
 name = "shikumi"
-version = "0.1.830"
+version = "0.1.838"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fda5fa76fbfc942823b21af279b618e6679628b8d9e1f78dcc4d03715a8652aa"
+checksum = "ea5ef5b493da7abb717d29e1e9217e29d8c7f3d370cb2ffad2bcfb90384742d0"
 dependencies = [
  "arc-swap",
  "async-trait",

@@ -1,8 +1,8 @@
 {
   "schema_version": 2,
-  "cargo_lock_sha256": "01845bdd5b8994c3f45c7a6eff3f3c144e9e1fa2302acc9e8191d7c1221568d4",
+  "cargo_lock_sha256": "bedfb5f48041e73a74faca5b8102b04f8fc545a5711a95e343bd1f37bee098da",
   "manifest_sha256": {
-    "Cargo.toml": "f2fb6372440d63621410c4b36c5bc0df1601fddb0b05ac2fc732e51963fdb027"
+    "Cargo.toml": "c60f16d09b13aec45b06b68b7753b42d9cc574e9c3aa947afd1d923b6dc06cc0"
   },
   "target_resolves": {
     "base": {
@@ -663,7 +663,7 @@
           },
           {
             "name": "ishou_tokens",
-            "package_key": "ishou-tokens-0.1.17",
+            "package_key": "ishou-tokens-0.1.18",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -1745,7 +1745,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "ishou-tokens-0.1.17": {
+      "ishou-tokens-0.1.18": {
         "runtime_dependencies": [
           {
             "name": "irodori",
@@ -1948,7 +1948,7 @@
           "hashbrown"
         ]
       },
-      "madori-0.1.18": {
+      "madori-0.1.19": {
         "runtime_dependencies": [
           {
             "name": "egaku",
@@ -1972,7 +1972,7 @@
           },
           {
             "name": "ishou_tokens",
-            "package_key": "ishou-tokens-0.1.17",
+            "package_key": "ishou-tokens-0.1.18",
             "kind": "normal",
             "features": [
               "wgpu"
@@ -2006,7 +2006,7 @@
           },
           {
             "name": "shikumi",
-            "package_key": "shikumi-0.1.830",
+            "package_key": "shikumi-0.1.838",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -3063,7 +3063,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "shikumi-0.1.830": {
+      "shikumi-0.1.838": {
         "runtime_dependencies": [
           {
             "name": "arc_swap",
@@ -20235,7 +20235,7 @@
     "irodori-0.1.1": {
       "edition": "2024"
     },
-    "ishou-tokens-0.1.17": {
+    "ishou-tokens-0.1.18": {
       "edition": "2024"
     },
     "itoa-1.0.18": {
@@ -20277,7 +20277,7 @@
     "lru-0.12.5": {
       "edition": "2015"
     },
-    "madori-0.1.18": {
+    "madori-0.1.19": {
       "edition": "2024",
       "lib_target": {
         "name": "madori",
@@ -20492,7 +20492,7 @@
     "shibori-0.1.1": {
       "edition": "2024"
     },
-    "shikumi-0.1.830": {
+    "shikumi-0.1.838": {
       "edition": "2024"
     },
     "shlex-2.0.1": {

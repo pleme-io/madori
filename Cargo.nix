@@ -3574,7 +3574,7 @@ rec {
       };
       "madori" = rec {
         crateName = "madori";
-        version = "0.1.18";
+        version = "0.1.19";
         edition = "2024";
         src = lib.cleanSourceWith { filter = sourceFilter;  src = ./.; };
         dependencies = [
@@ -7382,9 +7382,9 @@ rec {
       };
       "shikumi" = rec {
         crateName = "shikumi";
-        version = "0.1.825";
+        version = "0.1.830";
         edition = "2024";
-        sha256 = "06sk3r66mvrf46vs0y10ljyqnvxv925n0kys7gbipn8f06z4f5ml";
+        sha256 = "1ajjhrd720sdrj6zgqfrp0l9crz632v7kwhsn8iji57wzdvgm9gx";
         dependencies = [
           {
             name = "arc-swap";
