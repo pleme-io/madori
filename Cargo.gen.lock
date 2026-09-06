@@ -1,8 +1,8 @@
 {
   "schema_version": 2,
-  "cargo_lock_sha256": "9ab3b6aecc0bc28ebfc046b2c3e6220a37e908b8350e3b2050953548096e7b95",
+  "cargo_lock_sha256": "139f3ba391b10f841a2261996d20aff0c7146b1e2808ac99ae1e4e6899a2bdc4",
   "manifest_sha256": {
-    "Cargo.toml": "1095ab81f166c8e4ae94dcd5095a8e415718a96c618e28f7dbdb455c539963d9"
+    "Cargo.toml": "1591caec5fa27c35a7fa576c70705cc5885a1252dcc4de9ebb27418d9e0d9141"
   },
   "target_resolves": {
     "base": {
@@ -1112,7 +1112,7 @@
           "default"
         ]
       },
-      "gen-macros-0.1.49": {
+      "gen-macros-0.1.50": {
         "runtime_dependencies": [
           {
             "name": "proc_macro2",
@@ -1151,11 +1151,11 @@
         "build_dependencies": [],
         "features": []
       },
-      "gen-platform-0.1.49": {
+      "gen-platform-0.1.50": {
         "runtime_dependencies": [
           {
             "name": "gen_macros",
-            "package_key": "gen-macros-0.1.49",
+            "package_key": "gen-macros-0.1.50",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -1165,7 +1165,7 @@
           },
           {
             "name": "gen_types",
-            "package_key": "gen-types-0.1.49",
+            "package_key": "gen-types-0.1.50",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -1219,7 +1219,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "gen-types-0.1.49": {
+      "gen-types-0.1.50": {
         "runtime_dependencies": [
           {
             "name": "blake3",
@@ -1948,7 +1948,7 @@
           "hashbrown"
         ]
       },
-      "madori-0.1.16": {
+      "madori-0.1.17": {
         "runtime_dependencies": [
           {
             "name": "egaku",
@@ -2006,7 +2006,7 @@
           },
           {
             "name": "shikumi",
-            "package_key": "shikumi-0.1.824",
+            "package_key": "shikumi-0.1.825",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -3063,7 +3063,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "shikumi-0.1.824": {
+      "shikumi-0.1.825": {
         "runtime_dependencies": [
           {
             "name": "arc_swap",
@@ -3101,7 +3101,7 @@
           },
           {
             "name": "gen_platform",
-            "package_key": "gen-platform-0.1.49",
+            "package_key": "gen-platform-0.1.50",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -3111,7 +3111,7 @@
           },
           {
             "name": "gen_types",
-            "package_key": "gen-types-0.1.49",
+            "package_key": "gen-types-0.1.50",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -20159,14 +20159,14 @@
       "edition": "2024",
       "build_script": "build.rs"
     },
-    "gen-macros-0.1.49": {
+    "gen-macros-0.1.50": {
       "edition": "2024",
       "proc_macro": true
     },
-    "gen-platform-0.1.49": {
+    "gen-platform-0.1.50": {
       "edition": "2024"
     },
-    "gen-types-0.1.49": {
+    "gen-types-0.1.50": {
       "edition": "2024"
     },
     "gethostname-1.1.0": {
@@ -20277,7 +20277,7 @@
     "lru-0.12.5": {
       "edition": "2015"
     },
-    "madori-0.1.16": {
+    "madori-0.1.17": {
       "edition": "2024",
       "lib_target": {
         "name": "madori",
@@ -20492,7 +20492,7 @@
     "shibori-0.1.1": {
       "edition": "2024"
     },
-    "shikumi-0.1.824": {
+    "shikumi-0.1.825": {
       "edition": "2024"
     },
     "shlex-2.0.1": {
