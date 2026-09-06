@@ -3574,7 +3574,7 @@ rec {
       };
       "madori" = rec {
         crateName = "madori";
-        version = "0.1.20";
+        version = "0.1.21";
         edition = "2024";
         src = lib.cleanSourceWith { filter = sourceFilter;  src = ./.; };
         dependencies = [
