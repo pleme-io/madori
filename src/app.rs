@@ -135,6 +135,45 @@ impl FramePacing {
     }
 }
 
+/// Whether `RedrawRequested` must acquire, render and present this tick.
+///
+/// [`RenderCallback::needs_frame`] lets a consumer skip all three when nothing
+/// it draws has changed. That is the right question for CONTENT and the wrong
+/// question for GEOMETRY, because a resize changes no content: mado's override
+/// answers from terminal-grid state alone (seqno, grid epoch, cursor, overlays,
+/// bell, search), so a window that is merely the wrong SIZE reports itself
+/// perfectly clean and the frame carrying the new size is never drawn.
+///
+/// ── ★ THIS IS THE THIRD TIME THIS CLASS HAS SHIPPED ──────────────────────
+/// `5c20bdb` (a resize must schedule a frame) and `127512e` (a lost swapchain
+/// must re-arm) both fixed one arm each, and both ended with the same sentence:
+/// *"a resize is an EDGE that must produce a frame even when the app is
+/// otherwise idle."* Both then left `needs_frame` standing between the redraw
+/// they requested and the frame they wanted, so **both repairs were defeated by
+/// the same gate** — including the `Outdated` recovery path, whose own comment
+/// says "`Outdated` is precisely what a RESIZE produces".
+///
+/// MEASURED on plo 2026-09-06, omoya + mado, ungoogled-chromium closing beside
+/// it: omoya re-flowed to one full-width slot (`layout 4,32 1912x1044`) and
+/// mado's surface stayed at the two-column width (`geometry 4,32 952x1044`) —
+/// same origin, half the width, the right half showing desktop. One keystroke
+/// (evdev 28) snapped it to `1912x1044`, because a keystroke changes the grid
+/// and the grid is the only thing the gate was asking about.
+///
+/// ── ★ WHY THIS LIVES IN MADORI AND NOT IN MADO ───────────────────────────
+/// Every consumer that overrides `needs_frame` re-acquires this bug, and the
+/// override is the whole reason the trait method exists — mado added it to stop
+/// burning 50.7% of a core on a static screen. Fixing mado would leave the next
+/// consumer to rediscover it, which is exactly how it reached three arms. The
+/// loop owns the resize, so the loop owns the frame that carries it.
+///
+/// Resolving to `true` on doubt is the codebase's standing rule for this
+/// question: a redundant frame costs microseconds, a wrongly-skipped one is a
+/// window that stops updating.
+pub(crate) fn frame_gate(resize_pending: bool, callback_says: bool) -> bool {
+    resize_pending || callback_says
+}
+
 /// Configuration for creating an App.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(default)]
@@ -455,6 +494,18 @@ impl App {
             // would show an empty surface until the user happened to move
             // the mouse.
             animating: bool,
+            // A resize has reconfigured the surface and no frame has been
+            // PRESENTED at the new size yet.
+            //
+            // Set on `Resized`, cleared only after `frame.present()` — on
+            // attempt would be wrong, because the acquire immediately after a
+            // resize is the one most likely to come back `Outdated`, and that
+            // path returns early to re-arm. Clearing there would drop the force
+            // on the exact tick it exists to cover.
+            //
+            // See `frame_gate`: this is the input that lets a resize outrank a
+            // consumer's content-only `needs_frame`.
+            resize_pending: bool,
         }
 
         impl<R: RenderCallback, U, F: FnMut(U, &mut R) -> EventResponse> Handler<R, U, F> {
@@ -848,6 +899,19 @@ impl App {
                         // cadence, but a resize is an edge that must produce a
                         // frame even when the app is otherwise idle — which is
                         // exactly the state a terminal sits in.
+                        //
+                        // ★ AND THE REQUEST IS NOT ENOUGH ON ITS OWN. The
+                        // `RedrawRequested` arm below gates the acquire, the
+                        // render and the present on
+                        // `RenderCallback::needs_frame`, which a consumer
+                        // answers from its CONTENT. A resize changes no content,
+                        // so a correct consumer reports itself clean and the
+                        // frame this line just asked for is skipped — leaving
+                        // the window at its old committed size, which is the
+                        // very thing this line exists to prevent. Flagging the
+                        // resize is what lets it outrank that answer; see
+                        // `frame_gate`.
+                        self.resize_pending = true;
                         if let Some(w) = &self.window {
                             w.request_redraw();
                         }
@@ -989,9 +1053,16 @@ impl App {
                         let now = Instant::now();
                         let elapsed = now.duration_since(self.start_time).as_secs_f32();
                         let dt = now.duration_since(self.last_frame).as_secs_f32();
-                        let frame_needed = self
+                        // Asked UNCONDITIONALLY, and before the gate, so a
+                        // pending resize never silently skips the consumer's
+                        // question. The trait documents `needs_frame` as
+                        // side-effect free, but short-circuiting past it would
+                        // make that documentation load-bearing for correctness
+                        // rather than merely true.
+                        let callback_says = self
                             .renderer
                             .needs_frame(crate::render::FrameQuery { elapsed, dt });
+                        let frame_needed = frame_gate(self.resize_pending, callback_says);
                         // Under `Reactive` this is what decides whether the
                         // loop holds a deadline or parks. Recorded on every
                         // pacing so the field never carries a stale answer
@@ -1096,6 +1167,15 @@ impl App {
                             self.renderer.render(&mut render_ctx);
 
                             frame.present();
+
+                            // A buffer at the new size is now COMMITTED, which
+                            // on Wayland is the only thing that makes the
+                            // window actually be that size. Cleared here and
+                            // not at the top of this block: every error arm
+                            // above returns early to re-arm, and the acquire
+                            // right after a resize is the one most likely to
+                            // come back `Outdated`.
+                            self.resize_pending = false;
 
                             // First-frame reveal — show the window only
                             // after the swapchain has real pixels in it.
@@ -1239,6 +1319,7 @@ impl App {
             next_frame_due: Instant::now(),
             reactive: matches!(pacing, FramePacing::Reactive(_)),
             animating: true,
+            resize_pending: false,
         };
 
         event_loop
@@ -1252,6 +1333,33 @@ impl App {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn a_resize_outranks_a_consumer_that_reports_itself_clean() {
+        // THE REGRESSION, stated as the predicate that shipped broken three
+        // times: a consumer whose `needs_frame` answers from content alone says
+        // `false` after a resize, because a resize changes no content. If that
+        // answer reaches the acquire/render/present decision unmodified, no
+        // frame is drawn, nothing is committed, and on Wayland the window stays
+        // the size of its last committed buffer — indefinitely.
+        assert!(
+            frame_gate(true, false),
+            "a pending resize must produce a frame even when the renderer \
+             reports itself clean — this is the half-width-window bug"
+        );
+    }
+
+    #[test]
+    fn the_gate_changes_nothing_when_no_resize_is_pending() {
+        // The other half, and the reason this is a gate and not a force: with
+        // no resize outstanding the consumer's answer is passed through
+        // untouched, in BOTH directions. A gate that quietly raised the idle
+        // case to `true` would hand back the 50.7%-of-a-core idle repaint that
+        // `needs_frame` was introduced to remove.
+        assert!(!frame_gate(false, false));
+        assert!(frame_gate(false, true));
+        assert!(frame_gate(true, true));
+    }
 
     #[test]
     fn app_config_defaults() {
