@@ -48,7 +48,28 @@ pub struct FrameQuery {
 }
 
 /// Trait that applications implement for custom rendering.
-pub trait RenderCallback: Send + 'static {
+///
+/// ── ★ NOT `Send`, AND THAT IS THE POINT ──────────────────────────────────
+/// This required `Send + 'static` until 2026-09-06. Nothing in madori needed
+/// it: `cargo check --all-targets` is clean without it, because the renderer
+/// never crosses a thread — it lives on the event loop, and the only `Send`
+/// bounds madori actually relies on are on the boxed event handler
+/// (`app.rs:352`) and on the `EventLoopProxy` (`app.rs:493`), neither of which
+/// captures `R`.
+///
+/// What the bound DID do was keep a real app off this loop. namimado holds a
+/// `Box<dyn BrowserEngine>` — a web engine is not `Send` — so implementing
+/// `RenderCallback` was `E0277` and it hand-rolled its own winit loop instead.
+/// That matters far beyond one app: the missed-frame class (see
+/// [`crate::app::FrameDebt`]) is only solvable ONCE, in the loop, and every app
+/// pushed out of the loop is a place it can silently come back. An unnecessary
+/// bound that forces apps to reimplement the event loop costs more than the
+/// invariant it was protecting, which was none.
+///
+/// Relaxing a supertrait bound is backward-compatible: every existing
+/// implementor already satisfies the stricter form. A consumer that genuinely
+/// needs `R: Send` states it at its own call site.
+pub trait RenderCallback: 'static {
     /// Is a frame needed at all?
     ///
     /// Asked **before** the swapchain image is acquired, so returning `false`
