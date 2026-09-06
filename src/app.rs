@@ -957,10 +957,65 @@ impl App {
                                     if let Some(cfg) = &self.surface_config {
                                         surface.configure(&gpu.device, cfg);
                                     }
+                                    // ── ★ RE-ARM, OR THIS IS A PERMANENT FREEZE ──
+                                    // The comment ~20 lines above already states
+                                    // this rule for the frame-SKIP path — "it is a
+                                    // condition, not an early return … returning
+                                    // from here would skip it and the window would
+                                    // never be asked to draw again". The hazard is
+                                    // identical here and this arm was the one that
+                                    // still bare-returned.
+                                    //
+                                    // `Outdated` is precisely what a RESIZE
+                                    // produces: the swapchain no longer matches the
+                                    // surface, so we reconfigure — and then need
+                                    // another frame to actually present at the new
+                                    // size. Without re-arming, that frame never
+                                    // comes, and on Wayland a window's size IS its
+                                    // last committed buffer, so it stays stale
+                                    // forever.
+                                    //
+                                    // MEASURED on plo 2026-09-05 via WAYLAND_DEBUG
+                                    // on a live mado. omoya sent
+                                    // `xdg_toplevel.configure(856, 518)`, mado
+                                    // ACKED it and called
+                                    // `set_window_geometry(0, 0, 856, 518)` — then
+                                    // destroyed its wl_buffers and never attached
+                                    // another. Compositor-side and protocol-side
+                                    // were both correct; the client simply stopped
+                                    // drawing. Symptom: a band of desktop
+                                    // background where a window should be, and
+                                    // tobira stuck as a 1048x518 rectangle when it
+                                    // asks to be 600x53.
+                                    //
+                                    // Unconditional, and NOT gated on
+                                    // `frame_interval`: under `Capped`,
+                                    // `about_to_wait` owns the steady-state
+                                    // cadence, but recovering from a lost
+                                    // swapchain is an EDGE that must produce a
+                                    // frame even when the app is otherwise idle —
+                                    // which is exactly what a terminal or a
+                                    // launcher is between keystrokes.
+                                    if let Some(w) = &self.window {
+                                        w.request_redraw();
+                                    }
                                     return;
                                 }
                                 Err(e) => {
                                     tracing::warn!("surface error: {e}");
+                                    // Same rule as the arm above, and the same
+                                    // reason: every `return` out of this arm skips
+                                    // the re-arming `request_redraw()` at the
+                                    // bottom, so ANY surface error — including a
+                                    // transient `Timeout`, which is explicitly
+                                    // recoverable — would be permanent. A warning
+                                    // followed by a window that never redraws again
+                                    // is worse than the error it reports, because
+                                    // the log says "transient" and the screen says
+                                    // "frozen".
+                                    if let Some(w) = &self.window {
+                                        w.request_redraw();
+                                    }
                                     return;
                                 }
                             };
