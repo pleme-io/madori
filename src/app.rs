@@ -266,6 +266,53 @@ impl<R: RenderCallback> AppBuilder<R> {
             self.app_id,
         )
     }
+
+    /// Run with a typed **user-event channel** — the seam an app needs when
+    /// something OUTSIDE the event loop must reach it.
+    ///
+    /// ── ★ WHY THIS EXISTS: IT IS WHY APPS BYPASS madori ─────────────────
+    /// madori implemented plain `ApplicationHandler`, i.e. winit's
+    /// `ApplicationHandler<()>`. An app that needs to be woken from another
+    /// thread — an IPC socket, a global hotkey daemon, a file watcher —
+    /// therefore could not use madori at all, and had to hand-roll its own
+    /// winit loop.
+    ///
+    /// tobira is exactly that case (`ApplicationHandler<IpcCommand>`, 543
+    /// lines of bespoke loop) and it is not a hypothetical cost: on
+    /// 2026-09-05 the SAME missing `window.request_redraw()` on resize had to
+    /// be fixed twice on the same day — once in madori for mado, once in
+    /// tobira's own copy — because the two loops never shared a line. Two
+    /// codebases that never coordinated arriving at the same defect is the
+    /// fleet's own signal that the shape is forced by the problem and belongs
+    /// in one place.
+    ///
+    /// ── ★ WHY A SEPARATE ENTRY POINT AND NOT `AppEvent::User(U)` ─────────
+    /// Genericising `AppEvent` over the payload is the tidier type, and it
+    /// breaks every existing consumer: five apps (mado, kagi, kekkai, fumi,
+    /// nami) match on `AppEvent`, and a new variant makes any exhaustive
+    /// match a compile error in a repo that asked for nothing. The user
+    /// payload is delivered to its OWN handler instead, so an app that does
+    /// not want user events cannot even observe that they exist.
+    ///
+    /// `on_user` receives each payload sent through the proxy. `with_proxy`
+    /// is handed the proxy once at startup — that is the object the outside
+    /// world keeps, and it is `Send`, so it can cross to the IPC thread.
+    pub fn run_with_user_events<U, F, P>(self, mut on_user: F, with_proxy: P) -> Result<()>
+    where
+        U: 'static,
+        F: FnMut(U, &mut R) -> EventResponse + 'static,
+        P: FnOnce(winit::event_loop::EventLoopProxy<U>) + 'static,
+    {
+        App::run_inner_with_user(
+            self.config,
+            self.renderer,
+            self.event_handler,
+            self.pacing,
+            self.app_id,
+            move |payload, renderer| on_user(payload, renderer),
+            with_proxy,
+        )
+    }
 }
 
 /// The main application entry point.
@@ -284,12 +331,48 @@ impl App {
         pacing: FramePacing,
         app_id: Option<String>,
     ) -> Result<()> {
+        // The no-user-event path is the user-event path with an uninhabited-
+        // in-practice payload: `()` is never sent because no proxy escapes.
+        // One loop implementation, so a fix cannot land in one and not the
+        // other — which is the whole reason this seam exists.
+        Self::run_inner_with_user::<R, (), _, _>(
+            config,
+            renderer,
+            event_handler,
+            pacing,
+            app_id,
+            |(), _r| EventResponse::default(),
+            |_proxy| {},
+        )
+    }
+
+    #[allow(clippy::too_many_arguments, clippy::too_many_lines)]
+    fn run_inner_with_user<R, U, F, P>(
+        config: AppConfig,
+        renderer: R,
+        event_handler: Option<Box<dyn FnMut(&AppEvent, &mut R) -> EventResponse + Send + 'static>>,
+        pacing: FramePacing,
+        app_id: Option<String>,
+        on_user: F,
+        with_proxy: P,
+    ) -> Result<()>
+    where
+        R: RenderCallback,
+        U: 'static,
+        F: FnMut(U, &mut R) -> EventResponse + 'static,
+        P: FnOnce(winit::event_loop::EventLoopProxy<U>) + 'static,
+    {
         use winit::application::ApplicationHandler;
         use winit::event::{ElementState, WindowEvent};
-        use winit::event_loop::EventLoop;
+        use winit::event_loop::{ActiveEventLoop, EventLoop};
         use winit::window::{Window, WindowAttributes};
 
-        struct Handler<R: RenderCallback> {
+        struct Handler<R: RenderCallback, U, F: FnMut(U, &mut R) -> EventResponse> {
+            /// Delivered each payload sent through the proxy. Its own handler
+            /// rather than an `AppEvent` variant, so apps that never asked for
+            /// user events cannot observe them at all.
+            on_user: F,
+            _user: std::marker::PhantomData<fn(U)>,
             config: AppConfig,
             app_id: Option<String>,
             renderer: R,
@@ -330,7 +413,7 @@ impl App {
             next_frame_due: Instant,
         }
 
-        impl<R: RenderCallback> Handler<R> {
+        impl<R: RenderCallback, U, F: FnMut(U, &mut R) -> EventResponse> Handler<R, U, F> {
             fn dispatch(
                 &mut self,
                 event: &AppEvent,
@@ -376,7 +459,27 @@ impl App {
             }
         }
 
-        impl<R: RenderCallback> ApplicationHandler for Handler<R> {
+        impl<R: RenderCallback, U: 'static, F: FnMut(U, &mut R) -> EventResponse>
+            ApplicationHandler<U> for Handler<R, U, F>
+        {
+            /// A payload arrived from outside the loop (the proxy).
+            ///
+            /// Handed straight to the app's own handler, then treated exactly
+            /// like any other event that can change what is on screen: if the
+            /// app asks for a redraw we schedule one. An IPC command that
+            /// changes state and never repaints is the same class of bug as
+            /// the resize that never committed a buffer.
+            fn user_event(&mut self, event_loop: &ActiveEventLoop, payload: U) {
+                let response = (self.on_user)(payload, &mut self.renderer);
+                if response.exit {
+                    event_loop.exit();
+                    return;
+                }
+                if let Some(w) = &self.window {
+                    w.request_redraw();
+                }
+            }
+
             fn resumed(&mut self, event_loop: &winit::event_loop::ActiveEventLoop) {
                 if self.window.is_some() {
                     return;
@@ -960,7 +1063,10 @@ impl App {
         #[cfg(target_os = "macos")]
         let event_loop = {
             use winit::platform::macos::EventLoopBuilderExtMacOS;
-            let mut builder = EventLoop::builder();
+            // `with_user_event()` rather than `builder()`, for the same reason
+            // as the non-macOS arm below: one loop shape on both platforms, so
+            // a user-event app is not silently a Linux-only app.
+            let mut builder = EventLoop::<U>::with_user_event();
             if matches!(config.menu_policy, MenuPolicy::AppOwned) {
                 builder.with_default_menu(false);
             }
@@ -969,7 +1075,16 @@ impl App {
                 .map_err(|e| MadoriError::EventLoop(e.to_string()))?
         };
         #[cfg(not(target_os = "macos"))]
-        let event_loop = EventLoop::new().map_err(|e| MadoriError::EventLoop(e.to_string()))?;
+        // ★ ALWAYS a user-event loop, even when U = (). winit's
+        // `EventLoop::new()` is `EventLoop<()>` built the same way, so this
+        // costs nothing on the no-user-event path and keeps ONE loop
+        // implementation rather than two that can drift.
+        let event_loop = EventLoop::<U>::with_user_event()
+            .build()
+            .map_err(|e| MadoriError::EventLoop(e.to_string()))?;
+        // Handed out before `run_app` blocks: this is the object the outside
+        // world keeps, and it is `Send`, so it can cross to an IPC thread.
+        with_proxy(event_loop.create_proxy());
         // The one line this whole knob exists for. `Continuous` (the default,
         // and what every consumer that never calls `frame_pacing` gets) keeps
         // `Poll` — the loop spins as it always did. A `Capped` pacing starts
@@ -981,6 +1096,8 @@ impl App {
         });
 
         let mut handler = Handler {
+            on_user,
+            _user: std::marker::PhantomData,
             config,
             app_id,
             renderer,
