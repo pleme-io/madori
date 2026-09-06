@@ -3015,9 +3015,9 @@ rec {
       };
       "ishou-tokens" = rec {
         crateName = "ishou-tokens";
-        version = "0.1.17";
+        version = "0.1.18";
         edition = "2024";
-        sha256 = "1gm6nzg4nkgcg3aaq29sav9p5q5jxaqx5ikq4k3nywnbm5gq5hg6";
+        sha256 = "09c13zxlxrn6c4n5xvd4mb6zp1kj80dpvj49lshg7r2x1pd0gnr3";
         libName = "ishou_tokens";
         dependencies = [
           {
@@ -3574,7 +3574,7 @@ rec {
       };
       "madori" = rec {
         crateName = "madori";
-        version = "0.1.19";
+        version = "0.1.20";
         edition = "2024";
         src = lib.cleanSourceWith { filter = sourceFilter;  src = ./.; };
         dependencies = [
@@ -3590,6 +3590,10 @@ rec {
             name = "ishou-tokens";
             packageId = "ishou-tokens";
             features = [ "wgpu" ];
+          }
+          {
+            name = "pleme-allvariants-derive";
+            packageId = "pleme-allvariants-derive";
           }
           {
             name = "pollster";
@@ -6264,6 +6268,30 @@ rec {
         ];
 
       };
+      "pleme-allvariants-derive" = rec {
+        crateName = "pleme-allvariants-derive";
+        version = "0.1.0";
+        edition = "2024";
+        sha256 = "0ak6kb42n3023bag9p2qxpzinkvzm9bmyh6alj6llc9kv2y19cbc";
+        procMacro = true;
+        libName = "pleme_allvariants_derive";
+        dependencies = [
+          {
+            name = "proc-macro2";
+            packageId = "proc-macro2";
+          }
+          {
+            name = "quote";
+            packageId = "quote";
+          }
+          {
+            name = "syn";
+            packageId = "syn 2.0.119";
+            features = [ "full" "extra-traits" ];
+          }
+        ];
+
+      };
       "polling" = rec {
         crateName = "polling";
         version = "3.11.0";
@@ -7382,9 +7410,9 @@ rec {
       };
       "shikumi" = rec {
         crateName = "shikumi";
-        version = "0.1.830";
+        version = "0.1.838";
         edition = "2024";
-        sha256 = "1ajjhrd720sdrj6zgqfrp0l9crz632v7kwhsn8iji57wzdvgm9gx";
+        sha256 = "1l228ww91yxwsbx2zjvhsgrwgn19gqhykq99gmqvnynsjfsgappa";
         dependencies = [
           {
             name = "arc-swap";

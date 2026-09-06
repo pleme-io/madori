@@ -1,8 +1,8 @@
 {
   "schema_version": 2,
-  "cargo_lock_sha256": "532bfb37347ab12f6ce48363e8dbb60be4378eae3a0cac4f3413f58b274ec45a",
+  "cargo_lock_sha256": "05560dc10aa123103565a9ceebf21d870c52c0bdc317e8a3b4cbcddac459e275",
   "manifest_sha256": {
-    "Cargo.toml": "d3689f46648f0c7ef795e2ff96d4cbd69793640954af8f8fe15b07384175b078"
+    "Cargo.toml": "98c102742fd248dc707891f2fed7190fe0096f031f8952d9243134f62cb7b2a6"
   },
   "target_resolves": {
     "base": {
@@ -1948,7 +1948,7 @@
           "hashbrown"
         ]
       },
-      "madori-0.1.19": {
+      "madori-0.1.20": {
         "runtime_dependencies": [
           {
             "name": "egaku",
@@ -20326,7 +20326,7 @@
     "lru-0.12.5": {
       "edition": "2015"
     },
-    "madori-0.1.19": {
+    "madori-0.1.20": {
       "edition": "2024",
       "lib_target": {
         "name": "madori",

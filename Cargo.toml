@@ -1,6 +1,6 @@
 [package]
 name = "madori"
-version = "0.1.19"
+version = "0.1.20"
 edition = "2024"
 rust-version = "1.89.0"
 description = "Madori (間取り) — GPU application framework for pleme-io apps"
