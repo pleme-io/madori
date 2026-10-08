@@ -1,12 +1,15 @@
+use crate::doorbell::{Doorbell, Drains, Line, Turnstile};
 use crate::error::{MadoriError, Result};
 use crate::event::{
     AppEvent, EventResponse, ImeEvent, KeyCode, KeyEvent, Modifiers, MouseButton, MouseEvent,
     ScrollDelta,
 };
+use crate::pacer::{Flow, Pacer};
 use crate::render::{RenderCallback, RenderContext};
 use garasu::GpuContext;
 use serde::{Deserialize, Serialize};
 use std::num::NonZeroU32;
+use std::sync::Arc;
 use std::time::{Duration, Instant};
 /// Who owns the macOS application menubar.
 ///
@@ -363,6 +366,43 @@ pub struct AppBuilder<R: RenderCallback> {
     /// and every other Wayland compositor / X11 WM associate the running
     /// window with its `.desktop` launcher.
     app_id: Option<String>,
+    doorbell: Doorbell,
+}
+
+enum LoopEvent<U> {
+    Ring,
+    User(U),
+}
+
+pub struct UserProxy<U: 'static> {
+    proxy: Arc<winit::event_loop::EventLoopProxy<LoopEvent<U>>>,
+}
+
+impl<U: 'static> Clone for UserProxy<U> {
+    fn clone(&self) -> Self {
+        Self {
+            proxy: Arc::clone(&self.proxy),
+        }
+    }
+}
+
+impl<U: 'static> std::fmt::Debug for UserProxy<U> {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("UserProxy").finish_non_exhaustive()
+    }
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, thiserror::Error)]
+#[error("the event loop has exited")]
+pub struct LoopClosed;
+
+impl<U: 'static> UserProxy<U> {
+    #[allow(clippy::missing_errors_doc)]
+    pub fn send(&self, payload: U) -> std::result::Result<(), LoopClosed> {
+        self.proxy
+            .send_event(LoopEvent::User(payload))
+            .map_err(|_| LoopClosed)
+    }
 }
 
 impl<R: RenderCallback> AppBuilder<R> {
@@ -373,6 +413,7 @@ impl<R: RenderCallback> AppBuilder<R> {
             event_handler: None,
             pacing: FramePacing::default(),
             app_id: None,
+            doorbell: Doorbell::new(),
         }
     }
 
@@ -450,6 +491,15 @@ impl<R: RenderCallback> AppBuilder<R> {
         self
     }
 
+    #[must_use]
+    pub fn waker(&self) -> std::task::Waker {
+        self.doorbell.waker()
+    }
+
+    pub fn renderer_mut(&mut self) -> &mut R {
+        &mut self.renderer
+    }
+
     /// Build and run the application. This blocks until the window is closed.
     pub fn run(self) -> Result<()> {
         App::run_inner(
@@ -458,6 +508,7 @@ impl<R: RenderCallback> AppBuilder<R> {
             self.event_handler,
             self.pacing,
             self.app_id,
+            self.doorbell,
         )
     }
 
@@ -489,13 +540,16 @@ impl<R: RenderCallback> AppBuilder<R> {
     /// not want user events cannot even observe that they exist.
     ///
     /// `on_user` receives each payload sent through the proxy. `with_proxy`
-    /// is handed the proxy once at startup — that is the object the outside
-    /// world keeps, and it is `Send`, so it can cross to the IPC thread.
+    /// is handed a [`UserProxy`] once at startup — that is the object the
+    /// outside world keeps, and it is `Send`, so it can cross to the IPC
+    /// thread. It shares the loop's one `EventLoopProxy` with the
+    /// wakers [`AppBuilder::waker`] hands out; cloning it never adds a
+    /// run-loop source.
     pub fn run_with_user_events<U, F, P>(self, mut on_user: F, with_proxy: P) -> Result<()>
     where
-        U: 'static,
+        U: Send + 'static,
         F: FnMut(U, &mut R) -> EventResponse + 'static,
-        P: FnOnce(winit::event_loop::EventLoopProxy<U>) + 'static,
+        P: FnOnce(UserProxy<U>) + 'static,
     {
         App::run_inner_with_user(
             self.config,
@@ -503,9 +557,18 @@ impl<R: RenderCallback> AppBuilder<R> {
             self.event_handler,
             self.pacing,
             self.app_id,
+            self.doorbell,
             move |payload, renderer| on_user(payload, renderer),
             with_proxy,
         )
+    }
+}
+
+fn control_flow(flow: Flow) -> winit::event_loop::ControlFlow {
+    match flow {
+        Flow::Poll => winit::event_loop::ControlFlow::Poll,
+        Flow::Wait => winit::event_loop::ControlFlow::Wait,
+        Flow::WaitUntil(at) => winit::event_loop::ControlFlow::WaitUntil(at),
     }
 }
 
@@ -524,6 +587,7 @@ impl App {
         event_handler: Option<Box<dyn FnMut(&AppEvent, &mut R) -> EventResponse + Send + 'static>>,
         pacing: FramePacing,
         app_id: Option<String>,
+        doorbell: Doorbell,
     ) -> Result<()> {
         // The no-user-event path is the user-event path with an uninhabited-
         // in-practice payload: `()` is never sent because no proxy escapes.
@@ -535,6 +599,7 @@ impl App {
             event_handler,
             pacing,
             app_id,
+            doorbell,
             |(), _r| EventResponse::default(),
             |_proxy| {},
         )
@@ -547,14 +612,15 @@ impl App {
         event_handler: Option<Box<dyn FnMut(&AppEvent, &mut R) -> EventResponse + Send + 'static>>,
         pacing: FramePacing,
         app_id: Option<String>,
+        doorbell: Doorbell,
         on_user: F,
         with_proxy: P,
     ) -> Result<()>
     where
         R: RenderCallback,
-        U: 'static,
+        U: Send + 'static,
         F: FnMut(U, &mut R) -> EventResponse + 'static,
-        P: FnOnce(winit::event_loop::EventLoopProxy<U>) + 'static,
+        P: FnOnce(UserProxy<U>) + 'static,
     {
         use winit::application::ApplicationHandler;
         use winit::event::{ElementState, WindowEvent};
@@ -595,28 +661,7 @@ impl App {
             // multicolor purple flash on macOS Metal). Flipped to true
             // after the first frame is presented.
             first_frame_presented: bool,
-            // Minimum gap between frames, or None for the legacy
-            // spin-as-fast-as-possible loop. `None` is the default and
-            // keeps `ControlFlow::Poll` + the self-sustaining
-            // request_redraw() at the end of RedrawRequested; `Some(d)`
-            // swaps both for a WaitUntil deadline driven from
-            // about_to_wait. See `FramePacing`.
-            frame_interval: Option<Duration>,
-            // When the next frame is due. Meaningless (and never read)
-            // while `frame_interval` is None.
-            next_frame_due: Instant,
-            // `Reactive` pacing only: park in `ControlFlow::Wait` between
-            // events instead of holding a deadline. Read together with
-            // `animating` below.
-            reactive: bool,
-            // The last answer `RenderCallback::needs_frame` gave.
-            //
-            // ★ Starts `true` so the FIRST frame is never gated on an answer
-            // nobody has asked for yet: a window that has drawn nothing has
-            // nothing to keep showing, and parking before the first paint
-            // would show an empty surface until the user happened to move
-            // the mouse.
-            animating: bool,
+            turnstile: Turnstile,
             // Frames the LOOP owes for reasons the consumer cannot observe —
             // geometry, swapchain recovery, scale, first paint. See `FrameDebt`.
             //
@@ -709,8 +754,22 @@ impl App {
             }
         }
 
+        impl<'a, R: RenderCallback, U, F: FnMut(U, &mut R) -> EventResponse>
+            Drains<&'a ActiveEventLoop> for Handler<R, U, F>
+        {
+            type Drained = EventResponse;
+
+            fn turnstile(&mut self) -> &mut Turnstile {
+                &mut self.turnstile
+            }
+
+            fn drain(&mut self, event_loop: &'a ActiveEventLoop) -> EventResponse {
+                self.dispatch(&AppEvent::RedrawRequested, event_loop)
+            }
+        }
+
         impl<R: RenderCallback, U: 'static, F: FnMut(U, &mut R) -> EventResponse>
-            ApplicationHandler<U> for Handler<R, U, F>
+            ApplicationHandler<LoopEvent<U>> for Handler<R, U, F>
         {
             /// A payload arrived from outside the loop (the proxy).
             ///
@@ -719,14 +778,25 @@ impl App {
             /// app asks for a redraw we schedule one. An IPC command that
             /// changes state and never repaints is the same class of bug as
             /// the resize that never committed a buffer.
-            fn user_event(&mut self, event_loop: &ActiveEventLoop, payload: U) {
-                let response = (self.on_user)(payload, &mut self.renderer);
-                if response.exit {
-                    event_loop.exit();
-                    return;
-                }
-                if let Some(w) = &self.window {
-                    w.request_redraw();
+            fn user_event(&mut self, event_loop: &ActiveEventLoop, event: LoopEvent<U>) {
+                match event {
+                    LoopEvent::Ring => {
+                        if self.turnstile.pacer.ring(Instant::now(), self.last_frame)
+                            && let Some(w) = &self.window
+                        {
+                            w.request_redraw();
+                        }
+                    }
+                    LoopEvent::User(payload) => {
+                        let response = (self.on_user)(payload, &mut self.renderer);
+                        if response.exit {
+                            event_loop.exit();
+                            return;
+                        }
+                        if let Some(w) = &self.window {
+                            w.request_redraw();
+                        }
+                    }
                 }
             }
 
@@ -1191,8 +1261,7 @@ impl App {
                     }
                     WindowEvent::RedrawRequested => {
                         // Dispatch redraw event to handler (for title updates, exit checks, etc.)
-                        let redraw_event = AppEvent::RedrawRequested;
-                        self.dispatch(&redraw_event, event_loop);
+                        Turnstile::redraw(self, event_loop);
 
                         // ★ ASK BEFORE ACQUIRING. The acquire, the render and
                         // the present are one decision — see
@@ -1238,7 +1307,7 @@ impl App {
                         // loop holds a deadline or parks. Recorded on every
                         // pacing so the field never carries a stale answer
                         // from a mode switch.
-                        self.animating = frame_needed;
+                        self.turnstile.pacer.set_animating(frame_needed);
                         if let (true, Some(surface), Some(gpu), Some(text)) =
                             (frame_needed, &self.surface, &self.gpu, &mut self.text)
                         {
@@ -1385,10 +1454,10 @@ impl App {
                         // and a loop with work to do never waits. Under
                         // Capped pacing `about_to_wait` owns the next
                         // request instead.
-                        if self.frame_interval.is_none() {
-                            if let Some(w) = &self.window {
-                                w.request_redraw();
-                            }
+                        if !self.turnstile.pacer.paced()
+                            && let Some(w) = &self.window
+                        {
+                            w.request_redraw();
                         }
                     }
                     _ => {}
@@ -1400,44 +1469,15 @@ impl App {
             /// `ControlFlow::Poll` and the `RedrawRequested` re-arm above
             /// keep the historical behaviour untouched.
             fn about_to_wait(&mut self, event_loop: &winit::event_loop::ActiveEventLoop) {
-                let Some(interval) = self.frame_interval else {
-                    return;
-                };
-                // ── ★ NOTHING IN FLIGHT: SLEEP, DO NOT SCHEDULE ─────────────
-                // `Reactive`'s whole value is this branch. With no animation
-                // pending there is no next frame to be due, so the loop parks
-                // in `ControlFlow::Wait` and the thread costs nothing at all
-                // until a real event arrives. `next_frame_due` is resynced to
-                // `now` on the way out, so waking from an arbitrarily long
-                // park does not read as a stall and queue catch-up frames.
-                if self.reactive && !self.animating {
-                    self.next_frame_due = Instant::now();
-                    event_loop.set_control_flow(winit::event_loop::ControlFlow::Wait);
-                    return;
+                let turn = self.turnstile.pacer.about_to_wait(Instant::now());
+                if turn.redraw
+                    && let Some(w) = &self.window
+                {
+                    w.request_redraw();
                 }
-                let now = Instant::now();
-                if now >= self.next_frame_due {
-                    // Advance from the previous DEADLINE, not from `now`, so
-                    // the cadence doesn't shed the render's own duration every
-                    // frame (that drift is how a 60 Hz cap silently becomes
-                    // 56 Hz). Resync to `now` only when a stall put us a whole
-                    // interval behind — a recovered stall must not queue a
-                    // burst of catch-up frames.
-                    let mut next = self.next_frame_due + interval;
-                    if next <= now {
-                        next = now + interval;
-                    }
-                    self.next_frame_due = next;
-                    if let Some(w) = &self.window {
-                        w.request_redraw();
-                    }
+                if let Some(flow) = turn.flow {
+                    event_loop.set_control_flow(control_flow(flow));
                 }
-                // Park until the next frame is due. Real input, resize and
-                // IME events still wake the loop early — a deadline caps how
-                // long we may SLEEP, it never delays an event.
-                event_loop.set_control_flow(winit::event_loop::ControlFlow::WaitUntil(
-                    self.next_frame_due,
-                ));
             }
         }
 
@@ -1450,7 +1490,7 @@ impl App {
             // `with_user_event()` rather than `builder()`, for the same reason
             // as the non-macOS arm below: one loop shape on both platforms, so
             // a user-event app is not silently a Linux-only app.
-            let mut builder = EventLoop::<U>::with_user_event();
+            let mut builder = EventLoop::<LoopEvent<U>>::with_user_event();
             if matches!(config.menu_policy, MenuPolicy::AppOwned) {
                 builder.with_default_menu(false);
             }
@@ -1463,21 +1503,24 @@ impl App {
         // `EventLoop::new()` is `EventLoop<()>` built the same way, so this
         // costs nothing on the no-user-event path and keeps ONE loop
         // implementation rather than two that can drift.
-        let event_loop = EventLoop::<U>::with_user_event()
+        let event_loop = EventLoop::<LoopEvent<U>>::with_user_event()
             .build()
             .map_err(|e| MadoriError::EventLoop(e.to_string()))?;
+        let proxy = Arc::new(event_loop.create_proxy());
+        let ring_proxy = Arc::clone(&proxy);
+        let line: Line = Box::new(move || {
+            let _ = ring_proxy.send_event(LoopEvent::Ring);
+        });
         // Handed out before `run_app` blocks: this is the object the outside
         // world keeps, and it is `Send`, so it can cross to an IPC thread.
-        with_proxy(event_loop.create_proxy());
+        with_proxy(UserProxy { proxy });
         // The one line this whole knob exists for. `Continuous` (the default,
         // and what every consumer that never calls `frame_pacing` gets) keeps
         // `Poll` — the loop spins as it always did. A `Capped` pacing starts
         // the deadline machinery; `about_to_wait` re-arms it every turn.
-        let frame_interval = pacing.frame_interval();
-        event_loop.set_control_flow(match frame_interval {
-            None => winit::event_loop::ControlFlow::Poll,
-            Some(_) => winit::event_loop::ControlFlow::WaitUntil(Instant::now()),
-        });
+        let pacer = Pacer::new(pacing, Instant::now());
+        event_loop.set_control_flow(control_flow(pacer.initial_flow(Instant::now())));
+        let turnstile = doorbell.connect(line, pacer);
 
         let mut handler = Handler {
             on_user,
@@ -1503,10 +1546,7 @@ impl App {
             cursor_x: 0.0,
             cursor_y: 0.0,
             first_frame_presented: false,
-            frame_interval,
-            next_frame_due: Instant::now(),
-            reactive: matches!(pacing, FramePacing::Reactive(_)),
-            animating: true,
+            turnstile,
             debts: FrameDebts::at_startup(),
         };
 

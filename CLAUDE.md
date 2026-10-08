@@ -23,6 +23,8 @@ and input dispatch system. Eliminates ~200 lines of identical boilerplate per GP
 | `event.rs` | `AppEvent`, `KeyEvent`, `MouseEvent`, `KeyCode`, `Modifiers` — platform-independent input |
 | `render.rs` | `RenderCallback` trait, `RenderContext` (gpu, text, surface_view, elapsed, dt). `text` is `&mut garasu::TextLayerStack` (was `TextRenderer`): the framework owns the stack, the app mints its own per-surface layers — so multi-pass text apps can't clobber one layer's buffer with another's. Single-pass apps use the back-compat `text.prepare`/`text.render` unchanged. |
 | `error.rs` | `MadoriError` — event loop and GPU init failures |
+| `doorbell.rs` | `Doorbell` — one per loop, owned by `AppBuilder` from `new()`, so a waker exists only with the loop it rings; `AppBuilder::waker` hands out coalescing `std::task::Waker`s over the loop's one `EventLoopProxy`. A ring sends only when its flag goes false → true. `Turnstile::redraw` is the redraw turn — the pacer's `redrawing`, then the flag lowered, then the consumer's dispatch, which is where it drains — and the only code that lowers the flag; the loop and the pacer tests both run it. Loom-modelled (`doorbell::loom_model`) |
+| `pacer.rs` | `Pacer` — the loop's scheduling decisions (pacing deadlines, Reactive parking, when a ring redraws: at once after an idle interval, else at the pacing slot), testable without a window |
 
 ### Layer Position
 
