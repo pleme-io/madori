@@ -1,0 +1,5 @@
+error[E0451]: field `sealed` of struct `Visible` is private
+ --> tests/ui/visible_forged.rs:4:47
+  |
+4 |     let _ = surface.acquire(madori::Visible { sealed: () });
+  |                                               ^^^^^^ private field

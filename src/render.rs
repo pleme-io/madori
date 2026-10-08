@@ -1,3 +1,5 @@
+use std::time::Instant;
+
 use garasu::{GpuContext, TextLayerStack};
 use ishou_tokens::{ColorPalette, FleetTheme, Srgb};
 
@@ -45,6 +47,43 @@ pub struct FrameQuery {
     /// stepping by `dt` needs: the motion is the same whether it was sampled
     /// often or rarely.
     pub dt: f32,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum FrameDemand {
+    Idle,
+    Now,
+    At(Instant),
+    Continuous,
+}
+
+impl FrameDemand {
+    #[must_use]
+    pub fn draws(self) -> bool {
+        match self {
+            Self::Now | Self::Continuous => true,
+            Self::Idle | Self::At(_) => false,
+        }
+    }
+
+    #[must_use]
+    pub fn deadline(self) -> Option<Instant> {
+        match self {
+            Self::At(at) => Some(at),
+            Self::Idle | Self::Now | Self::Continuous => None,
+        }
+    }
+
+    #[must_use]
+    pub fn with(self, other: Self) -> Self {
+        match (self, other) {
+            (Self::Continuous, _) | (_, Self::Continuous) => Self::Continuous,
+            (Self::Now, _) | (_, Self::Now) => Self::Now,
+            (Self::At(a), Self::At(b)) => Self::At(a.min(b)),
+            (Self::At(a), Self::Idle) | (Self::Idle, Self::At(a)) => Self::At(a),
+            (Self::Idle, Self::Idle) => Self::Idle,
+        }
+    }
 }
 
 /// Trait that applications implement for custom rendering.
@@ -103,10 +142,19 @@ pub trait RenderCallback: 'static {
         true
     }
 
+    fn frame_demand(&mut self, q: FrameQuery) -> FrameDemand {
+        if self.needs_frame(q) {
+            FrameDemand::Now
+        } else {
+            FrameDemand::Idle
+        }
+    }
+
     /// Called each frame. Draw into `ctx.surface_view`.
     ///
-    /// Not called at all when [`needs_frame`](Self::needs_frame) returns
-    /// `false`.
+    /// Not called at all when [`frame_demand`](Self::frame_demand) asks for
+    /// no frame now — by default, when [`needs_frame`](Self::needs_frame)
+    /// returns `false`.
     fn render(&mut self, ctx: &mut RenderContext<'_>);
 
     /// Called when the window is resized.
@@ -233,6 +281,49 @@ mod needs_frame_tests {
         let mut d = Draining(true);
         assert!(d.needs_frame(Q), "the first ask sees the dirty flag");
         assert!(!d.needs_frame(Q), "and the ask CONSUMED it");
+    }
+
+    #[test]
+    fn the_default_demand_maps_needs_frame_so_no_consumer_changes() {
+        use super::FrameDemand;
+        assert_eq!(Legacy.frame_demand(Q), FrameDemand::Now);
+        assert_eq!(AlwaysClean.frame_demand(Q), FrameDemand::Idle);
+        let mut d = Draining(true);
+        assert_eq!(d.frame_demand(Q), FrameDemand::Now);
+        assert_eq!(
+            d.frame_demand(Q),
+            FrameDemand::Idle,
+            "and the ask consumed it"
+        );
+    }
+
+    #[test]
+    fn only_now_and_continuous_draw_and_a_deadline_is_a_wake() {
+        use super::FrameDemand;
+        let at = std::time::Instant::now();
+        assert!(FrameDemand::Now.draws());
+        assert!(FrameDemand::Continuous.draws());
+        assert!(!FrameDemand::Idle.draws());
+        assert!(!FrameDemand::At(at).draws());
+        assert_eq!(FrameDemand::At(at).deadline(), Some(at));
+        assert_eq!(FrameDemand::Now.deadline(), None);
+    }
+
+    #[test]
+    fn demands_join_to_the_most_urgent_and_the_soonest_deadline() {
+        use super::FrameDemand::{At, Continuous, Idle, Now};
+        let early = std::time::Instant::now();
+        let late = early + std::time::Duration::from_secs(1);
+        let all = [Idle, Now, At(early), At(late), Continuous];
+        for a in all {
+            for b in all {
+                assert_eq!(a.with(b), b.with(a), "{a:?} with {b:?} commutes");
+                assert_eq!(a.with(Idle), a, "Idle is the identity");
+                assert_eq!(a.with(Continuous), Continuous);
+            }
+        }
+        assert_eq!(At(late).with(At(early)), At(early));
+        assert_eq!(At(late).with(Now), Now);
     }
 
     #[test]

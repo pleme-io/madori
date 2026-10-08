@@ -1,0 +1,15 @@
+error[E0061]: this method takes 1 argument but 0 arguments were supplied
+ --> tests/ui/acquire_without_token.rs:4:21
+  |
+4 |     let _ = surface.acquire();
+  |                     ^^^^^^^-- argument #1 of type `Visible` is missing
+  |
+note: method defined here
+ --> src/pacer/mod.rs
+  |
+  |     fn acquire(&self, visible: Visible) -> Result<Self::Frame, Self::Error>;
+  |        ^^^^^^^
+help: provide the argument
+  |
+4 |     let _ = surface.acquire(/* Visible */);
+  |                             +++++++++++++

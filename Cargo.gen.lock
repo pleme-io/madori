@@ -1,8 +1,8 @@
 {
   "schema_version": 2,
-  "cargo_lock_sha256": "e103888c170b00bfbf7c3507d79c972c3427b4246df3f40649cac04ddf3d1ce9",
+  "cargo_lock_sha256": "ef0f1cfcc6317ffd781ab08024c74fd87bfe79e3d1ffdf295d5f1c2cf263e745",
   "manifest_sha256": {
-    "Cargo.toml": "ba7dc1e01d5ae419aa507546fc3425d1c281eef2937e154983f0a7a0ee79bee7"
+    "Cargo.toml": "dc37fa9fece95b2b55251acc895e37066aa1c9804f6d3256babf30ae5b3f5d5d"
   },
   "target_resolves": {
     "base": {
@@ -1477,6 +1477,11 @@
         "features": [
           "std"
         ]
+      },
+      "glob-0.3.4": {
+        "runtime_dependencies": [],
+        "build_dependencies": [],
+        "features": []
       },
       "glow-0.16.0": {
         "runtime_dependencies": [],
@@ -3468,6 +3473,26 @@
           "serde"
         ]
       },
+      "serde_spanned-1.1.2": {
+        "runtime_dependencies": [
+          {
+            "name": "serde_core",
+            "package_key": "serde_core-1.0.229",
+            "kind": "normal",
+            "features": [],
+            "uses_default_features": false,
+            "optional": true,
+            "target": null,
+            "tree": "target"
+          }
+        ],
+        "build_dependencies": [],
+        "features": [
+          "alloc",
+          "serde",
+          "std"
+        ]
+      },
       "serde_yaml-0.9.34+deprecated": {
         "runtime_dependencies": [
           {
@@ -4005,6 +4030,11 @@
         "build_dependencies": [],
         "features": []
       },
+      "target-tuple-1.0.2": {
+        "runtime_dependencies": [],
+        "build_dependencies": [],
+        "features": []
+      },
       "tempfile-3.27.0": {
         "runtime_dependencies": [
           {
@@ -4198,6 +4228,88 @@
           "parse"
         ]
       },
+      "toml-1.1.7+spec-1.1.0": {
+        "runtime_dependencies": [
+          {
+            "name": "serde_core",
+            "package_key": "serde_core-1.0.229",
+            "kind": "normal",
+            "features": [
+              "alloc"
+            ],
+            "uses_default_features": false,
+            "optional": true,
+            "target": null,
+            "tree": "target"
+          },
+          {
+            "name": "serde_spanned",
+            "package_key": "serde_spanned-1.1.2",
+            "kind": "normal",
+            "features": [
+              "alloc"
+            ],
+            "uses_default_features": false,
+            "optional": false,
+            "target": null,
+            "tree": "target"
+          },
+          {
+            "name": "toml_datetime",
+            "package_key": "toml_datetime-1.1.2+spec-1.1.0",
+            "kind": "normal",
+            "features": [
+              "alloc"
+            ],
+            "uses_default_features": false,
+            "optional": false,
+            "target": null,
+            "tree": "target"
+          },
+          {
+            "name": "toml_parser",
+            "package_key": "toml_parser-1.1.4+spec-1.1.0",
+            "kind": "normal",
+            "features": [
+              "alloc"
+            ],
+            "uses_default_features": false,
+            "optional": true,
+            "target": null,
+            "tree": "target"
+          },
+          {
+            "name": "toml_writer",
+            "package_key": "toml_writer-1.1.3+spec-1.1.0",
+            "kind": "normal",
+            "features": [
+              "alloc"
+            ],
+            "uses_default_features": false,
+            "optional": true,
+            "target": null,
+            "tree": "target"
+          },
+          {
+            "name": "winnow",
+            "package_key": "winnow-1.0.4",
+            "kind": "normal",
+            "features": [],
+            "uses_default_features": false,
+            "optional": true,
+            "target": null,
+            "tree": "target"
+          }
+        ],
+        "build_dependencies": [],
+        "features": [
+          "default",
+          "display",
+          "parse",
+          "serde",
+          "std"
+        ]
+      },
       "toml_datetime-0.6.11": {
         "runtime_dependencies": [
           {
@@ -4214,6 +4326,27 @@
         "build_dependencies": [],
         "features": [
           "serde"
+        ]
+      },
+      "toml_datetime-1.1.2+spec-1.1.0": {
+        "runtime_dependencies": [
+          {
+            "name": "serde_core",
+            "package_key": "serde_core-1.0.229",
+            "kind": "normal",
+            "features": [],
+            "uses_default_features": false,
+            "optional": true,
+            "target": null,
+            "tree": "target"
+          }
+        ],
+        "build_dependencies": [],
+        "features": [
+          "alloc",
+          "default",
+          "serde",
+          "std"
         ]
       },
       "toml_edit-0.22.27": {
@@ -4290,12 +4423,40 @@
           "serde"
         ]
       },
+      "toml_parser-1.1.4+spec-1.1.0": {
+        "runtime_dependencies": [
+          {
+            "name": "winnow",
+            "package_key": "winnow-1.0.4",
+            "kind": "normal",
+            "features": [],
+            "uses_default_features": false,
+            "optional": false,
+            "target": null,
+            "tree": "target"
+          }
+        ],
+        "build_dependencies": [],
+        "features": [
+          "alloc",
+          "default",
+          "std"
+        ]
+      },
       "toml_write-0.1.2": {
         "runtime_dependencies": [],
         "build_dependencies": [],
         "features": [
           "alloc",
           "default",
+          "std"
+        ]
+      },
+      "toml_writer-1.1.3+spec-1.1.0": {
+        "runtime_dependencies": [],
+        "build_dependencies": [],
+        "features": [
+          "alloc",
           "std"
         ]
       },
@@ -4569,6 +4730,82 @@
           "tracing",
           "tracing-log"
         ]
+      },
+      "trybuild-1.0.122": {
+        "runtime_dependencies": [
+          {
+            "name": "glob",
+            "package_key": "glob-0.3.4",
+            "kind": "normal",
+            "features": [],
+            "uses_default_features": true,
+            "optional": false,
+            "target": null,
+            "tree": "target"
+          },
+          {
+            "name": "serde",
+            "package_key": "serde-1.0.229",
+            "kind": "normal",
+            "features": [],
+            "uses_default_features": true,
+            "optional": false,
+            "target": null,
+            "tree": "target"
+          },
+          {
+            "name": "serde_derive",
+            "package_key": "serde_derive-1.0.229",
+            "kind": "normal",
+            "features": [],
+            "uses_default_features": true,
+            "optional": false,
+            "target": null,
+            "tree": "host"
+          },
+          {
+            "name": "serde_json",
+            "package_key": "serde_json-1.0.151",
+            "kind": "normal",
+            "features": [],
+            "uses_default_features": true,
+            "optional": false,
+            "target": null,
+            "tree": "target"
+          },
+          {
+            "name": "target_tuple",
+            "package_key": "target-tuple-1.0.2",
+            "kind": "normal",
+            "features": [],
+            "uses_default_features": true,
+            "optional": false,
+            "target": null,
+            "tree": "target"
+          },
+          {
+            "name": "termcolor",
+            "package_key": "termcolor-1.4.1",
+            "kind": "normal",
+            "features": [],
+            "uses_default_features": true,
+            "optional": false,
+            "target": null,
+            "tree": "target"
+          },
+          {
+            "name": "toml",
+            "package_key": "toml-1.1.7+spec-1.1.0",
+            "kind": "normal",
+            "features": [],
+            "uses_default_features": true,
+            "optional": false,
+            "target": null,
+            "tree": "target"
+          }
+        ],
+        "build_dependencies": [],
+        "features": []
       },
       "ttf-parser-0.20.0": {
         "runtime_dependencies": [],
@@ -4961,6 +5198,18 @@
         "features": [
           "alloc",
           "default",
+          "std"
+        ]
+      },
+      "winnow-1.0.4": {
+        "runtime_dependencies": [],
+        "build_dependencies": [],
+        "features": [
+          "alloc",
+          "ascii",
+          "binary",
+          "default",
+          "parser",
           "std"
         ]
       },
@@ -20828,6 +21077,9 @@
       "edition": "2024",
       "build_script": "build.rs"
     },
+    "glob-0.3.4": {
+      "edition": "2021"
+    },
     "glow-0.16.0": {
       "edition": "2021"
     },
@@ -21178,6 +21430,9 @@
     "serde_spanned-0.6.9": {
       "edition": "2021"
     },
+    "serde_spanned-1.1.2": {
+      "edition": "2024"
+    },
     "serde_yaml-0.9.34+deprecated": {
       "edition": "2021"
     },
@@ -21248,6 +21503,10 @@
     "sys-locale-0.3.2": {
       "edition": "2018"
     },
+    "target-tuple-1.0.2": {
+      "edition": "2021",
+      "build_script": "build.rs"
+    },
     "tempfile-3.27.0": {
       "edition": "2021"
     },
@@ -21285,14 +21544,26 @@
     "toml-0.8.23": {
       "edition": "2021"
     },
+    "toml-1.1.7+spec-1.1.0": {
+      "edition": "2024"
+    },
     "toml_datetime-0.6.11": {
       "edition": "2021"
+    },
+    "toml_datetime-1.1.2+spec-1.1.0": {
+      "edition": "2024"
     },
     "toml_edit-0.22.27": {
       "edition": "2021"
     },
+    "toml_parser-1.1.4+spec-1.1.0": {
+      "edition": "2024"
+    },
     "toml_write-0.1.2": {
       "edition": "2021"
+    },
+    "toml_writer-1.1.3+spec-1.1.0": {
+      "edition": "2024"
     },
     "tracing-0.1.44": {
       "edition": "2018"
@@ -21309,6 +21580,9 @@
     },
     "tracing-subscriber-0.3.23": {
       "edition": "2018"
+    },
+    "trybuild-1.0.122": {
+      "edition": "2024"
     },
     "ttf-parser-0.20.0": {
       "edition": "2018"
@@ -21466,6 +21740,9 @@
       "build_script": "build.rs"
     },
     "winnow-0.7.15": {
+      "edition": "2021"
+    },
+    "winnow-1.0.4": {
       "edition": "2021"
     },
     "x11-dl-2.21.0": {

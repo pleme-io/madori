@@ -4,7 +4,7 @@ use crate::event::{
     AppEvent, EventResponse, ImeEvent, KeyCode, KeyEvent, Modifiers, MouseButton, MouseEvent,
     ScrollDelta,
 };
-use crate::pacer::{Flow, Pacer};
+use crate::pacer::{Flow, Pacer, Shift, Surface as _, Wake};
 use crate::render::{RenderCallback, RenderContext};
 use garasu::GpuContext;
 use serde::{Deserialize, Serialize};
@@ -100,18 +100,22 @@ pub enum FramePacing {
     ///
     /// `Reactive` keeps both. Idle, the loop parks in `ControlFlow::Wait` and
     /// costs nothing; input, resize and IME still wake it exactly as they
-    /// would under any pacing. The moment
-    /// [`RenderCallback::needs_frame`] answers `true` — an animation is in
-    /// flight — the loop switches to the same `WaitUntil` cadence `Capped`
-    /// uses, and it switches back the frame after `needs_frame` answers
-    /// `false`.
+    /// would under any pacing. The first frame after a park is drawn at once;
+    /// while [`RenderCallback::frame_demand`] keeps asking for frames the loop
+    /// is Hot and ticks at the slower of this rate and the display's, drawing
+    /// at most once a tick; two ticks that draw nothing park it again, and an
+    /// `At` demand parks it until that instant. An occluded or minimized
+    /// window — on Wayland, one whose frame callbacks stopped — is Hidden:
+    /// nothing is acquired until it is shown again, and the reveal owes a
+    /// frame.
     ///
-    /// ★ **`needs_frame` is therefore load-bearing here in a way it is not
+    /// ★ **`frame_demand` is therefore load-bearing here in a way it is not
     /// elsewhere.** Under the other two pacings a renderer that always
-    /// answers `true` merely wastes frames; under `Reactive` it converts the
+    /// asks for a frame merely wastes frames; under `Reactive` it converts the
     /// mode into `Capped` and quietly gives up the idle-free property. A
     /// consumer choosing `Reactive` must answer honestly, which — since the
-    /// default impl returns `true` — means implementing it at all.
+    /// default impl maps `needs_frame`, which returns `true` — means
+    /// implementing one of them at all.
     Reactive(NonZeroU32),
 }
 
@@ -182,6 +186,7 @@ pub(crate) enum FrameDebt {
     /// `true`, so only an override could suppress the very first frame — but
     /// "only an override" is exactly the population that has this bug.
     FirstFrame,
+    Revealed,
 }
 
 impl FrameDebt {
@@ -197,6 +202,7 @@ impl FrameDebt {
             Self::SurfaceRecovered => 1 << 1,
             Self::ScaleChanged => 1 << 2,
             Self::FirstFrame => 1 << 3,
+            Self::Revealed => 1 << 4,
         }
     }
 }
@@ -279,13 +285,13 @@ pub(crate) fn frame_gate(debts: FrameDebts, content_says: bool) -> bool {
     debts.any() || content_says
 }
 
-/// Whether delivering `event` obliges the loop to re-ask `needs_frame`.
+/// Whether delivering `event` obliges the loop to re-ask `frame_demand`.
 ///
 /// The mirror of [`FrameDebt`]. A debt is the loop KNOWING a frame is required
 /// and forcing one; this is the loop knowing only that the consumer's ANSWER may
 /// have changed, and scheduling the question. Modelling it as a debt would draw
 /// on every mouse-move; not modelling it at all deadlocks
-/// [`FramePacing::Reactive`], because `animating` is assigned only in the
+/// [`FramePacing::Reactive`], because the pacer decides only in the
 /// `RedrawRequested` arm and a parked loop that never re-arms never asks again.
 ///
 /// ★ **Negative by default, on purpose.** A new [`AppEvent`] variant re-asks
@@ -496,6 +502,11 @@ impl<R: RenderCallback> AppBuilder<R> {
         self.doorbell.waker()
     }
 
+    #[must_use]
+    pub fn visibility(&self) -> crate::Visibility {
+        self.doorbell.visibility()
+    }
+
     pub fn renderer_mut(&mut self) -> &mut R {
         &mut self.renderer
     }
@@ -661,9 +672,9 @@ impl App {
             // multicolor purple flash on macOS Metal). Flipped to true
             // after the first frame is presented.
             first_frame_presented: bool,
-            turnstile: Turnstile,
-            // Frames the LOOP owes for reasons the consumer cannot observe —
-            // geometry, swapchain recovery, scale, first paint. See `FrameDebt`.
+            // The pacer also holds the frames the LOOP owes for reasons the
+            // consumer cannot observe — geometry, swapchain recovery, scale,
+            // first paint, a reveal. See `FrameDebt`.
             //
             // Owed at the edge that creates them, settled ONLY after
             // `frame.present()`. Settling on attempt would be wrong: the
@@ -671,10 +682,43 @@ impl App {
             // back `Outdated`, and that path returns early to re-arm, so
             // clearing there would drop the debt on the exact tick it exists to
             // cover.
-            debts: FrameDebts,
+            turnstile: Turnstile,
         }
 
         impl<R: RenderCallback, U, F: FnMut(U, &mut R) -> EventResponse> Handler<R, U, F> {
+            fn request_redraw(&mut self) {
+                if let Some(w) = &self.window {
+                    w.request_redraw();
+                    self.turnstile.pacer.requested(Instant::now());
+                }
+            }
+
+            fn read_display(&mut self) {
+                let millihertz = self
+                    .window
+                    .as_ref()
+                    .and_then(|w| w.current_monitor())
+                    .and_then(|m| m.refresh_rate_millihertz());
+                self.turnstile.pacer.set_display_millihertz(millihertz);
+            }
+
+            fn read_minimized(&mut self, event_loop: &ActiveEventLoop) {
+                let minimized = self
+                    .window
+                    .as_ref()
+                    .and_then(|w| w.is_minimized())
+                    .unwrap_or(false);
+                let shift = self.turnstile.pacer.set_minimized(minimized);
+                self.shift(shift, event_loop);
+            }
+
+            fn shift(&mut self, shift: Shift, event_loop: &ActiveEventLoop) {
+                if shift == Shift::Shown {
+                    self.request_redraw();
+                }
+                Turnstile::shift(self, shift, event_loop);
+            }
+
             fn dispatch(
                 &mut self,
                 event: &AppEvent,
@@ -690,33 +734,30 @@ impl App {
                 // defect. `FrameDebt` exists because the CONSUMER cannot see
                 // the loop's reasons to draw; this exists because the LOOP
                 // cannot see the consumer's. Handing a consumer an event may
-                // have changed its answer to `needs_frame`, and the loop has no
+                // have changed its answer to `frame_demand`, and the loop has no
                 // way to know that it did.
                 //
                 // Under `Reactive` that gap is a deadlock, not an inefficiency:
-                // `animating` is assigned ONLY in the `RedrawRequested` arm, so
-                // once the loop parks with `animating == false`, a keystroke
-                // wakes it, `about_to_wait` sees `!animating` and parks again —
-                // without ever requesting a redraw. `needs_frame` is never
-                // asked again, so no amount of typing can produce a frame. A
-                // launcher would render once and then ignore the keyboard
-                // forever.
+                // the pacer decides ONLY in the `RedrawRequested` arm, so once
+                // it parks, a keystroke wakes the loop, `about_to_wait` finds
+                // nothing due and parks again — without ever requesting a
+                // redraw. `frame_demand` is never asked again, so no amount of
+                // typing can produce a frame. A launcher would render once and
+                // then ignore the keyboard forever.
                 //
                 // ★ RE-ASK, NOT A DEBT. A `FrameDebt` FORCES a draw because the
                 // loop knows one is required. Here it knows no such thing — it
                 // only knows the answer may have changed. So it schedules the
-                // QUESTION and lets the consumer decide: if `needs_frame` still
-                // says `false` the loop parks again having spent one predicate
-                // call and no frame. Modelling this as a debt would draw on
+                // QUESTION and lets the consumer decide: if `frame_demand` still
+                // asks for no frame the loop parks again having spent one
+                // predicate call and no frame. Modelling this as a debt would draw on
                 // every mouse-move.
                 //
                 // Excluding `RedrawRequested` is load-bearing: re-arming on the
                 // dispatch that a redraw itself performs would make `Reactive`
                 // spin exactly like `Continuous` and silently delete the mode.
-                if reask_after(event) {
-                    if let Some(w) = &self.window {
-                        w.request_redraw();
-                    }
+                if reask_after(event) && self.turnstile.pacer.reask(Instant::now()) {
+                    self.request_redraw();
                 }
 
                 // Handle set_title
@@ -780,21 +821,21 @@ impl App {
             /// the resize that never committed a buffer.
             fn user_event(&mut self, event_loop: &ActiveEventLoop, event: LoopEvent<U>) {
                 match event {
-                    LoopEvent::Ring => {
-                        if self.turnstile.pacer.ring(Instant::now(), self.last_frame)
-                            && let Some(w) = &self.window
-                        {
-                            w.request_redraw();
+                    LoopEvent::Ring => match self.turnstile.pacer.ring(Instant::now()) {
+                        Wake::Redraw => self.request_redraw(),
+                        Wake::Defer => {}
+                        Wake::Drain => {
+                            Turnstile::redraw(self, event_loop);
                         }
-                    }
+                    },
                     LoopEvent::User(payload) => {
                         let response = (self.on_user)(payload, &mut self.renderer);
                         if response.exit {
                             event_loop.exit();
                             return;
                         }
-                        if let Some(w) = &self.window {
-                            w.request_redraw();
+                        if self.turnstile.pacer.reask(Instant::now()) {
+                            self.request_redraw();
                         }
                     }
                 }
@@ -1052,6 +1093,13 @@ impl App {
                 }
 
                 self.window = Some(window);
+                self.read_display();
+                let wayland = self.window.as_ref().is_some_and(|w| {
+                    use winit::raw_window_handle::{HasWindowHandle as _, RawWindowHandle};
+                    w.window_handle()
+                        .is_ok_and(|h| matches!(h.as_raw(), RawWindowHandle::Wayland(_)))
+                });
+                self.turnstile.pacer.infer_withheld_redraws(wayland);
                 // Kick the first redraw. The eager-clear pass that used
                 // to bootstrap the loop is gone; without an explicit
                 // request_redraw() here, the hidden window
@@ -1060,9 +1108,7 @@ impl App {
                 // RedrawRequested has nothing to sustain — and the
                 // window stays empty forever even though terminal cells
                 // arrive over the PTY.
-                if let Some(w) = &self.window {
-                    w.request_redraw();
-                }
+                self.request_redraw();
             }
 
             fn window_event(
@@ -1136,10 +1182,9 @@ impl App {
                         // very thing this line exists to prevent. Flagging the
                         // resize is what lets it outrank that answer; see
                         // `frame_gate`.
-                        self.debts.owe(FrameDebt::Resized);
-                        if let Some(w) = &self.window {
-                            w.request_redraw();
-                        }
+                        self.turnstile.pacer.owe(FrameDebt::Resized);
+                        self.request_redraw();
+                        self.read_minimized(event_loop);
                     }
                     WindowEvent::ScaleFactorChanged { scale_factor, .. } => {
                         // Updates the cached scale-factor so the next
@@ -1160,10 +1205,14 @@ impl App {
                         // that authors in logical pixels draws wrong until a
                         // frame carries the new value — and a consumer whose
                         // CONTENT did not change has no reason to ask for one.
-                        self.debts.owe(FrameDebt::ScaleChanged);
-                        if let Some(w) = &self.window {
-                            w.request_redraw();
-                        }
+                        self.turnstile.pacer.owe(FrameDebt::ScaleChanged);
+                        self.request_redraw();
+                        self.read_display();
+                    }
+                    WindowEvent::Occluded(occluded) => {
+                        let shift = self.turnstile.pacer.set_occluded(*occluded);
+                        self.shift(shift, event_loop);
+                        self.read_minimized(event_loop);
                     }
                     WindowEvent::Focused(focused) => {
                         let app_event = AppEvent::Focused(*focused);
@@ -1260,12 +1309,13 @@ impl App {
                         self.dispatch(&app_event, event_loop);
                     }
                     WindowEvent::RedrawRequested => {
+                        self.turnstile.pacer.arrived();
                         // Dispatch redraw event to handler (for title updates, exit checks, etc.)
                         Turnstile::redraw(self, event_loop);
 
                         // ★ ASK BEFORE ACQUIRING. The acquire, the render and
                         // the present are one decision — see
-                        // `RenderCallback::needs_frame`. Skipping all three
+                        // `RenderCallback::frame_demand`. Skipping all three
                         // together means no unpainted swapchain slot is ever
                         // handed to `present()`; the window simply keeps the
                         // frame it already has.
@@ -1299,19 +1349,14 @@ impl App {
                         // side-effect free, but short-circuiting past it would
                         // make that documentation load-bearing for correctness
                         // rather than merely true.
-                        let content_says = self
+                        let demand = self
                             .renderer
-                            .needs_frame(crate::render::FrameQuery { elapsed, dt });
-                        let frame_needed = frame_gate(self.debts, content_says);
-                        // Under `Reactive` this is what decides whether the
-                        // loop holds a deadline or parks. Recorded on every
-                        // pacing so the field never carries a stale answer
-                        // from a mode switch.
-                        self.turnstile.pacer.set_animating(frame_needed);
-                        if let (true, Some(surface), Some(gpu), Some(text)) =
-                            (frame_needed, &self.surface, &self.gpu, &mut self.text)
+                            .frame_demand(crate::render::FrameQuery { elapsed, dt });
+                        let visible = self.turnstile.pacer.decide(now, demand);
+                        if let (Some(visible), Some(surface), Some(gpu), Some(text)) =
+                            (visible, &self.surface, &self.gpu, &mut self.text)
                         {
-                            let frame = match surface.get_current_texture() {
+                            let frame = match surface.acquire(visible) {
                                 Ok(f) => f,
                                 Err(wgpu::SurfaceError::Lost | wgpu::SurfaceError::Outdated) => {
                                     if let Some(cfg) = &self.surface_config {
@@ -1333,7 +1378,7 @@ impl App {
                                     // (`Outdated` is what a resize produces),
                                     // so the two debts routinely coexist — and
                                     // settle together on one presented frame.
-                                    self.debts.owe(FrameDebt::SurfaceRecovered);
+                                    self.turnstile.pacer.owe(FrameDebt::SurfaceRecovered);
                                     // ── ★ RE-ARM, OR THIS IS A PERMANENT FREEZE ──
                                     // The comment ~20 lines above already states
                                     // this rule for the frame-SKIP path — "it is a
@@ -1376,6 +1421,7 @@ impl App {
                                     if let Some(w) = &self.window {
                                         w.request_redraw();
                                     }
+                                    self.turnstile.pacer.requested(now);
                                     return;
                                 }
                                 Err(e) => {
@@ -1393,6 +1439,7 @@ impl App {
                                     if let Some(w) = &self.window {
                                         w.request_redraw();
                                     }
+                                    self.turnstile.pacer.requested(now);
                                     return;
                                 }
                             };
@@ -1423,6 +1470,11 @@ impl App {
                             };
                             self.renderer.render(&mut render_ctx);
 
+                            if self.turnstile.pacer.reactive()
+                                && let Some(w) = &self.window
+                            {
+                                w.pre_present_notify();
+                            }
                             frame.present();
 
                             // A buffer at the new size is now COMMITTED, which
@@ -1432,7 +1484,7 @@ impl App {
                             // above returns early to re-arm, and the acquire
                             // right after a resize is the one most likely to
                             // come back `Outdated`.
-                            self.debts.settle();
+                            self.turnstile.pacer.presented(now);
 
                             // First-frame reveal — show the window only
                             // after the swapchain has real pixels in it.
@@ -1454,10 +1506,8 @@ impl App {
                         // and a loop with work to do never waits. Under
                         // Capped pacing `about_to_wait` owns the next
                         // request instead.
-                        if !self.turnstile.pacer.paced()
-                            && let Some(w) = &self.window
-                        {
-                            w.request_redraw();
+                        if !self.turnstile.pacer.paced() {
+                            self.request_redraw();
                         }
                     }
                     _ => {}
@@ -1469,11 +1519,9 @@ impl App {
             /// `ControlFlow::Poll` and the `RedrawRequested` re-arm above
             /// keep the historical behaviour untouched.
             fn about_to_wait(&mut self, event_loop: &winit::event_loop::ActiveEventLoop) {
-                let turn = self.turnstile.pacer.about_to_wait(Instant::now());
-                if turn.redraw
-                    && let Some(w) = &self.window
-                {
-                    w.request_redraw();
+                let (turn, _) = Turnstile::wait(self, Instant::now(), event_loop);
+                if turn.redraw {
+                    self.request_redraw();
                 }
                 if let Some(flow) = turn.flow {
                     event_loop.set_control_flow(control_flow(flow));
@@ -1547,7 +1595,6 @@ impl App {
             cursor_y: 0.0,
             first_frame_presented: false,
             turnstile,
-            debts: FrameDebts::at_startup(),
         };
 
         event_loop
@@ -1564,10 +1611,9 @@ mod tests {
 
     #[test]
     fn delivering_input_re_asks_but_a_redraw_does_not() {
-        // THE DEADLOCK this guards, in one sentence: under `Reactive` the loop
-        // parks when `!animating`, `animating` is written only by the
-        // `RedrawRequested` arm, and a keystroke that does not re-arm therefore
-        // wakes the loop only to park it again — forever. A launcher would
+        // THE DEADLOCK this guards, in one sentence: under `Reactive` the pacer
+        // decides only in the `RedrawRequested` arm, so a keystroke that does
+        // not re-arm wakes a parked loop only to park it again — forever. A launcher would
         // render once and then ignore the keyboard.
         use crate::event::{ImeEvent, KeyCode, KeyEvent, Modifiers, MouseButton, MouseEvent};
         let delivered = [

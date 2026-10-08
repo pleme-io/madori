@@ -2,7 +2,9 @@ use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::{Arc, OnceLock};
 use std::task::{Wake, Waker};
 
-use crate::pacer::Pacer;
+use std::time::Instant;
+
+use crate::pacer::{Pacer, Shift, Turn, Visibility};
 
 pub(crate) trait Flag: Send + Sync + 'static {
     fn lowered() -> Self;
@@ -74,6 +76,7 @@ impl Wake for Bell {
 
 pub(crate) struct Doorbell {
     bell: Arc<Bell>,
+    visibility: Visibility,
 }
 
 impl Doorbell {
@@ -83,6 +86,7 @@ impl Doorbell {
                 latch: Latch::new(),
                 line: OnceLock::new(),
             }),
+            visibility: Visibility::default(),
         }
     }
 
@@ -90,7 +94,12 @@ impl Doorbell {
         Waker::from(Arc::clone(&self.bell))
     }
 
-    pub(crate) fn connect(self, line: Line, pacer: Pacer) -> Turnstile {
+    pub(crate) fn visibility(&self) -> Visibility {
+        self.visibility.clone()
+    }
+
+    pub(crate) fn connect(self, line: Line, mut pacer: Pacer) -> Turnstile {
+        pacer.observed_by(self.visibility);
         let bell = self.bell;
         let _ = bell.line.set(line);
         bell.latch.answer(|| ());
@@ -115,6 +124,27 @@ impl Turnstile {
         turnstile.pacer.redrawing();
         let bell = Arc::clone(&turnstile.bell);
         bell.latch.answer(|| host.drain(cx))
+    }
+
+    pub(crate) fn shift<Cx, H: Drains<Cx>>(
+        host: &mut H,
+        shift: Shift,
+        cx: Cx,
+    ) -> Option<H::Drained> {
+        match shift {
+            Shift::Hid => Some(Self::redraw(host, cx)),
+            Shift::Steady | Shift::Shown => None,
+        }
+    }
+
+    pub(crate) fn wait<Cx, H: Drains<Cx>>(
+        host: &mut H,
+        now: Instant,
+        cx: Cx,
+    ) -> (Turn, Option<H::Drained>) {
+        let turn = host.turnstile().pacer.about_to_wait(now);
+        let drained = turn.drain.then(|| Self::redraw(host, cx));
+        (turn, drained)
     }
 
     #[cfg(test)]
