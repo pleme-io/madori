@@ -1,8 +1,8 @@
 {
   "schema_version": 2,
-  "cargo_lock_sha256": "ef0f1cfcc6317ffd781ab08024c74fd87bfe79e3d1ffdf295d5f1c2cf263e745",
+  "cargo_lock_sha256": "b1dc2c8b692a290c55701576fb6720da19e17ae6259e5f7cd56f2231fb4187f1",
   "manifest_sha256": {
-    "Cargo.toml": "dc37fa9fece95b2b55251acc895e37066aa1c9804f6d3256babf30ae5b3f5d5d"
+    "Cargo.toml": "e4a648cc679ddaf692a0fa18a26a0f1b5987baa0941ab28fa7897a30da7bebb8"
   },
   "target_resolves": {
     "base": {
@@ -1674,7 +1674,7 @@
           },
           {
             "name": "zerocopy",
-            "package_key": "zerocopy-0.8.61",
+            "package_key": "zerocopy-0.8.62",
             "kind": "normal",
             "features": [
               "derive",
@@ -2102,7 +2102,7 @@
           "hashbrown"
         ]
       },
-      "madori-0.1.22": {
+      "madori-0.1.23": {
         "runtime_dependencies": [
           {
             "name": "egaku",
@@ -5237,11 +5237,11 @@
           "std"
         ]
       },
-      "zerocopy-0.8.61": {
+      "zerocopy-0.8.62": {
         "runtime_dependencies": [
           {
             "name": "zerocopy_derive",
-            "package_key": "zerocopy-derive-0.8.61",
+            "package_key": "zerocopy-derive-0.8.62",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -5251,7 +5251,7 @@
           },
           {
             "name": "zerocopy_derive",
-            "package_key": "zerocopy-derive-0.8.61",
+            "package_key": "zerocopy-derive-0.8.62",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -5267,7 +5267,7 @@
           "zerocopy-derive"
         ]
       },
-      "zerocopy-derive-0.8.61": {
+      "zerocopy-derive-0.8.62": {
         "runtime_dependencies": [
           {
             "name": "proc_macro2",
@@ -7220,7 +7220,7 @@
               },
               {
                 "name": "zerocopy",
-                "package_key": "zerocopy-0.8.61",
+                "package_key": "zerocopy-0.8.62",
                 "kind": "normal",
                 "features": [
                   "simd"
@@ -10179,7 +10179,7 @@
               },
               {
                 "name": "zerocopy",
-                "package_key": "zerocopy-0.8.61",
+                "package_key": "zerocopy-0.8.62",
                 "kind": "normal",
                 "features": [
                   "simd"
@@ -14976,7 +14976,7 @@
               },
               {
                 "name": "zerocopy",
-                "package_key": "zerocopy-0.8.61",
+                "package_key": "zerocopy-0.8.62",
                 "kind": "normal",
                 "features": [
                   "simd"
@@ -17950,7 +17950,7 @@
               },
               {
                 "name": "zerocopy",
-                "package_key": "zerocopy-0.8.61",
+                "package_key": "zerocopy-0.8.62",
                 "kind": "normal",
                 "features": [
                   "simd"
@@ -21183,7 +21183,7 @@
     "lru-0.12.5": {
       "edition": "2015"
     },
-    "madori-0.1.22": {
+    "madori-0.1.23": {
       "edition": "2024",
       "lib_target": {
         "name": "madori",
@@ -21773,11 +21773,11 @@
     "zeno-0.3.3": {
       "edition": "2021"
     },
-    "zerocopy-0.8.61": {
+    "zerocopy-0.8.62": {
       "edition": "2021",
       "build_script": "build.rs"
     },
-    "zerocopy-derive-0.8.61": {
+    "zerocopy-derive-0.8.62": {
       "edition": "2021",
       "proc_macro": true
     },
