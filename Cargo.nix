@@ -3689,7 +3689,7 @@ rec {
       };
       "madori" = rec {
         crateName = "madori";
-        version = "0.1.23";
+        version = "0.1.24";
         edition = "2024";
         src = lib.cleanSourceWith { filter = sourceFilter;  src = ./.; };
         dependencies = [
@@ -14315,9 +14315,9 @@ rec {
       };
       "zerocopy" = rec {
         crateName = "zerocopy";
-        version = "0.8.61";
+        version = "0.8.62";
         edition = "2021";
-        sha256 = "0ri8ajsyghsl0fmwc55k4cj4ky042az0z5yvxd0jxhwqrq2vg7w7";
+        sha256 = "17asjqfdkqmxsx42myw1x5jlb28m5axlf9ifldqpbiy7dbsjnl46";
         dependencies = [
           {
             name = "zerocopy-derive";
@@ -14347,9 +14347,9 @@ rec {
       };
       "zerocopy-derive" = rec {
         crateName = "zerocopy-derive";
-        version = "0.8.61";
+        version = "0.8.62";
         edition = "2021";
-        sha256 = "0ncpf1fq0gv8rk4nxivdp32093d90xv75iww0gx09mh1hfi8523h";
+        sha256 = "06lx0gigf0j5pvp4dhlrv636b4mib37ijzlcc3i62rdhailj0msl";
         procMacro = true;
         libName = "zerocopy_derive";
         dependencies = [
