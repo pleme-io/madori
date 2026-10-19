@@ -25,6 +25,12 @@ pub enum AppEvent {
     HoveredFile(std::path::PathBuf),
     /// A hovered drag left the window without dropping.
     HoveredFileCancelled,
+    /// The held keyboard modifiers changed, with no other key involved:
+    /// pressing or releasing Cmd alone. A consumer that changes what the
+    /// pointer means while a modifier is held (a terminal underlining the
+    /// link under the mouse while Cmd is down) needs this edge, because
+    /// neither a motion event nor a key event carries it reliably.
+    ModifiersChanged(Modifiers),
     /// Redraw requested (vsync tick or explicit).
     RedrawRequested,
 }
@@ -42,6 +48,85 @@ pub struct EventResponse {
     pub toggle_fullscreen: bool,
     /// Request cursor visibility change (None = no change).
     pub set_cursor_visible: Option<bool>,
+    /// Request a pointer icon change (None = no change).
+    pub set_cursor_icon: Option<PointerIcon>,
+}
+
+/// The pointer icon a consumer may ask the window to show. The CSS
+/// `cursor` keyword set winit supports on every desktop backend, owned
+/// here so a consumer never names `winit::window::CursorIcon`.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+pub enum PointerIcon {
+    #[default]
+    Default,
+    Text,
+    Pointer,
+    Wait,
+    Progress,
+    Crosshair,
+    ColResize,
+    RowResize,
+    Move,
+    Grab,
+    Grabbing,
+    NotAllowed,
+    Help,
+    NwseResize,
+    NeswResize,
+    EwResize,
+    NsResize,
+    ZoomIn,
+    ZoomOut,
+}
+
+impl PointerIcon {
+    pub const ALL: [Self; 19] = [
+        Self::Default,
+        Self::Text,
+        Self::Pointer,
+        Self::Wait,
+        Self::Progress,
+        Self::Crosshair,
+        Self::ColResize,
+        Self::RowResize,
+        Self::Move,
+        Self::Grab,
+        Self::Grabbing,
+        Self::NotAllowed,
+        Self::Help,
+        Self::NwseResize,
+        Self::NeswResize,
+        Self::EwResize,
+        Self::NsResize,
+        Self::ZoomIn,
+        Self::ZoomOut,
+    ];
+
+    #[must_use]
+    pub fn to_winit(self) -> winit::window::CursorIcon {
+        use winit::window::CursorIcon as W;
+        match self {
+            Self::Default => W::Default,
+            Self::Text => W::Text,
+            Self::Pointer => W::Pointer,
+            Self::Wait => W::Wait,
+            Self::Progress => W::Progress,
+            Self::Crosshair => W::Crosshair,
+            Self::ColResize => W::ColResize,
+            Self::RowResize => W::RowResize,
+            Self::Move => W::Move,
+            Self::Grab => W::Grab,
+            Self::Grabbing => W::Grabbing,
+            Self::NotAllowed => W::NotAllowed,
+            Self::Help => W::Help,
+            Self::NwseResize => W::NwseResize,
+            Self::NeswResize => W::NeswResize,
+            Self::EwResize => W::EwResize,
+            Self::NsResize => W::NsResize,
+            Self::ZoomIn => W::ZoomIn,
+            Self::ZoomOut => W::ZoomOut,
+        }
+    }
 }
 
 impl EventResponse {
@@ -588,6 +673,25 @@ mod tests {
         assert_eq!(d.set_title, i.set_title);
         assert_eq!(d.toggle_fullscreen, i.toggle_fullscreen);
         assert_eq!(d.set_cursor_visible, i.set_cursor_visible);
+        assert_eq!(d.set_cursor_icon, i.set_cursor_icon);
+        assert!(d.set_cursor_icon.is_none());
+    }
+
+    #[test]
+    fn pointer_icon_maps_each_variant_to_a_distinct_winit_icon() {
+        let mapped: std::collections::HashSet<String> = PointerIcon::ALL
+            .iter()
+            .map(|i| i.to_winit().name().to_string())
+            .collect();
+        assert_eq!(mapped.len(), PointerIcon::ALL.len());
+        assert_eq!(
+            PointerIcon::Pointer.to_winit(),
+            winit::window::CursorIcon::Pointer
+        );
+        assert_eq!(
+            PointerIcon::default().to_winit(),
+            winit::window::CursorIcon::Default
+        );
     }
 
     #[test]

@@ -774,6 +774,12 @@ impl App {
                     }
                 }
 
+                if let Some(icon) = resp.set_cursor_icon {
+                    if let Some(w) = &self.window {
+                        w.set_cursor(icon.to_winit());
+                    }
+                }
+
                 // Handle fullscreen toggle
                 if resp.toggle_fullscreen {
                     if let Some(w) = &self.window {
@@ -1236,6 +1242,9 @@ impl App {
                     }
                     WindowEvent::ModifiersChanged(mods) => {
                         self.modifiers = mods.state();
+                        let app_event =
+                            AppEvent::ModifiersChanged(Modifiers::from_winit(&self.modifiers));
+                        self.dispatch(&app_event, event_loop);
                     }
                     WindowEvent::KeyboardInput { event, .. } => {
                         let key_event = KeyEvent {
