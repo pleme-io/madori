@@ -1,6 +1,6 @@
 # Resize — one model for every madori grid app
 
-Tier: DESIGN (2026-10-24). Phase 0, `Grid::fit` and `GridReconciler` are code; the consumers and phases 3 to 5 are the plan.
+Tier: phases 0 to 2 are code (2026-10-24); phases 3 to 5 are DESIGN.
 
 ## The problem class
 
@@ -78,6 +78,11 @@ committed grid cancels the pending one.
 
 ### 4. Reflow off the frame path
 
+Measured 2026-10-24 (release build, 160 to 140 columns, 50 rows): ~6 ms per
+column step, the same at 10k and 100k fed lines, because the scrollback byte
+budget caps history. Under `Coalesce` this cost is paid once per settle, so
+this phase is no longer on the drag path.
+
 Destination: the Terminal stores logical lines and wraps on demand for the rows
 it shows (the wezterm model), so a width change costs O(viewport), not
 O(history). Interim, in the same config surface: `reflow = live | on-settle`;
@@ -109,8 +114,8 @@ Each knob turns behaviour on or off; none deletes a path.
 | Phase | Change | Repos | Gate |
 |---|---|---|---|
 | 0 | done: dedupe per cell (48ffd84), paint held frames (48ffd84), layer anchor (5ae97fa) | mado, madori | red-run tests, pixel probe |
-| 1 | `madori::grid` (done, 3a60a79) + replace the 6 copies | madori, mado, escriba, suzuri | proptest on `Grid::fit` |
-| 2 | `GridReconciler` + `Commit` (done) + mado config + wiring | madori, mado | drag proptest |
+| 1 | `madori::grid` (3a60a79, 01502f2) + the copies: mado 6 (bca343e), escriba 1 (c83f00b); suzuri open (it does not use madori) | madori, mado, escriba | proptest on `Grid::fit` |
+| 2 | `GridReconciler` (a4e2e5c, 5b5424d) + mado `window.resize` + wiring (bca343e) | madori, mado | drag proptest, engine drag tests |
 | 3 | `Painted` token, anchor in `AppConfig`, layer background | madori + every consumer | does not compile without a token |
 | 4 | tear latest-value-wins pane resize | tear | caller never takes the pty lock |
 | 5 | lazy reflow | mado | per-column cost independent of scrollback |
