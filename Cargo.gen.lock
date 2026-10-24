@@ -1,8 +1,8 @@
 {
   "schema_version": 2,
-  "cargo_lock_sha256": "b8a3c11c8f7d4286981245bd48b3dcd46292c9aeb68fcebb8982712d80b6718a",
+  "cargo_lock_sha256": "ab2f44ef487a86d97abb5fd243e6012f2633a5654b87a322e6cd9a4e66b490e4",
   "manifest_sha256": {
-    "Cargo.toml": "cfb10f232d2b9c5fc2e4b16593ce443edde343160fb30ab0d9e7b30bddacc389"
+    "Cargo.toml": "98ee5470942559d11fc246731d2b7e113dfabcab97853b06fca6a66261859fbb"
   },
   "target_resolves": {
     "base": {
@@ -6127,7 +6127,7 @@
               "fallback"
             ]
           },
-          "madori-0.1.25": {
+          "madori-0.1.26": {
             "runtime_dependencies": [
               {
                 "name": "egaku",
@@ -8320,7 +8320,7 @@
               "system"
             ]
           },
-          "madori-0.1.25": {
+          "madori-0.1.26": {
             "runtime_dependencies": [
               {
                 "name": "egaku",
@@ -11427,7 +11427,7 @@
               "system"
             ]
           },
-          "madori-0.1.25": {
+          "madori-0.1.26": {
             "runtime_dependencies": [
               {
                 "name": "egaku",
@@ -14347,7 +14347,7 @@
               "fallback"
             ]
           },
-          "madori-0.1.25": {
+          "madori-0.1.26": {
             "runtime_dependencies": [
               {
                 "name": "egaku",
@@ -16565,7 +16565,7 @@
               "system"
             ]
           },
-          "madori-0.1.25": {
+          "madori-0.1.26": {
             "runtime_dependencies": [
               {
                 "name": "egaku",
@@ -19697,7 +19697,7 @@
               "system"
             ]
           },
-          "madori-0.1.25": {
+          "madori-0.1.26": {
             "runtime_dependencies": [
               {
                 "name": "egaku",
@@ -22533,7 +22533,7 @@
     "lru-0.12.5": {
       "edition": "2015"
     },
-    "madori-0.1.25": {
+    "madori-0.1.26": {
       "edition": "2024",
       "lib_target": {
         "name": "madori",
