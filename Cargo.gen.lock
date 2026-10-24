@@ -1,8 +1,8 @@
 {
   "schema_version": 2,
-  "cargo_lock_sha256": "50e513df946cb038998d870c0becb6ff6d23c7deefb6c859228900dde904fe1a",
+  "cargo_lock_sha256": "109d2dfa823c7c9c0a55cb3e16ca1296b9ae9e022a025cb23c20cb2f5719e2b4",
   "manifest_sha256": {
-    "Cargo.toml": "3c1dff440fa9ee76e09eca0a2a5d85856bfa01aed461ee738dfd62063def2b96"
+    "Cargo.toml": "2eefb7a8d6aaa3eb47e6b9b5d31532713fd17a8f21aa78558ec8ca8d3d0188c8"
   },
   "target_resolves": {
     "base": {
@@ -165,25 +165,6 @@
         "build_dependencies": [],
         "features": []
       },
-      "bit-set-0.11.1": {
-        "runtime_dependencies": [
-          {
-            "name": "bit_vec",
-            "package_key": "bit-vec-0.10.1",
-            "kind": "normal",
-            "features": [],
-            "uses_default_features": false,
-            "optional": false,
-            "target": null,
-            "tree": "target"
-          }
-        ],
-        "build_dependencies": [],
-        "features": [
-          "default",
-          "std"
-        ]
-      },
       "bit-set-0.8.0": {
         "runtime_dependencies": [
           {
@@ -199,14 +180,6 @@
         ],
         "build_dependencies": [],
         "features": []
-      },
-      "bit-vec-0.10.1": {
-        "runtime_dependencies": [],
-        "build_dependencies": [],
-        "features": [
-          "default",
-          "std"
-        ]
       },
       "bit-vec-0.8.0": {
         "runtime_dependencies": [],
@@ -231,98 +204,6 @@
           "serde",
           "serde_core",
           "std"
-        ]
-      },
-      "borsh-1.8.1": {
-        "runtime_dependencies": [
-          {
-            "name": "borsh_derive",
-            "package_key": "borsh-derive-1.8.1",
-            "kind": "normal",
-            "features": [],
-            "uses_default_features": true,
-            "optional": true,
-            "target": null,
-            "tree": "host"
-          }
-        ],
-        "build_dependencies": [
-          {
-            "name": "cfg_aliases",
-            "package_key": "cfg_aliases-0.2.2",
-            "kind": "build",
-            "features": [],
-            "uses_default_features": true,
-            "optional": false,
-            "target": null,
-            "tree": "host"
-          }
-        ],
-        "features": [
-          "borsh-derive",
-          "derive",
-          "std"
-        ]
-      },
-      "borsh-derive-1.8.1": {
-        "runtime_dependencies": [
-          {
-            "name": "once_cell",
-            "package_key": "once_cell-1.21.4",
-            "kind": "normal",
-            "features": [],
-            "uses_default_features": true,
-            "optional": false,
-            "target": null,
-            "tree": "target"
-          },
-          {
-            "name": "proc_macro_crate",
-            "package_key": "proc-macro-crate-3.5.0",
-            "kind": "normal",
-            "features": [],
-            "uses_default_features": true,
-            "optional": false,
-            "target": null,
-            "tree": "target"
-          },
-          {
-            "name": "proc_macro2",
-            "package_key": "proc-macro2-1.0.107",
-            "kind": "normal",
-            "features": [],
-            "uses_default_features": true,
-            "optional": false,
-            "target": null,
-            "tree": "target"
-          },
-          {
-            "name": "quote",
-            "package_key": "quote-1.0.47",
-            "kind": "normal",
-            "features": [],
-            "uses_default_features": true,
-            "optional": false,
-            "target": null,
-            "tree": "target"
-          },
-          {
-            "name": "syn",
-            "package_key": "syn-3.0.9",
-            "kind": "normal",
-            "features": [
-              "fold",
-              "full"
-            ],
-            "uses_default_features": true,
-            "optional": false,
-            "target": null,
-            "tree": "target"
-          }
-        ],
-        "build_dependencies": [],
-        "features": [
-          "default"
         ]
       },
       "bytemuck-1.25.2": {
@@ -383,15 +264,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "bytes-1.12.1": {
-        "runtime_dependencies": [],
-        "build_dependencies": [],
-        "features": [
-          "default",
-          "std"
-        ]
-      },
-      "cc-1.9.0": {
+      "cc-1.10.0": {
         "runtime_dependencies": [
           {
             "name": "find_msvc_tools",
@@ -535,13 +408,6 @@
         "build_dependencies": [],
         "features": [
           "std"
-        ]
-      },
-      "core_detect-1.0.0": {
-        "runtime_dependencies": [],
-        "build_dependencies": [],
-        "features": [
-          "default"
         ]
       },
       "cosmic-text-0.14.2": {
@@ -1079,14 +945,6 @@
         "build_dependencies": [],
         "features": []
       },
-      "fnv-1.0.7": {
-        "runtime_dependencies": [],
-        "build_dependencies": [],
-        "features": [
-          "default",
-          "std"
-        ]
-      },
       "foldhash-0.1.5": {
         "runtime_dependencies": [],
         "build_dependencies": [],
@@ -1276,7 +1134,7 @@
           "default"
         ]
       },
-      "gen-macros-0.1.51": {
+      "gen-macros-0.1.53": {
         "runtime_dependencies": [
           {
             "name": "proc_macro2",
@@ -1315,11 +1173,11 @@
         "build_dependencies": [],
         "features": []
       },
-      "gen-platform-0.1.51": {
+      "gen-platform-0.1.53": {
         "runtime_dependencies": [
           {
             "name": "gen_macros",
-            "package_key": "gen-macros-0.1.51",
+            "package_key": "gen-macros-0.1.53",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -1329,7 +1187,7 @@
           },
           {
             "name": "gen_types",
-            "package_key": "gen-types-0.1.51",
+            "package_key": "gen-types-0.1.53",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -1383,7 +1241,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "gen-types-0.1.51": {
+      "gen-types-0.1.53": {
         "runtime_dependencies": [
           {
             "name": "blake3",
@@ -1501,7 +1359,7 @@
         "build_dependencies": [
           {
             "name": "cc",
-            "package_key": "cc-1.9.0",
+            "package_key": "cc-1.10.0",
             "kind": "build",
             "features": [],
             "uses_default_features": true,
@@ -1613,22 +1471,11 @@
             "optional": false,
             "target": "cfg(target_os = \"vxworks\")",
             "tree": "target"
-          },
-          {
-            "name": "rand_core",
-            "package_key": "rand_core-0.10.1",
-            "kind": "normal",
-            "features": [],
-            "uses_default_features": true,
-            "optional": true,
-            "target": null,
-            "tree": "target"
           }
         ],
         "build_dependencies": [],
         "features": [
-          "std",
-          "sys_rng"
+          "std"
         ]
       },
       "glob-0.3.4": {
@@ -2289,7 +2136,7 @@
           "std"
         ]
       },
-      "memmap2-0.9.11": {
+      "memmap2-0.9.12": {
         "runtime_dependencies": [
           {
             "name": "libc",
@@ -2641,7 +2488,7 @@
           },
           {
             "name": "smallvec",
-            "package_key": "smallvec-1.16.3",
+            "package_key": "smallvec-1.16.4",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -2797,24 +2644,6 @@
         "build_dependencies": [],
         "features": []
       },
-      "proc-macro-crate-3.5.0": {
-        "runtime_dependencies": [
-          {
-            "name": "toml_edit",
-            "package_key": "toml_edit-0.25.17+spec-1.1.0",
-            "kind": "normal",
-            "features": [
-              "parse"
-            ],
-            "uses_default_features": false,
-            "optional": false,
-            "target": null,
-            "tree": "target"
-          }
-        ],
-        "build_dependencies": [],
-        "features": []
-      },
       "proc-macro2-1.0.107": {
         "runtime_dependencies": [
           {
@@ -2900,150 +2729,6 @@
         "build_dependencies": [],
         "features": []
       },
-      "proptest-1.12.0": {
-        "runtime_dependencies": [
-          {
-            "name": "bit_set",
-            "package_key": "bit-set-0.11.1",
-            "kind": "normal",
-            "features": [],
-            "uses_default_features": true,
-            "optional": true,
-            "target": null,
-            "tree": "target"
-          },
-          {
-            "name": "bit_vec",
-            "package_key": "bit-vec-0.10.1",
-            "kind": "normal",
-            "features": [],
-            "uses_default_features": true,
-            "optional": true,
-            "target": null,
-            "tree": "target"
-          },
-          {
-            "name": "bitflags",
-            "package_key": "bitflags-2.13.2",
-            "kind": "normal",
-            "features": [],
-            "uses_default_features": true,
-            "optional": false,
-            "target": null,
-            "tree": "target"
-          },
-          {
-            "name": "chacha20",
-            "package_key": "chacha20-0.10.2",
-            "kind": "normal",
-            "features": [
-              "rng"
-            ],
-            "uses_default_features": false,
-            "optional": false,
-            "target": null,
-            "tree": "target"
-          },
-          {
-            "name": "core_detect",
-            "package_key": "core_detect-1.0.0",
-            "kind": "normal",
-            "features": [],
-            "uses_default_features": true,
-            "optional": false,
-            "target": null,
-            "tree": "target"
-          },
-          {
-            "name": "num_traits",
-            "package_key": "num-traits-0.2.19",
-            "kind": "normal",
-            "features": [],
-            "uses_default_features": false,
-            "optional": false,
-            "target": null,
-            "tree": "target"
-          },
-          {
-            "name": "rand",
-            "package_key": "rand-0.10.3",
-            "kind": "normal",
-            "features": [
-              "alloc"
-            ],
-            "uses_default_features": false,
-            "optional": false,
-            "target": null,
-            "tree": "target"
-          },
-          {
-            "name": "rand_xorshift",
-            "package_key": "rand_xorshift-0.5.0",
-            "kind": "normal",
-            "features": [],
-            "uses_default_features": true,
-            "optional": false,
-            "target": null,
-            "tree": "target"
-          },
-          {
-            "name": "regex_syntax",
-            "package_key": "regex-syntax-0.8.11",
-            "kind": "normal",
-            "features": [],
-            "uses_default_features": true,
-            "optional": true,
-            "target": null,
-            "tree": "target"
-          },
-          {
-            "name": "rusty_fork",
-            "package_key": "rusty-fork-0.3.1",
-            "kind": "normal",
-            "features": [],
-            "uses_default_features": false,
-            "optional": true,
-            "target": null,
-            "tree": "target"
-          },
-          {
-            "name": "tempfile",
-            "package_key": "tempfile-3.27.0",
-            "kind": "normal",
-            "features": [],
-            "uses_default_features": true,
-            "optional": true,
-            "target": null,
-            "tree": "target"
-          },
-          {
-            "name": "unarray",
-            "package_key": "unarray-0.1.4",
-            "kind": "normal",
-            "features": [],
-            "uses_default_features": true,
-            "optional": false,
-            "target": null,
-            "tree": "target"
-          }
-        ],
-        "build_dependencies": [],
-        "features": [
-          "bit-set",
-          "default",
-          "fork",
-          "regex-syntax",
-          "rusty-fork",
-          "std",
-          "tempfile",
-          "timeout"
-        ]
-      },
-      "quick-error-1.2.3": {
-        "runtime_dependencies": [],
-        "build_dependencies": [],
-        "features": []
-      },
       "quote-1.0.47": {
         "runtime_dependencies": [
           {
@@ -3062,57 +2747,6 @@
           "default",
           "proc-macro"
         ]
-      },
-      "rand-0.10.3": {
-        "runtime_dependencies": [
-          {
-            "name": "getrandom",
-            "package_key": "getrandom-0.4.3",
-            "kind": "normal",
-            "features": [],
-            "uses_default_features": true,
-            "optional": true,
-            "target": null,
-            "tree": "target"
-          },
-          {
-            "name": "rand_core",
-            "package_key": "rand_core-0.10.1",
-            "kind": "normal",
-            "features": [],
-            "uses_default_features": false,
-            "optional": false,
-            "target": null,
-            "tree": "target"
-          }
-        ],
-        "build_dependencies": [],
-        "features": [
-          "alloc",
-          "std",
-          "sys_rng"
-        ]
-      },
-      "rand_core-0.10.1": {
-        "runtime_dependencies": [],
-        "build_dependencies": [],
-        "features": []
-      },
-      "rand_xorshift-0.5.0": {
-        "runtime_dependencies": [
-          {
-            "name": "rand_core",
-            "package_key": "rand_core-0.10.1",
-            "kind": "normal",
-            "features": [],
-            "uses_default_features": true,
-            "optional": false,
-            "target": null,
-            "tree": "target"
-          }
-        ],
-        "build_dependencies": [],
-        "features": []
       },
       "rangemap-1.8.0": {
         "runtime_dependencies": [],
@@ -3249,16 +2883,7 @@
         "runtime_dependencies": [],
         "build_dependencies": [],
         "features": [
-          "default",
-          "std",
-          "unicode",
-          "unicode-age",
-          "unicode-bool",
-          "unicode-case",
-          "unicode-gencat",
-          "unicode-perl",
-          "unicode-script",
-          "unicode-segment"
+          "std"
         ]
       },
       "renderdoc-sys-1.1.0": {
@@ -3283,55 +2908,6 @@
         "runtime_dependencies": [],
         "build_dependencies": [],
         "features": []
-      },
-      "rusty-fork-0.3.1": {
-        "runtime_dependencies": [
-          {
-            "name": "fnv",
-            "package_key": "fnv-1.0.7",
-            "kind": "normal",
-            "features": [],
-            "uses_default_features": true,
-            "optional": false,
-            "target": null,
-            "tree": "target"
-          },
-          {
-            "name": "quick_error",
-            "package_key": "quick-error-1.2.3",
-            "kind": "normal",
-            "features": [],
-            "uses_default_features": true,
-            "optional": false,
-            "target": null,
-            "tree": "target"
-          },
-          {
-            "name": "tempfile",
-            "package_key": "tempfile-3.27.0",
-            "kind": "normal",
-            "features": [],
-            "uses_default_features": true,
-            "optional": false,
-            "target": null,
-            "tree": "target"
-          },
-          {
-            "name": "wait_timeout",
-            "package_key": "wait-timeout-0.2.1",
-            "kind": "normal",
-            "features": [],
-            "uses_default_features": true,
-            "optional": true,
-            "target": null,
-            "tree": "target"
-          }
-        ],
-        "build_dependencies": [],
-        "features": [
-          "timeout",
-          "wait-timeout"
-        ]
       },
       "rustybuzz-0.14.1": {
         "runtime_dependencies": [
@@ -3369,7 +2945,7 @@
           },
           {
             "name": "smallvec",
-            "package_key": "smallvec-1.16.3",
+            "package_key": "smallvec-1.16.4",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -3874,7 +3450,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "shikumi-0.1.1082": {
+      "shikumi-0.1.1083": {
         "runtime_dependencies": [
           {
             "name": "arc_swap",
@@ -3912,7 +3488,7 @@
           },
           {
             "name": "gen_platform",
-            "package_key": "gen-platform-0.1.51",
+            "package_key": "gen-platform-0.1.53",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -3922,7 +3498,7 @@
           },
           {
             "name": "gen_types",
-            "package_key": "gen-types-0.1.51",
+            "package_key": "gen-types-0.1.53",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -4075,7 +3651,7 @@
           "std"
         ]
       },
-      "smallvec-1.16.3": {
+      "smallvec-1.16.4": {
         "runtime_dependencies": [],
         "build_dependencies": [],
         "features": [
@@ -4321,7 +3897,6 @@
           "default",
           "derive",
           "extra-traits",
-          "fold",
           "full",
           "parsing",
           "printing",
@@ -4728,56 +4303,6 @@
           "serde"
         ]
       },
-      "toml_edit-0.25.17+spec-1.1.0": {
-        "runtime_dependencies": [
-          {
-            "name": "indexmap",
-            "package_key": "indexmap-2.14.2",
-            "kind": "normal",
-            "features": [
-              "std"
-            ],
-            "uses_default_features": true,
-            "optional": false,
-            "target": null,
-            "tree": "target"
-          },
-          {
-            "name": "toml_datetime",
-            "package_key": "toml_datetime-1.1.2+spec-1.1.0",
-            "kind": "normal",
-            "features": [],
-            "uses_default_features": true,
-            "optional": false,
-            "target": null,
-            "tree": "target"
-          },
-          {
-            "name": "toml_parser",
-            "package_key": "toml_parser-1.1.5+spec-1.1.0",
-            "kind": "normal",
-            "features": [],
-            "uses_default_features": true,
-            "optional": true,
-            "target": null,
-            "tree": "target"
-          },
-          {
-            "name": "winnow",
-            "package_key": "winnow-1.0.4",
-            "kind": "normal",
-            "features": [],
-            "uses_default_features": true,
-            "optional": true,
-            "target": null,
-            "tree": "target"
-          }
-        ],
-        "build_dependencies": [],
-        "features": [
-          "parse"
-        ]
-      },
       "toml_parser-1.1.5+spec-1.1.0": {
         "runtime_dependencies": [
           {
@@ -5015,7 +4540,7 @@
           },
           {
             "name": "smallvec",
-            "package_key": "smallvec-1.16.3",
+            "package_key": "smallvec-1.16.4",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -5184,11 +4709,6 @@
           "variable-fonts"
         ]
       },
-      "unarray-0.1.4": {
-        "runtime_dependencies": [],
-        "build_dependencies": [],
-        "features": []
-      },
       "uncased-0.9.10": {
         "runtime_dependencies": [],
         "build_dependencies": [
@@ -5268,22 +4788,6 @@
       },
       "version_check-0.9.5": {
         "runtime_dependencies": [],
-        "build_dependencies": [],
-        "features": []
-      },
-      "wait-timeout-0.2.1": {
-        "runtime_dependencies": [
-          {
-            "name": "libc",
-            "package_key": "libc-0.2.191",
-            "kind": "normal",
-            "features": [],
-            "uses_default_features": true,
-            "optional": false,
-            "target": "cfg(unix)",
-            "tree": "target"
-          }
-        ],
         "build_dependencies": [],
         "features": []
       },
@@ -5392,7 +4896,7 @@
           },
           {
             "name": "smallvec",
-            "package_key": "smallvec-1.16.3",
+            "package_key": "smallvec-1.16.4",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -5402,7 +4906,7 @@
           },
           {
             "name": "smallvec",
-            "package_key": "smallvec-1.16.3",
+            "package_key": "smallvec-1.16.4",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -5741,7 +5245,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.9.0",
+                "package_key": "cc-1.10.0",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -5778,34 +5282,6 @@
               "alloc",
               "default",
               "std"
-            ]
-          },
-          "chacha20-0.10.2": {
-            "runtime_dependencies": [
-              {
-                "name": "cfg_if",
-                "package_key": "cfg-if-1.0.5",
-                "kind": "normal",
-                "features": [],
-                "uses_default_features": true,
-                "optional": false,
-                "target": null,
-                "tree": "target"
-              },
-              {
-                "name": "rand_core",
-                "package_key": "rand_core-0.10.1",
-                "kind": "normal",
-                "features": [],
-                "uses_default_features": false,
-                "optional": true,
-                "target": null,
-                "tree": "target"
-              }
-            ],
-            "build_dependencies": [],
-            "features": [
-              "rng"
             ]
           },
           "core-foundation-0.9.4": {
@@ -5962,7 +5438,7 @@
               },
               {
                 "name": "memmap2",
-                "package_key": "memmap2-0.9.11",
+                "package_key": "memmap2-0.9.12",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -6127,7 +5603,7 @@
               "fallback"
             ]
           },
-          "madori-0.1.24": {
+          "madori-0.1.25": {
             "runtime_dependencies": [
               {
                 "name": "egaku",
@@ -6205,7 +5681,7 @@
               },
               {
                 "name": "shikumi",
-                "package_key": "shikumi-0.1.1082",
+                "package_key": "shikumi-0.1.1083",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -7034,7 +6510,7 @@
               },
               {
                 "name": "smallvec",
-                "package_key": "smallvec-1.16.3",
+                "package_key": "smallvec-1.16.4",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -7395,7 +6871,7 @@
               },
               {
                 "name": "smallvec",
-                "package_key": "smallvec-1.16.3",
+                "package_key": "smallvec-1.16.4",
                 "kind": "normal",
                 "features": [
                   "union"
@@ -7834,7 +7310,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.9.0",
+                "package_key": "cc-1.10.0",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -7967,34 +7443,6 @@
             "build_dependencies": [],
             "features": []
           },
-          "chacha20-0.10.2": {
-            "runtime_dependencies": [
-              {
-                "name": "cfg_if",
-                "package_key": "cfg-if-1.0.5",
-                "kind": "normal",
-                "features": [],
-                "uses_default_features": true,
-                "optional": false,
-                "target": null,
-                "tree": "target"
-              },
-              {
-                "name": "rand_core",
-                "package_key": "rand_core-0.10.1",
-                "kind": "normal",
-                "features": [],
-                "uses_default_features": false,
-                "optional": true,
-                "target": null,
-                "tree": "target"
-              }
-            ],
-            "build_dependencies": [],
-            "features": [
-              "rng"
-            ]
-          },
           "dlib-0.5.3": {
             "runtime_dependencies": [
               {
@@ -8059,7 +7507,7 @@
               },
               {
                 "name": "memmap2",
-                "package_key": "memmap2-0.9.11",
+                "package_key": "memmap2-0.9.12",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -8320,7 +7768,7 @@
               "system"
             ]
           },
-          "madori-0.1.24": {
+          "madori-0.1.25": {
             "runtime_dependencies": [
               {
                 "name": "egaku",
@@ -8388,7 +7836,7 @@
               },
               {
                 "name": "shikumi",
-                "package_key": "shikumi-0.1.1082",
+                "package_key": "shikumi-0.1.1083",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -8889,7 +8337,7 @@
               },
               {
                 "name": "memmap2",
-                "package_key": "memmap2-0.9.11",
+                "package_key": "memmap2-0.9.12",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -8999,7 +8447,7 @@
               },
               {
                 "name": "memmap2",
-                "package_key": "memmap2-0.9.11",
+                "package_key": "memmap2-0.9.12",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -9341,7 +8789,7 @@
               },
               {
                 "name": "smallvec",
-                "package_key": "smallvec-1.16.3",
+                "package_key": "smallvec-1.16.4",
                 "kind": "normal",
                 "features": [
                   "const_generics",
@@ -9367,7 +8815,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.9.0",
+                "package_key": "cc-1.10.0",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -9908,7 +9356,7 @@
               },
               {
                 "name": "smallvec",
-                "package_key": "smallvec-1.16.3",
+                "package_key": "smallvec-1.16.4",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -10232,7 +9680,7 @@
               },
               {
                 "name": "smallvec",
-                "package_key": "smallvec-1.16.3",
+                "package_key": "smallvec-1.16.4",
                 "kind": "normal",
                 "features": [
                   "union"
@@ -10361,7 +9809,7 @@
               },
               {
                 "name": "memmap2",
-                "package_key": "memmap2-0.9.11",
+                "package_key": "memmap2-0.9.12",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -10941,7 +10389,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.9.0",
+                "package_key": "cc-1.10.0",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -11074,34 +10522,6 @@
             "build_dependencies": [],
             "features": []
           },
-          "chacha20-0.10.2": {
-            "runtime_dependencies": [
-              {
-                "name": "cfg_if",
-                "package_key": "cfg-if-1.0.5",
-                "kind": "normal",
-                "features": [],
-                "uses_default_features": true,
-                "optional": false,
-                "target": null,
-                "tree": "target"
-              },
-              {
-                "name": "rand_core",
-                "package_key": "rand_core-0.10.1",
-                "kind": "normal",
-                "features": [],
-                "uses_default_features": false,
-                "optional": true,
-                "target": null,
-                "tree": "target"
-              }
-            ],
-            "build_dependencies": [],
-            "features": [
-              "rng"
-            ]
-          },
           "dlib-0.5.3": {
             "runtime_dependencies": [
               {
@@ -11166,7 +10586,7 @@
               },
               {
                 "name": "memmap2",
-                "package_key": "memmap2-0.9.11",
+                "package_key": "memmap2-0.9.12",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -11427,7 +10847,7 @@
               "system"
             ]
           },
-          "madori-0.1.24": {
+          "madori-0.1.25": {
             "runtime_dependencies": [
               {
                 "name": "egaku",
@@ -11495,7 +10915,7 @@
               },
               {
                 "name": "shikumi",
-                "package_key": "shikumi-0.1.1082",
+                "package_key": "shikumi-0.1.1083",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -11996,7 +11416,7 @@
               },
               {
                 "name": "memmap2",
-                "package_key": "memmap2-0.9.11",
+                "package_key": "memmap2-0.9.12",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -12106,7 +11526,7 @@
               },
               {
                 "name": "memmap2",
-                "package_key": "memmap2-0.9.11",
+                "package_key": "memmap2-0.9.12",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -12448,7 +11868,7 @@
               },
               {
                 "name": "smallvec",
-                "package_key": "smallvec-1.16.3",
+                "package_key": "smallvec-1.16.4",
                 "kind": "normal",
                 "features": [
                   "const_generics",
@@ -12474,7 +11894,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.9.0",
+                "package_key": "cc-1.10.0",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -13015,7 +12435,7 @@
               },
               {
                 "name": "smallvec",
-                "package_key": "smallvec-1.16.3",
+                "package_key": "smallvec-1.16.4",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -13339,7 +12759,7 @@
               },
               {
                 "name": "smallvec",
-                "package_key": "smallvec-1.16.3",
+                "package_key": "smallvec-1.16.4",
                 "kind": "normal",
                 "features": [
                   "union"
@@ -13468,7 +12888,7 @@
               },
               {
                 "name": "memmap2",
-                "package_key": "memmap2-0.9.11",
+                "package_key": "memmap2-0.9.12",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -13946,7 +13366,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.9.0",
+                "package_key": "cc-1.10.0",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -13983,44 +13403,6 @@
               "alloc",
               "default",
               "std"
-            ]
-          },
-          "chacha20-0.10.2": {
-            "runtime_dependencies": [
-              {
-                "name": "cfg_if",
-                "package_key": "cfg-if-1.0.5",
-                "kind": "normal",
-                "features": [],
-                "uses_default_features": true,
-                "optional": false,
-                "target": null,
-                "tree": "target"
-              },
-              {
-                "name": "cpufeatures",
-                "package_key": "cpufeatures-0.3.1",
-                "kind": "normal",
-                "features": [],
-                "uses_default_features": true,
-                "optional": false,
-                "target": "cfg(any(target_arch = \"x86_64\", target_arch = \"x86\"))",
-                "tree": "target"
-              },
-              {
-                "name": "rand_core",
-                "package_key": "rand_core-0.10.1",
-                "kind": "normal",
-                "features": [],
-                "uses_default_features": false,
-                "optional": true,
-                "target": null,
-                "tree": "target"
-              }
-            ],
-            "build_dependencies": [],
-            "features": [
-              "rng"
             ]
           },
           "core-foundation-0.9.4": {
@@ -14182,7 +13564,7 @@
               },
               {
                 "name": "memmap2",
-                "package_key": "memmap2-0.9.11",
+                "package_key": "memmap2-0.9.12",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -14347,7 +13729,7 @@
               "fallback"
             ]
           },
-          "madori-0.1.24": {
+          "madori-0.1.25": {
             "runtime_dependencies": [
               {
                 "name": "egaku",
@@ -14425,7 +13807,7 @@
               },
               {
                 "name": "shikumi",
-                "package_key": "shikumi-0.1.1082",
+                "package_key": "shikumi-0.1.1083",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -15254,7 +14636,7 @@
               },
               {
                 "name": "smallvec",
-                "package_key": "smallvec-1.16.3",
+                "package_key": "smallvec-1.16.4",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -15615,7 +14997,7 @@
               },
               {
                 "name": "smallvec",
-                "package_key": "smallvec-1.16.3",
+                "package_key": "smallvec-1.16.4",
                 "kind": "normal",
                 "features": [
                   "union"
@@ -16064,7 +15446,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.9.0",
+                "package_key": "cc-1.10.0",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -16197,44 +15579,6 @@
             "build_dependencies": [],
             "features": []
           },
-          "chacha20-0.10.2": {
-            "runtime_dependencies": [
-              {
-                "name": "cfg_if",
-                "package_key": "cfg-if-1.0.5",
-                "kind": "normal",
-                "features": [],
-                "uses_default_features": true,
-                "optional": false,
-                "target": null,
-                "tree": "target"
-              },
-              {
-                "name": "cpufeatures",
-                "package_key": "cpufeatures-0.3.1",
-                "kind": "normal",
-                "features": [],
-                "uses_default_features": true,
-                "optional": false,
-                "target": "cfg(any(target_arch = \"x86_64\", target_arch = \"x86\"))",
-                "tree": "target"
-              },
-              {
-                "name": "rand_core",
-                "package_key": "rand_core-0.10.1",
-                "kind": "normal",
-                "features": [],
-                "uses_default_features": false,
-                "optional": true,
-                "target": null,
-                "tree": "target"
-              }
-            ],
-            "build_dependencies": [],
-            "features": [
-              "rng"
-            ]
-          },
           "cpufeatures-0.3.1": {
             "runtime_dependencies": [],
             "build_dependencies": [],
@@ -16304,7 +15648,7 @@
               },
               {
                 "name": "memmap2",
-                "package_key": "memmap2-0.9.11",
+                "package_key": "memmap2-0.9.12",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -16565,7 +15909,7 @@
               "system"
             ]
           },
-          "madori-0.1.24": {
+          "madori-0.1.25": {
             "runtime_dependencies": [
               {
                 "name": "egaku",
@@ -16633,7 +15977,7 @@
               },
               {
                 "name": "shikumi",
-                "package_key": "shikumi-0.1.1082",
+                "package_key": "shikumi-0.1.1083",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -17134,7 +16478,7 @@
               },
               {
                 "name": "memmap2",
-                "package_key": "memmap2-0.9.11",
+                "package_key": "memmap2-0.9.12",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -17244,7 +16588,7 @@
               },
               {
                 "name": "memmap2",
-                "package_key": "memmap2-0.9.11",
+                "package_key": "memmap2-0.9.12",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -17586,7 +16930,7 @@
               },
               {
                 "name": "smallvec",
-                "package_key": "smallvec-1.16.3",
+                "package_key": "smallvec-1.16.4",
                 "kind": "normal",
                 "features": [
                   "const_generics",
@@ -17612,7 +16956,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.9.0",
+                "package_key": "cc-1.10.0",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -18153,7 +17497,7 @@
               },
               {
                 "name": "smallvec",
-                "package_key": "smallvec-1.16.3",
+                "package_key": "smallvec-1.16.4",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -18477,7 +17821,7 @@
               },
               {
                 "name": "smallvec",
-                "package_key": "smallvec-1.16.3",
+                "package_key": "smallvec-1.16.4",
                 "kind": "normal",
                 "features": [
                   "union"
@@ -18606,7 +17950,7 @@
               },
               {
                 "name": "memmap2",
-                "package_key": "memmap2-0.9.11",
+                "package_key": "memmap2-0.9.12",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -19196,7 +18540,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.9.0",
+                "package_key": "cc-1.10.0",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -19329,44 +18673,6 @@
             "build_dependencies": [],
             "features": []
           },
-          "chacha20-0.10.2": {
-            "runtime_dependencies": [
-              {
-                "name": "cfg_if",
-                "package_key": "cfg-if-1.0.5",
-                "kind": "normal",
-                "features": [],
-                "uses_default_features": true,
-                "optional": false,
-                "target": null,
-                "tree": "target"
-              },
-              {
-                "name": "cpufeatures",
-                "package_key": "cpufeatures-0.3.1",
-                "kind": "normal",
-                "features": [],
-                "uses_default_features": true,
-                "optional": false,
-                "target": "cfg(any(target_arch = \"x86_64\", target_arch = \"x86\"))",
-                "tree": "target"
-              },
-              {
-                "name": "rand_core",
-                "package_key": "rand_core-0.10.1",
-                "kind": "normal",
-                "features": [],
-                "uses_default_features": false,
-                "optional": true,
-                "target": null,
-                "tree": "target"
-              }
-            ],
-            "build_dependencies": [],
-            "features": [
-              "rng"
-            ]
-          },
           "cpufeatures-0.3.1": {
             "runtime_dependencies": [],
             "build_dependencies": [],
@@ -19436,7 +18742,7 @@
               },
               {
                 "name": "memmap2",
-                "package_key": "memmap2-0.9.11",
+                "package_key": "memmap2-0.9.12",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -19697,7 +19003,7 @@
               "system"
             ]
           },
-          "madori-0.1.24": {
+          "madori-0.1.25": {
             "runtime_dependencies": [
               {
                 "name": "egaku",
@@ -19765,7 +19071,7 @@
               },
               {
                 "name": "shikumi",
-                "package_key": "shikumi-0.1.1082",
+                "package_key": "shikumi-0.1.1083",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -20266,7 +19572,7 @@
               },
               {
                 "name": "memmap2",
-                "package_key": "memmap2-0.9.11",
+                "package_key": "memmap2-0.9.12",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -20376,7 +19682,7 @@
               },
               {
                 "name": "memmap2",
-                "package_key": "memmap2-0.9.11",
+                "package_key": "memmap2-0.9.12",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -20718,7 +20024,7 @@
               },
               {
                 "name": "smallvec",
-                "package_key": "smallvec-1.16.3",
+                "package_key": "smallvec-1.16.4",
                 "kind": "normal",
                 "features": [
                   "const_generics",
@@ -20744,7 +20050,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.9.0",
+                "package_key": "cc-1.10.0",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": true,
@@ -21285,7 +20591,7 @@
               },
               {
                 "name": "smallvec",
-                "package_key": "smallvec-1.16.3",
+                "package_key": "smallvec-1.16.4",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -21609,7 +20915,7 @@
               },
               {
                 "name": "smallvec",
-                "package_key": "smallvec-1.16.3",
+                "package_key": "smallvec-1.16.4",
                 "kind": "normal",
                 "features": [
                   "union"
@@ -21738,7 +21044,7 @@
               },
               {
                 "name": "memmap2",
-                "package_key": "memmap2-0.9.11",
+                "package_key": "memmap2-0.9.12",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -22209,14 +21515,8 @@
     "bincode-1.3.3": {
       "edition": "2015"
     },
-    "bit-set-0.11.1": {
-      "edition": "2021"
-    },
     "bit-set-0.8.0": {
       "edition": "2015"
-    },
-    "bit-vec-0.10.1": {
-      "edition": "2021"
     },
     "bit-vec-0.8.0": {
       "edition": "2015"
@@ -22237,20 +21537,6 @@
     "block2-0.5.1": {
       "edition": "2021"
     },
-    "borsh-1.8.1": {
-      "edition": "2018",
-      "build_script": "build.rs",
-      "binaries": [
-        {
-          "name": "generate_schema_schema",
-          "path": "src/generate_schema_schema.rs"
-        }
-      ]
-    },
-    "borsh-derive-1.8.1": {
-      "edition": "2018",
-      "proc_macro": true
-    },
     "bytemuck-1.25.2": {
       "edition": "2018"
     },
@@ -22258,16 +21544,13 @@
       "edition": "2018",
       "proc_macro": true
     },
-    "bytes-1.12.1": {
-      "edition": "2021"
-    },
     "calloop-0.13.0": {
       "edition": "2018"
     },
     "calloop-wayland-source-0.3.0": {
       "edition": "2021"
     },
-    "cc-1.9.0": {
+    "cc-1.10.0": {
       "edition": "2021"
     },
     "cfg-if-1.0.5": {
@@ -22275,9 +21558,6 @@
     },
     "cfg_aliases-0.2.2": {
       "edition": "2018"
-    },
-    "chacha20-0.10.2": {
-      "edition": "2024"
     },
     "chrono-0.4.45": {
       "edition": "2021"
@@ -22298,9 +21578,6 @@
       "edition": "2018"
     },
     "core-graphics-types-0.1.3": {
-      "edition": "2018"
-    },
-    "core_detect-1.0.0": {
       "edition": "2018"
     },
     "cosmic-text-0.14.2": {
@@ -22366,13 +21643,6 @@
     "find-msvc-tools-0.1.15": {
       "edition": "2021"
     },
-    "fnv-1.0.7": {
-      "edition": "2015",
-      "lib_target": {
-        "name": "fnv",
-        "path": "lib.rs"
-      }
-    },
     "foldhash-0.1.5": {
       "edition": "2021"
     },
@@ -22402,14 +21672,14 @@
       "edition": "2024",
       "build_script": "build.rs"
     },
-    "gen-macros-0.1.51": {
+    "gen-macros-0.1.53": {
       "edition": "2024",
       "proc_macro": true
     },
-    "gen-platform-0.1.51": {
+    "gen-platform-0.1.53": {
       "edition": "2024"
     },
-    "gen-types-0.1.51": {
+    "gen-types-0.1.53": {
       "edition": "2024"
     },
     "generator-0.8.11": {
@@ -22533,7 +21803,7 @@
     "lru-0.12.5": {
       "edition": "2015"
     },
-    "madori-0.1.24": {
+    "madori-0.1.25": {
       "edition": "2024",
       "lib_target": {
         "name": "madori",
@@ -22552,7 +21822,7 @@
     "memchr-2.8.3": {
       "edition": "2021"
     },
-    "memmap2-0.9.11": {
+    "memmap2-0.9.12": {
       "edition": "2021"
     },
     "metal-0.31.0": {
@@ -22660,9 +21930,6 @@
     "pollster-0.4.0": {
       "edition": "2018"
     },
-    "proc-macro-crate-3.5.0": {
-      "edition": "2021"
-    },
     "proc-macro2-1.0.107": {
       "edition": "2021",
       "build_script": "build.rs"
@@ -22674,27 +21941,12 @@
     "profiling-1.0.18": {
       "edition": "2018"
     },
-    "proptest-1.12.0": {
-      "edition": "2021"
-    },
-    "quick-error-1.2.3": {
-      "edition": "2015"
-    },
     "quick-xml-0.41.0": {
       "edition": "2021"
     },
     "quote-1.0.47": {
       "edition": "2021",
       "build_script": "build.rs"
-    },
-    "rand-0.10.3": {
-      "edition": "2024"
-    },
-    "rand_core-0.10.1": {
-      "edition": "2024"
-    },
-    "rand_xorshift-0.5.0": {
-      "edition": "2024"
     },
     "rangemap-1.8.0": {
       "edition": "2018"
@@ -22743,9 +21995,6 @@
       "edition": "2018",
       "proc_macro": true,
       "build_script": "build/build.rs"
-    },
-    "rusty-fork-0.3.1": {
-      "edition": "2018"
     },
     "rustybuzz-0.14.1": {
       "edition": "2021"
@@ -22813,7 +22062,7 @@
     "shibori-0.1.1": {
       "edition": "2024"
     },
-    "shikumi-0.1.1082": {
+    "shikumi-0.1.1083": {
       "edition": "2024"
     },
     "shlex-2.0.1": {
@@ -22829,7 +22078,7 @@
       "edition": "2018",
       "build_script": "build.rs"
     },
-    "smallvec-1.16.3": {
+    "smallvec-1.16.4": {
       "edition": "2018"
     },
     "smithay-client-toolkit-0.19.2": {
@@ -22927,9 +22176,6 @@
     "toml_edit-0.22.27": {
       "edition": "2021"
     },
-    "toml_edit-0.25.17+spec-1.1.0": {
-      "edition": "2024"
-    },
     "toml_parser-1.1.5+spec-1.1.0": {
       "edition": "2024"
     },
@@ -22965,9 +22211,6 @@
       "edition": "2018"
     },
     "ttf-parser-0.25.1": {
-      "edition": "2018"
-    },
-    "unarray-0.1.4": {
       "edition": "2018"
     },
     "uncased-0.9.10": {
@@ -23016,23 +22259,6 @@
     },
     "version_check-0.9.5": {
       "edition": "2015"
-    },
-    "wait-timeout-0.2.1": {
-      "edition": "2015",
-      "binaries": [
-        {
-          "name": "exit",
-          "path": "src/bin/exit.rs"
-        },
-        {
-          "name": "reader",
-          "path": "src/bin/reader.rs"
-        },
-        {
-          "name": "sleep",
-          "path": "src/bin/sleep.rs"
-        }
-      ]
     },
     "walkdir-2.5.0": {
       "edition": "2018"

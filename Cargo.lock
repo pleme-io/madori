@@ -329,9 +329,9 @@ dependencies = [
 
 [[package]]
 name = "cc"
-version = "1.9.0"
+version = "1.10.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "877bf67ac8e52449eb2f9e98a344ea163beb70dd1f9eebe3cc5357dcfeaee4df"
+checksum = "86e055fa6e3e40ad6187ba25b6855eeb635d5271f8e0f0e1e9a5826b8d75bea0"
 dependencies = [
  "find-msvc-tools",
  "jobserver",
@@ -780,9 +780,9 @@ dependencies = [
 
 [[package]]
 name = "gen-macros"
-version = "0.1.51"
+version = "0.1.53"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b981d6e23ae392923db98dc5a96fd8f42a3a44c6ce4c7681461a6f0881ed59c0"
+checksum = "f11a494b2cb4b739c095ec2858f7f6f0e1bc699c11cbff1ed8b66564aa96b849"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -791,9 +791,9 @@ dependencies = [
 
 [[package]]
 name = "gen-platform"
-version = "0.1.51"
+version = "0.1.53"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f2ce1c250a8f7e6e026d731fdeee7ae0fdb7d882f899a076b8c1558eef6ddce3"
+checksum = "03c91fd83e197ad3d9c0fa97a065d0e4ff492efbd80f42375ef9a25e29592015"
 dependencies = [
  "gen-macros",
  "gen-types",
@@ -805,9 +805,9 @@ dependencies = [
 
 [[package]]
 name = "gen-types"
-version = "0.1.51"
+version = "0.1.53"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "25c13fba2c9360c684e7f068deddba4ae436111441285d7b54e0facb3ebe3bc5"
+checksum = "ededab842228681cef1743af0d56df1c421a81e83a4df9da2470ab36789590da"
 dependencies = [
  "blake3",
  "chrono",
@@ -1328,7 +1328,7 @@ dependencies = [
 
 [[package]]
 name = "madori"
-version = "0.1.24"
+version = "0.1.25"
 dependencies = [
  "egaku",
  "garasu",
@@ -1381,9 +1381,9 @@ checksum = "cf8baf1c55e62ffcace7a9f06f4bd9cd3f0c4beb022d3b367256b91b87513d98"
 
 [[package]]
 name = "memmap2"
-version = "0.9.11"
+version = "0.9.12"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d1219ed1b7f229ee7104d281dd01d6802fe28bb6e95d292942c4daacdeb798c0"
+checksum = "6b0ca1155a9ecc25aa12e8313a119f32edf0255fea2f44839c4ac0a12b2ac157"
 dependencies = [
  "libc",
 ]
@@ -2432,9 +2432,9 @@ checksum = "a5fb3ed7c462ed1f055d1db17434f2ceaffdd4a7dd6d633328cc1493e9423f40"
 
 [[package]]
 name = "shikumi"
-version = "0.1.1082"
+version = "0.1.1083"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1bf83a01a3a1fb4e82976dc3e10951ba88d0bc48b1d10fcd6eac03ddea9b8118"
+checksum = "253ee1f04558dcc476384a4be719428df4322816ad73c5e2e7731d3808cc5523"
 dependencies = [
  "arc-swap",
  "async-trait",
@@ -2499,9 +2499,9 @@ dependencies = [
 
 [[package]]
 name = "smallvec"
-version = "1.16.3"
+version = "1.16.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5b3dc8af474f516a851ff4bd12db780f948b9250ad37211e4eec0bccea54e01b"
+checksum = "d0d5d4b1981b8bbbb7aed204cae5726d683d5d6ac7e74ec54122ea28f315e7c8"
 
 [[package]]
 name = "smithay-client-toolkit"
@@ -2738,9 +2738,9 @@ checksum = "fd3ca314f692efd6c868f8408f53fe444634a845f96c028b97d35f6a1f79f0ee"
 
 [[package]]
 name = "tokio"
-version = "1.54.0"
+version = "1.54.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a0c168a474b95bfecfe908a65d4bdffc523144b649a74c09c286afb35d53e0bc"
+checksum = "b52fd3255258d26fac7264ab5a76b53c13367136dc011d3d6ad4f8ed070396a3"
 dependencies = [
  "pin-project-lite",
 ]
