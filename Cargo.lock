@@ -1267,6 +1267,7 @@ dependencies = [
  "garasu",
  "ishou-tokens",
  "loom",
+ "objc2",
  "pleme-allvariants-derive",
  "pollster",
  "serde",

@@ -2,6 +2,8 @@ pub mod app;
 mod doorbell;
 pub mod error;
 pub mod event;
+#[cfg(target_os = "macos")]
+mod metal_layer;
 mod pacer;
 pub mod render;
 

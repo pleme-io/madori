@@ -953,6 +953,15 @@ impl App {
                         return;
                     }
                 };
+                #[cfg(target_os = "macos")]
+                {
+                    let anchored = crate::metal_layer::anchor_top_left(&window);
+                    tracing::info!(
+                        target: "madori::perf",
+                        anchored,
+                        "metal layer contents anchored top-left"
+                    );
+                }
 
                 match pollster::block_on(GpuContext::new_for_surface(
                     instance,
