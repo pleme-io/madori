@@ -61,12 +61,20 @@ impl GridReconciler {
         match self.policy {
             Commit::Live => Some(self.commit(target)),
             Commit::Coalesce { .. } => {
-                let first_seen = self.pending.map_or(now, |p| p.first_seen);
-                self.pending = Some(Pending {
-                    grid: target,
-                    first_seen,
-                    last_seen: now,
-                });
+                let pending = match self.pending {
+                    Some(p) if p.grid == target => p,
+                    Some(p) => Pending {
+                        grid: target,
+                        first_seen: p.first_seen,
+                        last_seen: now,
+                    },
+                    None => Pending {
+                        grid: target,
+                        first_seen: now,
+                        last_seen: now,
+                    },
+                };
+                self.pending = Some(pending);
                 self.due(now)
             }
         }
@@ -200,6 +208,24 @@ mod tests {
         assert_eq!(r.due(t0 + Duration::from_millis(39)), None);
         assert_eq!(r.deadline(), Some(t0 + Duration::from_millis(40)));
         assert_eq!(r.due(t0 + Duration::from_millis(40)), Some(grid(81, 24)));
+    }
+
+    #[test]
+    fn re_observing_the_pending_grid_does_not_restart_the_quiet_period() {
+        let t0 = Instant::now();
+        let mut r = GridReconciler::new(coalesce());
+        let _ = r.observe(grid(80, 24), t0);
+        assert_eq!(r.observe(grid(81, 24), t0), None);
+        for ms in [10, 20, 30] {
+            assert_eq!(
+                r.observe(grid(81, 24), t0 + Duration::from_millis(ms)),
+                None
+            );
+        }
+        assert_eq!(
+            r.observe(grid(81, 24), t0 + Duration::from_millis(40)),
+            Some(grid(81, 24))
+        );
     }
 
     #[test]
