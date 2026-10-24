@@ -7,6 +7,7 @@ pub mod grid;
 mod metal_layer;
 mod pacer;
 pub mod render;
+pub mod resize;
 
 pub use app::{App, AppBuilder, AppConfig, FramePacing, LoopClosed, MenuPolicy, UserProxy};
 pub use error::MadoriError;
