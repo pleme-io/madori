@@ -39,6 +39,8 @@ pub struct CellMetrics {
     pub height: CellPx,
 }
 
+pub const MONO_ADVANCE_ESTIMATE: f32 = 0.6;
+
 impl CellMetrics {
     #[must_use]
     pub fn new(width: f32, height: f32) -> Self {
@@ -46,6 +48,11 @@ impl CellMetrics {
             width: CellPx::new(width),
             height: CellPx::new(height),
         }
+    }
+
+    #[must_use]
+    pub fn estimate(font_size: f32, line_height: f32) -> Self {
+        Self::new(font_size * MONO_ADVANCE_ESTIMATE, font_size * line_height)
     }
 }
 
@@ -195,6 +202,12 @@ mod tests {
             let b = Grid::fit(SurfaceSize::new(w - slack * (1.0 - frac) * 0.99, h), m, Insets::uniform(0.0));
             prop_assert_eq!(a, b);
         }
+    }
+
+    #[test]
+    fn an_estimate_is_the_monospace_advance_by_the_line_height() {
+        let m = CellMetrics::estimate(10.0, 1.5);
+        assert_eq!((m.width.get(), m.height.get()), (6.0, 15.0));
     }
 
     #[test]
