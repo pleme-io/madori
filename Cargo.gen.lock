@@ -1,8 +1,8 @@
 {
   "schema_version": 2,
-  "cargo_lock_sha256": "bd7b46745af8d23661fea065ee6c086290a583935b659503244b59d29c422838",
+  "cargo_lock_sha256": "bd6f5a0139d1b031133481d3616158e06bbcc7f7476253fe64bf70e70bb03e51",
   "manifest_sha256": {
-    "Cargo.toml": "98ee5470942559d11fc246731d2b7e113dfabcab97853b06fca6a66261859fbb"
+    "Cargo.toml": "f54d85e22465931ac721a2a56d9d2891d1621a39ab39b090563fa465faeb258e"
   },
   "target_resolves": {
     "base": {
@@ -515,7 +515,7 @@
           },
           {
             "name": "unicode_width",
-            "package_key": "unicode-width-0.2.2",
+            "package_key": "unicode-width-0.2.3",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -809,7 +809,7 @@
           },
           {
             "name": "ishou_tokens",
-            "package_key": "ishou-tokens-0.1.20",
+            "package_key": "ishou-tokens-0.1.22",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -881,7 +881,7 @@
           },
           {
             "name": "unicode_width",
-            "package_key": "unicode-width-0.2.2",
+            "package_key": "unicode-width-0.2.3",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -1264,7 +1264,7 @@
           "default"
         ]
       },
-      "gen-macros-0.1.54": {
+      "gen-macros-0.1.55": {
         "runtime_dependencies": [
           {
             "name": "proc_macro2",
@@ -1303,11 +1303,11 @@
         "build_dependencies": [],
         "features": []
       },
-      "gen-platform-0.1.54": {
+      "gen-platform-0.1.55": {
         "runtime_dependencies": [
           {
             "name": "gen_macros",
-            "package_key": "gen-macros-0.1.54",
+            "package_key": "gen-macros-0.1.55",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -1317,7 +1317,7 @@
           },
           {
             "name": "gen_types",
-            "package_key": "gen-types-0.1.54",
+            "package_key": "gen-types-0.1.55",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -1371,7 +1371,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "gen-types-0.1.54": {
+      "gen-types-0.1.55": {
         "runtime_dependencies": [
           {
             "name": "blake3",
@@ -1508,102 +1508,6 @@
             "tree": "host"
           }
         ],
-        "features": []
-      },
-      "getrandom-0.3.4": {
-        "runtime_dependencies": [
-          {
-            "name": "cfg_if",
-            "package_key": "cfg-if-1.0.5",
-            "kind": "normal",
-            "features": [],
-            "uses_default_features": true,
-            "optional": false,
-            "target": null,
-            "tree": "target"
-          },
-          {
-            "name": "libc",
-            "package_key": "libc-0.2.191",
-            "kind": "normal",
-            "features": [],
-            "uses_default_features": false,
-            "optional": false,
-            "target": "cfg(all(any(target_os = \"linux\", target_os = \"android\"), not(any(all(target_os = \"linux\", target_env = \"\"), getrandom_backend = \"custom\", getrandom_backend = \"linux_raw\", getrandom_backend = \"rdrand\", getrandom_backend = \"rndr\"))))",
-            "tree": "target"
-          },
-          {
-            "name": "libc",
-            "package_key": "libc-0.2.191",
-            "kind": "normal",
-            "features": [],
-            "uses_default_features": false,
-            "optional": false,
-            "target": "cfg(any(target_os = \"dragonfly\", target_os = \"freebsd\", target_os = \"hurd\", target_os = \"illumos\", target_os = \"cygwin\", all(target_os = \"horizon\", target_arch = \"arm\")))",
-            "tree": "target"
-          },
-          {
-            "name": "libc",
-            "package_key": "libc-0.2.191",
-            "kind": "normal",
-            "features": [],
-            "uses_default_features": false,
-            "optional": false,
-            "target": "cfg(any(target_os = \"haiku\", target_os = \"redox\", target_os = \"nto\", target_os = \"aix\"))",
-            "tree": "target"
-          },
-          {
-            "name": "libc",
-            "package_key": "libc-0.2.191",
-            "kind": "normal",
-            "features": [],
-            "uses_default_features": false,
-            "optional": false,
-            "target": "cfg(any(target_os = \"ios\", target_os = \"visionos\", target_os = \"watchos\", target_os = \"tvos\"))",
-            "tree": "target"
-          },
-          {
-            "name": "libc",
-            "package_key": "libc-0.2.191",
-            "kind": "normal",
-            "features": [],
-            "uses_default_features": false,
-            "optional": false,
-            "target": "cfg(any(target_os = \"macos\", target_os = \"openbsd\", target_os = \"vita\", target_os = \"emscripten\"))",
-            "tree": "target"
-          },
-          {
-            "name": "libc",
-            "package_key": "libc-0.2.191",
-            "kind": "normal",
-            "features": [],
-            "uses_default_features": false,
-            "optional": false,
-            "target": "cfg(target_os = \"netbsd\")",
-            "tree": "target"
-          },
-          {
-            "name": "libc",
-            "package_key": "libc-0.2.191",
-            "kind": "normal",
-            "features": [],
-            "uses_default_features": false,
-            "optional": false,
-            "target": "cfg(target_os = \"solaris\")",
-            "tree": "target"
-          },
-          {
-            "name": "libc",
-            "package_key": "libc-0.2.191",
-            "kind": "normal",
-            "features": [],
-            "uses_default_features": false,
-            "optional": false,
-            "target": "cfg(target_os = \"vxworks\")",
-            "tree": "target"
-          }
-        ],
-        "build_dependencies": [],
         "features": []
       },
       "getrandom-0.4.3": {
@@ -2066,7 +1970,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "ishou-tokens-0.1.20": {
+      "ishou-tokens-0.1.22": {
         "runtime_dependencies": [
           {
             "name": "irodori",
@@ -2588,7 +2492,7 @@
           "wgsl-out"
         ]
       },
-      "notify-types-2.1.0": {
+      "notify-types-2.2.0": {
         "runtime_dependencies": [
           {
             "name": "bitflags",
@@ -3995,7 +3899,7 @@
           },
           {
             "name": "gen_platform",
-            "package_key": "gen-platform-0.1.54",
+            "package_key": "gen-platform-0.1.55",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -4005,7 +3909,7 @@
           },
           {
             "name": "gen_types",
-            "package_key": "gen-types-0.1.54",
+            "package_key": "gen-types-0.1.55",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -4015,7 +3919,7 @@
           },
           {
             "name": "notify",
-            "package_key": "notify-8.2.0",
+            "package_key": "notify-8.2.1",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -4025,7 +3929,7 @@
           },
           {
             "name": "notify",
-            "package_key": "notify-8.2.0",
+            "package_key": "notify-8.2.1",
             "kind": "normal",
             "features": [
               "macos_fsevent"
@@ -4437,7 +4341,7 @@
           },
           {
             "name": "getrandom",
-            "package_key": "getrandom-0.3.4",
+            "package_key": "getrandom-0.4.3",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -4459,7 +4363,7 @@
           },
           {
             "name": "rustix",
-            "package_key": "rustix-1.1.5",
+            "package_key": "rustix-1.1.6",
             "kind": "normal",
             "features": [
               "fs"
@@ -5336,7 +5240,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "unicode-width-0.2.2": {
+      "unicode-width-0.2.3": {
         "runtime_dependencies": [],
         "build_dependencies": [],
         "features": [
@@ -6176,22 +6080,6 @@
             "build_dependencies": [],
             "features": []
           },
-          "fsevent-sys-4.1.0": {
-            "runtime_dependencies": [
-              {
-                "name": "libc",
-                "package_key": "libc-0.2.191",
-                "kind": "normal",
-                "features": [],
-                "uses_default_features": true,
-                "optional": false,
-                "target": null,
-                "tree": "target"
-              }
-            ],
-            "build_dependencies": [],
-            "features": []
-          },
           "iana-time-zone-0.1.65": {
             "runtime_dependencies": [
               {
@@ -6210,7 +6098,7 @@
               "fallback"
             ]
           },
-          "madori-0.1.26": {
+          "madori-0.1.27": {
             "runtime_dependencies": [
               {
                 "name": "egaku",
@@ -6234,7 +6122,7 @@
               },
               {
                 "name": "ishou_tokens",
-                "package_key": "ishou-tokens-0.1.20",
+                "package_key": "ishou-tokens-0.1.22",
                 "kind": "normal",
                 "features": [
                   "wgpu"
@@ -6435,7 +6323,7 @@
               "link"
             ]
           },
-          "notify-8.2.0": {
+          "notify-8.2.1": {
             "runtime_dependencies": [
               {
                 "name": "bitflags",
@@ -6444,16 +6332,6 @@
                 "features": [],
                 "uses_default_features": true,
                 "optional": false,
-                "target": "cfg(target_os = \"macos\")",
-                "tree": "target"
-              },
-              {
-                "name": "fsevent_sys",
-                "package_key": "fsevent-sys-4.1.0",
-                "kind": "normal",
-                "features": [],
-                "uses_default_features": true,
-                "optional": true,
                 "target": "cfg(target_os = \"macos\")",
                 "tree": "target"
               },
@@ -6479,12 +6357,44 @@
               },
               {
                 "name": "notify_types",
-                "package_key": "notify-types-2.1.0",
+                "package_key": "notify-types-2.2.0",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
                 "optional": false,
                 "target": null,
+                "tree": "target"
+              },
+              {
+                "name": "objc2_core_foundation",
+                "package_key": "objc2-core-foundation-0.3.2",
+                "kind": "normal",
+                "features": [
+                  "CFArray",
+                  "CFDate",
+                  "CFError",
+                  "CFRunLoop",
+                  "CFString",
+                  "CFURL",
+                  "std"
+                ],
+                "uses_default_features": false,
+                "optional": true,
+                "target": "cfg(target_os = \"macos\")",
+                "tree": "target"
+              },
+              {
+                "name": "objc2_core_services",
+                "package_key": "objc2-core-services-0.3.2",
+                "kind": "normal",
+                "features": [
+                  "FSEvents",
+                  "libc",
+                  "std"
+                ],
+                "uses_default_features": false,
+                "optional": true,
+                "target": "cfg(target_os = \"macos\")",
                 "tree": "target"
               },
               {
@@ -6501,7 +6411,9 @@
             "build_dependencies": [],
             "features": [
               "fsevent-sys",
-              "macos_fsevent"
+              "macos_fsevent",
+              "objc2-core-foundation",
+              "objc2-core-services"
             ]
           },
           "objc-0.2.7": {
@@ -6666,6 +6578,35 @@
               "std"
             ]
           },
+          "objc2-core-foundation-0.3.2": {
+            "runtime_dependencies": [
+              {
+                "name": "bitflags",
+                "package_key": "bitflags-2.13.2",
+                "kind": "normal",
+                "features": [
+                  "std"
+                ],
+                "uses_default_features": false,
+                "optional": true,
+                "target": null,
+                "tree": "target"
+              }
+            ],
+            "build_dependencies": [],
+            "features": [
+              "CFArray",
+              "CFDate",
+              "CFError",
+              "CFRunLoop",
+              "CFString",
+              "CFURL",
+              "CFUUID",
+              "alloc",
+              "bitflags",
+              "std"
+            ]
+          },
           "objc2-core-image-0.2.2": {
             "runtime_dependencies": [
               {
@@ -6695,6 +6636,37 @@
               "CIContext",
               "CIImage",
               "alloc",
+              "std"
+            ]
+          },
+          "objc2-core-services-0.3.2": {
+            "runtime_dependencies": [
+              {
+                "name": "libc",
+                "package_key": "libc-0.2.191",
+                "kind": "normal",
+                "features": [],
+                "uses_default_features": false,
+                "optional": true,
+                "target": null,
+                "tree": "target"
+              },
+              {
+                "name": "objc2_core_foundation",
+                "package_key": "objc2-core-foundation-0.3.2",
+                "kind": "normal",
+                "features": [],
+                "uses_default_features": false,
+                "optional": false,
+                "target": null,
+                "tree": "target"
+              }
+            ],
+            "build_dependencies": [],
+            "features": [
+              "FSEvents",
+              "alloc",
+              "libc",
               "std"
             ]
           },
@@ -6890,7 +6862,7 @@
             "build_dependencies": [],
             "features": []
           },
-          "rustix-1.1.5": {
+          "rustix-1.1.6": {
             "runtime_dependencies": [
               {
                 "name": "bitflags",
@@ -8203,7 +8175,7 @@
             "runtime_dependencies": [
               {
                 "name": "rustix",
-                "package_key": "rustix-1.1.5",
+                "package_key": "rustix-1.1.6",
                 "kind": "normal",
                 "features": [
                   "system"
@@ -8211,6 +8183,102 @@
                 "uses_default_features": false,
                 "optional": false,
                 "target": "cfg(not(windows))",
+                "tree": "target"
+              }
+            ],
+            "build_dependencies": [],
+            "features": []
+          },
+          "getrandom-0.3.4": {
+            "runtime_dependencies": [
+              {
+                "name": "cfg_if",
+                "package_key": "cfg-if-1.0.5",
+                "kind": "normal",
+                "features": [],
+                "uses_default_features": true,
+                "optional": false,
+                "target": null,
+                "tree": "target"
+              },
+              {
+                "name": "libc",
+                "package_key": "libc-0.2.191",
+                "kind": "normal",
+                "features": [],
+                "uses_default_features": false,
+                "optional": false,
+                "target": "cfg(all(any(target_os = \"linux\", target_os = \"android\"), not(any(all(target_os = \"linux\", target_env = \"\"), getrandom_backend = \"custom\", getrandom_backend = \"linux_raw\", getrandom_backend = \"rdrand\", getrandom_backend = \"rndr\"))))",
+                "tree": "target"
+              },
+              {
+                "name": "libc",
+                "package_key": "libc-0.2.191",
+                "kind": "normal",
+                "features": [],
+                "uses_default_features": false,
+                "optional": false,
+                "target": "cfg(any(target_os = \"dragonfly\", target_os = \"freebsd\", target_os = \"hurd\", target_os = \"illumos\", target_os = \"cygwin\", all(target_os = \"horizon\", target_arch = \"arm\")))",
+                "tree": "target"
+              },
+              {
+                "name": "libc",
+                "package_key": "libc-0.2.191",
+                "kind": "normal",
+                "features": [],
+                "uses_default_features": false,
+                "optional": false,
+                "target": "cfg(any(target_os = \"haiku\", target_os = \"redox\", target_os = \"nto\", target_os = \"aix\"))",
+                "tree": "target"
+              },
+              {
+                "name": "libc",
+                "package_key": "libc-0.2.191",
+                "kind": "normal",
+                "features": [],
+                "uses_default_features": false,
+                "optional": false,
+                "target": "cfg(any(target_os = \"ios\", target_os = \"visionos\", target_os = \"watchos\", target_os = \"tvos\"))",
+                "tree": "target"
+              },
+              {
+                "name": "libc",
+                "package_key": "libc-0.2.191",
+                "kind": "normal",
+                "features": [],
+                "uses_default_features": false,
+                "optional": false,
+                "target": "cfg(any(target_os = \"macos\", target_os = \"openbsd\", target_os = \"vita\", target_os = \"emscripten\"))",
+                "tree": "target"
+              },
+              {
+                "name": "libc",
+                "package_key": "libc-0.2.191",
+                "kind": "normal",
+                "features": [],
+                "uses_default_features": false,
+                "optional": false,
+                "target": "cfg(target_os = \"netbsd\")",
+                "tree": "target"
+              },
+              {
+                "name": "libc",
+                "package_key": "libc-0.2.191",
+                "kind": "normal",
+                "features": [],
+                "uses_default_features": false,
+                "optional": false,
+                "target": "cfg(target_os = \"solaris\")",
+                "tree": "target"
+              },
+              {
+                "name": "libc",
+                "package_key": "libc-0.2.191",
+                "kind": "normal",
+                "features": [],
+                "uses_default_features": false,
+                "optional": false,
+                "target": "cfg(target_os = \"vxworks\")",
                 "tree": "target"
               }
             ],
@@ -8307,7 +8375,7 @@
               "system"
             ]
           },
-          "madori-0.1.26": {
+          "madori-0.1.27": {
             "runtime_dependencies": [
               {
                 "name": "egaku",
@@ -8331,7 +8399,7 @@
               },
               {
                 "name": "ishou_tokens",
-                "package_key": "ishou-tokens-0.1.20",
+                "package_key": "ishou-tokens-0.1.22",
                 "kind": "normal",
                 "features": [
                   "wgpu"
@@ -8458,7 +8526,7 @@
               "os-poll"
             ]
           },
-          "notify-8.2.0": {
+          "notify-8.2.1": {
             "runtime_dependencies": [
               {
                 "name": "inotify",
@@ -8516,7 +8584,7 @@
               },
               {
                 "name": "notify_types",
-                "package_key": "notify-types-2.1.0",
+                "package_key": "notify-types-2.2.0",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -8538,7 +8606,9 @@
             "build_dependencies": [],
             "features": [
               "fsevent-sys",
-              "macos_fsevent"
+              "macos_fsevent",
+              "objc2-core-foundation",
+              "objc2-core-services"
             ]
           },
           "owned_ttf_parser-0.25.1": {
@@ -8588,7 +8658,7 @@
               },
               {
                 "name": "rustix",
-                "package_key": "rustix-1.1.5",
+                "package_key": "rustix-1.1.6",
                 "kind": "normal",
                 "features": [
                   "event",
@@ -8743,7 +8813,7 @@
               "use-libc-auxv"
             ]
           },
-          "rustix-1.1.5": {
+          "rustix-1.1.6": {
             "runtime_dependencies": [
               {
                 "name": "bitflags",
@@ -9303,7 +9373,7 @@
               },
               {
                 "name": "rustix",
-                "package_key": "rustix-1.1.5",
+                "package_key": "rustix-1.1.6",
                 "kind": "normal",
                 "features": [
                   "event",
@@ -9382,7 +9452,7 @@
               },
               {
                 "name": "rustix",
-                "package_key": "rustix-1.1.5",
+                "package_key": "rustix-1.1.6",
                 "kind": "normal",
                 "features": [
                   "event"
@@ -9456,7 +9526,7 @@
             "runtime_dependencies": [
               {
                 "name": "rustix",
-                "package_key": "rustix-1.1.5",
+                "package_key": "rustix-1.1.6",
                 "kind": "normal",
                 "features": [
                   "shm"
@@ -10643,7 +10713,7 @@
               },
               {
                 "name": "rustix",
-                "package_key": "rustix-1.1.5",
+                "package_key": "rustix-1.1.6",
                 "kind": "normal",
                 "features": [
                   "event",
@@ -11214,7 +11284,7 @@
             "runtime_dependencies": [
               {
                 "name": "rustix",
-                "package_key": "rustix-1.1.5",
+                "package_key": "rustix-1.1.6",
                 "kind": "normal",
                 "features": [
                   "system"
@@ -11222,6 +11292,102 @@
                 "uses_default_features": false,
                 "optional": false,
                 "target": "cfg(not(windows))",
+                "tree": "target"
+              }
+            ],
+            "build_dependencies": [],
+            "features": []
+          },
+          "getrandom-0.3.4": {
+            "runtime_dependencies": [
+              {
+                "name": "cfg_if",
+                "package_key": "cfg-if-1.0.5",
+                "kind": "normal",
+                "features": [],
+                "uses_default_features": true,
+                "optional": false,
+                "target": null,
+                "tree": "target"
+              },
+              {
+                "name": "libc",
+                "package_key": "libc-0.2.191",
+                "kind": "normal",
+                "features": [],
+                "uses_default_features": false,
+                "optional": false,
+                "target": "cfg(all(any(target_os = \"linux\", target_os = \"android\"), not(any(all(target_os = \"linux\", target_env = \"\"), getrandom_backend = \"custom\", getrandom_backend = \"linux_raw\", getrandom_backend = \"rdrand\", getrandom_backend = \"rndr\"))))",
+                "tree": "target"
+              },
+              {
+                "name": "libc",
+                "package_key": "libc-0.2.191",
+                "kind": "normal",
+                "features": [],
+                "uses_default_features": false,
+                "optional": false,
+                "target": "cfg(any(target_os = \"dragonfly\", target_os = \"freebsd\", target_os = \"hurd\", target_os = \"illumos\", target_os = \"cygwin\", all(target_os = \"horizon\", target_arch = \"arm\")))",
+                "tree": "target"
+              },
+              {
+                "name": "libc",
+                "package_key": "libc-0.2.191",
+                "kind": "normal",
+                "features": [],
+                "uses_default_features": false,
+                "optional": false,
+                "target": "cfg(any(target_os = \"haiku\", target_os = \"redox\", target_os = \"nto\", target_os = \"aix\"))",
+                "tree": "target"
+              },
+              {
+                "name": "libc",
+                "package_key": "libc-0.2.191",
+                "kind": "normal",
+                "features": [],
+                "uses_default_features": false,
+                "optional": false,
+                "target": "cfg(any(target_os = \"ios\", target_os = \"visionos\", target_os = \"watchos\", target_os = \"tvos\"))",
+                "tree": "target"
+              },
+              {
+                "name": "libc",
+                "package_key": "libc-0.2.191",
+                "kind": "normal",
+                "features": [],
+                "uses_default_features": false,
+                "optional": false,
+                "target": "cfg(any(target_os = \"macos\", target_os = \"openbsd\", target_os = \"vita\", target_os = \"emscripten\"))",
+                "tree": "target"
+              },
+              {
+                "name": "libc",
+                "package_key": "libc-0.2.191",
+                "kind": "normal",
+                "features": [],
+                "uses_default_features": false,
+                "optional": false,
+                "target": "cfg(target_os = \"netbsd\")",
+                "tree": "target"
+              },
+              {
+                "name": "libc",
+                "package_key": "libc-0.2.191",
+                "kind": "normal",
+                "features": [],
+                "uses_default_features": false,
+                "optional": false,
+                "target": "cfg(target_os = \"solaris\")",
+                "tree": "target"
+              },
+              {
+                "name": "libc",
+                "package_key": "libc-0.2.191",
+                "kind": "normal",
+                "features": [],
+                "uses_default_features": false,
+                "optional": false,
+                "target": "cfg(target_os = \"vxworks\")",
                 "tree": "target"
               }
             ],
@@ -11318,7 +11484,7 @@
               "system"
             ]
           },
-          "madori-0.1.26": {
+          "madori-0.1.27": {
             "runtime_dependencies": [
               {
                 "name": "egaku",
@@ -11342,7 +11508,7 @@
               },
               {
                 "name": "ishou_tokens",
-                "package_key": "ishou-tokens-0.1.20",
+                "package_key": "ishou-tokens-0.1.22",
                 "kind": "normal",
                 "features": [
                   "wgpu"
@@ -11469,7 +11635,7 @@
               "os-poll"
             ]
           },
-          "notify-8.2.0": {
+          "notify-8.2.1": {
             "runtime_dependencies": [
               {
                 "name": "inotify",
@@ -11527,7 +11693,7 @@
               },
               {
                 "name": "notify_types",
-                "package_key": "notify-types-2.1.0",
+                "package_key": "notify-types-2.2.0",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -11549,7 +11715,9 @@
             "build_dependencies": [],
             "features": [
               "fsevent-sys",
-              "macos_fsevent"
+              "macos_fsevent",
+              "objc2-core-foundation",
+              "objc2-core-services"
             ]
           },
           "owned_ttf_parser-0.25.1": {
@@ -11599,7 +11767,7 @@
               },
               {
                 "name": "rustix",
-                "package_key": "rustix-1.1.5",
+                "package_key": "rustix-1.1.6",
                 "kind": "normal",
                 "features": [
                   "event",
@@ -11754,7 +11922,7 @@
               "use-libc-auxv"
             ]
           },
-          "rustix-1.1.5": {
+          "rustix-1.1.6": {
             "runtime_dependencies": [
               {
                 "name": "bitflags",
@@ -12314,7 +12482,7 @@
               },
               {
                 "name": "rustix",
-                "package_key": "rustix-1.1.5",
+                "package_key": "rustix-1.1.6",
                 "kind": "normal",
                 "features": [
                   "event",
@@ -12393,7 +12561,7 @@
               },
               {
                 "name": "rustix",
-                "package_key": "rustix-1.1.5",
+                "package_key": "rustix-1.1.6",
                 "kind": "normal",
                 "features": [
                   "event"
@@ -12467,7 +12635,7 @@
             "runtime_dependencies": [
               {
                 "name": "rustix",
-                "package_key": "rustix-1.1.5",
+                "package_key": "rustix-1.1.6",
                 "kind": "normal",
                 "features": [
                   "shm"
@@ -13654,7 +13822,7 @@
               },
               {
                 "name": "rustix",
-                "package_key": "rustix-1.1.5",
+                "package_key": "rustix-1.1.6",
                 "kind": "normal",
                 "features": [
                   "event",
@@ -14204,22 +14372,6 @@
             "build_dependencies": [],
             "features": []
           },
-          "fsevent-sys-4.1.0": {
-            "runtime_dependencies": [
-              {
-                "name": "libc",
-                "package_key": "libc-0.2.191",
-                "kind": "normal",
-                "features": [],
-                "uses_default_features": true,
-                "optional": false,
-                "target": null,
-                "tree": "target"
-              }
-            ],
-            "build_dependencies": [],
-            "features": []
-          },
           "iana-time-zone-0.1.65": {
             "runtime_dependencies": [
               {
@@ -14238,7 +14390,7 @@
               "fallback"
             ]
           },
-          "madori-0.1.26": {
+          "madori-0.1.27": {
             "runtime_dependencies": [
               {
                 "name": "egaku",
@@ -14262,7 +14414,7 @@
               },
               {
                 "name": "ishou_tokens",
-                "package_key": "ishou-tokens-0.1.20",
+                "package_key": "ishou-tokens-0.1.22",
                 "kind": "normal",
                 "features": [
                   "wgpu"
@@ -14463,7 +14615,7 @@
               "link"
             ]
           },
-          "notify-8.2.0": {
+          "notify-8.2.1": {
             "runtime_dependencies": [
               {
                 "name": "bitflags",
@@ -14472,16 +14624,6 @@
                 "features": [],
                 "uses_default_features": true,
                 "optional": false,
-                "target": "cfg(target_os = \"macos\")",
-                "tree": "target"
-              },
-              {
-                "name": "fsevent_sys",
-                "package_key": "fsevent-sys-4.1.0",
-                "kind": "normal",
-                "features": [],
-                "uses_default_features": true,
-                "optional": true,
                 "target": "cfg(target_os = \"macos\")",
                 "tree": "target"
               },
@@ -14507,12 +14649,44 @@
               },
               {
                 "name": "notify_types",
-                "package_key": "notify-types-2.1.0",
+                "package_key": "notify-types-2.2.0",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
                 "optional": false,
                 "target": null,
+                "tree": "target"
+              },
+              {
+                "name": "objc2_core_foundation",
+                "package_key": "objc2-core-foundation-0.3.2",
+                "kind": "normal",
+                "features": [
+                  "CFArray",
+                  "CFDate",
+                  "CFError",
+                  "CFRunLoop",
+                  "CFString",
+                  "CFURL",
+                  "std"
+                ],
+                "uses_default_features": false,
+                "optional": true,
+                "target": "cfg(target_os = \"macos\")",
+                "tree": "target"
+              },
+              {
+                "name": "objc2_core_services",
+                "package_key": "objc2-core-services-0.3.2",
+                "kind": "normal",
+                "features": [
+                  "FSEvents",
+                  "libc",
+                  "std"
+                ],
+                "uses_default_features": false,
+                "optional": true,
+                "target": "cfg(target_os = \"macos\")",
                 "tree": "target"
               },
               {
@@ -14529,7 +14703,9 @@
             "build_dependencies": [],
             "features": [
               "fsevent-sys",
-              "macos_fsevent"
+              "macos_fsevent",
+              "objc2-core-foundation",
+              "objc2-core-services"
             ]
           },
           "objc-0.2.7": {
@@ -14694,6 +14870,35 @@
               "std"
             ]
           },
+          "objc2-core-foundation-0.3.2": {
+            "runtime_dependencies": [
+              {
+                "name": "bitflags",
+                "package_key": "bitflags-2.13.2",
+                "kind": "normal",
+                "features": [
+                  "std"
+                ],
+                "uses_default_features": false,
+                "optional": true,
+                "target": null,
+                "tree": "target"
+              }
+            ],
+            "build_dependencies": [],
+            "features": [
+              "CFArray",
+              "CFDate",
+              "CFError",
+              "CFRunLoop",
+              "CFString",
+              "CFURL",
+              "CFUUID",
+              "alloc",
+              "bitflags",
+              "std"
+            ]
+          },
           "objc2-core-image-0.2.2": {
             "runtime_dependencies": [
               {
@@ -14723,6 +14928,37 @@
               "CIContext",
               "CIImage",
               "alloc",
+              "std"
+            ]
+          },
+          "objc2-core-services-0.3.2": {
+            "runtime_dependencies": [
+              {
+                "name": "libc",
+                "package_key": "libc-0.2.191",
+                "kind": "normal",
+                "features": [],
+                "uses_default_features": false,
+                "optional": true,
+                "target": null,
+                "tree": "target"
+              },
+              {
+                "name": "objc2_core_foundation",
+                "package_key": "objc2-core-foundation-0.3.2",
+                "kind": "normal",
+                "features": [],
+                "uses_default_features": false,
+                "optional": false,
+                "target": null,
+                "tree": "target"
+              }
+            ],
+            "build_dependencies": [],
+            "features": [
+              "FSEvents",
+              "alloc",
+              "libc",
               "std"
             ]
           },
@@ -14918,7 +15154,7 @@
             "build_dependencies": [],
             "features": []
           },
-          "rustix-1.1.5": {
+          "rustix-1.1.6": {
             "runtime_dependencies": [
               {
                 "name": "bitflags",
@@ -16256,7 +16492,7 @@
             "runtime_dependencies": [
               {
                 "name": "rustix",
-                "package_key": "rustix-1.1.5",
+                "package_key": "rustix-1.1.6",
                 "kind": "normal",
                 "features": [
                   "system"
@@ -16264,6 +16500,102 @@
                 "uses_default_features": false,
                 "optional": false,
                 "target": "cfg(not(windows))",
+                "tree": "target"
+              }
+            ],
+            "build_dependencies": [],
+            "features": []
+          },
+          "getrandom-0.3.4": {
+            "runtime_dependencies": [
+              {
+                "name": "cfg_if",
+                "package_key": "cfg-if-1.0.5",
+                "kind": "normal",
+                "features": [],
+                "uses_default_features": true,
+                "optional": false,
+                "target": null,
+                "tree": "target"
+              },
+              {
+                "name": "libc",
+                "package_key": "libc-0.2.191",
+                "kind": "normal",
+                "features": [],
+                "uses_default_features": false,
+                "optional": false,
+                "target": "cfg(all(any(target_os = \"linux\", target_os = \"android\"), not(any(all(target_os = \"linux\", target_env = \"\"), getrandom_backend = \"custom\", getrandom_backend = \"linux_raw\", getrandom_backend = \"rdrand\", getrandom_backend = \"rndr\"))))",
+                "tree": "target"
+              },
+              {
+                "name": "libc",
+                "package_key": "libc-0.2.191",
+                "kind": "normal",
+                "features": [],
+                "uses_default_features": false,
+                "optional": false,
+                "target": "cfg(any(target_os = \"dragonfly\", target_os = \"freebsd\", target_os = \"hurd\", target_os = \"illumos\", target_os = \"cygwin\", all(target_os = \"horizon\", target_arch = \"arm\")))",
+                "tree": "target"
+              },
+              {
+                "name": "libc",
+                "package_key": "libc-0.2.191",
+                "kind": "normal",
+                "features": [],
+                "uses_default_features": false,
+                "optional": false,
+                "target": "cfg(any(target_os = \"haiku\", target_os = \"redox\", target_os = \"nto\", target_os = \"aix\"))",
+                "tree": "target"
+              },
+              {
+                "name": "libc",
+                "package_key": "libc-0.2.191",
+                "kind": "normal",
+                "features": [],
+                "uses_default_features": false,
+                "optional": false,
+                "target": "cfg(any(target_os = \"ios\", target_os = \"visionos\", target_os = \"watchos\", target_os = \"tvos\"))",
+                "tree": "target"
+              },
+              {
+                "name": "libc",
+                "package_key": "libc-0.2.191",
+                "kind": "normal",
+                "features": [],
+                "uses_default_features": false,
+                "optional": false,
+                "target": "cfg(any(target_os = \"macos\", target_os = \"openbsd\", target_os = \"vita\", target_os = \"emscripten\"))",
+                "tree": "target"
+              },
+              {
+                "name": "libc",
+                "package_key": "libc-0.2.191",
+                "kind": "normal",
+                "features": [],
+                "uses_default_features": false,
+                "optional": false,
+                "target": "cfg(target_os = \"netbsd\")",
+                "tree": "target"
+              },
+              {
+                "name": "libc",
+                "package_key": "libc-0.2.191",
+                "kind": "normal",
+                "features": [],
+                "uses_default_features": false,
+                "optional": false,
+                "target": "cfg(target_os = \"solaris\")",
+                "tree": "target"
+              },
+              {
+                "name": "libc",
+                "package_key": "libc-0.2.191",
+                "kind": "normal",
+                "features": [],
+                "uses_default_features": false,
+                "optional": false,
+                "target": "cfg(target_os = \"vxworks\")",
                 "tree": "target"
               }
             ],
@@ -16360,7 +16692,7 @@
               "system"
             ]
           },
-          "madori-0.1.26": {
+          "madori-0.1.27": {
             "runtime_dependencies": [
               {
                 "name": "egaku",
@@ -16384,7 +16716,7 @@
               },
               {
                 "name": "ishou_tokens",
-                "package_key": "ishou-tokens-0.1.20",
+                "package_key": "ishou-tokens-0.1.22",
                 "kind": "normal",
                 "features": [
                   "wgpu"
@@ -16511,7 +16843,7 @@
               "os-poll"
             ]
           },
-          "notify-8.2.0": {
+          "notify-8.2.1": {
             "runtime_dependencies": [
               {
                 "name": "inotify",
@@ -16569,7 +16901,7 @@
               },
               {
                 "name": "notify_types",
-                "package_key": "notify-types-2.1.0",
+                "package_key": "notify-types-2.2.0",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -16591,7 +16923,9 @@
             "build_dependencies": [],
             "features": [
               "fsevent-sys",
-              "macos_fsevent"
+              "macos_fsevent",
+              "objc2-core-foundation",
+              "objc2-core-services"
             ]
           },
           "owned_ttf_parser-0.25.1": {
@@ -16641,7 +16975,7 @@
               },
               {
                 "name": "rustix",
-                "package_key": "rustix-1.1.5",
+                "package_key": "rustix-1.1.6",
                 "kind": "normal",
                 "features": [
                   "event",
@@ -16796,7 +17130,7 @@
               "use-libc-auxv"
             ]
           },
-          "rustix-1.1.5": {
+          "rustix-1.1.6": {
             "runtime_dependencies": [
               {
                 "name": "bitflags",
@@ -17356,7 +17690,7 @@
               },
               {
                 "name": "rustix",
-                "package_key": "rustix-1.1.5",
+                "package_key": "rustix-1.1.6",
                 "kind": "normal",
                 "features": [
                   "event",
@@ -17435,7 +17769,7 @@
               },
               {
                 "name": "rustix",
-                "package_key": "rustix-1.1.5",
+                "package_key": "rustix-1.1.6",
                 "kind": "normal",
                 "features": [
                   "event"
@@ -17509,7 +17843,7 @@
             "runtime_dependencies": [
               {
                 "name": "rustix",
-                "package_key": "rustix-1.1.5",
+                "package_key": "rustix-1.1.6",
                 "kind": "normal",
                 "features": [
                   "shm"
@@ -18696,7 +19030,7 @@
               },
               {
                 "name": "rustix",
-                "package_key": "rustix-1.1.5",
+                "package_key": "rustix-1.1.6",
                 "kind": "normal",
                 "features": [
                   "event",
@@ -19292,7 +19626,7 @@
             "runtime_dependencies": [
               {
                 "name": "rustix",
-                "package_key": "rustix-1.1.5",
+                "package_key": "rustix-1.1.6",
                 "kind": "normal",
                 "features": [
                   "system"
@@ -19300,6 +19634,102 @@
                 "uses_default_features": false,
                 "optional": false,
                 "target": "cfg(not(windows))",
+                "tree": "target"
+              }
+            ],
+            "build_dependencies": [],
+            "features": []
+          },
+          "getrandom-0.3.4": {
+            "runtime_dependencies": [
+              {
+                "name": "cfg_if",
+                "package_key": "cfg-if-1.0.5",
+                "kind": "normal",
+                "features": [],
+                "uses_default_features": true,
+                "optional": false,
+                "target": null,
+                "tree": "target"
+              },
+              {
+                "name": "libc",
+                "package_key": "libc-0.2.191",
+                "kind": "normal",
+                "features": [],
+                "uses_default_features": false,
+                "optional": false,
+                "target": "cfg(all(any(target_os = \"linux\", target_os = \"android\"), not(any(all(target_os = \"linux\", target_env = \"\"), getrandom_backend = \"custom\", getrandom_backend = \"linux_raw\", getrandom_backend = \"rdrand\", getrandom_backend = \"rndr\"))))",
+                "tree": "target"
+              },
+              {
+                "name": "libc",
+                "package_key": "libc-0.2.191",
+                "kind": "normal",
+                "features": [],
+                "uses_default_features": false,
+                "optional": false,
+                "target": "cfg(any(target_os = \"dragonfly\", target_os = \"freebsd\", target_os = \"hurd\", target_os = \"illumos\", target_os = \"cygwin\", all(target_os = \"horizon\", target_arch = \"arm\")))",
+                "tree": "target"
+              },
+              {
+                "name": "libc",
+                "package_key": "libc-0.2.191",
+                "kind": "normal",
+                "features": [],
+                "uses_default_features": false,
+                "optional": false,
+                "target": "cfg(any(target_os = \"haiku\", target_os = \"redox\", target_os = \"nto\", target_os = \"aix\"))",
+                "tree": "target"
+              },
+              {
+                "name": "libc",
+                "package_key": "libc-0.2.191",
+                "kind": "normal",
+                "features": [],
+                "uses_default_features": false,
+                "optional": false,
+                "target": "cfg(any(target_os = \"ios\", target_os = \"visionos\", target_os = \"watchos\", target_os = \"tvos\"))",
+                "tree": "target"
+              },
+              {
+                "name": "libc",
+                "package_key": "libc-0.2.191",
+                "kind": "normal",
+                "features": [],
+                "uses_default_features": false,
+                "optional": false,
+                "target": "cfg(any(target_os = \"macos\", target_os = \"openbsd\", target_os = \"vita\", target_os = \"emscripten\"))",
+                "tree": "target"
+              },
+              {
+                "name": "libc",
+                "package_key": "libc-0.2.191",
+                "kind": "normal",
+                "features": [],
+                "uses_default_features": false,
+                "optional": false,
+                "target": "cfg(target_os = \"netbsd\")",
+                "tree": "target"
+              },
+              {
+                "name": "libc",
+                "package_key": "libc-0.2.191",
+                "kind": "normal",
+                "features": [],
+                "uses_default_features": false,
+                "optional": false,
+                "target": "cfg(target_os = \"solaris\")",
+                "tree": "target"
+              },
+              {
+                "name": "libc",
+                "package_key": "libc-0.2.191",
+                "kind": "normal",
+                "features": [],
+                "uses_default_features": false,
+                "optional": false,
+                "target": "cfg(target_os = \"vxworks\")",
                 "tree": "target"
               }
             ],
@@ -19396,7 +19826,7 @@
               "system"
             ]
           },
-          "madori-0.1.26": {
+          "madori-0.1.27": {
             "runtime_dependencies": [
               {
                 "name": "egaku",
@@ -19420,7 +19850,7 @@
               },
               {
                 "name": "ishou_tokens",
-                "package_key": "ishou-tokens-0.1.20",
+                "package_key": "ishou-tokens-0.1.22",
                 "kind": "normal",
                 "features": [
                   "wgpu"
@@ -19547,7 +19977,7 @@
               "os-poll"
             ]
           },
-          "notify-8.2.0": {
+          "notify-8.2.1": {
             "runtime_dependencies": [
               {
                 "name": "inotify",
@@ -19605,7 +20035,7 @@
               },
               {
                 "name": "notify_types",
-                "package_key": "notify-types-2.1.0",
+                "package_key": "notify-types-2.2.0",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": true,
@@ -19627,7 +20057,9 @@
             "build_dependencies": [],
             "features": [
               "fsevent-sys",
-              "macos_fsevent"
+              "macos_fsevent",
+              "objc2-core-foundation",
+              "objc2-core-services"
             ]
           },
           "owned_ttf_parser-0.25.1": {
@@ -19677,7 +20109,7 @@
               },
               {
                 "name": "rustix",
-                "package_key": "rustix-1.1.5",
+                "package_key": "rustix-1.1.6",
                 "kind": "normal",
                 "features": [
                   "event",
@@ -19832,7 +20264,7 @@
               "use-libc-auxv"
             ]
           },
-          "rustix-1.1.5": {
+          "rustix-1.1.6": {
             "runtime_dependencies": [
               {
                 "name": "bitflags",
@@ -20392,7 +20824,7 @@
               },
               {
                 "name": "rustix",
-                "package_key": "rustix-1.1.5",
+                "package_key": "rustix-1.1.6",
                 "kind": "normal",
                 "features": [
                   "event",
@@ -20471,7 +20903,7 @@
               },
               {
                 "name": "rustix",
-                "package_key": "rustix-1.1.5",
+                "package_key": "rustix-1.1.6",
                 "kind": "normal",
                 "features": [
                   "event"
@@ -20545,7 +20977,7 @@
             "runtime_dependencies": [
               {
                 "name": "rustix",
-                "package_key": "rustix-1.1.5",
+                "package_key": "rustix-1.1.6",
                 "kind": "normal",
                 "features": [
                   "shm"
@@ -21732,7 +22164,7 @@
               },
               {
                 "name": "rustix",
-                "package_key": "rustix-1.1.5",
+                "package_key": "rustix-1.1.6",
                 "kind": "normal",
                 "features": [
                   "event",
@@ -22094,21 +22526,18 @@
     "foreign-types-shared-0.3.1": {
       "edition": "2018"
     },
-    "fsevent-sys-4.1.0": {
-      "edition": "2018"
-    },
     "garasu-0.1.17": {
       "edition": "2024",
       "build_script": "build.rs"
     },
-    "gen-macros-0.1.54": {
+    "gen-macros-0.1.55": {
       "edition": "2024",
       "proc_macro": true
     },
-    "gen-platform-0.1.54": {
+    "gen-platform-0.1.55": {
       "edition": "2024"
     },
-    "gen-types-0.1.54": {
+    "gen-types-0.1.55": {
       "edition": "2024"
     },
     "generator-0.8.11": {
@@ -22184,7 +22613,7 @@
     "irodori-0.1.1": {
       "edition": "2024"
     },
-    "ishou-tokens-0.1.20": {
+    "ishou-tokens-0.1.22": {
       "edition": "2024"
     },
     "itoa-1.0.18": {
@@ -22232,7 +22661,7 @@
     "lru-0.12.5": {
       "edition": "2015"
     },
-    "madori-0.1.26": {
+    "madori-0.1.27": {
       "edition": "2024",
       "lib_target": {
         "name": "madori",
@@ -22264,11 +22693,11 @@
       "edition": "2021",
       "build_script": "build.rs"
     },
-    "notify-8.2.0": {
+    "notify-8.2.1": {
       "edition": "2021"
     },
-    "notify-types-2.1.0": {
-      "edition": "2021"
+    "notify-types-2.2.0": {
+      "edition": "2024"
     },
     "nu-ansi-term-0.50.3": {
       "edition": "2021"
@@ -22294,7 +22723,13 @@
     "objc2-core-data-0.2.2": {
       "edition": "2021"
     },
+    "objc2-core-foundation-0.3.2": {
+      "edition": "2021"
+    },
     "objc2-core-image-0.2.2": {
+      "edition": "2021"
+    },
+    "objc2-core-services-0.3.2": {
       "edition": "2021"
     },
     "objc2-encode-4.1.0": {
@@ -22434,7 +22869,7 @@
       "edition": "2021",
       "build_script": "build.rs"
     },
-    "rustix-1.1.5": {
+    "rustix-1.1.6": {
       "edition": "2021",
       "build_script": "build.rs"
     },
@@ -22697,7 +23132,7 @@
     "unicode-segmentation-1.13.3": {
       "edition": "2018"
     },
-    "unicode-width-0.2.2": {
+    "unicode-width-0.2.3": {
       "edition": "2021"
     },
     "unsafe-libyaml-norway-0.2.15": {
