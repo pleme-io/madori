@@ -4,7 +4,10 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone)]
 pub enum AppEvent {
     /// Window resized to new physical dimensions.
-    Resized { width: u32, height: u32 },
+    Resized {
+        width: u32,
+        height: u32,
+    },
     /// Window close requested.
     CloseRequested,
     /// Window gained or lost focus.
@@ -31,6 +34,8 @@ pub enum AppEvent {
     /// link under the mouse while Cmd is down) needs this edge, because
     /// neither a motion event nor a key event carries it reliably.
     ModifiersChanged(Modifiers),
+    PointerLeft,
+    WindowState(crate::chrome::WindowState),
     /// Redraw requested (vsync tick or explicit).
     RedrawRequested,
 }
@@ -50,7 +55,7 @@ pub struct EventResponse {
     pub set_cursor_visible: Option<bool>,
     /// Request a pointer icon change (None = no change).
     pub set_cursor_icon: Option<PointerIcon>,
-    pub drag_window: bool,
+    pub window_op: Option<crate::chrome::WindowOp>,
 }
 
 /// The pointer icon a consumer may ask the window to show. The CSS

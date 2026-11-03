@@ -657,6 +657,7 @@ impl App {
             start_time: Instant,
             last_frame: Instant,
             modifiers: winit::keyboard::ModifiersState,
+            window_state: Option<crate::chrome::WindowState>,
             width: u32,
             height: u32,
             // HiDPI scale factor of the active window — captured at
@@ -717,6 +718,60 @@ impl App {
                     self.request_redraw();
                 }
                 Turnstile::shift(self, shift, event_loop);
+            }
+
+            fn apply_window_op(
+                &mut self,
+                op: crate::chrome::WindowOp,
+                event_loop: &winit::event_loop::ActiveEventLoop,
+            ) {
+                use crate::chrome::WindowOp;
+                if matches!(op, WindowOp::Close) {
+                    let resp = self.dispatch(&AppEvent::CloseRequested, event_loop);
+                    if !resp.consumed {
+                        event_loop.exit();
+                    }
+                    return;
+                }
+                let Some(w) = &self.window else {
+                    return;
+                };
+                let refused = match op {
+                    WindowOp::Close => None,
+                    WindowOp::Drag => w.drag_window().err(),
+                    WindowOp::Resize(edge) => w.drag_resize_window(edge.to_winit()).err(),
+                    WindowOp::ToggleMaximize => {
+                        w.set_maximized(!w.is_maximized());
+                        None
+                    }
+                    WindowOp::Minimize => {
+                        w.set_minimized(true);
+                        None
+                    }
+                    WindowOp::ShowMenu { x, y } => {
+                        w.show_window_menu(winit::dpi::PhysicalPosition::new(x, y));
+                        None
+                    }
+                };
+                if let Some(e) = refused {
+                    tracing::warn!(?op, "window operation refused: {e}");
+                }
+                self.refresh_window_state(event_loop);
+            }
+
+            fn refresh_window_state(&mut self, event_loop: &winit::event_loop::ActiveEventLoop) {
+                let Some(w) = &self.window else {
+                    return;
+                };
+                let state = crate::chrome::WindowState {
+                    maximized: w.is_maximized(),
+                    fullscreen: w.fullscreen().is_some(),
+                    decorated: w.is_decorated(),
+                };
+                if self.window_state != Some(state) {
+                    self.window_state = Some(state);
+                    self.dispatch(&AppEvent::WindowState(state), event_loop);
+                }
             }
 
             fn dispatch(
@@ -780,13 +835,6 @@ impl App {
                     }
                 }
 
-                if resp.drag_window
-                    && let Some(w) = &self.window
-                    && let Err(e) = w.drag_window()
-                {
-                    tracing::warn!("window drag refused: {e}");
-                }
-
                 // Handle fullscreen toggle
                 if resp.toggle_fullscreen {
                     if let Some(w) = &self.window {
@@ -802,6 +850,10 @@ impl App {
                 // Handle exit request
                 if resp.exit {
                     event_loop.exit();
+                }
+
+                if let Some(op) = resp.window_op {
+                    self.apply_window_op(op, event_loop);
                 }
 
                 resp
@@ -1115,6 +1167,7 @@ impl App {
 
                 self.window = Some(window);
                 self.read_display();
+                self.refresh_window_state(event_loop);
                 let wayland = self.window.as_ref().is_some_and(|w| {
                     use winit::raw_window_handle::{HasWindowHandle as _, RawWindowHandle};
                     w.window_handle()
@@ -1147,6 +1200,7 @@ impl App {
                         }
                     }
                     WindowEvent::Resized(size) => {
+                        self.refresh_window_state(event_loop);
                         self.width = size.width.max(1);
                         self.height = size.height.max(1);
                         if let (Some(surface), Some(cfg), Some(gpu)) =
@@ -1292,6 +1346,9 @@ impl App {
                         });
                         self.dispatch(&app_event, event_loop);
                     }
+                    WindowEvent::CursorLeft { .. } => {
+                        self.dispatch(&AppEvent::PointerLeft, event_loop);
+                    }
                     WindowEvent::MouseInput { state, button, .. } => {
                         let btn = match button {
                             winit::event::MouseButton::Left => MouseButton::Left,
@@ -1333,6 +1390,7 @@ impl App {
                         self.dispatch(&app_event, event_loop);
                     }
                     WindowEvent::RedrawRequested => {
+                        self.refresh_window_state(event_loop);
                         self.turnstile.pacer.arrived();
                         // Dispatch redraw event to handler (for title updates, exit checks, etc.)
                         Turnstile::redraw(self, event_loop);
@@ -1609,6 +1667,7 @@ impl App {
             start_time: Instant::now(),
             last_frame: Instant::now(),
             modifiers: winit::keyboard::ModifiersState::default(),
+            window_state: None,
             width: 0,
             height: 0,
             // 1.0 is the safe pre-resume default — gets overwritten by

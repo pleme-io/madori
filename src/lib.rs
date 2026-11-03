@@ -1,5 +1,6 @@
 pub mod alpha;
 pub mod app;
+pub mod chrome;
 mod doorbell;
 pub mod error;
 pub mod event;
@@ -12,6 +13,10 @@ pub mod resize;
 
 pub use alpha::{SurfaceAlpha, carries_alpha, select_alpha_mode};
 pub use app::{App, AppBuilder, AppConfig, FramePacing, LoopClosed, MenuPolicy, UserProxy};
+pub use chrome::{
+    ButtonRect, ChromeButton, ChromeLayout, ChromeMetrics, ResizeEdge, WindowOp, WindowRegion,
+    WindowState,
+};
 pub use error::MadoriError;
 pub use event::{
     AppEvent, EventResponse, ImeEvent, InputEvent, KeyEvent, Modifiers, MouseEvent, PointerIcon,
