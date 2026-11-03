@@ -50,6 +50,7 @@ pub struct EventResponse {
     pub set_cursor_visible: Option<bool>,
     /// Request a pointer icon change (None = no change).
     pub set_cursor_icon: Option<PointerIcon>,
+    pub drag_window: bool,
 }
 
 /// The pointer icon a consumer may ask the window to show. The CSS

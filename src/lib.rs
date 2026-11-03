@@ -1,3 +1,4 @@
+pub mod alpha;
 pub mod app;
 mod doorbell;
 pub mod error;
@@ -9,6 +10,7 @@ mod pacer;
 pub mod render;
 pub mod resize;
 
+pub use alpha::{SurfaceAlpha, carries_alpha, select_alpha_mode};
 pub use app::{App, AppBuilder, AppConfig, FramePacing, LoopClosed, MenuPolicy, UserProxy};
 pub use error::MadoriError;
 pub use event::{

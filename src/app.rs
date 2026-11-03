@@ -780,6 +780,13 @@ impl App {
                     }
                 }
 
+                if resp.drag_window
+                    && let Some(w) = &self.window
+                    && let Err(e) = w.drag_window()
+                {
+                    tracing::warn!("window drag refused: {e}");
+                }
+
                 // Handle fullscreen toggle
                 if resp.toggle_fullscreen {
                     if let Some(w) = &self.window {
@@ -1015,32 +1022,30 @@ impl App {
                             wgpu::PresentMode::AutoNoVsync
                         };
 
-                        // Prefer Opaque alpha_mode when the surface
-                        // advertises it. On macOS the default
-                        // (caps.alpha_modes[0]) is sometimes
-                        // PostMultiplied or Inherit, which causes
-                        // the FIRST presented frame to flash a
-                        // garbage-colour (often purple/magenta) for
-                        // a few ms while the OS compositor decides
-                        // how to blend an uninitialized surface
-                        // against whatever's behind the window.
-                        // Opaque tells the compositor "draw my
-                        // pixels verbatim, no alpha" — same shape
-                        // ghostty / kitty / alacritty use on macOS.
-                        let alpha_mode =
-                            if caps.alpha_modes.contains(&wgpu::CompositeAlphaMode::Opaque) {
-                                wgpu::CompositeAlphaMode::Opaque
-                            } else {
-                                // Same empty-vector hazard as `formats`, reached by
-                                // the same mismatch. The guard above has already
-                                // returned in that case, so `Auto` here is only for
-                                // an adapter that advertises formats but no alpha
-                                // modes — let wgpu decide rather than panic.
-                                caps.alpha_modes
-                                    .first()
-                                    .copied()
-                                    .unwrap_or(wgpu::CompositeAlphaMode::Auto)
-                            };
+                        let alpha_mode = crate::alpha::select_alpha_mode(
+                            &caps.alpha_modes,
+                            self.config.transparent,
+                        );
+                        let surface_alpha = crate::alpha::SurfaceAlpha {
+                            mode: alpha_mode,
+                            transparent: self.config.transparent,
+                        };
+                        tracing::info!(
+                            chosen = ?alpha_mode,
+                            offered = ?caps.alpha_modes,
+                            transparent = self.config.transparent,
+                            "surface alpha mode"
+                        );
+                        if surface_alpha.alpha_unavailable() {
+                            tracing::warn!(
+                                chosen = ?alpha_mode,
+                                offered = ?caps.alpha_modes,
+                                adapter = %gpu.adapter.get_info().name,
+                                backend = ?gpu.adapter.get_info().backend,
+                                "transparent window requested, but alpha is unavailable on this \
+                                 surface: it renders opaque"
+                            );
+                        }
 
                         let surface_config = wgpu::SurfaceConfiguration {
                             usage: wgpu::TextureUsages::RENDER_ATTACHMENT,
@@ -1067,7 +1072,7 @@ impl App {
                         // + present round-trip cost ~5-10 ms on cold
                         // start, and the magenta-flash concern it
                         // addressed is already prevented by setting
-                        // alpha_mode = Opaque (above): the macOS
+                        // alpha_mode = Opaque (alpha.rs): the macOS
                         // compositor knows the surface is opaque and
                         // won't show uninitialized garbage. The first
                         // REAL render (mado's Pass 1) does the clear
@@ -1088,6 +1093,7 @@ impl App {
                             "phase"
                         );
 
+                        self.renderer.surface_configured(surface_alpha);
                         self.renderer.init(&gpu);
                         self.text = Some(text);
                         self.surface_config = Some(surface_config);

@@ -162,6 +162,8 @@ pub trait RenderCallback: 'static {
 
     /// Called once after GPU is initialized, before first render.
     fn init(&mut self, _gpu: &GpuContext) {}
+
+    fn surface_configured(&mut self, _alpha: crate::alpha::SurfaceAlpha) {}
 }
 
 /// A no-op renderer that clears to a background color.
@@ -273,6 +275,15 @@ mod needs_frame_tests {
             "the default must be `true`: a renderer that never opted in must \
              keep drawing exactly as it did before this trait method existed"
         );
+    }
+
+    #[test]
+    fn a_renderer_that_ignores_the_surface_alpha_still_compiles_and_runs() {
+        Legacy.surface_configured(crate::alpha::SurfaceAlpha {
+            mode: wgpu::CompositeAlphaMode::PreMultiplied,
+            transparent: true,
+        });
+        assert!(Legacy.needs_frame(Q));
     }
 
     #[test]
